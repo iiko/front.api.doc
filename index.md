@@ -1,5 +1,5 @@
 ﻿---
-title: Введение
+title: Main page.
 layout: basic
 ---
 # Введение #
