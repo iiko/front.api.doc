@@ -1,4 +1,4 @@
-﻿---
+---
 title: Main page.
 layout: xspec
 ---
