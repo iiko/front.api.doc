@@ -1,6 +1,6 @@
 ﻿---
 title: Main page.
-layout: basic
+layout: xspec
 ---
 # Введение #
 
