@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    {% if page.description %}
+    <meta name="description" content="{{ page.description }}" />
+    {% endif %}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+        header
+        {
+            background-color: lightgray;
+            color: white;
+            text-align: center;
+            padding: 5px;
+        }
+
+        nav
+        {
+            background-color: #eeeeee;
+            float: left;
+            padding: 5px;
+            margin: 0px 20px 10px 0px;
+        }
+
+        article
+        {
+            margin: 5px;
+        }
+
+        footer
+        {
+            background-color: lightgray;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/">Home</a>
+        <a href="http://api.iiko.ru">api.iiko.ru</a>
+        <a href="api@iiko.ru">api@iiko.ru</a>
+        <a href="https://github.com/iiko/front.api.doc/" align="end">view on github</a>
+    </header>
+    <aside>
+        <nav>
+            {% assign pagesByTitle = site.pages | sort: 'title' %}
+
+        <!-- common topics -->
+            {% for p in pagesByTitle %}
+        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% unless site.apiVersions contains apiVersionOfPage %}
+        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
+            {% endunless %}
+        {% endfor %}
+
+        <!-- version-specific topics -->
+            {% for apiVersion in site.apiVersions reversed %}
+        {% assign hasVersionHeader = false %}
+        {% for p in pagesByTitle %}
+        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% if apiVersionOfPage == apiVersion %}
+        {% unless hasVersionHeader %}
+        {% assign hasVersionHeader = true %}
+        <br>
+            <b>{{ apiVersion }}</b><br>
+            {% endunless %}
+        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
+            {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </nav>
+
+    </aside>
+    <article>
+        {{ content }}
+    </article>
+    <footer>
+        iiko
+    </footer>
+</body>
+</html>

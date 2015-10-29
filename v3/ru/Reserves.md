@@ -1,6 +1,6 @@
-﻿---
+---
 title: Резервы
-layout: basic
+layout: default
 ---
 # Резервы #
 

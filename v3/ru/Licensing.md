@@ -1,6 +1,6 @@
-﻿---
+---
 title: Лицензирование
-layout: basic
+layout: default
 ---
 # Лицензирование #
 

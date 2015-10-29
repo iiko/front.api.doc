@@ -1,1 +1,3 @@
 title: iikoFront Api docs
+baseurl: /front.api.doc
+apiVersions: [v1, v2, v3, v4, v5]

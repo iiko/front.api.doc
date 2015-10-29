@@ -1,6 +1,6 @@
-﻿---
+---
 title: Введение
-layout: basic
+layout: default
 ---
 # Введение #
 
