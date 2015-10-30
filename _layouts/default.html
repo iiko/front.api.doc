@@ -10,7 +10,6 @@
         header
         {
             background-color: lightgray;
-            color: white;
             text-align: center;
             padding: 5px;
         }
@@ -25,7 +24,7 @@
 
         article
         {
-            margin: 5px;
+            margin: 5px 5px 50px 5px;
         }
 
         footer
@@ -38,10 +37,17 @@
 </head>
 <body>
     <header>
-        <a href="/">Home</a>
-        <a href="http://api.iiko.ru">api.iiko.ru</a>
-        <a href="api@iiko.ru">api@iiko.ru</a>
-        <a href="https://github.com/iiko/front.api.doc/" align="end">view on github</a>
+        <div>
+            <div style="float: left">
+                <a href="https://github.com/iiko/front.api.sdk">iikoFront Api SDK</a>
+            </div>
+            <div style="float: right">
+                <a href="https://github.com/iiko/front.api.doc/">View source</a>
+            </div>
+            <div style="margin: 0 auto">
+                This site is under construction, anything may be broken or incomplete
+            </div>
+        </div>
     </header>
     <aside>
         <nav>
@@ -77,7 +83,17 @@
         {{ content }}
     </article>
     <footer>
-        iiko
+        <div>
+            <div style="float: left">
+                Contacts: <a href="http://api.iiko.ru">api.iiko.ru</a> | <a href="api@iiko.ru">api@iiko.ru</a>
+            </div>
+            <div style="float: right">
+                Last change: {{ site.time | date_to_long_string }}
+            </div>
+            <div style="margin: 0 auto">
+                iiko, 2015
+            </div>
+        </div>
     </footer>
 </body>
 </html>
