@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
@@ -14,17 +14,18 @@
             padding: 5px;
         }
 
-        nav
+        aside
         {
             background-color: #eeeeee;
             float: left;
             padding: 5px;
             margin: 0px 20px 10px 0px;
+            width: 250px;
         }
 
         article
         {
-            margin: 5px 5px 50px 5px;
+            margin: 5px 5px 50px 280px;
         }
 
         footer
@@ -33,6 +34,28 @@
             text-align: center;
             padding: 5px;
         }
+
+        p, blockquote, ul, ol, dl, table, pre
+        {
+            margin: 15px 0;
+        }
+
+        blockquote
+        {
+            border-left: 4px solid lightgray;
+            padding: 0 15px;
+            color: gray;
+        }
+
+            blockquote > :first-child
+            {
+                margin-top: 0px;
+            }
+
+            blockquote > :last-child
+            {
+                margin-bottom: 0px;
+            }
     </style>
 </head>
 <body>
@@ -50,19 +73,18 @@
         </div>
     </header>
     <aside>
-        <nav>
-            {% assign pagesByTitle = site.pages | sort: 'title' %}
+        {% assign pagesByTitle = site.pages | sort: 'title' %}
 
         <!-- common topics -->
-            {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% for p in pagesByTitle %}
+            {% assign apiVersionOfPage = (p.path | split:"/") | first %}
         {% unless site.apiVersions contains apiVersionOfPage %}
         &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-            {% endunless %}
+        {% endunless %}
         {% endfor %}
 
         <!-- version-specific topics -->
-            {% for apiVersion in site.apiVersions reversed %}
+        {% for apiVersion in site.apiVersions reversed %}
         {% assign hasVersionHeader = false %}
         {% for p in pagesByTitle %}
         {% assign apiVersionOfPage = (p.path | split:"/") | first %}
@@ -70,13 +92,12 @@
         {% unless hasVersionHeader %}
         {% assign hasVersionHeader = true %}
         <br>
-            <b>{{ apiVersion }}</b><br>
-            {% endunless %}
+        <b>{{ apiVersion }}</b><br>
+        {% endunless %}
         &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-            {% endif %}
+        {% endif %}
         {% endfor %}
         {% endfor %}
-        </nav>
 
     </aside>
     <article>
