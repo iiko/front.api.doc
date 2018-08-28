@@ -74,5 +74,5 @@ layout: default
 
 ## Контакты ##
 
-- [api.iiko.ru](http://api.iiko.ru)
+- [help.iiko.ru](http://help.iiko.ru/articles/#!api-documentations/getting-started/)
 - [api@iiko.ru](mailto:api@iiko.ru)
