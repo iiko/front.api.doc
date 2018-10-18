@@ -8,3 +8,5 @@ layout: default
 
 - Resto.Front.Api.SampleScalePlugin — пример плагина, реализующего интеграцию с весами.
 - Resto.Front.Api.SampleCashRegisterPlugin — демонстрирует работу с произвольным фискальным регистратором.
+
+Подробнее отдельная [статья]({{ site.baseurl }}/v6/ru/Devices).
