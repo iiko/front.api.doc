@@ -48,7 +48,7 @@ layout: default
 Помимо прочего в состав SDK входит несколько примеров плагинов в исходных кодах. Имеет смысл ознакомиться с ними, прежде чем приступать к разработке собственного плагина.
 
 ### SamplePlugin ###
-[`Resto.Front.Api.SamplePlugin`](https://iiko.github.io/front.api.sdk/sample)
+[`Resto.Front.Api.SamplePlugin`](https://github.com/iiko/front.api.sdk/tree/master/sample)
 
 Данный пример демонстрирует различные сценарии использования Api:
 
