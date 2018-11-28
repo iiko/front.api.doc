@@ -8,7 +8,7 @@ layout: default
 
 Места, где управление передается от iikoFront в плагин:
 
-- Встраивание кнопки в меню "Дополнения" (см. [`IPluginIntegrationService.AddButton()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IPluginIntegrationService_AddButton.htm "IPluginIntegrationService_AddButton"),  [`Button_PerformAction()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button_PerformAction.htm "Button_PerformAction")) 
+- Встраивание кнопки в меню "Дополнения" (см. [`IPluginIntegrationService.AddButton()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IPluginIntegrationService_AddButton.htm "IPluginIntegrationService_AddButton"),  [`Button.PerformAction()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button_PerformAction.htm "Button_PerformAction")) 
 - Взаимодействие с реализованным в плагине типом оплаты: процесс сбора данных, проведения и возврата оплаты (см. [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm "IExternalPaymentProcessor")) *(note: добавить ссылку на статью про оплаты после её написания)*
 
 ## Общий принцип
@@ -134,7 +134,7 @@ private void EntryPoint()
 }
 ```
 
-Во-вторых, т.к. планиг это отдельный процесс, по умолчанию показанное из плагина окно не приобретает фокус. Фокус окну может дать только пользователь. Есть разные способы решить задачу форсированного назначения фокуса окну. Вот один из них:
+Во-вторых, т.к. плагин это отдельный процесс, по умолчанию показанное из плагина окно не приобретает фокус. Фокус окну может дать только пользователь. Есть разные способы решить задачу форсированного назначения фокуса окну. Вот один из них:
 ```cs
 public static void ClickWindow(Window wnd)
 {
