@@ -73,7 +73,7 @@ if (dialogResult == null)
 Ещё одна опция у настроек для `ShowExtendedInputDialog()` — это `ExtendedInputDialogSettings.EnableBarcode = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitleBarcode`. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `BarcodeInputDialogResult`.
 
 ### Диалог ввода номеров телефонов
-Ещё одна опция у настроек для `ShowExtendedInputDialog()` это `ExtendedInputSettings.EnablePhone = true`, которая идёт совместно с `ExtendedInputSettings.TabTitlePhone`. В этом случае валидация вводимых пользователем данных будет происходить в соответствии с настройками в системе для телефонных номеров, на форме будет маска с кодом страны и данные не будут считаться валидными пока не будет нужное количество символов. А пока введенные данные не будут валидными, нажать «OK» на форме будет невозможно. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `PhoneInputDialogResult`.
+Ещё одна опция у настроек для `ShowExtendedInputDialog()` это `ExtendedInputDialogSettings.EnablePhone = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitlePhone`. В этом случае валидация вводимых пользователем данных будет происходить в соответствии с настройками в системе для телефонных номеров, в поле ввода будет маска с кодом страны и данные не будут считаться валидными, пока не будет нужное количество символов. А пока введенные данные не будут валидными, нажать «OK» будет невозможно. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `PhoneInputDialogResult`.
 
 ![ext_phone](../../img/viewmanager/ext_phone.png)
 
