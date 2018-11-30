@@ -78,7 +78,7 @@ if (dialogResult == null)
 ![ext_phone](../../img/viewmanager/ext_phone.png)
 
 ### Диалоги с возможностью прокатки карт
-Прокатку карт можно включить и в `ShowInputDialog()` и в `ShowExtendedInputDialog()`. В первом случае нужно указать 
+Прокатку карт можно включить и в `ShowInputDialog()`, и в `ShowExtendedInputDialog()`. В первом случае нужно указать 
 `type = InputTypes.Card`, во втором – `ExtendedInputSettings.EnableCardSlider = true`. В обоих случаях чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `CardInputDialogResult`.
 
 ### Note
