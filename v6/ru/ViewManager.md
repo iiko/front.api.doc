@@ -66,7 +66,7 @@ var dialogResult = viewManager.ShowExtendedInputDialog(
     as NumericStringInputDialogResult;
 if (dialogResult == null)
     return;
-// analize result
+// analyze result
 ```
 
 ### Диалог ввода штрихкодов 
