@@ -12,13 +12,17 @@ layout: default
 - Взаимодействие с реализованным в плагине типом оплаты: процесс сбора данных, проведения и возврата оплаты (см. [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm "IExternalPaymentProcessor")) *(note: добавить ссылку на статью про оплаты после её написания)*
 
 ## Общий принцип
-Плагин вызываете метод `var result = viewManager.ShowSomeThing(...)` и обрабатываете результат. В зависимости от сигнатуры конкретного метода в результате плагин получаете либо переменную примитивного типа (`bool`, `int`, `string`), либо экземпляр одной из реализаций [`IInputDialogResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_View_IInputDialogResult.htm "IInputDialogResult"), в зависимости от семантики.
+Плагин вызывает метод  и обрабатываете результат: `var result = viewManager.ShowSomeThing(...)`. В зависимости от сигнатуры конкретного метода в результате плагин получаете либо переменную примитивного типа (`bool`, `int`, `string`), либо экземпляр одной из реализаций [`IInputDialogResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_View_IInputDialogResult.htm "IInputDialogResult"), в зависимости от семантики.
 
-Если бизнес-логика требует валидации введенного значения *(например, при вводе номера гостиничной комнаты нужно проверить, что такой номер есть в гостинице)*, то правильный подход такой: оказанное диалоговое окно закрывается пользователем, результат валидируется бизнес-логикой, если валидация не проходит, диалоговое окно показывается вновь.
+Если бизнес-логика требует валидации введенного значения *(например, при вводе номера гостиничной комнаты нужно проверить, что такой номер есть в гостинице)*, то правильный подход такой:
+
+- показанное диалоговое окно закрывается пользователем,
+- результат валидируется бизнес-логикой, 
+- если валидация не проходит, диалоговое окно показывается вновь.
 
 ![check_number](../../img/viewmanager/check_number.gif)
 
-Если бизнес-логика требует показать уведомительное сообщение пользователю, то рекомендуется использовать немодальные сообщения (см. [notification](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddNotificationMessage_1.htm "IOperationService_AddNotificationMessage"), [warning](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddWarningMessage_1.htm "IOperationService_AddWarningMessage"),  [error](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddErrorMessage_1.htm "IOperationService_AddErrornMessage")). Во-первых, эти методы доступны из api в любой момент. Во-вторых, api iikoFront намеренно не предоставляет возможность показать диалоговое окно с одной кнопкой, т.к. единственное, что может сделать пользователь в окне с одной кнопкой нажать эту единственную кнопку.    
+Если бизнес-логика требует показать уведомительное сообщение пользователю, то рекомендуется использовать немодальные сообщения (см. [notification](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddNotificationMessage_1.htm "IOperationService_AddNotificationMessage"), [warning](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddWarningMessage_1.htm "IOperationService_AddWarningMessage"),  [error](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddErrorMessage_1.htm "IOperationService_AddErrornMessage")). Во-первых, методы их показа доступны из API в любой момент. Во-вторых, API iikoFront намеренно не предоставляет возможность показать диалоговое окно с одной кнопкой, т.к. единственное, что может сделать пользователь в диалоговом окне с одной кнопкой нажать эту единственную кнопку.    
 
 ## Описание доступных возможностей
 ### Диалог с двумя кнопками «Да»/«Нет»
@@ -115,5 +119,5 @@ var dialogResult = viewManager.ShowExtendedInputDialog(
 ```
 
 ## Ещё кое-что о UI
-Вопросы касающиеся .net освещены в [отдельной статье](UiCommonQuestions.md "Кое-то о UI и .Net").
+Вопросы показа собственных диалоговых окон не касаются напрямую API iikoFront. Они относятся к .net в целом и освещены в [отдельной статье](UiCommonQuestions.md "Кое-что о UI и .Net").
  

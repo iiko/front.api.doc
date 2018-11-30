@@ -3,7 +3,7 @@ title: FAQ по UI и .Net
 layout: default
 ---
 # FAQ по UI и .Net 
-Если [диалоговых окон iikoFront api ](ViewManager.md "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.
+Если [диалоговых окон iikoFront API](ViewManager.md "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.
 
 Во-первых, по умолчанию в процессе плагина нет [STA-потока](https://msdn.microsoft.com/library/ms809971.aspx "Understanding and Using COM Threading Models"). Вам нужно его явно инициализировать. Пример кода:
 
