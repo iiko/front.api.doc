@@ -79,7 +79,7 @@ if (dialogResult == null)
 
 ### Диалоги с возможностью прокатки карт
 Прокатку карт можно включить и в `ShowInputDialog()`, и в `ShowExtendedInputDialog()`. В первом случае нужно указать 
-`type = InputTypes.Card`, во втором – `ExtendedInputSettings.EnableCardSlider = true`. В обоих случаях чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `CardInputDialogResult`.
+`type = InputTypes.Card`, во втором – `ExtendedInputDialogSettings.EnableCardSlider = true`. В обоих случаях, чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `CardInputDialogResult`.
 
 ### Note
 Способы ввода в `ShowInputDialog()` и `ShowExtendedInputDialog()` можно комбинировать путём сочетания доступных настроек. Например, можно одновременно просить пользователя ввести номер и прокатать карту. В этом случае возвращаемый результат нужно будет пытаться приводить к каждому из ожидаемых типов результатов. 
