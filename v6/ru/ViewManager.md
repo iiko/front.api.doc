@@ -70,7 +70,7 @@ if (dialogResult == null)
 ```
 
 ### Диалог ввода штрихкодов 
-Ещё одна опция у настроек для `ShowExtendedInputDialog()` это `ExtendedInputSettings.EnableBarcode = true`, которая идёт совместно с `ExtendedInputSettings.TabTitleBarcode`. Фактически не нужен. Возможно, когда-нибудь на стороне iikoFront будет реализована и сканирование штрихкодов сканером *(RMS-48214)*. Но пока это просто числовая строка. В api две эти близких по сути опции добавлены исходя их бизнес-запросов клиента, которому нужно было вводить либо номер, либо штрихкод. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `BarcodeInputDialogResult`.
+Ещё одна опция у настроек для `ShowExtendedInputDialog()` — это `ExtendedInputDialogSettings.EnableBarcode = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitleBarcode`. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `BarcodeInputDialogResult`.
 
 ### Диалог ввода номеров телефонов
 Ещё одна опция у настроек для `ShowExtendedInputDialog()` это `ExtendedInputSettings.EnablePhone = true`, которая идёт совместно с `ExtendedInputSettings.TabTitlePhone`. В этом случае валидация вводимых пользователем данных будет происходить в соответствии с настройками в системе для телефонных номеров, на форме будет маска с кодом страны и данные не будут считаться валидными пока не будет нужное количество символов. А пока введенные данные не будут валидными, нажать «OK» на форме будет невозможно. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `PhoneInputDialogResult`.
