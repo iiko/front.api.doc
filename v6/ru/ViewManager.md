@@ -1,28 +1,28 @@
 ---
-title: Возможности IViewManager
+title: Диалоговые окна
 layout: default
 ---
-# Возможности IViewManager 
+# Возможности ViewManager 
 ## «Точки входа» 
 [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm "IViewManager") позволяет показывать предопределённый набор встроенных в iikoFront диалоговых окон. Эта возможность доступна плагину, когда iikoFront в рамках модальной операции передаёт ему управление, вызывая соответствующий метод и передавая в него одним из аргументов экземпляр `IViewManager`. Данный объект актуален только в рамках метода, в который он приходит, и будет уничтожен, когда плагин вернёт управление из этого метода. 
 
-Кейсы, когда совершаются модальные операции:
+Примеры модальных операций:
 
-- Встраивание кнопки в меню «Дополнения» (см. [`IPluginIntegrationService.AddButton()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IPluginIntegrationService_AddButton.htm "IPluginIntegrationService_AddButton"),  [`Button.PerformAction()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button_PerformAction.htm "Button_PerformAction")) 
+- [Вызов](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button_PerformAction.htm "Button_PerformAction") обработчика нажатия на кнопку, [добавленную](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IPluginIntegrationService_AddButton.htm "IPluginIntegrationService_AddButton") плагином в меню «Дополнения». 
 - Взаимодействие с реализованным в плагине типом оплаты: процесс сбора данных, проведения и возврата оплаты (см. [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm "IExternalPaymentProcessor")) *(note: добавить ссылку на статью про оплаты после её написания)*
 
 ## Общий принцип
-Плагин вызывает метод  и обрабатываете результат: `var result = viewManager.ShowSomeThing(...)`. В зависимости от сигнатуры конкретного метода в результате плагин получаете либо переменную примитивного типа (`bool`, `int`, `string`), либо экземпляр одной из реализаций [`IInputDialogResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_View_IInputDialogResult.htm "IInputDialogResult"), в зависимости от семантики.
+Плагин вызывает метод  и обрабатывает результат: `var result = viewManager.ShowSomething(...)`. В зависимости от сигнатуры конкретного метода плагин получит либо переменную примитивного типа (`bool`, `int`, `string`), либо экземпляр одной из реализаций [`IInputDialogResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_View_IInputDialogResult.htm "IInputDialogResult"), в зависимости от семантики.
 
 Если бизнес-логика требует валидации введенного значения *(например, при вводе номера гостиничной комнаты нужно проверить, что такой номер есть в гостинице)*, то правильный подход такой:
 
-- показанное диалоговое окно закрывается пользователем,
-- результат валидируется бизнес-логикой, 
+- пользователь закрывает диалоговое окно,
+- плагин валидирует результат, 
 - если валидация не проходит, диалоговое окно показывается вновь.
 
 ![check_number](../../img/viewmanager/check_number.gif)
 
-Если бизнес-логика требует показать уведомительное сообщение пользователю, то рекомендуется использовать немодальные сообщения (см. [notification](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddNotificationMessage_1.htm "IOperationService_AddNotificationMessage"), [warning](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddWarningMessage_1.htm "IOperationService_AddWarningMessage"),  [error](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddErrorMessage_1.htm "IOperationService_AddErrornMessage")). Во-первых, методы их показа доступны из API в любой момент. Во-вторых, API iikoFront намеренно не предоставляет возможность показать диалоговое окно с одной кнопкой, т.к. единственное, что может сделать пользователь в диалоговом окне с одной кнопкой нажать эту единственную кнопку.    
+Для уведомлений, не требующих явной реакции пользователя, рекомендуется использовать немодальные всплывающие окна (см. [notification](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddNotificationMessage_1.htm "IOperationService_AddNotificationMessage"), [warning](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddWarningMessage_1.htm "IOperationService_AddWarningMessage"),  [error](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddErrorMessage_1.htm "IOperationService_AddErrornMessage")), они не требуют экземпляра `IViewManager`, поэтому их можно показать в любой момент.    
 
 ## Описание доступных возможностей
 ### Диалог с двумя кнопками «Да»/«Нет»
@@ -31,12 +31,12 @@ layout: default
 ![yesno](../../img/viewmanager/yesno.png)
 
 ### Диалог выбора элемента из списка
-`ShowChooserPopup()` в качестве параметров принимает список строк и опционально индекс выбранного по умолчанию элемента, а возвращает индекс выбранного пользователем элемента. Имеет extention, который принимает список объектов, функцию получения текстового представления объекта `Func<T, string> `, опционально выбранных по умолчанию элемент, а возвращает выбранный пользователем элемент. Если элемент не был выбран пользователем *(нажата «Отмена»)*, возвращается `-1` или `null`. Необязательным параметром можно задать ширину кнопок в списке. Соответственно, чем у́же одна кнопка, тем больше колонок с кнопками влезет на одну страницу. По умолчанию параметр равен `ButtonWidth.Normal`.
+`ShowChooserPopup()` в качестве параметров принимает список строк и опционально индекс выбранного по умолчанию элемента, а возвращает индекс выбранного пользователем элемента. Имеет обёртку, принимающую список объектов и функцию получения текстового представления объекта `Func<T, string> `, опционально выбранный по умолчанию элемент, а возвращает выбранный пользователем элемент. Если элемент не был выбран пользователем *(нажата «Отмена»)*, возвращается `-1` или `null`. Необязательным параметром можно задать ширину кнопок в списке. Чем у́же одна кнопка, тем больше колонок с кнопками влезет на одну страницу. По умолчанию, кнопки имеют ширину `ButtonWidth.Normal`.
 
 ![chooser](../../img/viewmanager/chooser.png)
 
 ### Диалог ввода произвольных строк
-`ShowKeyboard()` показывает диалоговое окно с экранной клавиатурой. Опциональными параметрами можно задать:
+`ShowKeyboard()` показывает диалоговое окно с экранной клавиатурой. Можно задать следующие параметры:
 
 - начальный текст
 - допускается ли многострочный ввод
@@ -52,7 +52,7 @@ layout: default
 ![number](../../img/viewmanager/number.png)
 
 ### Диалог ввода числовых строк
-Кроме упомянутого выше метода, есть `ShowExtendedInputDialog()`. Одним из его параметров является класс настроек `ExtendedInputDialogSettings`. Если в нём задать `ExtendedInputDialogSettings.EnableNumericString = true` то пользователю будет предложено ввести цифры. Совместно с данной настройкой можно задать и поясняющий текст `ExtendedInputDialogSettings.TabTitleNumericString`. В отличие от упомянутого выше способа ввода, тут введенные данные представляют собой строку. Это позволяет вводить «ведущие нули» или не ограничиваться размером `int`-а, если этого требует бизнес-задача. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `NumericStringInputDialogResult`.
+Кроме упомянутого выше метода, есть `ShowExtendedInputDialog()`. Одним из его параметров является класс настроек `ExtendedInputDialogSettings`. Если в нём задать `ExtendedInputDialogSettings.EnableNumericString = true` то пользователю будет предложено ввести цифры. Совместно с данной настройкой можно задать и поясняющий текст `ExtendedInputDialogSettings.TabTitleNumericString`. В отличие от упомянутого выше способа ввода, тут введённые данные представляют собой строку, что позволяет вводить «ведущие нули», а также большие числа, превышающие `int`. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `NumericStringInputDialogResult`.
 
 ![ext_number](../../img/viewmanager/ext_number.png)
 
@@ -74,10 +74,10 @@ if (dialogResult == null)
 ```
 
 ### Диалог ввода штрихкодов 
-Ещё одна опция у настроек для `ShowExtendedInputDialog()` — это `ExtendedInputDialogSettings.EnableBarcode = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitleBarcode`. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `BarcodeInputDialogResult`.
+Метод `ShowExtendedInputDialog()` может быть вызван с настройкой `ExtendedInputDialogSettings.EnableBarcode = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitleBarcode`. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `BarcodeInputDialogResult`.
 
 ### Диалог ввода номеров телефонов
-Ещё одна опция у настроек для `ShowExtendedInputDialog()` это `ExtendedInputDialogSettings.EnablePhone = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitlePhone`. В этом случае валидация вводимых пользователем данных будет происходить в соответствии с настройками в системе для телефонных номеров, в поле ввода будет маска с кодом страны и данные не будут считаться валидными, пока не будет нужное количество символов. А пока введенные данные не будут валидными, нажать «OK» будет невозможно. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `PhoneInputDialogResult`.
+Ещё одна настройка для `ShowExtendedInputDialog()` — это `ExtendedInputDialogSettings.EnablePhone = true`, которая идёт совместно с `ExtendedInputDialogSettings.TabTitlePhone`. В этом случае валидация вводимых пользователем данных будет происходить в соответствии с настройками в системе для телефонных номеров, в поле ввода будет маска с кодом страны. Пока введенные данные не будут валидными, нажать «OK» будет невозможно. Чтобы интерпретировать результат ввода, нужно привести возвращаемый `IInputDialogResult` к `PhoneInputDialogResult`.
 
 ![ext_phone](../../img/viewmanager/ext_phone.png)
 
@@ -100,6 +100,7 @@ if (result is CardInputDialogResult card)
     Operations.AddNotificationMessage($"Карта с треком {card.FullCardTrack}", "SamplePlugin");
 ```
 Пример 2 (возможный внешний вид и настройки):
+
 ![ext_input](../../img/viewmanager/ext_input.gif)
 ```cs
 var settings = new ExtendedInputDialogSettings
@@ -119,5 +120,5 @@ var dialogResult = viewManager.ShowExtendedInputDialog(
 ```
 
 ## Ещё кое-что о UI
-Вопросы показа собственных диалоговых окон не касаются напрямую API iikoFront. Они относятся к .net в целом и освещены в [отдельной статье](UiCommonQuestions.md "Кое-что о UI и .Net").
+Плагин может показывать свои собственные диалоговые окна, но это уже не является частью iikoFront Api. На эту тему есть [отдельная статья](CustomWindows.html "Кое-что о UI и .Net").
  
