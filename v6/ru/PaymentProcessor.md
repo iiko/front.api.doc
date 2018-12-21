@@ -8,7 +8,7 @@ layout: default
 Для плагинов, реализующих внешние типы оплаты, вводится [обязательное лицензирование](https://ru.iiko.help/articles/#!api-documentations/apistart).
 
 
-## Регистрация внешней системы оплаты
+## Регистрация внешней платёжной системы
 
 Плагин регистрирует платёжную систему с помощью [`IOperationService.RegisterPaymentSystem(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_RegisterPaymentSystem.htm)
 ```cs
