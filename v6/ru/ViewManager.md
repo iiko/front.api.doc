@@ -9,7 +9,7 @@ layout: default
 Примеры модальных операций:
 
 - [Вызов](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button_PerformAction.htm "Button_PerformAction") обработчика нажатия на кнопку, [добавленную](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IPluginIntegrationService_AddButton.htm "IPluginIntegrationService_AddButton") плагином в меню «Дополнения». 
-- Взаимодействие с реализованным в плагине типом оплаты: процесс сбора данных, проведения и возврата оплаты (см. [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm "IExternalPaymentProcessor")) *(см. статью про [Api внешних типов оплаты](PaymentProcessor.html "Внешние типы оплаты"))*
+- Взаимодействие с реализованным в плагине типом оплаты: процесс сбора данных, проведения и возврата оплаты (см. [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm "IExternalPaymentProcessor")) *(см. статью про [API внешних типов оплаты](PaymentProcessor.html "Внешние типы оплаты"))*
 
 ## Общий принцип
 Плагин вызывает метод  и обрабатывает результат: `var result = viewManager.ShowSomething(...)`. В зависимости от сигнатуры конкретного метода плагин получит либо переменную примитивного типа (`bool`, `int`, `string`), либо экземпляр одной из реализаций [`IInputDialogResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_View_IInputDialogResult.htm "IInputDialogResult"), в зависимости от семантики.
