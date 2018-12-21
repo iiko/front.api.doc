@@ -10,7 +10,7 @@ layout: default
 
 ## Регистрация внешней системы оплаты
 
-Плагин должен регистрировать тип оплаты с помощью [`IOperationService.RegisterPaymentSystem(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_RegisterPaymentSystem.htm)
+Плагин регистрирует платёжную систему с помощью [`IOperationService.RegisterPaymentSystem(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_RegisterPaymentSystem.htm)
 ```cs
 var disposable = PluginContext.Operations.RegisterPaymentSystem(paymentSystem);
 ```
