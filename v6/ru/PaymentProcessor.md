@@ -5,7 +5,7 @@ layout: default
 # Интеграция с внешними типами оплаты
 ## Общая идея 
 Реализовав интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm) и зарегистрировав его соответствующим образом, в системе iiko появится система оплаты кастомной логикой проведения и возврата оплаты. 
-Для плагинов, использующих этот функционал вводится [обязательное лицензирование](https://ru.iiko.help/articles/#!api-documentations/apistart).
+Для плагинов, реализующих внешние типы оплаты, вводится [обязательное лицензирование](https://ru.iiko.help/articles/#!api-documentations/apistart).
 
 
 ## Регистрация внешней системы оплаты
