@@ -243,7 +243,7 @@ bool OnPreliminaryPaymentEditing([NotNull] IOrder order, [NotNull] IPaymentItem 
 ## Открытие и закрытие кассовой смены в iikoFront.
 Некоторым внешним платёжным системам нужно выполнять на своей стороне необходимые действия при открытии и закрытии кассовой смены на iikoFront.
 Например, для банковских систем при закрытии смены нужно проводить сверку.
-Для этого нужно подписаться на [`INotificationService._SubscribeOnCafeSessionOpening`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionOpening.htm) и [`INotificationService.SubscribeOnCafeSessionClosing`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionClosing.htm).
+Для этого нужно подписаться на [`INotificationService.SubscribeOnCafeSessionOpening`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionOpening.htm) и [`INotificationService.SubscribeOnCafeSessionClosing`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionClosing.htm).
 
 При открытии и закрытии кассовой смены в соответствующий observer приходит новое событие.
 Пример кода, который при открытии и закрытии смены печатает на принтере ключ платежной системы и открыта или закрыта смена:
