@@ -30,10 +30,10 @@ layout: default
 Можно заводить сколько угодно типов оплаты каждой платёжной системы.   
 - *Элемент оплаты* – относится к заказам в iikoFront. Когда пользователь [на экране кассы](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72) или в [окне предоплат и платежей](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72/a/h2_10) выбирает какой-либо тип оплаты, в заказ добавляется элемент оплаты соответствующего типа оплаты.
 Также элементы оплаты могут быть добавлены средствами API.
-*(NOTE: добавить ссылку, когда про это будет написана статья)*  
+*(NOTE: добавить ссылку, когда про это будет написана статья)*.
 
 ## Интерфейс IExternalPaymentProcessor
-Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm)
+Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm):
 ```cs
 public interface IExternalPaymentProcessor
 {
@@ -53,8 +53,8 @@ public interface IExternalPaymentProcessor
 
 Здесь:
 
-- `PaymentSystemKey` – это уникальный ключ, с которым регистрируется новая внешняя платёжная система
-- `PaymentSystemName` – имя, которое будет показываться на UI в iikoOffice
+- `PaymentSystemKey` – это уникальный ключ, с которым регистрируется новая внешняя платёжная система.
+- `PaymentSystemName` – имя, которое будет показываться на UI в iikoOffice.
 
 
 ## Метод проведения оплаты
@@ -65,29 +65,27 @@ void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [No
 
 Здесь:
 
-- `sum` – сумма платежа
-- `orderId` – id заказа в iikoFront
+- `sum` – сумма платежа;
+- `orderId` – id заказа в iikoFront;
 - `paymentTypeId` – id типа оплаты. Список всех типов оплаты можно получить методом [`IOperationService.GetPaymentTypes()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_GetPaymentTypes.htm), конкретный тип оплаты можно получить методом [`OperationService_TryGetPaymentTypeById(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_TryGetPaymentTypeById.htm)
-- `transactionId` – id транзакции
+- `transactionId` – id транзакции;
 - `pointOfSale` – [Точка продаж](GroupsAndPointsOfSale.html), на которой проводится данный элемент оплаты
-- `cashier` – кассир
+- `cashier` – кассир;
 - `printer` – экземпляр [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IReceiptPrinter.htm), который дает возможность печатать на принтере квитанций iikoFront
 - `viewManager` – экземпляр [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) для [показа окон](ViewManager.html) в процессе проведения оплаты. 
-- `context` – экземпляр [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) для сохранения данных в элемент оплаты
-- `progressBar` – экземпляр [`IProgressBar`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IProgressBar.htm) для изменения текста на прогрессбаре в процессе проведения оплаты 
+- `context` – экземпляр [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) для сохранения данных в элемент оплаты;
+- `progressBar` – экземпляр [`IProgressBar`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IProgressBar.htm) для изменения текста на прогрессбаре в процессе проведения оплаты.
 
 Подробнее сигнатуру объектов можно найти [в документации](http://iiko.github.io/front.api.sdk/v6).
 
-Например, если требуется реализовать интеграцию с гостиничной системой
+Например, если требуется реализовать интеграцию с гостиничной системой:
 
-- В процессе оплаты нужно спросить у пользователя номер комнаты или карту от комнаты
-- Затем обратиться к гостиничному сервису
-- В случае успеха напечатать квитанцию с суммой и именем гостя, которое нам вернет гостиничная система
-- В iikoRMS сохранить введенный номер или прокатанную карту для просмотра этих данных в OLAP
+- В процессе оплаты нужно спросить у пользователя номер комнаты или карту от комнаты.
+- Затем обратиться к гостиничному сервису.
+- В случае успеха напечатать квитанцию с суммой и именем гостя, которое нам вернет гостиничная система.
+- В iikoRMS сохранить введенный номер или прокатанную карту для просмотра этих данных в OLAP.
 - Для последующей отмены понадобится знать, карта ли была прокатана или введен номер.
-- В случае неуспеха прервать оплату
-
-то это будет выглядеть так:
+- В случае неуспеха прервать оплату.
 
 ```cs
 [Serializable]
@@ -174,7 +172,7 @@ void ReturnPaymentWithoutOrder(decimal sum, Guid paymentTypeId, [NotNull] IPoint
 
 Методы принимают те же параметры, что и метод оплаты. `transactionId` тот же, что передавался в исполненную ранее операцию `Pay()`.
 
-Методы считаются успешно завершёнными, если в процессе выполнения не возникло исключений типа `PaymentActionFailedException` или `PaymentActionCancelledException`. Если это исключения возникли, так же, как и для оплаты, операция возврата прерывается.
+Методы считаются успешно завершёнными, если в процессе выполнения не возникло исключений типа `PaymentActionFailedException` или `PaymentActionCancelledException`. Если эти исключения возникли, так же, как и для оплаты, операция возврата прерывается.
 
 Пример кода интеграции с гостиничной системой.
 Метод возврата отменяет транзакцию и печатает чек с отменяемой суммой и сохранёнными данными: была ли прокатана карта, или был введён номер.
@@ -237,11 +235,12 @@ bool OnPreliminaryPaymentEditing([NotNull] IOrder order, [NotNull] IPaymentItem 
 Метод `OnPaymentAdded()` вызывается после добавления элемента оплаты в заказ. Особенность этого метода в том, что одним из его аргументов является `IOperationService operationService`.
 В отличие от [`PluginContext.Operations`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_PluginContext_Operations.htm), у данного экземпляра есть полномочия вносить изменения в текущий заказ. Это нужно, например, чтобы задать сумму для добавляемого элемента оплаты или вообще добавить какое-либо блюдо в заказ.
  
-Метод `OnPreliminaryPaymentEditing()` вызывается при редактировании предварительных платежей. Для данного метода также доступна возможность вносить изменения в текущий заказ через аргумент `IOperationService operationService`.
-Метод возвращает `bool`, смысл возвращаемого значения следующий: доступно ли изменение суммы элемента предварительной оплаты с UI после совершения данного метода. 
+Метод [`OnPreliminaryPaymentEditing()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_OnPreliminaryPaymentEditing.htm) вызывается при редактировании предварительных платежей.
+Для данного метода также доступна возможность вносить изменения в текущий заказ через аргумент `IOperationService operationService`.
+Метод возвращает `bool`, смысл возвращаемого значения следующий: доступно ли изменение суммы элемента предварительной оплаты с UI после завершения данного метода. 
 
-## Открытие и закрытие кассовой смены в iikoFront.
-Некоторым внешним платёжным системам нужно выполнять на своей стороне необходимые действия при открытии и закрытии кассовой смены на iikoFront.
+## Открытие и закрытие кассовой смены в iikoFront
+Некоторым внешним платёжным системам нужно выполнять на своей стороне определённые действия при открытии и закрытии кассовой смены на iikoFront.
 Например, для банковских систем при закрытии смены нужно проводить сверку.
 Для этого нужно подписаться на [`INotificationService.SubscribeOnCafeSessionOpening`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionOpening.htm) и [`INotificationService.SubscribeOnCafeSessionClosing`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionClosing.htm).
 
@@ -258,7 +257,7 @@ ctor
 
 private void CafeSessionOpening([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe Session Opening.");
+	PluginContext.Log.Info("Cafe session opening.");
 	var message =
 		"Я не могу подключиться к своему серверу и открыть смену.";
 	PluginContext.Operations.AddNotificationMessage(message, "SamplePaymentPlugin");
@@ -266,7 +265,7 @@ private void CafeSessionOpening([NotNull] IReceiptPrinter printer, [NotNull] IPr
 
 private void CafeSessionClosing([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe Session Closing.");
+	PluginContext.Log.Info("Cafe session closing.");
 	var slip = new ReceiptSlip
 	{
 		Doc = new XElement(Tags.Doc,
@@ -277,6 +276,7 @@ private void CafeSessionClosing([NotNull] IReceiptPrinter printer, [NotNull] IPr
 }
 
 ```
-
+Если необходимо показать пользователю какое-либо предупреждение, можно сделать это с помощью уведомлений.
 Исключения, возникшие в процессе выполнения `CafeSessionOpening()` и `CafeSessionClosing()`, не прерывают операций открытия и закрытия кассовой смены на iikoFront.
-Если необходимо показать пользователю какое-либо предупреждение, можно сделать это с помощью уведомлений. 
+Более того, при возникновении исключения в обработчике, он считается сломанным и не вызывается до перезапуска плагина.
+ 
