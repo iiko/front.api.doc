@@ -3,7 +3,7 @@ title: Произвольные окна
 layout: default
 ---
 # FAQ по UI и .Net 
-Если [диалоговых окон iikoFront Api](ViewManager.html "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.
+Если [диалоговых окон iikoFront API](ViewManager.html "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.
 
 Во-первых, хост-процесс плагина по умолчанию не содержит необходимого для UI [STA-потока](https://msdn.microsoft.com/library/ms809971.aspx "Understanding and Using COM Threading Models"). Плагин должен создать его самостоятельно. Пример кода:
 
@@ -39,7 +39,7 @@ public static void ClickWindow(Window wnd)
 }
 ```
 
-В-третьих, окно плагина, будучи независимым окном, может оказаться позади окна iikoFront. Режим отображения поверх всех окон — тоже [не панацея](https://social.msdn.microsoft.com/Forums/en-US/fb4a7d5f-c98b-461f-a527-7d5dd4cd03e6/multiple-topmost-windows?forum=wpf "Multiple Topmost Windows"), потому что могут быть и другие topmost-окна (в том числе само приложение iikoFront). Плагин может привязать своё окно как дочернее к окну iikoFront через WinApi-функцию `SetParent`. Хотя в Api не публикуется hwnd фронтового окна, плагин может самостоятельно его [найти](https://stackoverflow.com/questions/10676649/attach-window-to-window-of-another-process).
+В-третьих, окно плагина, будучи независимым окном, может оказаться позади окна iikoFront. Режим отображения поверх всех окон — тоже [не панацея](https://social.msdn.microsoft.com/Forums/en-US/fb4a7d5f-c98b-461f-a527-7d5dd4cd03e6/multiple-topmost-windows?forum=wpf "Multiple Topmost Windows"), потому что могут быть и другие topmost-окна (в том числе само приложение iikoFront). Плагин может привязать своё окно как дочернее к окну iikoFront через WinApi-функцию `SetParent`. Хотя в API не публикуется hwnd фронтового окна, плагин может самостоятельно его [найти](https://stackoverflow.com/questions/10676649/attach-window-to-window-of-another-process).
 
 
 
