@@ -25,6 +25,15 @@ layout: default
 Для уведомлений, не требующих явной реакции пользователя, рекомендуется использовать немодальные всплывающие окна (см. [notification](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddNotificationMessage_1.htm "IOperationService_AddNotificationMessage"), [warning](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddWarningMessage_1.htm "IOperationService_AddWarningMessage"),  [error](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddErrorMessage_1.htm "IOperationService_AddErrornMessage")), они не требуют экземпляра `IViewManager`, поэтому их можно показать в любой момент.    
 
 ## Описание доступных возможностей
+### Диалог с одной кнопкой
+`ShowOkPopup()` показывает диалоговое окно с заголовком, текстом и кнопкой «OK», закрывающей диалог.
+
+![ok](../../img/viewmanager/ok.png)
+
+`ShowErrorPopup()` показывает диалоговое окно с заголовком «Ошибка», текстом и кнопкой «Закрыть».
+
+![error](../../img/viewmanager/error.png)
+
 ### Диалог с двумя кнопками «Да»/«Нет»
 `ShowYesNoPopup()` показывает диалоговое окно с заголовком, текстом и двумя кнопками и возвращает `true`, если нажали «Да».
 
