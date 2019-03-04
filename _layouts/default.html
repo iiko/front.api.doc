@@ -70,7 +70,11 @@
                 <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a>
             </div>
             <div style="float: right">
-                <a href="https://github.com/iiko/front.api.doc/">View source</a>
+                <form action="https://google.com/search" method="get">
+                    <input type="hidden" name="sitesearch" value="https://iiko.github.io/front.api.doc/" />
+                    <input type="text" name="q" />
+                    <input type="submit" value="Search Google">
+                </form>
             </div>
             <div style="margin: 0 auto">
                 This site is under construction, anything may be broken or incomplete
@@ -82,7 +86,7 @@
 
         <!-- common topics -->
         {% for p in pagesByTitle %}
-            {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
         {% unless site.apiVersions contains apiVersionOfPage %}
         &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
         {% endunless %}
@@ -103,7 +107,6 @@
         {% endif %}
         {% endfor %}
         {% endfor %}
-
     </aside>
     <article>
         {{ content }}
@@ -114,7 +117,7 @@
                 Contacts: <a href="http://help.iiko.ru/articles/#!api-documentations/getting-started/">help.iiko.ru</a> | <a href="api@iiko.ru">api@iiko.ru</a>
             </div>
             <div style="float: right">
-                Last change: {{ site.time | date_to_long_string }}
+                Last change: {{ site.time | date_to_long_string }} | <a href="https://github.com/iiko/front.api.doc/">View source</a>
             </div>
             <div style="margin: 0 auto">
                 iiko, 2019
