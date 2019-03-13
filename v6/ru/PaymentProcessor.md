@@ -29,8 +29,7 @@ layout: default
 Если сделать внешний тип оплаты фискальным, он попадёт в раздел *«Банковские карты»*, если оставить нефискальным, он будет в разделе *«Безналичный расчёт»*.
 Можно заводить сколько угодно типов оплаты каждой платёжной системы.   
 - *Элемент оплаты* – относится к заказам в iikoFront. Когда пользователь [на экране кассы](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72) или в [окне предоплат и платежей](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72/a/h2_10) выбирает какой-либо тип оплаты, в заказ добавляется элемент оплаты соответствующего типа оплаты.
-Также элементы оплаты могут быть добавлены средствами API.
-*(NOTE: добавить ссылку, когда про это будет написана статья)*.
+Также элементы оплаты могут быть добавлены средствами API ([Добавление оплат](Payments.html)).
 
 ## Интерфейс IExternalPaymentProcessor
 Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm):
@@ -48,6 +47,7 @@ public interface IExternalPaymentProcessor
     void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
     void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
     void ReturnPaymentWithoutOrder(decimal sum, Guid paymentTypeId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IProgressBar progressBar);
+
     void PaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IPaymentDataContext context);
     void EmergencyCancelPaymentSilently(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IPaymentDataContext context);
     bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaymentDataContext context);
@@ -157,21 +157,23 @@ public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transaction
 Так что сохранять их в переменные не имеет смысла, т.к. вне метода их нельзя будет использовать.
 
 ### Тихое проведение оплаты
-
-Если требуется дистанционно оплатить заказ по инициативе плагина и при этом нет необходимости отображать какие-либо UI элементы iikoFront, то плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина результатом которого является ответ на вопрос _"Имеет ли плагин возможность проводить оплату тихо?"_. 
-Для того чтобы появилась такая возможность, необходимо чтобы в заказ предварительно была добавлена внешняя оплата. Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
+Иногда бизнесу нужны решения по оплате плагинными типами оплаты из самих плагинов, без входа на экран кассы iikoFront.
+Для этого плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина.
+Результатом метода является ответ на вопрос _"Имеет ли плагин возможность проводить оплату тихо?"_.
+Для того чтобы появилась такая возможность, необходимо чтобы в заказ предварительно был добавлен плагинный элемент оплаты.
+Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
 В примере `SDK SamplePlugin` приводится пример с использованием пользовательского класса со свойством _SilentPay_:
 ```cs
- var additionalData = new ExternalPaymentItemAdditionalData
+var additionalData = new ExternalPaymentItemAdditionalData
 {
     CustomData = Serializer.Serialize(new PaymentAdditionalData {SilentPay = true})
 };
-var credentials = PluginContext.Operations.GetCredentials();
-var paymentItem = PluginContext.Operations.AddExternalPaymentItemorder.ResultSum, false, additionalData, paymentType, order, redentials);
+var credentials = PluginContext.Operations.AuthenticateByPin("12345");
+var paymentItem = PluginContext.Operations.AddExternalPaymentItemorder.ResultSum, false, additionalData, paymentType, order, credentials);
 
 PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 ```
-В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm)) , далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
+В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm)), далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
 ```
 public bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaymentDataContext context)
 {
