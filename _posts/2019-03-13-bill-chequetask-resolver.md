@@ -7,11 +7,11 @@ layout: default
 Чек типа «Счёт‎» используется в некоторых странах, например [в Белоруссии](https://ru.iiko.help/articles/how-to-iiko/fr-belarus) и Латвии.
 Печать чеков типа «Счёт‎» поддерживают не все модели фискальных регистраторов. Для устройств написанных на [API Оборудования](https://iiko.github.io/front.api.doc/v6/ru/Devices.html) поддержка печати чеков типа «Счёт‎» включается через [`CashRegisterDriverParameters`](http://iiko.github.io/front.api.sdk/v6/html/Properties_T_Resto_Front_Api_V6_Data_Device_Settings_CashRegisterDriverParameters.htm) указанием `IsBillTaskSupported = true`.
 Чек типа «Счёт‎» это команда [ICashRegister.DoBillCheque()](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Devices_ICashRegister_DoBillCheque.htm).
-Конфигурации `IsBillTaskSupported = true` предполагает, что номер счёта обязателен в команде чека оплаты.
+Конфигурация `IsBillTaskSupported = true` предполагает, что номер счёта обязателен в команде чека оплаты.
 Поэтому в результатах команды `DoBillCheque` обязательно к заполнению поле `CashRegisterResult.BillNumber`.
 
 В момент [печати пречека](https://ru.iiko.help/articles/iikofront-5-4/topic-48) ядро iikoFront опрашивает подписчиков *«На какой точке продаж печатать Счёт‎ для данного заказа?»*.
-Регистрация маршрутизатора печати чеков типа «Счёт‎» осуществляется методом `IOperationService.RegisterBillChequeTaskResolver()`
+Регистрация маршрутизатора печати чеков типа «Счёт‎» осуществляется методом `IOperationService.RegisterBillChequeTaskResolver()`:
 
 - Метод принимает функцию с аргументами `IOrder` *"заказ"* и `bool` *"это возврат пречека"*.
 - Функция должна вернуть `IPointOfSale`: ту точку продаж, на которую будет отправлена команда для чека типа «Счёт‎».
