@@ -156,22 +156,43 @@ public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transaction
 Аргументы [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IReceiptPrinter.htm), [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) и  [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) «живут» только в процессе выполнения метода, после завершения метода экземпляры уничтожаются.
 Так что сохранять их в переменные не имеет смысла, т.к. вне метода их нельзя будет использовать.
 
-### Тихое проведение оплаты
+### Тихое проведение оплаты (Silent-оплата)
 Иногда бизнесу нужны решения по оплате плагинными типами оплаты из самих плагинов, без входа на экран кассы iikoFront.
 Для этого плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина.
-Результатом метода является ответ на вопрос _"Имеет ли плагин возможность проводить оплату тихо?"_.
+Результатом метода является ответ на вопрос _«Имеет ли плагин возможность проводить оплату тихо?»_.
 Для того чтобы появилась такая возможность, необходимо чтобы в заказ предварительно был добавлен плагинный элемент оплаты.
 Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
-В примере `SDK SamplePlugin` приводится пример с использованием пользовательского класса со свойством _SilentPay_:
+В `SDK` приводится пример с использованием пользовательского класса со свойством _SilentPay_:
 ```cs
-var additionalData = new ExternalPaymentItemAdditionalData
+[Serializable]
+public class PaymentAdditionalData
 {
-    CustomData = Serializer.Serialize(new PaymentAdditionalData {SilentPay = true})
-};
-var credentials = PluginContext.Operations.AuthenticateByPin("12345");
-var paymentItem = PluginContext.Operations.AddExternalPaymentItemorder.ResultSum, false, additionalData, paymentType, order, credentials);
+    public bool SilentPay { get; set; }
+}
 
-PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
+private string Serialize<T>(T data) where T : class
+{
+    using (var sw = new StringWriter())
+    using (var writer = XmlWriter.Create(sw))
+    {
+        new XmlSerializer(typeof(T)).Serialize(writer, data);
+        return sw.ToString();
+    }
+}
+private void AddAndProcessExternalPrepay()
+{
+    var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
+    var paymentType = PluginContext.Operations.GetPaymentTypes().Single(i => i.Kind == PaymentTypeKind.External && i.Name == "SamplePaymentType");
+    
+    var additionalData = new ExternalPaymentItemAdditionalData
+    {
+        CustomData = Serialize(new PaymentAdditionalData {SilentPay = true})
+    };
+    var credentials = PluginContext.Operations.AuthenticateByPin("777");
+    var paymentItem = PluginContext.Operations.AddExternalPaymentItem(order.ResultSum, false, additionalData, paymentType, order, credentials);
+
+    PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
+}
 ```
 В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm)), далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
 ```

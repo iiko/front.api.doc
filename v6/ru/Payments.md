@@ -25,8 +25,8 @@ layout: default
 
 - Добавление в заказ оплаты наличными
 ```cs
-var order = PluginContext.Operations.GetOrders().Last(o => o.Status == orderStatus.New);
-var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == .Cash);
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
+var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Cash);
 var credentials = PluginContext.Operations.GetCredentials();
 var paymentItem = PluginContext.Operations.AddPaymentItem(100m, null, paymentType, order);
 ```
@@ -39,7 +39,7 @@ PluginContext.Operations.AddPreliminaryPaymentItem(150, additionalData, paymentT
 ```
 - Добавить в заказ внешнюю непроведенную оплату
 ```cs
-var order = PluginContext.Operations.GetOrders().Last(o => o.Status == orderStatus.New);
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
 var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Card && x.Name.ToUpper() == "DINERS");
 var additionalData = new CardPaymentItemAdditionalData { CardNumber = "123456" };
 PluginContext.Operations.AddExternalPaymentItem(150, false, additionalData, paymentType, order, PluginContext.Operations.GetCredentials());
@@ -55,53 +55,60 @@ PluginContext.Operations.AddExternalPaymentItem(150, false, additionalData, paym
 ## Оплата заказа
 Для оплаты заказа существуют методы:
 
-- [IOperationService.PayOrder](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrder.htm)
+- [IOperationService.PayOrder](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrder.htm) &mdash; оплата заказа
 
-- [IOperationService.PayOrderAndPayOutOnUser](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrderAndPayOutOnUser.htm)
+- [IOperationService.PayOrderAndPayOutOnUser](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrderAndPayOutOnUser.htm) &mdash; оплата заказа в расчет официанту
 
 также сущестует метод, с помощью которого можно превратить элемент оплаты в предоплату iikoFront
 - [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm)
 
-### Оплата заказа, в котором достаточно внесенных денежных средств
+ Если оплата производится фискальным наличным типом, то на пользователя, от чьего имени производится операция оплаты методом `IOperationService.PayOrderAndPayOutOnUser`, будет оформлено [фискальное изъятие](https://ru.iiko.help/articles/iikofront-6-3/topic-43).
+
+#### Примеры
+
+- Оплата заказа, в котором достаточно внесенных денежных средств
+
 Пусть существует заказ IOrder order, который необходимо закрыть в iikoFront и в заказ уже внесено достаточно проведенных оплат
 (*проведенные элементы оплаты это либо предоплаты, внесенные на экране кассы iikoFront, либо оплаты, добавленные по инициативе плагина методом `AddExternalPaymentItem` с флагом `isProcessed` равным `true`*).
 Для такого заказа можно вызвать метод:
 ```cs
 operationService.PayOrder(credentials, order);
 ```
-В результате на главной кассе (в кассовую смену главной кассы) заказ закроется, распечатаются все необходимые квитанции и фискальный чек, а сам заказ окажется в закрытых в iikoFront.
 
 ![payOrder](../../img/payment/api_payOrder.png)
 
-### Оплата стандартным типом оплаты
+- Оплата заказа наличными с расчетом официанту
+
 Пусть существует заказ `IOrder order`, который необходимо оплатить наличными на всю сумму заказа и закрыть в iikoFront.
-Для этого нужно выбрать соответствующий paymentType.
+Для этого нужно выбрать соответствующий `paymentType`.
 Затем вызывается метод `IOperationService.PayOrderAndPayOutOnUser`.
-Здесь заказ оплачивается наличными на всю сумму заказа:
+В примере ниже заказ оплачивается наличными на всю сумму заказа:
 ```cs
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New || o.Status == OrderStatus.Bill);
-var credentials = PluginContext.Operations.AuthenticateByPin("654");
+var credentials = PluginContext.Operations.AuthenticateByPin("777");
 var paymentType = operationService.GetPaymentTypesToPayOutOnUser().First(x => x.IsCash);
 PluginContext.Operations.PayOrderAndPayOutOnUser(credentials, order, paymentType, order.ResultSum);
 ```
-В результате на главной кассе (в кассовую смену главной кассы) заказ закроется, распечатаются все необходимые квитанции и фискальный чек, а сам заказ окажется в закрытых в iikoFront.
 
-### Оплата плагинным типом оплаты
-Для оплаты заказа плагинным типом оплаты сначала требуется выбрать соответствующий тип.
+- Оплата плагинным типом оплаты
+
+Пусть существует `IOrder order` который нужно оплатить плагинным типом оплаты.
 
 ```cs
 var orderId = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New).Id;
-var paymentType = PluginContext.Operations.GetPaymentTypes().Single(i => i.Id == Guid.Parse("fabcf499-9485-4f6f-af0c-d09bed6d96ba"));
+var paymentType = PluginContext.Operations.GetPaymentTypes().Single(i => i.Kind == PaymentTypeKind.External && i.Name == "SamplePaymentType");
 var credentials = PluginContext.Operations.GetCredentials();
 
 var order = PluginContext.Operations.GetOrders().Single(o => o.Id == orderId);
 PluginContext.Operations.PayOrderAndPayOutOnUser(credentials, order, paymentType, order.ResultSum);
 ```
 
-Комментарии:
-- На пользователя, от чьего имени была выполнена операция оплаты `IOperationService.PayOrder` или `IOperationService.PayOrderAndPayOutOnUser`, оформляется фискальное изъятие, т.к. оплата была произведена фискальным типом.
+##### Комментарии:
+- При оплате заказа на главной кассе (в кассовую смену главной кассы) с помощью методов [IOperationService.PayOrder](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrder.htm) или
+ [IOperationService.PayOrderAndPayOutOnUser](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_PayOrderAndPayOutOnUser.htm) заказ закроется, распечатаются все необходимые квитанции, напечатан фискальный чек, а сам заказ окажется в закрытых в iikoFront (_NOTE: дополнить раздел пояснением про фискальное иъятие в расчет официанту_).
 
-Возврат оплаты и возврат заказов через по инициативе плагина не предусмотрен, он должен выполняться со стационарных терминалов iikoFront
+### Возврат оплаты
+Возврат оплаты и возврат заказов по инициативе плагина не предусмотрен, он должен выполняться со стационарных терминалов iikoFront пользователем системы.
 
 ### Проведение оплаты
 
@@ -113,7 +120,7 @@ PluginContext.Operations.PayOrderAndPayOutOnUser(credentials, order, paymentType
 
 ##### Пример
 ```cs
-var order = PluginContext.Operations.GetOrders().Last(o => o.Status == orderStatus.New);
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
 var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Cash);
 PluginContext.Operations.AddExternalPaymentItem(150, true, null, paymentType, order, PluginContext.Operations.GetCredentials());
 ```
@@ -121,6 +128,9 @@ PluginContext.Operations.AddExternalPaymentItem(150, true, null, paymentType, or
 ![cash](../../img/payment/api_cashExternalProcessed.png)
 
 #### Добавление в заказ проведенной оплаты и превращение ее в предоплату iikoFront
+
+Иногда требуется в заказ добавить такой элемент оплаты, чтобы он отображался в отчетах iikoOffice до закрытия заказа.
+Тогда в заказ нужно добавить оплату методом `AddExternalPaymentItem` с параметром `isProcessed` равным `true`, затем вызвать метод [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm).
 
 ##### Пример
 ```cs
@@ -134,6 +144,9 @@ PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 ```
 ![card](../../img/payment/api_cardExternalPrepay.png)
 
+**Дополнительно:**
+- Silent-оплата заказа см. в разделе [Внешние типы оплаты](PaymentProcessor.html).
+
 ## Удаление оплат
 
 - [IEditSession.DeletePaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeletePaymentItem.htm) - удалить оплату
@@ -144,7 +157,7 @@ PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 
 ##### Пример
 
-Удаление всех внешних элементов оплаты из заказа
+- Удаление всех внешних элементов оплаты из заказа
 ```cs
 var paymentItems = operationService.GetPaymentsByOrder(order).Where(i => .IsExternal);
 foreach (var paymentItem in paymentItems)
