@@ -94,56 +94,56 @@ void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [No
 [Serializable]
 internal class IsCardClass
 {
-	public bool IsCard;
+    public bool IsCard;
 }
 public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, IPointOfSale pointOfSale,  IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	// Показать в iikoFront окно ввода номера и прокатки карты
-	var input = viewManager.ShowInputDialog("Введите номер или прокатайте карту", InputDialogTypes.Card | InputDialogTypes.Number);
-	string room = null;
-	string cardTrack = null;
-
-	// Если был введен номер, то результат типа NumberInputDialogResult
-	var roomNum = input as NumberInputDialogResult;
-	if (roomNum != null)
-		room = roomNum.Number.ToString();
-
-	// Если была прокатана карта, то результат типа CardInputDialogResult
-	var card = input as CardInputDialogResult;
-	if (card != null)
-		cardTrack = card.FullCardTrack;
-
-	if (room == null && cardTrack == null)
-		// Ничего не было введено, прекращаем операцию.
-		throw new PaymentActionFailedException("Не было введено данных.");
-
-	// Получаем заказ средствами API по id через IOperationService.
-	var order = PluginContext.Operations.TryGetOrderById(orderId.Value);
-
-	// Выполняем произвольные методы. Например, проводим платёж в некой hotelSystem, которая вернет имя гостя, если платёж «принят» и null, если платёж отклонён.
-	var guestName = hotelSystem.ProcessPaymentOnGuest(cardTrack, room, order?.Number, transactionId, sum);
-	if (guestName == null)
-		// Платёж не прошёл, прекращаем операцию.
-		throw new PaymentActionFailedException("Платеж не прошёл.");
-
-	// Формирование квитанции для печати. Квитанция состоит из XElement
-	var slip = new ReceiptSlip
-	{
-		Doc =  new XElement(Tags.Doc, 
-			new XElement(Tags.Pair, "Гость", guestName),
-			new XElement(Tags.Pair, "Сумма", sum))
-	};
-
-	// Печать.
-	printer.Print(slip);
-	var cardInfoData = new IsCardClass { IsCard = card != null };
-	var cardType = cardInfoData.IsCard
-		? "My Hotel System Card"
-		: "My Hotel System Room";
-	// Сохранение данных, которые будут показаны в отчётах.
-	context.SetInfoForReports(room ?? cardTrack, cardType);
-	// Сохранение данных, которые будут использованы для возврата оплаты.
-	context.SetRollbackData(cardInfoData);
+    // Показать в iikoFront окно ввода номера и прокатки карты
+    var input = viewManager.ShowInputDialog("Введите номер или прокатайте карту", InputDialogTypes.Card | InputDialogTypes.Number);
+    string room = null;
+    string cardTrack = null;
+    
+    // Если был введен номер, то результат типа NumberInputDialogResult
+    var roomNum = input as NumberInputDialogResult;
+    if (roomNum != null)
+        room = roomNum.Number.ToString();
+    
+    // Если была прокатана карта, то результат типа CardInputDialogResult
+    var card = input as CardInputDialogResult;
+    if (card != null)
+        cardTrack = card.FullCardTrack;
+    
+    if (room == null && cardTrack == null)
+        // Ничего не было введено, прекращаем операцию.
+        throw new PaymentActionFailedException("Не было введено данных.");
+    
+    // Получаем заказ средствами API по id через IOperationService.
+    var order = PluginContext.Operations.TryGetOrderById(orderId.Value);
+    
+    // Выполняем произвольные методы. Например, проводим платёж в некой hotelSystem, которая вернет имя гостя, если платёж «принят» и null, если платёж отклонён.
+    var guestName = hotelSystem.ProcessPaymentOnGuest(cardTrack, room, order?.Number, transactionId, sum);
+    if (guestName == null)
+        // Платёж не прошёл, прекращаем операцию.
+        throw new PaymentActionFailedException("Платеж не прошёл.");
+    
+    // Формирование квитанции для печати. Квитанция состоит из XElement
+    var slip = new ReceiptSlip
+    {
+        Doc =  new XElement(Tags.Doc,
+            new XElement(Tags.Pair, "Гость", guestName),
+            new XElement(Tags.Pair, "Сумма", sum))
+    };
+    
+    // Печать.
+    printer.Print(slip);
+    var cardInfoData = new IsCardClass { IsCard = card != null };
+    var cardType = cardInfoData.IsCard
+        ? "My Hotel System Card"
+        : "My Hotel System Room";
+    // Сохранение данных, которые будут показаны в отчётах.
+    context.SetInfoForReports(room ?? cardTrack, cardType);
+    // Сохранение данных, которые будут использованы для возврата оплаты.
+    context.SetRollbackData(cardInfoData);
 }
 ```
  
@@ -212,32 +212,31 @@ void EmergencyCancelPaymentSilently(decimal sum, Guid? orderId, Guid paymentType
 [Serializable]
 public class IsCardClass
 {
-	public bool IsCard;
+    public bool IsCard;
 }
 
 public void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	// Выполняктся произвольные методы. Например, по id транзакции платёж возвращаетется в некой hotelSystem, которая вернет true, если платёж успешно откатился и false, если возврат не удался.
-	var success = hotelSystem.ProcessReturnPayment(transactionId);
-	if (!success)
-		throw new PaymentActionFailedException("Не получилось вернуть оплату.");
-
-	// Получаем данные, сохранённые в элементе оплаты.
-	var isCard = context.GetRollbackData<IsCardClass>();
-
-	var slip = new ReceiptSlip
-	{
-		Doc =  new XElement(Tags.Doc, 
-			new XElement(Tags.Pair, "Возврат суммы", sum),
-			new XElement(Tags.Pair, "Была ли карта", isCard.IsCard ? "ДА" : "НЕТ" ))
-	};
-	printer.Print(slip);
+    // Выполняктся произвольные методы. Например, по id транзакции платёж   озвращаетется в некой hotelSystem, которая вернет true, если платёж  успешно ткатился и false, если возврат не удался.
+    var success = hotelSystem.ProcessReturnPayment(transactionId);
+    if (!success)
+        throw new PaymentActionFailedException("Не получилось вернуть плату.");
+    
+    // Получаем данные, сохранённые в элементе оплаты.
+    var isCard = context.GetRollbackData<IsCardClass>();
+    
+    var slip = new ReceiptSlip
+    {
+        Doc =  new XElement(Tags.Doc, 
+            new XElement(Tags.Pair, "Возврат суммы", sum),
+            new XElement(Tags.Pair, "Была ли карта", isCard.IsCard ? "ДА" :    "НЕТ" ))
+    };
+    printer.Print(slip);
 }
 
-public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer,
-	IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
+public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	ReturnPayment(sum, orderId, paymentTypeId, transactionId, pointOfSale, cashier, printer, viewManager, context, progressBar);
+    ReturnPayment(sum, orderId, paymentTypeId, transactionId, pointOfSale, cashier, printer, viewManager, context, progressBar);
 }
 ```
 
@@ -288,22 +287,22 @@ ctor
 
 private void CafeSessionOpening([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe session opening.");
-	var message =
-		"Я не могу подключиться к своему серверу и открыть смену.";
-	PluginContext.Operations.AddNotificationMessage(message, "SamplePaymentPlugin");
+    PluginContext.Log.Info("Cafe session opening.");
+    var message =
+        "Я не могу подключиться к своему серверу и открыть смену.";
+    PluginContext.Operations.AddNotificationMessage(message, "SamplePaymentPlugin");
 }
 
 private void CafeSessionClosing([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe session closing.");
-	var slip = new ReceiptSlip
-	{
-		Doc = new XElement(Tags.Doc,
-			new XElement(Tags.Center, PaymentSystemKey),
-			new XElement(Tags.Center, "Cafe session closed."))
-	};
-	printer.Print(slip);
+    PluginContext.Log.Info("Cafe session closing.");
+    var slip = new ReceiptSlip
+    {
+        Doc = new XElement(Tags.Doc,
+            new XElement(Tags.Center, PaymentSystemKey),
+            new XElement(Tags.Center, "Cafe session closed."))
+    };
+    printer.Print(slip);
 }
 
 ```

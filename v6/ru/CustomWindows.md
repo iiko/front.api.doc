@@ -26,16 +26,16 @@ private void EntryPoint()
 ```cs
 public static void ClickWindow(Window wnd)
 {
-   try
-   {
-       var wih = new WindowInteropHelper(wnd);
-       WinApi.RECT rect;
-       WinApi.GetWindowRect(new HandleRef(wnd, wih.Handle), out rect);
-       var x = rect.Left + (rect.Right - rect.Left) / 2;
-       var y = rect.Top + (rect.Bottom - rect.Top) / 4;
-       WinApi.LeftMouseClick(x, y);
-   }
-   catch (Exception) { }
+    try
+    {
+        var wih = new WindowInteropHelper(wnd);
+        WinApi.RECT rect;
+        WinApi.GetWindowRect(new HandleRef(wnd, wih.Handle), out rect);
+        var x = rect.Left + (rect.Right - rect.Left) / 2;
+        var y = rect.Top + (rect.Bottom - rect.Top) / 4;
+        WinApi.LeftMouseClick(x, y);
+    }
+    catch (Exception) { }
 }
 ```
 
