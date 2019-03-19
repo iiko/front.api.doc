@@ -36,7 +36,7 @@ layout: default
 Для удобства реализации подобных сценариев добавлена возможность выполнения нескольких операций одной непрерываемой серией.
 
 [`ExecuteContinuousOperation`](https://iiko.github.io/front.api.sdk/v6/html/Overload_Resto_Front_Api_V6_Extensions_OperationServiceExtensions_ExecuteContinuousOperation.htm) — специальная операция, внутри которой можно последовательно выполнить несколько других операций одной непрерываемой серией.
-В коде плагина нужно собрать серию операций в одну функцию или лямбду и передать её как callback в метод `ExecuteContinuousOperation`, который вызовет этот callback, передав ему вход специальный экземпляр сервиса `IOperationService`, предназначенный для непрерываемого выполнения операций:
+В коде плагина нужно собрать серию операций в одну функцию или лямбду и передать её как callback в метод `ExecuteContinuousOperation`, который вызовет этот callback, передав ему на вход специальный экземпляр сервиса `IOperationService`, предназначенный для непрерываемого выполнения операций:
 
 ```cs
 PluginContext.Operations.ExecuteContinuousOperation(
