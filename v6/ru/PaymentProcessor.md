@@ -29,8 +29,7 @@ layout: default
 Если сделать внешний тип оплаты фискальным, он попадёт в раздел *«Банковские карты»*, если оставить нефискальным, он будет в разделе *«Безналичный расчёт»*.
 Можно заводить сколько угодно типов оплаты каждой платёжной системы.   
 - *Элемент оплаты* – относится к заказам в iikoFront. Когда пользователь [на экране кассы](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72) или в [окне предоплат и платежей](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72/a/h2_10) выбирает какой-либо тип оплаты, в заказ добавляется элемент оплаты соответствующего типа оплаты.
-Также элементы оплаты могут быть добавлены средствами API.
-*(NOTE: добавить ссылку, когда про это будет написана статья)*.
+Также элементы оплаты могут быть добавлены средствами API ([Добавление оплат](Payments.html)).
 
 ## Интерфейс IExternalPaymentProcessor
 Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm):
@@ -48,6 +47,10 @@ public interface IExternalPaymentProcessor
     void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
     void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
     void ReturnPaymentWithoutOrder(decimal sum, Guid paymentTypeId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IProgressBar progressBar);
+
+    void PaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IPaymentDataContext context);
+    void EmergencyCancelPaymentSilently(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IPaymentDataContext context);
+    bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaymentDataContext context);
 }
 ```
 
@@ -91,56 +94,56 @@ void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [No
 [Serializable]
 internal class IsCardClass
 {
-	public bool IsCard;
+    public bool IsCard;
 }
 public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, IPointOfSale pointOfSale,  IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	// Показать в iikoFront окно ввода номера и прокатки карты
-	var input = viewManager.ShowInputDialog("Введите номер или прокатайте карту", InputDialogTypes.Card | InputDialogTypes.Number);
-	string room = null;
-	string cardTrack = null;
-
-	// Если был введен номер, то результат типа NumberInputDialogResult
-	var roomNum = input as NumberInputDialogResult;
-	if (roomNum != null)
-		room = roomNum.Number.ToString();
-
-	// Если была прокатана карта, то результат типа CardInputDialogResult
-	var card = input as CardInputDialogResult;
-	if (card != null)
-		cardTrack = card.FullCardTrack;
-
-	if (room == null && cardTrack == null)
-		// Ничего не было введено, прекращаем операцию.
-		throw new PaymentActionFailedException("Не было введено данных.");
-
-	// Получаем заказ средствами API по id через IOperationService.
-	var order = PluginContext.Operations.TryGetOrderById(orderId.Value);
-
-	// Выполняем произвольные методы. Например, проводим платёж в некой hotelSystem, которая вернет имя гостя, если платёж «принят» и null, если платёж отклонён.
-	var guestName = hotelSystem.ProcessPaymentOnGuest(cardTrack, room, order?.Number, transactionId, sum);
-	if (guestName == null)
-		// Платёж не прошёл, прекращаем операцию.
-		throw new PaymentActionFailedException("Платеж не прошёл.");
-
-	// Формирование квитанции для печати. Квитанция состоит из XElement
-	var slip = new ReceiptSlip
-	{
-		Doc =  new XElement(Tags.Doc, 
-			new XElement(Tags.Pair, "Гость", guestName),
-			new XElement(Tags.Pair, "Сумма", sum))
-	};
-
-	// Печать.
-	printer.Print(slip);
-	var cardInfoData = new IsCardClass { IsCard = card != null };
-	var cardType = cardInfoData.IsCard
-		? "My Hotel System Card"
-		: "My Hotel System Room";
-	// Сохранение данных, которые будут показаны в отчётах.
-	context.SetInfoForReports(room ?? cardTrack, cardType);
-	// Сохранение данных, которые будут использованы для возврата оплаты.
-	context.SetRollbackData(cardInfoData);
+    // Показать в iikoFront окно ввода номера и прокатки карты
+    var input = viewManager.ShowInputDialog("Введите номер или прокатайте карту", InputDialogTypes.Card | InputDialogTypes.Number);
+    string room = null;
+    string cardTrack = null;
+    
+    // Если был введен номер, то результат типа NumberInputDialogResult
+    var roomNum = input as NumberInputDialogResult;
+    if (roomNum != null)
+        room = roomNum.Number.ToString();
+    
+    // Если была прокатана карта, то результат типа CardInputDialogResult
+    var card = input as CardInputDialogResult;
+    if (card != null)
+        cardTrack = card.FullCardTrack;
+    
+    if (room == null && cardTrack == null)
+        // Ничего не было введено, прекращаем операцию.
+        throw new PaymentActionFailedException("Не было введено данных.");
+    
+    // Получаем заказ средствами API по id через IOperationService.
+    var order = PluginContext.Operations.TryGetOrderById(orderId.Value);
+    
+    // Выполняем произвольные методы. Например, проводим платёж в некой hotelSystem, которая вернет имя гостя, если платёж «принят» и null, если платёж отклонён.
+    var guestName = hotelSystem.ProcessPaymentOnGuest(cardTrack, room, order?.Number, transactionId, sum);
+    if (guestName == null)
+        // Платёж не прошёл, прекращаем операцию.
+        throw new PaymentActionFailedException("Платеж не прошёл.");
+    
+    // Формирование квитанции для печати. Квитанция состоит из XElement
+    var slip = new ReceiptSlip
+    {
+        Doc =  new XElement(Tags.Doc,
+            new XElement(Tags.Pair, "Гость", guestName),
+            new XElement(Tags.Pair, "Сумма", sum))
+    };
+    
+    // Печать.
+    printer.Print(slip);
+    var cardInfoData = new IsCardClass { IsCard = card != null };
+    var cardType = cardInfoData.IsCard
+        ? "My Hotel System Card"
+        : "My Hotel System Room";
+    // Сохранение данных, которые будут показаны в отчётах.
+    context.SetInfoForReports(room ?? cardTrack, cardType);
+    // Сохранение данных, которые будут использованы для возврата оплаты.
+    context.SetRollbackData(cardInfoData);
 }
 ```
  
@@ -153,6 +156,54 @@ public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transaction
 Аргументы [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IReceiptPrinter.htm), [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) и  [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) «живут» только в процессе выполнения метода, после завершения метода экземпляры уничтожаются.
 Так что сохранять их в переменные не имеет смысла, т.к. вне метода их нельзя будет использовать.
 
+### Тихое проведение оплаты (Silent-оплата)
+Иногда бизнесу нужны решения по оплате плагинными типами оплаты из самих плагинов, без входа на экран кассы iikoFront.
+Для этого плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина.
+Результатом метода является ответ на вопрос _«Имеет ли плагин возможность проводить оплату тихо?»_.
+Для того чтобы появилась такая возможность, необходимо чтобы в заказ предварительно был добавлен плагинный элемент оплаты.
+Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
+В `SDK` приводится пример с использованием пользовательского класса со свойством _SilentPay_:
+```cs
+[Serializable]
+public class PaymentAdditionalData
+{
+    public bool SilentPay { get; set; }
+}
+
+private string Serialize<T>(T data) where T : class
+{
+    using (var sw = new StringWriter())
+    using (var writer = XmlWriter.Create(sw))
+    {
+        new XmlSerializer(typeof(T)).Serialize(writer, data);
+        return sw.ToString();
+    }
+}
+private void AddAndProcessExternalPrepay()
+{
+    var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
+    var paymentType = PluginContext.Operations.GetPaymentTypes().Single(i => i.Kind == PaymentTypeKind.External && i.Name == "SamplePaymentType");
+    
+    var additionalData = new ExternalPaymentItemAdditionalData
+    {
+        CustomData = Serialize(new PaymentAdditionalData {SilentPay = true})
+    };
+    var credentials = PluginContext.Operations.AuthenticateByPin("777");
+    var paymentItem = PluginContext.Operations.AddExternalPaymentItem(order.ResultSum, false, additionalData, paymentType, order, credentials);
+
+    PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
+}
+```
+В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm)), далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
+```
+public bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaymentDataContext context)
+{
+    var customData = context.GetCustomData<PaymentAdditionalData>();    
+    return customData?.SilentPay ?? false;
+}
+```
+В зависимости от ответа возвращаемого значения метода [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) iikoFront вызовет `Pay` или `PaySilently` метод процессора плагина.
+Таким образом плагин сам решает как должен проводиться вновь добавляемый платеж.
 
 ## Методы возврата оплаты
 
@@ -160,6 +211,7 @@ public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transaction
 void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
 void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
 void ReturnPaymentWithoutOrder(decimal sum, Guid paymentTypeId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IProgressBar progressBar);
+void EmergencyCancelPaymentSilently(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IPaymentDataContext context);
 ```
 
 Методы `EmergencyCancelPayment()` и `ReturnPayment()` вызываются, когда пользователь на iikoFront инициирует возврат проведённого ранее платежа.
@@ -181,32 +233,31 @@ void ReturnPaymentWithoutOrder(decimal sum, Guid paymentTypeId, [NotNull] IPoint
 [Serializable]
 public class IsCardClass
 {
-	public bool IsCard;
+    public bool IsCard;
 }
 
 public void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	// Выполняктся произвольные методы. Например, по id транзакции платёж возвращаетется в некой hotelSystem, которая вернет true, если платёж успешно откатился и false, если возврат не удался.
-	var success = hotelSystem.ProcessReturnPayment(transactionId);
-	if (!success)
-		throw new PaymentActionFailedException("Не получилось вернуть оплату.");
-
-	// Получаем данные, сохранённые в элементе оплаты.
-	var isCard = context.GetRollbackData<IsCardClass>();
-
-	var slip = new ReceiptSlip
-	{
-		Doc =  new XElement(Tags.Doc, 
-			new XElement(Tags.Pair, "Возврат суммы", sum),
-			new XElement(Tags.Pair, "Была ли карта", isCard.IsCard ? "ДА" : "НЕТ" ))
-	};
-	printer.Print(slip);
+    // Выполняктся произвольные методы. Например, по id транзакции платёж   озвращаетется в некой hotelSystem, которая вернет true, если платёж  успешно ткатился и false, если возврат не удался.
+    var success = hotelSystem.ProcessReturnPayment(transactionId);
+    if (!success)
+        throw new PaymentActionFailedException("Не получилось вернуть плату.");
+    
+    // Получаем данные, сохранённые в элементе оплаты.
+    var isCard = context.GetRollbackData<IsCardClass>();
+    
+    var slip = new ReceiptSlip
+    {
+        Doc =  new XElement(Tags.Doc, 
+            new XElement(Tags.Pair, "Возврат суммы", sum),
+            new XElement(Tags.Pair, "Была ли карта", isCard.IsCard ? "ДА" :    "НЕТ" ))
+    };
+    printer.Print(slip);
 }
 
-public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer,
-	IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
+public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-	ReturnPayment(sum, orderId, paymentTypeId, transactionId, pointOfSale, cashier, printer, viewManager, context, progressBar);
+    ReturnPayment(sum, orderId, paymentTypeId, transactionId, pointOfSale, cashier, printer, viewManager, context, progressBar);
 }
 ```
 
@@ -257,22 +308,22 @@ ctor
 
 private void CafeSessionOpening([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe session opening.");
-	var message =
-		"Я не могу подключиться к своему серверу и открыть смену.";
-	PluginContext.Operations.AddNotificationMessage(message, "SamplePaymentPlugin");
+    PluginContext.Log.Info("Cafe session opening.");
+    var message =
+        "Я не могу подключиться к своему серверу и открыть смену.";
+    PluginContext.Operations.AddNotificationMessage(message, "SamplePaymentPlugin");
 }
 
 private void CafeSessionClosing([NotNull] IReceiptPrinter printer, [NotNull] IProgressBar progressBar)
 {
-	PluginContext.Log.Info("Cafe session closing.");
-	var slip = new ReceiptSlip
-	{
-		Doc = new XElement(Tags.Doc,
-			new XElement(Tags.Center, PaymentSystemKey),
-			new XElement(Tags.Center, "Cafe session closed."))
-	};
-	printer.Print(slip);
+    PluginContext.Log.Info("Cafe session closing.");
+    var slip = new ReceiptSlip
+    {
+        Doc = new XElement(Tags.Doc,
+            new XElement(Tags.Center, PaymentSystemKey),
+            new XElement(Tags.Center, "Cafe session closed."))
+    };
+    printer.Print(slip);
 }
 
 ```
