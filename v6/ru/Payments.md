@@ -17,7 +17,7 @@ layout: default
 Для настройки и регистрации внешних типов оплаты см. статью [Интеграция с внешними типами оплаты](PaymentProcessor.html).
 
 ##### Ограничения добавления оплат:
-Платеж может быть добавлен в заказ только если заказ находится в статусе новый (`New`) или пречек (`Bill`), иначе метод выбрасывает исключение [`ConstraintViolationException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Exceptions_ConstraintViolationException.htm).
+Платеж может быть добавлен в заказ, только если заказ находится в статусе новый (`New`) или пречек (`Bill`), иначе метод выбрасывает исключение [`ConstraintViolationException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Exceptions_ConstraintViolationException.htm).
 Кроме того нельзя добавить в заказ несколько непроведенных элементов оплаты одного типа
 (_NOTE: планируется разрешить добавлять несколько непроведенных элементов оплаты в заказ_).
 
