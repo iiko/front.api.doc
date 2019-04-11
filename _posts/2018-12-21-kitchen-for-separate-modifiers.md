@@ -1,0 +1,5 @@
+---
+title: Добавлены места приготовления модификаторов
+layout: default
+---
+Для [модификаторов](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrderModifierItem.htm) добавлен признак [`IsSeparate`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderModifierItem_IsSeparate.htm), готовятся ли они отдельно от своих блюд, а также ссылка [`Kitchen`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderModifierItem_Kitchen.htm) на отделение, в котором готовится модификатор. Последнее особенно интересно как раз для отдельно готовящихся модификаторов, ибо если модификатор готовится вместе с [блюдом](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrderCookingItem.htm), то место приготовления можно было получить из блюда ([`Kitchen`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderCookingItem_Kitchen.htm)).

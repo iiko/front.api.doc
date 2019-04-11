@@ -13,7 +13,7 @@ layout: default
 Для отладки плагина в Visual Studio можно запускать тот же самый хост-процесс `Resto.Front.Api.Host.exe`, указав в свойствах проекта плагина следующие параметры отладки:
 
 - Start Action: Start external program: `C:\Program Files\iiko\iikoRMS\Front.Net\Resto.Front.Api.Host.exe`.
-- Start Options: Command line arguments: `/a=C:\Projects\Front.Api Sdk\Resto.Front.Api.SamplePlugin\bin\Debug\Resto.Front.Api.SamplePlugin.dll /c=Resto.Front.Api.SamplePlugin.SamplePlugin /m=21005108 /l=C:\Projects\Front.Api Sdk\Logs\sample-plugin.log`
+- Start Options: Command line arguments: `/a="C:\Projects\Front.Api Sdk\Resto.Front.Api.SamplePlugin\bin\Debug\Resto.Front.Api.SamplePlugin.dll" /c=Resto.Front.Api.SamplePlugin.SamplePlugin /m=21005108 /l="C:\Projects\Front.Api Sdk\Logs\sample-plugin.log"`
 
 Аргументы командной строки:
 
