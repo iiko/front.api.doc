@@ -75,6 +75,7 @@ class DeviceSettings
         Значение перечисления описывается типом [`DeviceCustomEnumSettingValue`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_Settings_DeviceCustomEnumSettingValue.htm).  
 
 Все настройки из коллекции [`DeviceSettings.Settings`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_Settings_DeviceSettings.htm) при подключении ФРа попадают на вкладку *«Дополнительные настройки»*:
+
 ![CustomCashRegisterSettings](../../img/cashRegister/customCashRegisterSettings.png)
 
 ##### Обязательные настройки:
@@ -611,6 +612,7 @@ public CashRegisterDriverParameters GetCashRegisterDriverParameters()
 
 # FAQ
 **1. Почему не появляется в списке моделей внешний ФР?**
+
 *Вариант 1*: Скорее всего регистрация внешнего ФР прошла неуспешно. Это можно проверить по логам *api.log* в папке с данными фронта. 
 Наличие следующих записей говорит об успехе регистрации внешнего ФРа:
 ```cs
@@ -621,6 +623,7 @@ public CashRegisterDriverParameters GetCashRegisterDriverParameters()
 *CashRegisterPluginFolderName* — имя папки c плагином `iikoFront/Plugins/CashRegisterPluginFolderName`
 *CodeName* — [`DeviceSettings.CodeName`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Devices_IDeviceFactory_CodeName.htm)
 Иначе, в логах будет зафиксировано исключение.
+
 *Вариант 2*: Обновить вкладку с настройками оборудования в iikoOffice: *«Администрирование»* => *«Настройка оборудования»* => кнопка *«Обновить»*. 
 Если вкладка была уже открыта до запуска iikoFront, то список доступных моделей оборудования не был обновлен автоматически, его нужно обновлять вручную или переоткрыть вкладку.
 
@@ -630,6 +633,7 @@ IUser user = PluginContext.Operations.GetUserById(cashierId);
 var name = user.Name;
 ```
 **3. Как сконфигурировать типы внесений и изъятий в iikoOffice, чтобы вызывались методы ФРа DoPayIn() и DoPayOut() ?**
+
 Скорее всего настроены нефискальные внесения и изъятия. 
 Это просто бухгалтерские перемещения, которые не вызывают команды ФРа на их печать.
 Фискальные внесения и изъятия должны иметь пустой Шеф-счёт. 
