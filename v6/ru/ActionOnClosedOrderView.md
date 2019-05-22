@@ -1,10 +1,8 @@
 ---
-title: Расширение функционала экрана закрытого заказа 
+title: Экран закрытого заказа 
 layout: default
 ---
 # Расширение функционала экрана закрытого заказа #
-
-## Введение
 
 На экран закрытого заказа текущей кассовой смены и на экран возврата товаров по чеку можно добавить свои команды, которые могут выполнять операции, используя объект закрытого заказа. 
 
@@ -12,27 +10,26 @@ layout: default
 
 ### 1. На экране закрытого заказа текущей кассовой смены
 
-Для примера, с помощью SDK SamplePlugin была добавлена кнопка с надписью *«SamplePlugin: Show OK popup»*. 
-На экране закрытого заказа появляется кнопка с надписью и действием, которую описал плагин.
+Например, вот так выглядит кнопка *«SamplePlugin: Show OK popup»*, добавляемая плагином SamplePlugin из SDK.
 
 ![ButtonOnClosedOrder](../../img/actionOnClosedOrderView/buttonOnClosedOrder.png) 
 
-По нажатию на кнопку *«SamplePlugin: Show OK popup»*, описанное плагином действие выполняется.
 
-
-Допустим плагин просто инициирует показ окна с сообщением на UI iikoFront.
+Допустим, плагин показывает окно с сообщением (см. статью [*API диалоговые окна*](ViewManager.html "Диалоговые окна")).
 
 ![ActionOnClosedOrderView](../../img/actionOnClosedOrderView/actionOnClosedOrderView.png) 
 
-Плагин может добавить сразу несколько действий на экран закрытого заказа.
+Плагин может добавить сразу несколько кнопок на экран закрытого заказа.
 
 
-Например, с помощью SDK SamplePlugin были добавлены 2 кнопки: *«SamplePlugin: Show OK popup»* и *«SamplePlugin: Show OK popup»*.
+Например, с помощью SDK SamplePlugin были добавлены 2 кнопки: *«SamplePlugin: Show OK popup»* и *«SamplePlugin: Show input dialog»*.
 Тогда на экране закрытого заказа появится кнопка *«Дополнения»*.
 
 ![ButtonsOnClosedOrder](../../img/actionOnClosedOrderView/buttonsOnClosedOrder.png) 
 
-По нажатию на *«Дополнения»* будет выведен список всех расширений, добавленные плагинами. 
+Кнопка *«Дополнения»* также появляется, если несколько плагинов добавят по одной кнопке на экран закрытого заказа.
+
+По нажатию на *«Дополнения»* будет выведен список всех кнопок, добавленных плагинами. 
 
 ![ActionsOnClosedOrderView](../../img/actionOnClosedOrderView/actionsOnClosedOrderView.png) 
 
@@ -59,17 +56,14 @@ subscriptions = new CompositeDisposable
 ``` 
 
 Функция регистрации операции на экран закрытого заказа **текущей** кассовой смены [`AddButtonOnClosedOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnClosedOrderView.htm) принимает на вход 2 аргумента:
-- **string** — название кнопки, отображается на UI.
-- **action<IOrder, ICashRegisterInfo, IViewManager>** — функция, которая принимает на вход заказ [`IOrder`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrder.htm), фискальный регистратор [`ICashRegisterInfo`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_ICashRegisterInfo.htm) и менеджер окон [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm).
 
-Функция регистрации операции на экран закрытого заказа **прошлой** кассовой смены [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm) также принимает на вход 2 аргумента:
-- **string** — название кнопки, отображается на UI.
-- **action<Guid, ICashRegisterInfo, IViewManager>** — функция, которая принимает на вход идентификатор заказа, фискальный регистратор [`ICashRegisterInfo`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_ICashRegisterInfo.htm) и менеджер окон [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm).
+- `string` — название кнопки, отображается на UI.
+- `Action<IOrder, ICashRegisterInfo, IViewManager>` — функция, которая будет вызвана при нажатии на кнопку.
 
-Заказы закрытых кассовых смен iikoFront не хранит у себя в хранилище, поэтому в методе [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm) по идентификатору заказа не получится получить заказ [`IOrder`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrder.htm). 
+Функция регистрации операции на экран закрытого заказа **прошлой** кассовой смены [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm).
+
+Заказы закрытых кассовых смен iikoFront не хранит, поэтому в методе [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm) по идентификатору заказа не получится получить заказ [`IOrder`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrder.htm). 
 Идентификатор заказа прошлой кассовой смены будет полезен плагину или внешнему сервису, если он сам ведет свое хранилище.
-
-Подробнее о менеджере окон [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) см. статью [*API диалоговые окна*](ViewManager.html "Диалоговые окна").
 
 ##### Шаг 2. Описать обработчик добавляемой кнопки:
 
@@ -87,4 +81,4 @@ private void ShowOkPopupOnPastOrderScreen(Guid pastOrderId, ICashRegisterInfo ca
 }
 ```
  
-Примеры реализации можно посмотреть в проекте SDK SamplePlugin. 
+Примеры реализации можно посмотреть в проекте SDK SamplePlugin класс `ButtonsTester`.
