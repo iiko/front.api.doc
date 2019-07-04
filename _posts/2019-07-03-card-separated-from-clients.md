@@ -1,0 +1,14 @@
+---
+title: Редактирование дисконтных карт отвязано от редактирования клиентов
+layout: default
+---
+Начиная с V6 клиенты ([`IClient`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Brd_IClient.htm)) и дисконтные карты ([`IDiscountCard`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IDiscountCard.htm)) создаются и редактируются по-отдельности. Для дисконтных карт стало доступно имя владельца ([`OwnerName`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IDiscountCard_OwnerName.htm)).
+
+Клиенты и дисконтные карты — справочники разных типов, транзакционное изменение дисконтных карт в рамках [сессии редактирования](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Editors_IEditSession.htm) не поддерживается, поэтому попутное создание/редактирование дисконтных карт при создании/редактировании клиентов работало неправильно. Кроме того, маленькие атомарные методы дают больше гибкости по сравнению с громоздкими комбайнами. Дисконтная карта — самостоятельная сущность, не привязанная к клиенту, то есть можно создать и использовать отдельно только дисконтную карту, не пользуясь справочником клиентов, можно отдельно клиента, а можно использовать то и другое совместно, связав через номер карты.
+
+Начиная с V6 метод [`CreateClient`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_CreateClient.htm) создаёт только клиента, удалены аргументы для попутного создания дисконтной карты, метод [`ChangeClientCardNumber`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_ChangeClientCardNumber.htm) меняет номер карты только у клиента, удалены аргументы для попутного изменения дисконтной карты.
+
+Для работы с дисконтными картами есть отдельные методы:
+
+* [`CreateDiscountCard`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_CreateDiscountCard.htm) — создаёт дисконтную карту с указанными номером, именем владельца, типом скидки или ценовой категорией. Если уже существует другая карта с таким номером, будет сгенерировано исключение. Проверить наличие другой карты с таким номером можно через [поиск](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_SearchDiscountCardByNumber.htm).
+* [`UpdateDiscountCard`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_UpdateDiscountCard.htm) — обновляет дисконтную карту с указанным id, можно задать новые значения для номера карты, имени владельца, типа скидки или ценовой категории. Чтобы узнать id карты, нужно либо запомнить его в момент создания (результат вызова `CreateDiscountCard`), либо в любой момент найти по номеру ([`SearchDiscountCardByNumber`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_SearchDiscountCardByNumber.htm)).   
