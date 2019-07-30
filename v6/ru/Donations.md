@@ -18,6 +18,7 @@ IPaymentItem AddDonation([NotNull] ICredentials credentials, [NotNull] IOrder or
 
 - Добавление в открытый заказ чаевых наличными
 ```cs
+const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
 var donationType = PluginContext.Operations.GetDonationTypesCompatibleWith(order).Last(dt => dt.PaymentTypes.Any(pt => pt.Kind == PaymentTypeKind.Cash));
 var paymentType = donationType.PaymentTypes.First(x => x.Kind == PaymentTypeKind.Cash);
@@ -26,6 +27,7 @@ var paymentItem = PluginContext.Operations.AddDonation(credentials, order, donat
 order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
+
 - Добавление в закрытый заказ чаевых картой
 ```cs
 const bool isProcessed = true;
@@ -38,6 +40,7 @@ var paymentItem = PluginContext.Operations.AddDonation(credentials, order, donat
 order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
+
 - Добавление в открытый заказ чаевых плагинным типом оплаты
 ```cs
 const bool isProcessed = true;
@@ -49,6 +52,32 @@ var paymentItem = PluginContext.Operations.AddDonation(credentials, order, donat
 order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
+
+- Добавление в открытый заказ чаевых наличными, которые будут проводиться на стороне iikoFront
+```cs
+const bool isProcessed = false;
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
+var donationType = PluginContext.Operations.GetDonationTypesCompatibleWith(order).Last(dt => dt.PaymentTypes.Any(pt => pt.Kind == PaymentTypeKind.Cash));
+var paymentType = donationType.PaymentTypes.First(x => x.Kind == PaymentTypeKind.Cash);
+var credentials = PluginContext.Operations.GetCredentials();
+var paymentItem = PluginContext.Operations.AddDonation(credentials, order, donationType, paymentType, null, isProcessed, order.ResultSum / 10);
+order = PluginContext.Operations.GetOrderById(order.Id);
+Debug.Assert(order.Donations.Contains(paymentItem));
+```
+
+- Добавление в закрытый заказ чаевых картой, проведение осуществляется на стороне iikoFront
+```cs
+const bool isProcessed = false;
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.Closed);
+var donationType = PluginContext.Operations.GetDonationTypesCompatibleWith(order).First(dt => dt.PaymentTypes.Any(pt => pt.Kind == PaymentTypeKind.Card));
+var paymentType = donationType.PaymentTypes.First(x => x.Kind == PaymentTypeKind.Card && x.Name.ToUpper() == "VISA");
+var additionalData = new CardPaymentItemAdditionalData { CardNumber = "123456" };
+var credentials = PluginContext.Operations.GetCredentials();
+var paymentItem = PluginContext.Operations.AddDonation(credentials, order, donationType, paymentType, additionalData, isProcessed, order.ResultSum / 4);
+order = PluginContext.Operations.GetOrderById(order.Id);
+Debug.Assert(order.Donations.Contains(paymentItem));
+```
+
 - Добавление в открытый заказ чаевых плагинным непроведенным типом оплаты. Стоит обратить внимание, что для непроведенного типа оплаты плагин должен поддерживать Silent-оплату.
 ```cs
 const bool isProcessed = false;
