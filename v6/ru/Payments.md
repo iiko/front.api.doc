@@ -142,16 +142,42 @@ PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 ```
 ![card](../../img/payment/api_cardExternalPrepay.png)
 
+#### Добавление в заказ предварительного платежа с последующим превращением в предоплату iikoFront
+
+Для оплаты доставочного заказа следует сначала добавить предварительную оплату с помощью метода [IEditSession.AddPreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/Overload_Resto_Front_Api_V6_Editors_IEditSession_AddPreliminaryPaymentItem.htm), а после вызвать метод [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm).
+
+##### Пример
+```cs
+var order = PluginContext.Operations.GetDeliveryOrders().Last(o => o.Status == OrderStatus.New || o.Status == OrderStatus.Bill);
+var paymentType = PluginContext.Operations.GetPaymentTypes().Last(i => i.Kind == PaymentTypeKind.Cash);
+var credentials = PluginContext.Operations.GetCredentials();
+var paymentItem = PluginContext.Operations.AddPreliminaryPaymentItem(order.ResultSum, null, paymentType, order, credentials);
+PluginContext.Operations.ProcessPrepay(credentials, PluginContext.Operations.GetDeliveryOrderById(order.Id), paymentItem);
+```
+
+## Типы оплат, которые поддерживают тихое проведение (Silent-оплата)
+Порой клиентам нужна возможность проводить предоплату или вносить чаевые по инициативе плагина (без входа на попап предоплаты или чаевых iikoFront) непроведенным типом оплаты (для последующего проведения на стороне iikoFront).
+Непроведенный тип оплаты подразумевает, что он был создан c флагом `isProcessed` равным `false`.
+Проведение какой-либо оплаты по инициативе плагина требует, чтобы оплата поддерживала так называемую тихую оплату, когда для проведения не требуется взаимодействие с пользовательским интерфейсом iikoFront (например, для сбора данных), считается, что все необходимые данные уже собраны.
+Среди типов оплат, поддерживающих тихую оплату, есть те, которые поддерживают ее по умолчанию:
+- Наличные
+- Банковские карты, платежная система которых в задана как "Внешняя".
+Настройка платежной системы типа оплаты в iikoOffice должна быть следующей:
+![paymentType](../../img/payment/cardPaymentType.png)
+
+Также, поддержку тихой оплаты можно реализовать для внешнего плагинного типа.
+Подробнее см. в разделе [Внешние типы оплаты](PaymentProcessor.html).
+
 **Дополнительно:**
-- Silent-оплата заказа см. в разделе [Внешние типы оплаты](PaymentProcessor.html).
+- Добавление чаевых в заказ см. в разделе [Чаевые](Donations.html).
 
 ## Удаление оплат
 
-- [IEditSession.DeletePaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeletePaymentItem.htm) - удалить оплату
+- [IEditSession.DeletePaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeletePaymentItem.htm) &mdash; удалить оплату
 
-- [IEditSession.DeleteExternalPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeleteExternalPaymentItem.htm) - удалить внешнюю оплату
+- [IEditSession.DeleteExternalPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeleteExternalPaymentItem.htm) &mdash; удалить внешнюю оплату
 
-- [IEditSession.DeletePreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeletePreliminaryPaymentItem.htm) - удалить предварительную оплату _(имеет смысл только для доставочного заказа)_
+- [IEditSession.DeletePreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_DeletePreliminaryPaymentItem.htm) &mdash; удалить предварительную оплату _(имеет смысл только для доставочного заказа)_
 
 ##### Пример
 
