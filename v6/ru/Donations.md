@@ -16,7 +16,7 @@ IPaymentItem AddDonation([NotNull] ICredentials credentials, [NotNull] IOrder or
 
 ##### Примеры
 
-- Добавление в открытый заказ чаевых наличными
+- Добавление в открытый заказ чаевых наличными.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -28,7 +28,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в закрытый заказ чаевых картой
+- Добавление в закрытый заказ чаевых картой.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.Closed);
@@ -41,7 +41,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в открытый заказ чаевых плагинным типом оплаты
+- Добавление в открытый заказ чаевых плагинным типом оплаты.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -53,7 +53,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в открытый заказ чаевых наличными, которые будут проводиться на стороне iikoFront
+- Добавление в открытый заказ чаевых наличными, которые будут проводиться на стороне iikoFront.
 ```cs
 const bool isProcessed = false;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -65,7 +65,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в закрытый заказ чаевых картой, проведение осуществляется на стороне iikoFront
+- Добавление в закрытый заказ чаевых картой, проведение осуществляется на стороне iikoFront.
 ```cs
 const bool isProcessed = false;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.Closed);
@@ -91,7 +91,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление чаевых в момент проведения оплаты плагинным типом оплаты
+- Добавление чаевых чаевых во время проведения оплаты внешним плагинным типом. В данном примере требуется изменить реализацию метода [IExternalPaymentProcessor.Pay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_Pay.htm).
 ```cs
 public void Pay(decimal sum, [NotNull] IOrder order, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier,
     [NotNull] IOperationService operations, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context)
