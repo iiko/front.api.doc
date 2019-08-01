@@ -16,7 +16,7 @@ IPaymentItem AddDonation([NotNull] ICredentials credentials, [NotNull] IOrder or
 
 ##### Примеры
 
-- Добавление в открытый заказ чаевых наличными
+- Добавление в открытый заказ чаевых наличными.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -28,7 +28,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в закрытый заказ чаевых картой
+- Добавление в закрытый заказ чаевых картой.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.Closed);
@@ -41,7 +41,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в открытый заказ чаевых плагинным типом оплаты
+- Добавление в открытый заказ чаевых плагинным типом оплаты.
 ```cs
 const bool isProcessed = true;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -53,7 +53,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в открытый заказ чаевых наличными, которые будут проводиться на стороне iikoFront
+- Добавление в открытый заказ чаевых наличными, которые будут проводиться на стороне iikoFront.
 ```cs
 const bool isProcessed = false;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
@@ -65,7 +65,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление в закрытый заказ чаевых картой, проведение осуществляется на стороне iikoFront
+- Добавление в закрытый заказ чаевых картой, проведение осуществляется на стороне iikoFront.
 ```cs
 const bool isProcessed = false;
 var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.Closed);
@@ -91,6 +91,23 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
+- Добавление чаевых чаевых во время проведения оплаты внешним плагинным типом. В данном примере требуется изменить реализацию метода [IExternalPaymentProcessor.Pay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_Pay.htm).
+```cs
+public void Pay(decimal sum, [NotNull] IOrder order, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier,
+    [NotNull] IOperationService operations, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context)
+{
+	var donationType = operations.GetDonationTypesCompatibleWith(order).FirstOrDefault(dt => dt.PaymentTypes.Any(pt => pt.Kind == PaymentTypeKind.External));
+	if (donationType != null)
+	{
+		var paymentType = donationType.PaymentTypes.First(x => x.Kind == PaymentTypeKind.External && x.Name == "SampleApiPayment");
+		var additionalData = new ExternalPaymentItemAdditionalData { CustomData = Serializer.Serialize(new PaymentAdditionalData { SilentPay = true }) };
+		var credentials = operations.GetCredentials();
+
+		operations.AddDonation(credentials, order, donationType, paymentType, additionalData, false, order.ResultSum / 2);
+	}
+}
+```
+
 Комментарии:
 
 - В примерах используется выражение `PluginContext.Operations.GetOrders().Last(...)` &mdash; получение последнего попавшегося заказа из списка. Аналогичные выражения используются для получения типов чаевых и оплат. Для решения бизнес&ndash;задач следует использовать соответствующий критерий отбора.
@@ -101,3 +118,26 @@ Debug.Assert(order.Donations.Contains(paymentItem));
 
 - Silent-оплата заказа см. в разделе [Внешние типы оплаты](PaymentProcessor.html).
 - Подробнее об оплатах, предварительных оплатах и предоплатах см. в разделе [Оплатные действия](Payments.html).
+
+## Удаление чаевых
+Для удаления ранее добавленных чаевых из заказа существует метод:
+
+[IOperationService.DeleteDonation](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_DeleteDonation.htm)
+```cs
+void DeleteDonation([NotNull] ICredentials credentials, [NotNull] IOrder order, [NotNull] Data.Payments.IPaymentItem paymentItem);
+```
+
+- Одним из параметров является элемент оплаты (чаевые) [IPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Payments_IPaymentItem.htm), который необходимо удалить. 
+- Список внесенных в заказ чаевых можно получить из [IOrder.Donations](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrder_Donations.htm). 
+
+##### Примеры
+
+- Попытка удаления чаевых из заказа
+```cs
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New || o.Status == OrderStatus.Bill || o.Status == OrderStatus.Closed);
+var donationItem = order.Donations.LastOrDefault();
+if (donationItem != null)
+{
+    PluginContext.Operations.DeleteDonation(PluginContext.Operations.GetCredentials(), order, donationItem);
+}
+```
