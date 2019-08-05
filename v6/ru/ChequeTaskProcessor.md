@@ -21,13 +21,15 @@ PluginContext.Operations.RegisterChequeTaskProcessor(chequeTaskProcessor);
 Все команды интерфейса [`IChequeTaskProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Devices_ChequeTaskProcessor_IChequeTaskProcessor.htm) могут прервать выполнение основной операции: фискализация чека, внесение, изъятие, печать X и Z отчета. Для этого в теле команды нужно бросить любого вида исключение.
 Например, сделаем условие — нельзя закрывать заказы на виртуальном фискальном регистраторе (ФР):
 ```cs
-public void BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
+public BeforeDoCheckAction BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
 {
 	// Для примера: разрешать печатать чеки оплаты и предоплаты только на реальном устройстве.
 	if (device.IsVirtual)
 		throw new Exception("Cash register is virtual. Please close order only on real device.");
 
 	PluginContext.Log.InfoFormat("Before do cheque on cash register: {0} ({1})", device.FriendlyName, device.Id);
+	
+	...
 }
 ```
 Тогда при оплате заказа на виртуальном ФР iikoFront выведет сообщение об ошибке и заказ останется открытым:
@@ -56,17 +58,26 @@ public void BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device,
 
 ![AddChequeExtensionsIikoOffice](../../img/chequeTaskProcessor/addChequeExtensionsIikoOffice.png)
 
--  Плагин может сам заполнить поля [`chequeExtensions.BeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_BeforeCheque.htm) и [`chequeExtensions.AfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_AfterCheque.htm), используя свой аргумент [`chequeExtensions`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions.htm). 
-Эти данные будут записаны в [`chequeTask.TextBeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextBeforeCheque.htm), [`chequeTask.TextAfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextAfterCheque.htm) соответственно и переданы в ФР для печати.
+-  Плагин может сам добавить свои значения в поля поля [`chequeExtensions.BeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_BeforeCheque.htm) и [`chequeExtensions.AfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_AfterCheque.htm), заполнив соотвествующие поля в возращаемом значении типа [`BeforeDoCheckActionResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_BeforeDoCheckActionResult.htm). 
+Эти данные будут записаны в [`chequeTask.TextBeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextBeforeCheque.htm), [`chequeTask.TextAfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextAfterCheque.htm) соответственно и переданы в ФР для печати. Также возможно изменить имя кассира. Если модификация полей не требуется, можно вернуть просто null.
 ```cs
-public void BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
+public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
 {
 		...
-		chequeExtensions.BeforeCheque.Add(new QRCode("www.iiko.ru"));
-		chequeExtensions.BeforeCheque.Add(new F0("Font f0 line"));
-		chequeExtensions.AfterCheque.Add(new F1("Font f1 line"));
-		chequeExtensions.AfterCheque.Add(new F2("Font f2 line"));
-		...
+		var beforeCheque = new List<V6.Data.Print.Document>();
+		beforeCheque.Add(new QRCode("www.iiko.ru"));
+		beforeCheque.Add(new F0("Font f0 line"));
+		
+		var afterCheque = new List<V6.Data.Print.Document>();
+		afterCheque.Add(new F1("Font f1 line"));
+		afterCheque.Add(new F2("Font f2 line"));
+		
+		return new BeforeDoCheckActionResult
+            {
+                BeforeCheque = beforeCheque,
+                AfterCheque = afterCheque,
+                CashierName = "CashierName"
+            };
 }
 ```
 
