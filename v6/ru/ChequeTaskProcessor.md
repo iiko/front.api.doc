@@ -21,7 +21,7 @@ PluginContext.Operations.RegisterChequeTaskProcessor(chequeTaskProcessor);
 Все команды интерфейса [`IChequeTaskProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Devices_ChequeTaskProcessor_IChequeTaskProcessor.htm) могут прервать выполнение основной операции: фискализация чека, внесение, изъятие, печать X и Z отчета. Для этого в теле команды нужно бросить любого вида исключение.
 Например, сделаем условие — нельзя закрывать заказы на виртуальном фискальном регистраторе (ФР):
 ```cs
-public BeforeDoCheckAction BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
+public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
 {
 	// Для примера: разрешать печатать чеки оплаты и предоплаты только на реальном устройстве.
 	if (device.IsVirtual)
@@ -58,8 +58,7 @@ public BeforeDoCheckAction BeforeDoCheckAction(ChequeTask chequeTask, ICashRegis
 
 ![AddChequeExtensionsIikoOffice](../../img/chequeTaskProcessor/addChequeExtensionsIikoOffice.png)
 
--  Плагин может сам добавить свои значения в поля поля [`chequeExtensions.BeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_BeforeCheque.htm) и [`chequeExtensions.AfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_CashRegisterChequeExtensions_AfterCheque.htm), заполнив соотвествующие поля в возращаемом значении типа [`BeforeDoCheckActionResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_BeforeDoCheckActionResult.htm). 
-Эти данные будут записаны в [`chequeTask.TextBeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextBeforeCheque.htm), [`chequeTask.TextAfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextAfterCheque.htm) соответственно и переданы в ФР для печати. Также возможно изменить имя кассира. Если модификация полей не требуется, можно вернуть просто null.
+-  Плагин имеет возможность добавить свои значения в [`chequeTask.TextBeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextBeforeCheque.htm), [`chequeTask.TextAfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_BillTask_TextAfterCheque.htm), а так же изменить имя кассира [`chequeTask.cashierName`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Device_Tasks_CashRegisterTask_CashierName.htm). Эти данные будут переданы в ФР для печати. Для этого необходимо заполнить соотвествующие поля в возращаемом значении типа [`BeforeDoCheckActionResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Device_BeforeDoCheckActionResult.htm). Если модификация полей не требуется, нужно вернуть просто null.
 ```cs
 public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
 {
