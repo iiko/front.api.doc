@@ -2,7 +2,7 @@
 title: Добавлены цвета и изображения кнопок меню
 layout: default
 ---
-Начиная с V6/V6Preview5 стали доступны цвет текста, цвет фона и фоновое изображение для продуктов ([`IProduct`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_IProduct.htm)) и групп продуктов ([`IProductGroup`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_IProductGroup.htm)), что позволит показывать на мобильных терминалах и веб-сайтах удобное цветное меню как в приложении iikoFront.
+Начиная с V6/V6Preview5 стали доступны цвет текста, цвет фона и фоновое изображение для продуктов ([`IProduct`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm)) и групп продуктов ([`IProductGroup`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_IProductGroup.htm)), что позволит показывать на мобильных терминалах и веб-сайтах удобное цветное меню как в приложении iikoFront.
 
 В приложении iikoOffice для элементов меню (продукты и группы продуктов) можно задать цвет текста и цвет фона, а также фоновое изображение. Раскраска меню помогает пользователям визуально запоминать расположение элементов и быстрее находить нужные позиции. Однако, в API информация о цветах не публиковалась, отчего плагинам приходилось показывать одноцветное меню. Теперь информация о цветах стала доступна через API.
 

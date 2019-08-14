@@ -8,5 +8,5 @@ layout: default
 
 Например, если при оформлении онлайн-заказа доставки на сайте, интегрированном с платежной системой, гость уже внес предоплату, то чек должен быть отправлен гостю на электронную почту или на телефон (в зависимости от его выбора).
 
-Для реализации этого требования в метод проведения внешней предоплаты [`OperationService.ProcessExternalPrepay()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessExternalPrepay.htm) добавлен параметр `chequeAdditionalInfo`.
+Для реализации этого требования в метод проведения внешней предоплаты [`OperationService.ProcessExternalPrepay()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_ProcessExternalPrepay.htm) добавлен параметр `chequeAdditionalInfo`.
 Он позволяет указать информацию о месте расчета, будет ли чек бумажным или электронным, о способе отправки электронного чека и адресе отправки.

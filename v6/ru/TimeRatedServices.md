@@ -38,53 +38,53 @@ layout: default
 ## Структуры данных ##
 
 ### Услуга
-[`IOrderServiceItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem.htm) — элемент заказа, соответствующий повременной услуге. Расположен в коллекции [`IOrder.Items`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrder_Items.htm) наряду с блюдами, которые можно готовить ([`IOrderCookingItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrderCookingItem.htm)).
-В меню повременной услуге соответствует продукт ([`IProduct`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_IProduct.htm)) с типом [`ProductType.Service`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_ProductType.htm) и имеющий параметры тарификации [`IProduct.RateSchedule`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Assortment_IProduct_RateSchedule.htm) (если параметры тарификации не заданы, то это услуга без повременной тарификации, она добавляется в заказ и оплачивается как обычное блюдо).
+[`IOrderServiceItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IOrderServiceItem.htm) — элемент заказа, соответствующий повременной услуге. Расположен в коллекции [`IOrder.Items`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrder_Items.htm) наряду с блюдами, которые можно готовить ([`IOrderCookingItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IOrderCookingItem.htm)).
+В меню повременной услуге соответствует продукт ([`IProduct`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm)) с типом [`ProductType.Service`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_ProductType.htm) и имеющий параметры тарификации [`IProduct.RateSchedule`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Assortment_IProduct_RateSchedule.htm) (если параметры тарификации не заданы, то это услуга без повременной тарификации, она добавляется в заказ и оплачивается как обычное блюдо).
 
 Ключевые свойства повременной услуги:
 
-- [`Service`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_Service.htm) — продукт, соответствующий этой услуге, определяет доступность в меню, базовую цену (тариф по умолчанию) и т. п.
-- [`Periods`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_Periods.htm) — список периодов работы услуги, соответствующих разным тарифам.
+- [`Service`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Service.htm) — продукт, соответствующий этой услуге, определяет доступность в меню, базовую цену (тариф по умолчанию) и т. п.
+- [`Periods`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Periods.htm) — список периодов работы услуги, соответствующих разным тарифам.
 При запуске услуги в список добавляется первый период, его время и стоимость растут до тех пор, пока не произойдёт переключение на другой тариф, для другого тарифа будет добавлен второй период и так далее.
 Каждому тарифу соответствует один период: если тарифная сетка настроена таким образом, что сначала действует один тариф, затем другой, а после него снова первый, то сначала будет расти время первого периода, затем второго, а потом снова первого.
-- [`IsStarted`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_IsStarted.htm) — запущена ли услуга в данный момент. 
-- [`Price`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_Price.htm) — базовая цена за единицу времени (отдельные периоды могут тарифицироваться по другим ценам).
-- [`TimeLimit`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_TimeLimit.htm) — лимит времени.
+- [`IsStarted`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_IsStarted.htm) — запущена ли услуга в данный момент. 
+- [`Price`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Price.htm) — базовая цена за единицу времени (отдельные периоды могут тарифицироваться по другим ценам).
+- [`TimeLimit`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_TimeLimit.htm) — лимит времени.
 Если он задан, услуга автоматически остановится при достижении лимита. Даже если вручную остановить услугу раньше, оплатить все равно надо будет всё заказанное время, при этом использованное время учитывается и оплачивается в рамках периодов, а неиспользованное — в рамках самой услуги (см. `RemainingLimitCost`). 
-- [`RemainingLimitCost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_RemainingLimitCost.htm) — стоимость неиспользованной части лимита времени. Если лимит не задан, 0. При задании лимита изначально будет полная стоимость лимита времени (ибо услугу ещё не запускали, нет ни одного периода работы, всё заказанное время ещё не использовано), со временем будет уменьшаться одновременно с увеличением стоимостей периодов (всё меньше неиспользованная часть лимита и всё больше использованная), пока не дойдёт до нуля.
-- [`Cost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_Cost.htm) — полная стоимость этой услуги, включает в себя сумму за все периоды и стоимость неиспользованного остатка лимита времени.
-- [`ResultSum`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_ResultSum.htm) — итоговая стоимость этой услуги, включая скидки, надбавки и НДС.
+- [`RemainingLimitCost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_RemainingLimitCost.htm) — стоимость неиспользованной части лимита времени. Если лимит не задан, 0. При задании лимита изначально будет полная стоимость лимита времени (ибо услугу ещё не запускали, нет ни одного периода работы, всё заказанное время ещё не использовано), со временем будет уменьшаться одновременно с увеличением стоимостей периодов (всё меньше неиспользованная часть лимита и всё больше использованная), пока не дойдёт до нуля.
+- [`Cost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Cost.htm) — полная стоимость этой услуги, включает в себя сумму за все периоды и стоимость неиспользованного остатка лимита времени.
+- [`ResultSum`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_ResultSum.htm) — итоговая стоимость этой услуги, включая скидки, надбавки и НДС.
 
 ### Период услуги
-[`IOrderServiceItemPeriod`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrderServiceItemPeriod.htm) — период работы услуги по определённому тарифу, включает в себя все отрезки времени, когда соответствующий тариф был активен.
+[`IOrderServiceItemPeriod`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IOrderServiceItemPeriod.htm) — период работы услуги по определённому тарифу, включает в себя все отрезки времени, когда соответствующий тариф был активен.
 
 Ключевые свойства периода повременной услуги:
 
-- [`Service`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItemPeriod_Service.htm) — продукт, соответствующий тарифу этого периода. Либо продукт типа  [`ProductType.Service`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_ProductType.htm), взятый из услуги как тариф по умолчанию, либо продукт типа  [`ProductType.Rate`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Assortment_ProductType.htm), взятый из тарифной сетки.
-- [`Price`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItemPeriod_Price.htm) — цена за единицу времени.
-- [`ElapsedTime`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItemPeriod_ElapsedTime.htm) — суммарное время, когда соответствующий тариф был активен.
+- [`Service`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItemPeriod_Service.htm) — продукт, соответствующий тарифу этого периода. Либо продукт типа  [`ProductType.Service`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_ProductType.htm), взятый из услуги как тариф по умолчанию, либо продукт типа  [`ProductType.Rate`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Assortment_ProductType.htm), взятый из тарифной сетки.
+- [`Price`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItemPeriod_Price.htm) — цена за единицу времени.
+- [`ElapsedTime`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItemPeriod_ElapsedTime.htm) — суммарное время, когда соответствующий тариф был активен.
 Если услугу несколько раз запускали и останавливали, либо были переключения между тарифами туда и обратно, все отрезки времени, когда тариф был активен, будут собраны в один период, и здесь будет точная (не округлённая) суммарная длина всех этих отрезков.
 Оплачивается округлённое время, но запоминается фактическое. Например, если оплата почасовая, а в `ElapsedTime` набралось всего 10 минут, стоимость периода будет соответствовать одному часу и не изменится в следующие 50 минут действия этого тарифа.
-- [`Cost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItemPeriod_Cost.htm) — полная стоимость этого периода.
-Она уже включена в стоимость услуги (и [полную](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_Cost.htm), и [итоговую](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrderServiceItem_ResultSum.htm)), поэтому не следует их повторно суммировать.
+- [`Cost`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItemPeriod_Cost.htm) — полная стоимость этого периода.
+Она уже включена в стоимость услуги (и [полную](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Cost.htm), и [итоговую](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_ResultSum.htm)), поэтому не следует их повторно суммировать.
 Данное свойство предназначено лишь для возможности детализации стоимости услуги по тарифам.
 
 ### Настройки тарификации
-[`RateSchedule`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_RateSchedule.htm) — настройки повременной услуги, ключевые свойства:
+[`RateSchedule`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_RateSchedule.htm) — настройки повременной услуги, ключевые свойства:
 
-- [`TimingMode`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_RateSchedule_TimingMode.htm) — режим тарификации, по времени суток или по времени самой услуги.
-- [`Items`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_RateSchedule_Items.htm) — тарифная сетка, список элементов типа [`RateScheduleItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_RateScheduleItem.htm), определяющих отрезки времени с отличными от базового тарифами. Отрезок времени ([`RateScheduleInterval`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_RateScheduleInterval.htm)) определяется днём недели и смещением начала и конца отрезка относительно начала шкалы тарификации. В зависимости от выбранного режима тарификации (`TimingMode`) началом шкалы будет либо начало суток (вся шкала *[0;24)* часа), либо начало действия услуги (вся шкала *[0;12)* часов).
+- [`TimingMode`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_RateSchedule_TimingMode.htm) — режим тарификации, по времени суток или по времени самой услуги.
+- [`Items`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_RateSchedule_Items.htm) — тарифная сетка, список элементов типа [`RateScheduleItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_RateScheduleItem.htm), определяющих отрезки времени с отличными от базового тарифами. Отрезок времени ([`RateScheduleInterval`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_RateScheduleInterval.htm)) определяется днём недели и смещением начала и конца отрезка относительно начала шкалы тарификации. В зависимости от выбранного режима тарификации (`TimingMode`) началом шкалы будет либо начало суток (вся шкала *[0;24)* часа), либо начало действия услуги (вся шкала *[0;12)* часов).
 Гарантируется, что отрезки времени не пересекаются.
 Если список пуст, всегда действует базовый тариф.
-- [`TimingStep`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_RateSchedule_TimingStep.htm) — единица измерения. Фактическое время работы услуги округляется вверх до ближайшего кратного значения.
-- [`MinimumDuration`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_RateSchedule_MinimumDuration.htm) — минимальная продолжительность услуги, либо `null`, если нижняя граница не задана.
+- [`TimingStep`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_RateSchedule_TimingStep.htm) — единица измерения. Фактическое время работы услуги округляется вверх до ближайшего кратного значения.
+- [`MinimumDuration`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_RateSchedule_MinimumDuration.htm) — минимальная продолжительность услуги, либо `null`, если нижняя граница не задана.
 
 ## Управление услугой
-[`AddOrderServiceItem`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Editors_IEditSession_AddOrderServiceItem.htm) — добавление услуги в заказ.
+[`AddOrderServiceItem`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Editors_IEditSession_AddOrderServiceItem.htm) — добавление услуги в заказ.
 
-[`StartService`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_StartService.htm) — запуск услуги.
+[`StartService`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_StartService.htm) — запуск услуги.
 
-[`StopService`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_StopService.htm) — остановка услуги. При пречеке или оплате заказа услуга остановится автоматически.
+[`StopService`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_StopService.htm) — остановка услуги. При пречеке или оплате заказа услуга остановится автоматически.
 
 ## Примеры
 В плагине SamplePlugin, входящем в состав SDK, появились примеры добавления услуги в заказ, запуска и остановки услуги — методы [`StartService`] и [`StopService`] в классе [`EditorTester`](https://github.com/iiko/front.api.sdk/blob/master/sample/Resto.Front.Api.SamplePlugin/EditorTester.cs):

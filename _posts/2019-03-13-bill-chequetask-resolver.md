@@ -5,8 +5,8 @@ layout: default
 Начиная с версии iiko 6.4 в API V6 добавлена возможность явно указывать, куда будет печататься чек типа «Счёт‎». 
 
 Чек типа «Счёт‎» используется в некоторых странах, например [в Белоруссии](https://ru.iiko.help/articles/how-to-iiko/fr-belarus) и Латвии.
-Печать чеков типа «Счёт‎» поддерживают не все модели фискальных регистраторов. Для устройств написанных на [API Оборудования]({{ site.baseurl }}/v6/ru/Devices.html) поддержка печати чеков типа «Счёт‎» включается через [`CashRegisterDriverParameters`](http://iiko.github.io/front.api.sdk/v6/html/Properties_T_Resto_Front_Api_V6_Data_Device_Settings_CashRegisterDriverParameters.htm) указанием `IsBillTaskSupported = true`.
-Чек типа «Счёт‎» это команда [ICashRegister.DoBillCheque()](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Devices_ICashRegister_DoBillCheque.htm).
+Печать чеков типа «Счёт‎» поддерживают не все модели фискальных регистраторов. Для устройств написанных на [API Оборудования]({{ site.baseurl }}/v6/ru/Devices.html) поддержка печати чеков типа «Счёт‎» включается через [`CashRegisterDriverParameters`](http://iiko.github.io/front.api.sdk/v6/html/Properties_T_Resto_Front_Api_Data_Device_Settings_CashRegisterDriverParameters.htm) указанием `IsBillTaskSupported = true`.
+Чек типа «Счёт‎» это команда [ICashRegister.DoBillCheque()](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Devices_ICashRegister_DoBillCheque.htm).
 Конфигурация `IsBillTaskSupported = true` предполагает, что номер счёта обязателен в команде чека оплаты.
 Поэтому в результатах команды `DoBillCheque` обязательно к заполнению поле `CashRegisterResult.BillNumber`.
 

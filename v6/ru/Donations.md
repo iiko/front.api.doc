@@ -5,13 +5,13 @@ layout: default
 ## Добавление чаевых
 Для добавления чаевых в заказ существует метод:
 
-[IOperationService.AddDonation](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_AddDonation.htm)
+[IOperationService.AddDonation](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_AddDonation.htm)
 ```cs
 IPaymentItem AddDonation([NotNull] ICredentials credentials, [NotNull] IOrder order, [NotNull] IDonationType donationType, [NotNull] IPaymentType paymentType, [CanBeNull] IPaymentItemAdditionalData additionalData, bool isProcessed, decimal donationSum);
 ```
 
-- В качестве параметра передается тип чаевых [IDonationType](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Payments_IDonationType.htm). Список типов чаевых, доступных для конкретного заказа, можно получить вызовом метода [IOperationService.GetDonationTypesCompatibleWith](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_GetDonationTypesCompatibleWith.htm) и передачей в него заказа в качестве параметра.
-- Также одним из параметров является тип оплаты [IPaymentType](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Payments_IPaymentType.htm), с помощью которого чаевые будут проведены. Список доступных типов оплат для выбранного типа чаевых можно узнать из выбранного ранее типа чаевых [IDonationType.PaymentTypes](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Payments_IDonationType_PaymentTypes.htm).
+- В качестве параметра передается тип чаевых [IDonationType](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Payments_IDonationType.htm). Список типов чаевых, доступных для конкретного заказа, можно получить вызовом метода [IOperationService.GetDonationTypesCompatibleWith](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_GetDonationTypesCompatibleWith.htm) и передачей в него заказа в качестве параметра.
+- Также одним из параметров является тип оплаты [IPaymentType](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Payments_IPaymentType.htm), с помощью которого чаевые будут проведены. Список доступных типов оплат для выбранного типа чаевых можно узнать из выбранного ранее типа чаевых [IDonationType.PaymentTypes](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Payments_IDonationType_PaymentTypes.htm).
 - Параметр `isProcessed` указывает на то, нужно ли проводить чаевые через iikoFront, или же они уже проведены вовне. 
 
 ##### Примеры
@@ -91,7 +91,7 @@ order = PluginContext.Operations.GetOrderById(order.Id);
 Debug.Assert(order.Donations.Contains(paymentItem));
 ```
 
-- Добавление чаевых чаевых во время проведения оплаты внешним плагинным типом. В данном примере требуется изменить реализацию метода [IExternalPaymentProcessor.Pay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_Pay.htm).
+- Добавление чаевых чаевых во время проведения оплаты внешним плагинным типом. В данном примере требуется изменить реализацию метода [IExternalPaymentProcessor.Pay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_Pay.htm).
 ```cs
 public void Pay(decimal sum, [NotNull] IOrder order, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier,
     [NotNull] IOperationService operations, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context)
@@ -122,13 +122,13 @@ public void Pay(decimal sum, [NotNull] IOrder order, Guid paymentTypeId, Guid tr
 ## Удаление чаевых
 Для удаления ранее добавленных чаевых из заказа существует метод:
 
-[IOperationService.DeleteDonation](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_DeleteDonation.htm)
+[IOperationService.DeleteDonation](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_DeleteDonation.htm)
 ```cs
 void DeleteDonation([NotNull] ICredentials credentials, [NotNull] IOrder order, [NotNull] Data.Payments.IPaymentItem paymentItem);
 ```
 
-- Одним из параметров является элемент оплаты (чаевые) [IPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Payments_IPaymentItem.htm), который необходимо удалить. 
-- Список внесенных в заказ чаевых можно получить из [IOrder.Donations](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_Data_Orders_IOrder_Donations.htm). 
+- Одним из параметров является элемент оплаты (чаевые) [IPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Payments_IPaymentItem.htm), который необходимо удалить. 
+- Список внесенных в заказ чаевых можно получить из [IOrder.Donations](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IOrder_Donations.htm). 
 
 ##### Примеры
 

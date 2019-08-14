@@ -4,13 +4,13 @@ layout: default
 ---
 # Интеграция с внешними типами оплаты
 ## Общая идея 
-Если реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm) и зарегистрировать его соответствующим образом, в iikoRMS появится новая платёжная система.
+Если реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IExternalPaymentProcessor.htm) и зарегистрировать его соответствующим образом, в iikoRMS появится новая платёжная система.
 Упрощенно можно называть это внешним типом оплаты. 
 Для плагинов, реализующих внешние типы оплаты, вводится [специальное лицензирование](Licensing.html).
 
 
 ## Регистрация внешней платёжной системы
-Плагин регистрирует платёжную систему с помощью [`IOperationService.RegisterPaymentSystem(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_RegisterPaymentSystem.htm).
+Плагин регистрирует платёжную систему с помощью [`IOperationService.RegisterPaymentSystem(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_RegisterPaymentSystem.htm).
 В качестве обязательного параметра в этот метод передается `paymentSystem` – экземпляр класса, реализующего `IExternalPaymentProcessor`.
 В результате регистрации в iikoOffice появится новая платёжная система.
 Её можно увидеть в типах оплаты в разделе «Внешний тип оплаты» с наименованием  `IExternalPaymentProcessor.PaymentSystemName`.
@@ -32,7 +32,7 @@ layout: default
 Также элементы оплаты могут быть добавлены средствами API ([Добавление оплат](Payments.html)).
 
 ## Интерфейс IExternalPaymentProcessor
-Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IExternalPaymentProcessor.htm):
+Чтобы реализовать необходимую бизнес-логику по проведению и возврату платежа внешним типом оплаты, нужно реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IExternalPaymentProcessor.htm):
 ```cs
 public interface IExternalPaymentProcessor
 {
@@ -61,7 +61,7 @@ public interface IExternalPaymentProcessor
 
 
 ## Метод проведения оплаты
-Когда пользователь iikoFront выберет на экране кассы тип оплаты, задаст сумму и нажмёт кнопку *«Оплатить»*, или когда пользователь внесёт предоплату определенным типом оплаты, управление придёт в метод [`Pay()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_Pay.htm):
+Когда пользователь iikoFront выберет на экране кассы тип оплаты, задаст сумму и нажмёт кнопку *«Оплатить»*, или когда пользователь внесёт предоплату определенным типом оплаты, управление придёт в метод [`Pay()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_Pay.htm):
 ```cs
 void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar);
 ```
@@ -70,14 +70,14 @@ void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [No
 
 - `sum` – сумма платежа;
 - `orderId` – id заказа в iikoFront;
-- `paymentTypeId` – id типа оплаты. Список всех типов оплаты можно получить методом [`IOperationService.GetPaymentTypes()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_GetPaymentTypes.htm), конкретный тип оплаты можно получить методом [`OperationService_TryGetPaymentTypeById(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_TryGetPaymentTypeById.htm);
+- `paymentTypeId` – id типа оплаты. Список всех типов оплаты можно получить методом [`IOperationService.GetPaymentTypes()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_GetPaymentTypes.htm), конкретный тип оплаты можно получить методом [`OperationService_TryGetPaymentTypeById(...)`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_TryGetPaymentTypeById.htm);
 - `transactionId` – id транзакции;
 - `pointOfSale` – [Точка продаж](GroupsAndPointsOfSale.html), на которой проводится данный элемент оплаты;
 - `cashier` – кассир;
-- `printer` – экземпляр [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IReceiptPrinter.htm), который дает возможность печатать на принтере квитанций iikoFront;
-- `viewManager` – экземпляр [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) для [показа окон](ViewManager.html) в процессе проведения оплаты;
-- `context` – экземпляр [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) для сохранения данных в элемент оплаты;
-- `progressBar` – экземпляр [`IProgressBar`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IProgressBar.htm) для изменения текста на прогрессбаре в процессе проведения оплаты.
+- `printer` – экземпляр [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IReceiptPrinter.htm), который дает возможность печатать на принтере квитанций iikoFront;
+- `viewManager` – экземпляр [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_UI_IViewManager.htm) для [показа окон](ViewManager.html) в процессе проведения оплаты;
+- `context` – экземпляр [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IPaymentDataContext.htm) для сохранения данных в элемент оплаты;
+- `progressBar` – экземпляр [`IProgressBar`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_UI_IProgressBar.htm) для изменения текста на прогрессбаре в процессе проведения оплаты.
 
 Подробнее сигнатуру объектов можно найти [в документации](http://iiko.github.io/front.api.sdk/v6).
 
@@ -147,21 +147,21 @@ public void Pay(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transaction
 }
 ```
  
-Исключение типа [`PaymentActionFailedException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Exceptions_PaymentActionFailedException.htm) служит для прерывания операции оплаты.
+Исключение типа [`PaymentActionFailedException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Exceptions_PaymentActionFailedException.htm) служит для прерывания операции оплаты.
 Пользователю iikoFront будет показан `message` этого исключения. Это имеет смысл, если возникли какие-либо проблемы при общении с внешним сервисом, оплата не может быть проведена и нужно проинформировать пользователя о причинах. 
 
-Для «тихого» прерывания операции можно воспользоваться исключением типа [`PaymentActionCancelledException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Exceptions_PaymentActionCancelledException.htm).
+Для «тихого» прерывания операции можно воспользоваться исключением типа [`PaymentActionCancelledException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Exceptions_PaymentActionCancelledException.htm).
 Это имеет смысл, если в процессе оплаты было показано диалоговое окно и пользователь нажал кнопку *«Отмена»*. 
 
-Аргументы [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IReceiptPrinter.htm), [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_UI_IViewManager.htm) и  [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm) «живут» только в процессе выполнения метода, после завершения метода экземпляры уничтожаются.
+Аргументы [`IReceiptPrinter`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IReceiptPrinter.htm), [`IViewManager`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_UI_IViewManager.htm) и  [`IPaymentDataContext`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IPaymentDataContext.htm) «живут» только в процессе выполнения метода, после завершения метода экземпляры уничтожаются.
 Так что сохранять их в переменные не имеет смысла, т.к. вне метода их нельзя будет использовать.
 
 ### Тихое проведение оплаты (Silent-оплата)
 Иногда бизнесу нужны решения по оплате плагинными типами оплаты из самих плагинов, без входа на экран кассы iikoFront.
-Для этого плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина.
+Для этого плагин должен реализовать метод [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_CanPaySilently.htm) процессора оплаты плагина.
 Результатом метода является ответ на вопрос _«Имеет ли плагин возможность проводить оплату тихо?»_.
 Для того чтобы появилась такая возможность, необходимо чтобы в заказ предварительно был добавлен плагинный элемент оплаты.
-Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
+Для тихого проведения оплаты можно вызвать метод [ProcessPrepay](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_ProcessPrepay.htm) c флагом `isProcessed` равным `false`.
 В `SDK` приводится пример с использованием пользовательского класса со свойством _SilentPay_:
 ```cs
 [Serializable]
@@ -194,7 +194,7 @@ private void AddAndProcessExternalPrepay()
     PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 }
 ```
-В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_IPaymentDataContext.htm)), далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
+В свою очередь iikoFront передает указанный для оплаты сериализованный класс в контекст оплаты([IPaymentContext](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IPaymentDataContext.htm)), далее в методе [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_CanPaySilently.htm) класс извлекается и десериализуется:
 ```
 public bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaymentDataContext context)
 {
@@ -202,7 +202,7 @@ public bool CanPaySilently(decimal sum, Guid? orderId, Guid paymentTypeId, IPaym
     return customData?.SilentPay ?? false;
 }
 ```
-В зависимости от ответа возвращаемого значения метода [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_CanPaySilently.htm) iikoFront вызовет `Pay` или `PaySilently` метод процессора плагина.
+В зависимости от ответа возвращаемого значения метода [CanPaySilently](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_CanPaySilently.htm) iikoFront вызовет `Pay` или `PaySilently` метод процессора плагина.
 Таким образом плагин сам решает как должен проводиться вновь добавляемый платеж.
 
 ## Методы возврата оплаты
@@ -261,7 +261,7 @@ public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeI
 }
 ```
 
-Метод [`ReturnPaymentWithoutOrder()`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_ReturnPaymentWithoutOrder.htm) вызывается, когда происходит [возврат товаров](https://ru.iiko.help/articles/iikofront-6-1/topic-38) внешним типом оплаты.
+Метод [`ReturnPaymentWithoutOrder()`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_ReturnPaymentWithoutOrder.htm) вызывается, когда происходит [возврат товаров](https://ru.iiko.help/articles/iikofront-6-1/topic-38) внешним типом оплаты.
 Возможность возвращать оплату за товары без оплаченных ранее заказов внешними типами появилась начиная с версии iiko 6.2.2. 
 Чтобы на UI возврата товаров появилась возможность выбрать внешний тип оплаты, нужно регистрировать платёжную систему с опциональным параметром `canProcessPaymentReturnWithoutOrder = true`. Т.е.
 
@@ -284,16 +284,16 @@ bool OnPreliminaryPaymentEditing([NotNull] IOrder order, [NotNull] IPaymentItem 
 Если требуется собрать какие-либо данные не в момент нажатия на кнопку *«Оплатить»* на экране кассы, а в момент добавления элемента внешнего типа оплаты в заказ, то можно реализовать это в методе `CollectData()`. 
 
 Метод `OnPaymentAdded()` вызывается после добавления элемента оплаты в заказ. Особенность этого метода в том, что одним из его аргументов является `IOperationService operationService`.
-В отличие от [`PluginContext.Operations`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_V6_PluginContext_Operations.htm), у данного экземпляра есть полномочия вносить изменения в текущий заказ. Это нужно, например, чтобы задать сумму для добавляемого элемента оплаты или вообще добавить какое-либо блюдо в заказ.
+В отличие от [`PluginContext.Operations`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_PluginContext_Operations.htm), у данного экземпляра есть полномочия вносить изменения в текущий заказ. Это нужно, например, чтобы задать сумму для добавляемого элемента оплаты или вообще добавить какое-либо блюдо в заказ.
  
-Метод [`OnPreliminaryPaymentEditing()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_IExternalPaymentProcessor_OnPreliminaryPaymentEditing.htm) вызывается при редактировании предварительных платежей.
+Метод [`OnPreliminaryPaymentEditing()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_OnPreliminaryPaymentEditing.htm) вызывается при редактировании предварительных платежей.
 Для данного метода также доступна возможность вносить изменения в текущий заказ через аргумент `IOperationService operationService`.
 Метод возвращает `bool`, смысл возвращаемого значения следующий: доступно ли изменение суммы элемента предварительной оплаты с UI после завершения данного метода. 
 
 ## Открытие и закрытие кассовой смены в iikoFront
 Некоторым внешним платёжным системам нужно выполнять на своей стороне определённые действия при открытии и закрытии кассовой смены на iikoFront.
 Например, для банковских систем при закрытии смены нужно проводить сверку.
-Для этого нужно подписаться на [`INotificationService.SubscribeOnCafeSessionOpening`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionOpening.htm) и [`INotificationService.SubscribeOnCafeSessionClosing`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionClosing.htm).
+Для этого нужно подписаться на [`INotificationService.SubscribeOnCafeSessionOpening`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnCafeSessionOpening.htm) и [`INotificationService.SubscribeOnCafeSessionClosing`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnCafeSessionClosing.htm).
 
 При открытии и закрытии кассовой смены в соответствующий observer приходит новое событие.
 Пример кода, который при открытии и закрытии смены печатает на принтере ключ платежной системы и открыта или закрыта смена:

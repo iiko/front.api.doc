@@ -55,14 +55,14 @@ subscriptions = new CompositeDisposable
 };
 ``` 
 
-Функция регистрации операции на экран закрытого заказа **текущей** кассовой смены [`AddButtonOnClosedOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnClosedOrderView.htm) принимает на вход 2 аргумента:
+Функция регистрации операции на экран закрытого заказа **текущей** кассовой смены [`AddButtonOnClosedOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Extensions_PluginIntegrationServiceExtensions_AddButtonOnClosedOrderView.htm) принимает на вход 2 аргумента:
 
 - `string` — название кнопки, отображается на UI.
 - `Action<IOrder, ICashRegisterInfo, IViewManager>` — функция, которая будет вызвана при нажатии на кнопку.
 
-Функция регистрации операции на экран закрытого заказа **прошлой** кассовой смены [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm).
+Функция регистрации операции на экран закрытого заказа **прошлой** кассовой смены [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm).
 
-Заказы закрытых кассовых смен iikoFront не хранит, поэтому в методе [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm) по идентификатору заказа не получится получить заказ [`IOrder`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_V6_Data_Orders_IOrder.htm). 
+Заказы закрытых кассовых смен iikoFront не хранит, поэтому в методе [`AddButtonOnPastOrderView()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Extensions_PluginIntegrationServiceExtensions_AddButtonOnPastOrderView.htm) по идентификатору заказа не получится получить заказ [`IOrder`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IOrder.htm). 
 Идентификатор заказа прошлой кассовой смены будет полезен плагину или внешнему сервису, если он сам ведет свое хранилище.
 
 ##### Шаг 2. Описать обработчик добавляемой кнопки:

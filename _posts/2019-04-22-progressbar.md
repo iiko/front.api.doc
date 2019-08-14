@@ -8,18 +8,18 @@ layout: default
 Во всех операциях, приведенных ниже, станет возможно взаимодействие с пользователем в стандартном UI iikoFront:
 
 Операции с возможностью отмены действия:
-- [`INotificationService.SubscribeOnBeforeServiceCheque`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnBeforeServiceCheque.htm)
-- [`INotificationService.SubscribeOnBeforeOrderBill`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnBeforeOrderBill.htm) 
-- [`INotificationService.SubscribeOnBeforeDeletePrintedIte`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnBeforeDeletePrintedItem.htm)
-- [`INotificationService.SubscribeOnBeforeDeleteOrder`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnBeforeDeleteOrder.htm)
+- [`INotificationService.SubscribeOnBeforeServiceCheque`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnBeforeServiceCheque.htm)
+- [`INotificationService.SubscribeOnBeforeOrderBill`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnBeforeOrderBill.htm) 
+- [`INotificationService.SubscribeOnBeforeDeletePrintedIte`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnBeforeDeletePrintedItem.htm)
+- [`INotificationService.SubscribeOnBeforeDeleteOrder`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnBeforeDeleteOrder.htm)
 
 
 Операции-наблюдатели:
-- [`INotificationService.SubscribeOnNavigatingToPaymentScreen`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnNavigatingToPaymentScreen.htm)
-- [`INotificationService.SubscribeOnCafeSessionOpening`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionOpening.htm)
-- [`INotificationService.SubscribeOnCafeSessionClosing`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_INotificationService_SubscribeOnCafeSessionClosing.htm)
+- [`INotificationService.SubscribeOnNavigatingToPaymentScreen`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnNavigatingToPaymentScreen.htm)
+- [`INotificationService.SubscribeOnCafeSessionOpening`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnCafeSessionOpening.htm)
+- [`INotificationService.SubscribeOnCafeSessionClosing`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_INotificationService_SubscribeOnCafeSessionClosing.htm)
 
 Кнопки:
-- [`Button`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_Button__ctor.htm)
-- [`ButtonOnClosedOrderView `](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_ButtonOnClosedOrderView__ctor.htm)
-- [`ButtonOnPastOrderView `](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_V6_UI_ButtonOnPastOrderView__ctor.htm)
+- [`Button`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_UI_Button__ctor.htm)
+- [`ButtonOnClosedOrderView `](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_UI_ButtonOnClosedOrderView__ctor.htm)
+- [`ButtonOnPastOrderView `](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_UI_ButtonOnPastOrderView__ctor.htm)
