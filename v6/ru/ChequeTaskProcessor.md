@@ -62,21 +62,24 @@ public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICas
 ```cs
 public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
 {
-		...
-		var beforeCheque = new List<V6.Data.Print.Document>();
-		beforeCheque.Add(new QRCode("www.iiko.ru"));
-		beforeCheque.Add(new F0("Font f0 line"));
-		
-		var afterCheque = new List<V6.Data.Print.Document>();
-		afterCheque.Add(new F1("Font f1 line"));
-		afterCheque.Add(new F2("Font f2 line"));
-		
-		return new BeforeDoCheckActionResult
-            {
-                BeforeCheque = beforeCheque,
-                AfterCheque = afterCheque,
-                CashierName = "CashierName"
-            };
+	var beforeCheque = new List<Data.Print.Document>();
+	var documentBefore = new Data.Print.Document();
+	documentBefore.Markup.Add(new XElement(Tags.LargeFont, "Welcome"));
+	documentBefore.Markup.Add(new XElement(Tags.SmallFont, "tel. 555-123456"));
+	beforeCheque.Add(documentBefore);
+
+	var afterCheque = new List<Data.Print.Document>();
+	var documentAfter = new Data.Print.Document();
+	documentBefore.Markup.Add(new XElement(Tags.SmallFont, "Thank you for shopping"));
+	documentBefore.Markup.Add(new XElement(Tags.QRCode, "iiko.ru"));
+	beforeCheque.Add(documentAfter);
+	
+	return new BeforeDoCheckActionResult
+	{
+		BeforeCheque = beforeCheque,
+		AfterCheque = afterCheque,
+		CashierName = "CashierName"
+	};
 }
 ```
 
