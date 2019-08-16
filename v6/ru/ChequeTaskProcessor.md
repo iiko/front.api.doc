@@ -61,23 +61,26 @@ public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICas
 -  Плагин имеет возможность добавить свои значения в [`chequeTask.TextBeforeCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Device_Tasks_BillTask_TextBeforeCheque.htm), [`chequeTask.TextAfterCheque`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Device_Tasks_BillTask_TextAfterCheque.htm), а так же изменить имя кассира [`chequeTask.cashierName`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Device_Tasks_CashRegisterTask_CashierName.htm). Эти данные будут переданы в ФР для печати. Для этого необходимо заполнить соотвествующие поля в возращаемом значении типа [`BeforeDoCheckActionResult`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Device_BeforeDoCheckActionResult.htm). Если модификация полей не требуется, нужно вернуть просто null.
 ```cs
 public BeforeDoCheckActionResult BeforeDoCheckAction(ChequeTask chequeTask, ICashRegisterInfo device, CashRegisterChequeExtensions chequeExtensions, IViewManager viewManager)
-{
-		...
-		var beforeCheque = new List<V6.Data.Print.Document>();
-		beforeCheque.Add(new QRCode("www.iiko.ru"));
-		beforeCheque.Add(new F0("Font f0 line"));
-		
-		var afterCheque = new List<V6.Data.Print.Document>();
-		afterCheque.Add(new F1("Font f1 line"));
-		afterCheque.Add(new F2("Font f2 line"));
-		
-		return new BeforeDoCheckActionResult
+        {
+            var beforeCheque = new List<Data.Print.Document>();
+            var documentBefore = new Data.Print.Document();
+            documentBefore.Markup.Add(new XElement(Tags.LargeFont, "Welcome"));
+            documentBefore.Markup.Add(new XElement(Tags.SmallFont, "tel. 555-123456"));
+            beforeCheque.Add(documentBefore);
+
+            var afterCheque = new List<Data.Print.Document>();
+            var documentAfter = new Data.Print.Document();
+            documentBefore.Markup.Add(new XElement(Tags.SmallFont, "Thank you for shopping"));
+            documentBefore.Markup.Add(new XElement(Tags.QRCode, "iiko.ru"));
+            beforeCheque.Add(documentAfter);
+
+            return new BeforeDoCheckActionResult
             {
                 BeforeCheque = beforeCheque,
                 AfterCheque = afterCheque,
                 CashierName = "CashierName"
             };
-}
+        }
 ```
 
 Аргументы функции [`BeforeDoCheckAction()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Devices_ChequeTaskProcessor_IChequeTaskProcessor_BeforeDoCheckAction.htm):
