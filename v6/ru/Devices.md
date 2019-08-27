@@ -48,3 +48,14 @@ layout: default
 В `IScaleFactory` указывается имя модели оборудования и его настройки. Т.о. в BackOffice по имени модели можно будет найти весы и создать или отредактировать их настройки. 
 
 Пример плагина, реализующего интеграцию с весами, можно посмотреть в  проекте `Resto.Front.Api.SampleScalePlugin`.
+
+### Автоматический запуск устройств ###
+Возможны ситуации, когда iikoFront запущен с выключенным устройством, затем оно включено в процессе работы. В настройках устройства в BackOffice установите галочку "Запускать автоматически". В целевых методах (например, DoCheque, OpenSession для ФР) добавьте проверку состояния устройства и выбросите исключение [`DeviceNotStartedException`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Exceptions_DeviceNotStartedException.htm):
+```cs
+private void CheckStarted()
+{
+    if (state != State.Running)
+        throw new DeviceNotStartedException("Device not started");
+}
+```
+При возникновение такого исключения iikoFront попытается произвести запуск устройства и выполнить целевую команду.
