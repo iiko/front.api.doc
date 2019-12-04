@@ -111,7 +111,7 @@ public void Pay(decimal sum, [NotNull] IOrder order, Guid paymentTypeId, Guid tr
 Комментарии:
 
 - В примерах используется выражение `PluginContext.Operations.GetOrders().Last(...)` &mdash; получение последнего попавшегося заказа из списка. Аналогичные выражения используются для получения типов чаевых и оплат. Для решения бизнес&ndash;задач следует использовать соответствующий критерий отбора.
-- `PluginContext.Operations.GetCredentials()` &mdash; здесь и далее в примерах приводится метод&ndash;расширение, [реализованный](https://github.com/iiko/front.api.sdk/blob/master/sample/Resto.Front.Api.SamplePlugin/OperationServiceExtensions.cs) в примере проекта SamplePlugin.
+- `PluginContext.Operations.GetCredentials()` &mdash; здесь и далее в примерах приводится метод&ndash;расширение, [реализованный](https://github.com/iiko/front.api.sdk/blob/master/sample/v6/Resto.Front.Api.SamplePlugin/OperationServiceExtensions.cs) в примере проекта SamplePlugin.
 - `Debug.Assert(order.Donations.Contains(paymentItem))` &mdash; лишь демострация того, что недавно добавленные чаевые должны присутствовать в списке чаевых в заказе (если, конечно, за время между добавлением и проверкой кто-то не успел их удалить).
 
 **Дополнительно:**

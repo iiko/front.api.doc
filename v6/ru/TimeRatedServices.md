@@ -87,7 +87,7 @@ layout: default
 [`StopService`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_StopService.htm) — остановка услуги. При пречеке или оплате заказа услуга остановится автоматически.
 
 ## Примеры
-В плагине SamplePlugin, входящем в состав SDK, появились примеры добавления услуги в заказ, запуска и остановки услуги — методы [`StartService`] и [`StopService`] в классе [`EditorTester`](https://github.com/iiko/front.api.sdk/blob/master/sample/Resto.Front.Api.SamplePlugin/EditorTester.cs):
+В плагине SamplePlugin, входящем в состав SDK, появились примеры добавления услуги в заказ, запуска и остановки услуги — методы [`StartService`] и [`StopService`] в классе [`EditorTester`](https://github.com/iiko/front.api.sdk/blob/master/sample/v6/Resto.Front.Api.SamplePlugin/EditorTester.cs):
 
 ```cs
 private static void StartService()
