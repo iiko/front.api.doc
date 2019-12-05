@@ -11,18 +11,18 @@ layout: default
 
 Получение модификаторов для блюда без схемы модификаторов:
 
-- Простые модификаторы ([IProduct.GetSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_ProductExtensions_GetSimpleModifiers.htm) 
+- Простые модификаторы ([IProduct.GetSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetSimpleModifiers.htm) 
 или [IOperationService.GetSimpleModifiersByProduct](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetSimpleModifiersByProduct.htm))
-- Групповые модификаторы ([IProduct.GetGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_ProductExtensions_GetGroupModifiers.htm) 
+- Групповые модификаторы ([IProduct.GetGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetGroupModifiers.htm) 
 или [IOperationService.GetGroupModifiersByProduct](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetGroupModifiersByProduct.htm))
 
 Получение модификаторов для блюда со схемой модификаторов:
 
-- Простые общие модификаторы ([ICompoundItemTemplate.GetCommonSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetCommonSimpleModifiers.htm) 
+- Простые общие модификаторы ([ICompoundItemTemplate.GetCommonSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetCommonSimpleModifiers.htm) 
 или [IOperationService.GetCommonSimpleModifiersByCompoundItemTemplate](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetCommonSimpleModifiersByCompoundItemTemplate.htm))
-- Простые делимые модификаторы ([ICompoundItemTemplate.GetSplittableSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetSplittableSimpleModifiers.htm) 
+- Простые делимые модификаторы ([ICompoundItemTemplate.GetSplittableSimpleModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetSplittableSimpleModifiers.htm) 
 или [IOperationService.GetSplittableSimpleModifiersByCompoundItemTemplate](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetSplittableSimpleModifiersByCompoundItemTemplate.htm))
-- Групповые общие модификаторы ([ICompoundItemTemplate.GetCommonGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetCommonGroupModifiers.htm) 
+- Групповые общие модификаторы ([ICompoundItemTemplate.GetCommonGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetCommonGroupModifiers.htm) 
 или [IOperationService.GetCommonGroupModifiersByCompoundItemTemplate](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetCommonGroupModifiersByCompoundItemTemplate.htm))
-- Групповые делимые модификаторы ([ICompoundItemTemplate.GetSplittableGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetSplittableGroupModifiers.htm) 
+- Групповые делимые модификаторы ([ICompoundItemTemplate.GetSplittableGroupModifiers](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_OperationArgumentExtensions_GetSplittableGroupModifiers.htm) 
 или [IOperationService.GetSplittableGroupModifiersByCompoundItemTemplate](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetSplittableGroupModifiersByCompoundItemTemplate.htm))
