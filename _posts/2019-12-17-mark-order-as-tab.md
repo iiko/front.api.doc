@@ -10,6 +10,6 @@ layout: default
 - [`IEditSession.MarkOrderAsTab`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Editors_IEditSession_MarkOrderAsTab.htm) — пометить заказ как таб, дав ему соответствующее название. 
 Данное действие можно выполнить в рамках сессии редактирования при выполнении нескольких действий с заказом или одной строчкой вызовом [`IOperationService.MarkOrderAsTab`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Extensions_OperationServiceExtensions_MarkOrderAsTab.htm), который создаст сессию, пометит заказ как таб и сохранит изменения за кулисами. 
 
-Более подробно о сессиях редактирования в [соответствующем разделе]({{ site.baseurl }}/v6/ru/Data editing.html).
+Подробнее о сессиях редактирования в [соответствующем разделе]({{ site.baseurl }}/v6/ru/Data editing.html).
 
-Более подробно о функционировании режима табов в [документации](https://ru.iiko.help/articles/#!iikofront-7-1/topic-69/q/%D1%82%D0%B0%D0%B1%D1%8B/qid/278231/qp/1).
+Подробнее о функционировании режима табов в [документации](https://ru.iiko.help/articles/#!iikofront-7-1/topic-69/q/%D1%82%D0%B0%D0%B1%D1%8B/qid/278231/qp/1).
