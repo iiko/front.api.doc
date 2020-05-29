@@ -20,7 +20,7 @@ layout: default
 * [`GetSplittableSimpleModifiers`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetSplittableSimpleModifiers.htm)/[`TryGetSplittableSimpleModifiers`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_TryGetSplittableSimpleModifiers.htm)
 * [`GetSplittableGroupModifiers`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_GetSplittableGroupModifiers.htm)/[`TryGetSplittableGroupModifiers`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Data_Assortment_CompoundItemTemplateExtensions_TryGetSplittableGroupModifiers.htm)
 
-Кроме того, удалены из некоторых Get/TryGet-пар удалены Get-методы, которые могли возвращать `null`:
+Кроме того, из некоторых Get/TryGet-пар удалены Get-методы, которые могли возвращать `null`:
 
 * `GetSectionSchema(IRestaurantSection)`
 * `GetParent(IProduct)`
