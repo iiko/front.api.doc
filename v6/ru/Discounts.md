@@ -2,7 +2,6 @@
 title: Скидки и надбавки
 layout: default
 ---
-# Скидки и надбавки #
 iikoRms имеет встроенную дисконтную систему. Сторонние системы лояльности (plazius, iikoCard и прочие) в данной статье не рассматриваются.
 Дисконтная система iikoRms позволяет начислять скидки и надбавки по различным условиям.
 Под скидкой понимается уменьшение стоимости элемента заказа на определённую сумму, а под набавкой — увеличение. Поскольку разница между скидкой и надбавкой заключается лишь в знаке числа, вычитаемого из стоимости, для упрощения терминологии и то, и другое будем называть скидками (в коде [`DiscountType`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IDiscountType.htm), [`DiscountItem`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IDiscountItem.htm), [`DiscountCard`](https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Orders_IDiscountCard.htm) и так далее), подразумевая, что положительное значение [`DiscountSum`](https://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Orders_IAppliedDiscountItem_DiscountSum.htm) в предметной области соответствует скидке, а отрицательное — надбавке.
