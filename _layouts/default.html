@@ -61,23 +61,25 @@
         {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+        }
     </style>
 </head>
 <body>
     <header>
-        <div>
-            <div style="float: left">
+        <div class="flex-container">
+            <div>
                 <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a>
             </div>
-            <div style="float: right">
+            <div>
                 <form action="https://google.com/search" method="get">
                     <input type="hidden" name="sitesearch" value="https://iiko.github.io/front.api.doc/" />
                     <input type="text" name="q" />
                     <input type="submit" value="Search Google">
                 </form>
-            </div>
-            <div style="margin: 0 auto">
-                This site is under construction, anything may be broken or incomplete
             </div>
         </div>
     </header>
@@ -126,7 +128,7 @@
                 Last change: {{ site.time | date_to_long_string }} | <a href="https://github.com/iiko/front.api.doc/">View source</a>
             </div>
             <div style="margin: 0 auto">
-                iiko, 2019
+                iiko, 2020
             </div>
         </div>
     </footer>
