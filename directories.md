@@ -10,6 +10,10 @@ layout: default
 
 Приложение iikoFront получает всю информацию о плагине из файла *Manifest.xml*.
 
+Файлы контрактов iikoFront API (*Resto.Front.Api.Vx.dll*, *Resto.Front.Api.Vx.xml*) нужны только на этапе разработки и компиляции плагина, не следует распространять и устанавливать их вместе с плагином, в рантайме будут использоваться контракты из папки самого приложения iikoFront.
+При подключении контрактов к проекту через прямую ссылку на dll-файл следует указывать `Copy Local = False`.
+При подключении [NuGet-пакета](https://www.nuget.org/profiles/iiko) через PackageReference для версий до V7Preview2 копирование необходимо отключить с помощью `<PrivateAssets>all</PrivateAssets>` ([описание](https://docs.microsoft.com/en-us/nuget/consume-packages/package-references-in-project-files)), начиная с V7Preview2 копирование отключается автоматически.
+
 # Структура файла Manifest.xml #
 
 ### Обязательные параметры ###
