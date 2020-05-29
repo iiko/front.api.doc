@@ -6,8 +6,8 @@ layout: default
 # Внешние фискальные регистраторы
 Если в списке поддерживаемых моделей фискальных регистраторов (ФР) в iiko вы не нашли нужной вам модели, вы можете написать свою поддержку интересующей вас модели ФРа. 
 Это будет плагин, подключаемый к iikoFront — внешний ФР. 
-Cм. [введение](Devices.html).
-Для плагинов, реализующих внешние ФРы, вводится [специальное лицензирование](Licensing.html).
+Cм. [введение]({{ site.baseurl }}/v6/ru/Devices.html).
+Для плагинов, реализующих внешние ФРы, вводится [специальное лицензирование]({{ site.baseurl }}/v6/ru/Licensing.html).
 
 ## Подключение внешнего фискального регистратора
 Подключение внешнего ФРа состоит из 2 шагов.
@@ -20,7 +20,7 @@ PluginContext.Operations.RegisterCashRegisterFactory(cashRegisterFactory);
 ```
 Это нужно для того, чтобы в iikoRMS появилась ваша новая модель ФРа, которую потом можно будет добавить и подключить как контрольно-кассовую технику (ККТ) к кассе.
 
-![NewCashRegisterModel](../../img/cashRegister/newCashRegisterModel.png)
+![NewCashRegisterModel]({{ site.baseurl }}/img/cashRegister/newCashRegisterModel.png)
 
 **Шаг 2:** Добавить ФР новой модели.
 Для этого нужно реализовать интерфейс [`ICashRegister`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Devices_ICashRegister.htm) и создавать его экземпляр в методе [`ICashRegisterFactory.Create()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Devices_ICashRegisterFactory_Create.htm):
@@ -40,7 +40,7 @@ class SampleCashRegisterFactory : MarshalByRefObject, ICashRegisterFactory
 По нажатию «Завершить» в окне добавления ФРа (*iikoOffice => «Настройки оборудования»*), будет вызван метод [`ICashRegisterFactory.Create()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Devices_ICashRegisterFactory_Create.htm), который добавит новый ФР в список оборудования. 
 После этого iikoRMS сможет общаться с внешним ФРом, отправлять ему команды и принимать его ответы.
 
-![CreateCashRegister](../../img/cashRegister/createCashRegister.png)
+![CreateCashRegister]({{ site.baseurl }}/img/cashRegister/createCashRegister.png)
 
 ## Настройки фискального регистратора CashRegisterSettings
 Каждое оборудование имеет свой набор настроек [`IDeviceFactory.DefaultDeviceSettings`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Devices_IDeviceFactory_DefaultDeviceSettings.htm):
@@ -207,7 +207,7 @@ public DeviceInfo GetDeviceInfo()
 
 **8.** [`DoBillCheque()`](http://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Devices_ICashRegister_DoBillCheque.htm) — пречек заказа или отмена пречека.
 Команда выполняется на тех ФРах, которые поддерживают печать пречека [`CashRegisterDriverParameters.IsBillTaskSupported = true`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Device_Settings_CashRegisterDriverParameters.htm) 
-(см. чек типа [`«Счёт»`](https://iiko.github.io/front.api.doc/2019/03/13/bill-chequetask-resolver.html)).
+(см. чек типа [`«Счёт»`]({{ site.baseurl }}/2019/03/13/bill-chequetask-resolver.html)).
 
 Информация по заказу приходит в аргументе [`BillTask`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_Data_Device_Tasks_BillTask.htm):
 - [`Id`](http://iiko.github.io/front.api.sdk/v6/html/P_Resto_Front_Api_Data_Device_Tasks_CashRegisterTask_Id.htm) — уникальный номер выполняемой операции.
