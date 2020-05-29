@@ -51,4 +51,4 @@ layout: default
 </Manifest>
 ```
 
-Данный пример, как и схему xml-файла *Manifest.xsd*, пока можно увидеть лишь в офлайновом пакете iikoFront API SDK. Ожидается обновление онлайн-версии SDK.
+Данный [пример](https://github.com/iiko/front.api.sdk/blob/master/sample/v6/Resto.Front.Api.SamplePlugin/Manifest.xml), как и схему xml-файла [*Manifest.xsd*](https://github.com/iiko/front.api.sdk/blob/master/sample/v6/Binaries/Manifest.xsd) можно посмотреть в [iikoFront API SDK](https://github.com/iiko/front.api.sdk/tree/master/sample/v6).
