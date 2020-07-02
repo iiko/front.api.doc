@@ -122,10 +122,10 @@ Preview-версии являются копиями промежуточных 
 
     <!-- V7Preview1 -->
     <rect x="700" y="170" fill="steelblue" height="10" width="25" />
-    <rect x="725" y="170" fill="darkblue" height="10" width="25" />
+    <rect x="725" y="170" fill="darkblue" height="10" width="50" />
 
     <!-- V7Preview2 -->
-    <rect x="725" y="190" fill="steelblue" height="10" width="25" />
+    <rect x="745" y="190" fill="steelblue" height="10" width="5" />
     <rect x="750" y="190" fill="darkblue" height="10" width="25" />
 
     <!-- V7Preview3 -->
