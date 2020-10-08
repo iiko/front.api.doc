@@ -11,6 +11,8 @@ layout: default
 
 - [IEditSession.AddPreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/Overload_Resto_Front_Api_Editors_IEditSession_AddPreliminaryPaymentItem.htm) &mdash; добавить предварительную оплату _(имеет смысл только для заказов доставки)_
 
+- [IEditSession.AddExternalFiscalizedPaymentItem](https://iiko.github.io/front.api.sdk/v7/html/Overload_Resto_Front_Api_Editors_IEditSession_AddExternalFiscalizedPaymentItem.htm) &mdash; добавить оплату, фискализованную на внешней кассе вне iikoFront _(NOTE: данный функционал доступен только начиная с V7Preview4)_
+
 Также можно использовать одноименные [методы](https://iiko.github.io/front.api.sdk/v6/html/Methods_T_Resto_Front_Api_Extensions_OperationServiceExtensions.htm) сервиса операций&ndash;расширений, в которых неявно создаётся [сессия редактирования]({{ site.baseurl }}/v6/ru/Data%20editing.html)
 (_отличие в необходимости выполнения нескольких действий над заказом.
 Если помимо добавления оплаты требуется, например, добавить гостя к заказу, то нужно использовать методы в рамках сессии редактирования_).
@@ -46,6 +48,15 @@ PluginContext.Operations.AddExternalPaymentItem(150, false, additionalData, paym
 ```
 
 ![card](../../img/payment/api_cardExternal.png)
+
+- Добавить в заказ оплату, фискализованную на внешней кассе
+```cs
+var order = PluginContext.Operations.GetOrders().Last(o => (o.Status == OrderStatus.New));
+var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Card && x.Name.ToUpper() == "DINERS");
+var additionalData = new CardPaymentItemAdditionalData { CardNumber = "123456" };
+var credentials = PluginContext.Operations.GetCredentials();
+PluginContext.Operations.AddExternalFiscalizedPaymentItem(50, additionalData, paymentType, order, credentials);
+```
 
 Комментарии:
 - В примерах используется выражение `PluginContext.Operations.GetOrders().Last(...)` &mdash; получение последнего попавшегося заказа из списка.
@@ -142,6 +153,41 @@ PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
 ```
 ![card](../../img/payment/api_cardExternalPrepay.png)
 
+
+#### Добавление в заказ фискализованной на внешней кассе оплаты
+
+В ситуации, когда, к примеру, предоплата принимается на сайте и фискальный чек печатается на облачном принтере сайта,
+такую оплату следует добавить в заказ с помощью метода `AddExternalFiscalizedPaymentItem`. При проведении такой оплаты в iikoFront создадутся все транзакции,
+соответствующие проведению внешнего фискального платежа. Однако принципиальным отличием является то, что фискального чека при проведении такой оплаты в ikoFront
+напечатано не будет, т.к. чек уже был отпечатан ранее на внешней кассе. _(NOTE: данный функционал доступен только начиная с V7Preview4)_
+
+##### Пример
+```cs
+var order = PluginContext.Operations.GetOrders().Last(o => (o.Status == OrderStatus.New));
+var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Card && x.Name.ToUpper() == "DINERS");
+var additionalData = new CardPaymentItemAdditionalData { CardNumber = "123456" };
+var credentials = PluginContext.Operations.GetCredentials();
+var paymentItem = PluginContext.Operations.AddExternalFiscalizedPaymentItem(50, additionalData, paymentType, order, credentials);
+```
+
+#### Добавление в заказ фискализованной на внешней кассе оплаты и превращение ее в предоплату iikoFront
+
+Чтобы фискализованный на внешней кассе платеж был добавлен в заказ сразу проведенным, следует вызвать метод `AddExternalFiscalizedPaymentItem`, а затем 
+метод [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_ProcessPrepay.htm). В результате платеж попадет 
+в iikoFront уже проведенным и фискализованным. Фискального чека во время вызова метода проведении такого платежа в ikoFront напечатано не будет, т.к. чек уже был 
+отпечатан ранее на внешней кассе. _(NOTE: данный функционал доступен только начиная с V7Preview4)_
+
+##### Пример
+```cs
+var order = PluginContext.Operations.GetOrders().Last(o => (o.Status == OrderStatus.New));
+var paymentType = PluginContext.Operations.GetPaymentTypes().Last(x => x.Kind == PaymentTypeKind.Card && x.Name.ToUpper() == "DINERS");
+var additionalData = new CardPaymentItemAdditionalData { CardNumber = "123456" };
+var credentials = PluginContext.Operations.GetCredentials();
+var paymentItem = PluginContext.Operations.AddExternalFiscalizedPaymentItem(50, additionalData, paymentType, order, credentials);
+order = PluginContext.Operations.GetOrderById(order.Id);
+PluginContext.Operations.ProcessPrepay(credentials, order, paymentItem);
+```
+
 #### Добавление в заказ предварительного платежа с последующим превращением в предоплату iikoFront
 
 Для оплаты доставочного заказа следует сначала добавить предварительную оплату с помощью метода [IEditSession.AddPreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/Overload_Resto_Front_Api_Editors_IEditSession_AddPreliminaryPaymentItem.htm), а после вызвать метод [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_ProcessPrepay.htm).
@@ -178,6 +224,8 @@ PluginContext.Operations.ProcessPrepay(credentials, PluginContext.Operations.Get
 - [IEditSession.DeleteExternalPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Editors_IEditSession_DeleteExternalPaymentItem.htm) &mdash; удалить внешнюю оплату
 
 - [IEditSession.DeletePreliminaryPaymentItem](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_Editors_IEditSession_DeletePreliminaryPaymentItem.htm) &mdash; удалить предварительную оплату _(имеет смысл только для доставочного заказа)_
+
+- [IEditSession.DeleteExternalFiscalizedPaymentItem ](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Extensions_OperationServiceExtensions_DeleteExternalFiscalizedPaymentItem.htm) &mdash; удалить оплату, фискализованную на внешней кассе вне iikoFront. _(NOTE: данный функционал доступен только начиная с V7Preview4)_
 
 ##### Пример
 
