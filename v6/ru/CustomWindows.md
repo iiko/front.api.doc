@@ -22,7 +22,7 @@ private void EntryPoint()
 }
 ```
 
-Во-вторых, открытое фоновым процессом окно по умолчанию не имеет фокуса, поэтому события ввода будут направлены прежнему активному окну (то есть окну iikoFront). По [задумке](https://blogs.msdn.microsoft.com/oldnewthing/20090220-00/?p=19083 "Foreground activation permission is like love: You can’t steal it, it has to be given to you") Microsoft, приложение не может стать активным само по себе, эстафету ему может передать только предыдущее активное окно, либо фокус может назначить пользователь. Однако, последнее можно имитировать программно:
+Во-вторых, открытое фоновым процессом окно по умолчанию не имеет фокуса, поэтому события ввода будут направлены прежнему активному окну (то есть окну iikoFront). По [задумке](https://devblogs.microsoft.com/oldnewthing/20090220-00/?p=19083 "Foreground activation permission is like love: You can’t steal it, it has to be given to you") Microsoft, приложение не может стать активным само по себе, эстафету ему может передать только предыдущее активное окно, либо фокус может назначить пользователь. Однако, последнее можно имитировать программно:
 ```cs
 public static void ClickWindow(Window wnd)
 {
