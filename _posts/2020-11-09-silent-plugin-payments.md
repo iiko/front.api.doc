@@ -9,22 +9,16 @@ layout: default
 
 #### Пример
 ```cs
-/// <summary>
-/// Дистанционная оплата заказа существующими в заказе платежами.
-/// </summary>
-private void PayOrderWithExistingPayments()
-{
-	const bool isProcessed = false;
-	var credentials = PluginContext.Operations.GetCredentials();
+const bool isProcessed = false;
+var credentials = PluginContext.Operations.GetCredentials();
 
-	var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
-	var paymentType = PluginContext.Operations.GetPaymentTypes().First(x => x.Kind == PaymentTypeKind.External && x.Name == "SampleApiPayment");
-	var additionalData = new ExternalPaymentItemAdditionalData { CustomData = Serializer.Serialize(new PaymentAdditionalData { SilentPay = true }) };
-	// Добавление плагинной оплаты на полную сумму
-	PluginContext.Operations.AddExternalPaymentItem(order.ResultSum, isProcessed, additionalData, null, paymentType, order, credentials);
+var order = PluginContext.Operations.GetOrders().Last(o => o.Status == OrderStatus.New);
+var paymentType = PluginContext.Operations.GetPaymentTypes().First(x => x.Kind == PaymentTypeKind.External && x.Name == "SampleApiPayment");
+var additionalData = new ExternalPaymentItemAdditionalData { CustomData = Serializer.Serialize(new PaymentAdditionalData { SilentPay = true }) };
+// Добавление плагинной оплаты на полную сумму
+PluginContext.Operations.AddExternalPaymentItem(order.ResultSum, isProcessed, additionalData, null, paymentType, order, credentials);
 
-	order = PluginContext.Operations.GetOrderById(order.Id);
-	// Закрытие заказа существующими оплатами
-	PluginContext.Operations.PayOrder(credentials, order);
-}
+order = PluginContext.Operations.GetOrderById(order.Id);
+// Закрытие заказа существующими оплатами
+PluginContext.Operations.PayOrder(credentials, order);
 ```
