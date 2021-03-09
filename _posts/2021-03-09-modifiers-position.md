@@ -7,7 +7,7 @@ layout: default
 
 Поле MenuIndex добавлено для типов [`ISimpleModifierBase`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Assortment_ISimpleModifierBase_MenuIndex.htm) и [`IGroupModifier`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Assortment_IGroupModifier_MenuIndex.htm).
 
-Получить модификаторы блюда можно получить с помощью следующих методов:
+Получить модификаторы блюда можно с помощью следующих методов:
 - [`IOperationService.GetSimpleModifier`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetSimpleModifiers.htm)
 - [`IOperationService.GetGroupModifiers`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetGroupModifiers.htm)
 
