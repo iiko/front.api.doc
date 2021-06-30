@@ -1,5 +1,5 @@
 ---
-title: Добавлены поля `Comment` и изменена сигнатура метода  `AddOrderExternalData`
+title: Добавлены поля Comment и изменена сигнатура метода AddOrderExternalData
 layout: default
 ---
 
