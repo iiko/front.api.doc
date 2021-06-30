@@ -7,4 +7,4 @@ layout: default
 
 Изменена сигнатура метода [`AddOrderExternalData`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_Editors_IEditSession_AddOrderExternalData.htm) — добавлен флаг `isPublic`.
 
-Данные, записанные с помощью метода `AddOrderExternalData` с флагом `isPublic`, равным `true`, станут доступны в iikoRMS для выгрузки в OlAP-отчете по продажам. Если при вызове метода `AddOrderExternalData` передавать флаг `isPublic` равным `false`, то такие данные, как и прежде, сохраняются только в iikoFront и не будут доступны снаружи.
+Данные, записанные с помощью метода `AddOrderExternalData` с флагом `isPublic`, равным `true`, станут доступны в iikoRMS для выгрузки в OLAP-отчете по продажам. Если при вызове метода `AddOrderExternalData` передавать флаг `isPublic` равным `false`, то такие данные, как и прежде, сохраняются только в iikoFront и не будут доступны снаружи.
