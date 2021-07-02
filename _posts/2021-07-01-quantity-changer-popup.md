@@ -6,7 +6,7 @@ layout: default
 В версии API V7Preview6 было добавлено новое окно для удобства работы с количеством какой-то группы элементов
 [`IViewManager.ShowQuantityChangerPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowQuantityChangerPopup.htm).
 
-![quantity-changer-popup-1](../img/viewmanager/quantity-changer-popup-1.PNG)
+![quantity-changer-popup-1](../../../img/viewmanager/quantity-changer-popup-1.PNG)
 
 Метод принимает
 
@@ -29,7 +29,7 @@ layout: default
 Центральная область элемента с его названием также кликабельна и позволяет открыть цифровой попап для расширенного редактирования количества выбранного элемента.
 Справа от названия указано текущее количество элемента.
 
-![quantity-changer-popup-3](../img/viewmanager/quantity-changer-popup-3.PNG)
+![quantity-changer-popup-3](../../../img/viewmanager/quantity-changer-popup-3.PNG)
 
 В случае, когда минимально возможное количество каждого элемента равно нулю,
 максимально возможное количество каждого элемента равно максимально возможному количеству для группы,
@@ -38,7 +38,7 @@ layout: default
 клик по центральной области остальных элементов не открывает цифровой попап,
 а полностью переносит количество ранее выбранного элемента в текущий элемент.
 
-![quantity-changer-popup-2](../img/viewmanager/quantity-changer-popup-2.PNG)
+![quantity-changer-popup-2](../../../img/viewmanager/quantity-changer-popup-2.PNG)
 
 ##### Пример
 
