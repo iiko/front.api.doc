@@ -43,7 +43,7 @@ layout: default
 ##### Шаг 1: Зарегистрировать обработчик для экрана кассы:
  
 ```cs
-// Регистрация действия на экране закрытого заказа текущей кассовой смены
+// Регистрация действия на экране кассы
 subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: Show ok popup", false, true, ShowOkPopupOnPaymentScreen);
 ``` 
 
