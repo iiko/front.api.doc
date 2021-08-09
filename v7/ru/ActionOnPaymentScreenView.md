@@ -44,10 +44,10 @@ layout: default
  
 ```cs
 // Регистрация действия на экране закрытого заказа текущей кассовой смены
-subscription = Integration.AddButtonOnPaymentScreen("SamplePlugin: Show ok popup", false, true, ShowOkPopupOnPaymentScreen);
+subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: Show ok popup", false, true, ShowOkPopupOnPaymentScreen);
 ``` 
 
-Функция регистрации операции на экран кассы [`AddButtonOnPaymentScreen()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm) принимает на вход 5 аргументов:
+Функция регистрации операции на экран кассы [`AddButtonToPaymentScreen()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm) принимает на вход 5 аргументов:
 
 - `string caption` — название кнопки, отображается на UI.
 - `bool isChecked` — выделена ли кнопка.
@@ -73,7 +73,7 @@ private void ShowOkPopupOnPaymentScreen((Order order, IOperationService os, IVie
 
 Можно в любой момент обновить состояние ранее добавленной кнопки с помощью функции [`UpdatePaymentScreenButtonState()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_UpdatePaymentScreenButtonState.htm), которая принимает на вход 5 аргументов:
 
-- `Guid buttonId` — идентификатор кнопки, который можно получить из вовращаемого значения функции [`AddButtonOnPaymentScreen()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm).
+- `Guid buttonId` — идентификатор кнопки, который можно получить из вовращаемого значения функции [`AddButtonToPaymentScreen()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm).
 - `string caption` — необязательный аргумент. Если он задан, то обновится название кнопки.
 - `bool? isChecked` — необязательный аргумент. Если он задан, то обновится состояние кнопки - выделена ли она или нет.
 - `bool? isEnabled` — необязательный аргумент. Если он задан, то обновится состояние кнопки - доступна ли она для нажатия или нет.
