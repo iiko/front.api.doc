@@ -13,7 +13,7 @@ layout: default
 ![ButtonOnPaymentScreenView](../../img/actionOnPaymentScreenView/buttonOnPaymentScreen.png) 
 
 
-Допустим, плагин показывает окно с сообщением (см. статью [*API диалоговые окна*](../../v6/ViewManager.html "Диалоговые окна")).
+Допустим, плагин показывает окно с сообщением (см. статью [*API диалоговые окна*](../../v6/ru/ViewManager.html "Диалоговые окна")).
 
 ![ButtonOnPaymentScreenView_Click](../../img/actionOnPaymentScreenView/buttonOnPaymentScreenClick.png) 
 
