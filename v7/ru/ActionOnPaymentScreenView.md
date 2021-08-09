@@ -13,7 +13,7 @@ layout: default
 ![ButtonOnPaymentScreenView](../../img/actionOnPaymentScreenView/buttonOnPaymentScreen.png) 
 
 
-Допустим, плагин показывает окно с сообщением (см. статью [*API диалоговые окна*](ViewManager.html "Диалоговые окна")).
+Допустим, плагин показывает окно с сообщением (см. статью [*API диалоговые окна*](../../v6/ViewManager.html "Диалоговые окна")).
 
 ![ButtonOnPaymentScreenView_Click](../../img/actionOnPaymentScreenView/buttonOnPaymentScreenClick.png) 
 
@@ -53,7 +53,7 @@ subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: 
 - `bool isChecked` — выделена ли кнопка.
 - `bool isEnabled` — доступна ли кнопка для нажатия.
 - `Action<(IOrder order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state)> callback` - функция, которая будет вызвана при нажатии на кнопку.
-- `string iconGeometry` — картинка кнопки. [`Синтаксис`](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/path-markup-syntax?view=netframeworkdesktop-4.8).
+- `string iconGeometry` — картинка кнопки (см. [`синтаксис`](https://docs.microsoft.com/en-us/dotnet/desktop/wpf/graphics-multimedia/path-markup-syntax?view=netframeworkdesktop-4.8)).
 
 Функция нажатия на кнопку принимает объект заказа [`IOrder`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Orders_IOrder.htm), экземпляр [`IViewManager`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_UI_IViewManager.htm) для показа окон, а также текущее состояние кнопки - `(Guid buttonId, string caption, bool isChecked, string iconGeometry) state`.
 
@@ -79,7 +79,7 @@ private void ShowOkPopupOnPaymentScreen((Order order, IOperationService os, IVie
 - `bool? isEnabled` — необязательный аргумент. Если он задан, то обновится состояние кнопки - доступна ли она для нажатия или нет.
 - `string iconGeometry` — необязательный аргумент. Если он задан, то обновится картинка на кнопке.
 
-Для отслеживания изменений на экране кассы, можно подписаться на событие [`PaymentScreenUpdated()`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_PaymentScreenUpdated.htm). Событие вызывается при добавлении, изменении, удалении типа оплаты, при изменении суммы оплаты, а также при добавлении или удалении EInvoice. Это событие имеет 2 аргумента:
+Для отслеживания изменений на экране кассы, можно подписаться на событие [`PaymentScreenUpdated`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_PaymentScreenUpdated.htm). Событие вызывается при добавлении, изменении, удалении типа оплаты, при изменении суммы оплаты, а также при добавлении или удалении EInvoice. Это событие имеет 2 аргумента:
 
 - `PaymentScreenUpdatedContext context` - текущее состояние экрана оплаты заказа.
 - `IViewManager vm` - экземпляр [`IViewManager`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_UI_IViewManager.htm) для показа окон.
