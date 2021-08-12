@@ -2,7 +2,7 @@
 title: Добавлена возможность расширения функционала экрана кассы   
 layout: default
 ---
-В API V7 добавлен метод [`AddButtonToPaymentScreen`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm), который позволяет добавить на экран кассы свою операцию (см. статью «[Экран кассы](../v7/ru/ActionOnPaymentScreenView.html)»).
+В API V7 добавлен метод [`AddButtonToPaymentScreen`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPaymentScreen.htm), который позволяет добавить на экран кассы свою операцию (см. статью «[Экран кассы]({{ site.baseurl }}/v7/ru/ActionOnPaymentScreenView.html)»).
 
 
 
