@@ -60,7 +60,7 @@ subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: 
 ##### Шаг 2. Описать обработчик добавляемой кнопки:
 
 ```cs
-private void ShowOkPopupOnPaymentScreen((Order order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state) info)
+private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state) info)
 { 
     info.vm.ShowOkPopup("Тестовое окно", "Сообщение показано с помощью SamplePlugin.");
 }
