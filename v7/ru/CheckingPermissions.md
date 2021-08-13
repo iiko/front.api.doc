@@ -87,7 +87,8 @@ PluginContext.Notifications.CurrentUserChanged.Where(user => user != null).Disti
 
 ### Вариант 3: Проверка возможности выполнения операции в момент нажатия на кнопку.
 
-Если есть возможность воспользоваться экземпляром [`IViewManager`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_UI_IViewManager.htm), то можно показать окно запроса прав. Например, доступ к нему есть в подписке на событие нажатия на кнопку. 
+Если есть возможность воспользоваться экземпляром [`IViewManager`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_UI_IViewManager.htm), то можно показать окно запроса прав. 
+Например, доступ к нему есть в подписке на событие нажатия на кнопку. 
 Здесь может быть несколько вариантов реализации.
 
 #### Вариант 3.1: Если право у пользователя есть, то окно запроса права не покажется. Если у пользователя его нет, то показываем окно запроса права. 
@@ -106,7 +107,8 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 - `string permissionCode` — право, которое должно быть у текущего пользователя.
 - `bool showConfirmPopupAnyway` — если false, то окно покажется только в том случае, если у текущего пользователя нет права. Если true, то окно покажется в любом случае, даже если пользователь обладает нужным правом.
 
-Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил право, либо *null*, если право не было подтверждено.
+Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил право, либо *null*, если право не было подтверждено. 
+Следует учитывать, что подтвердить право может любой пользователь, а не только тот, кто в данный момент выполнил вход в терминал.
 
 В нашем случае, если текущий пользователь обладает правом, то окно запроса прав не покажется, произойдёт выполнение операции. 
 Если же права у него нет, то покажется окно запроса прав:
@@ -115,7 +117,7 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 
 Если право было подтверждено, то метод [`ShowCheckPermissionPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowCheckPermissionPopup.htm) вернёт экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователя, который подтвердил права.
 
-#### Вариант 3.3: Запрашивать право в любом случае, даже если у пользователя оно есть.
+#### Вариант 3.2: Запрашивать право в любом случае, даже если у пользователя оно есть.
 
 Иногда непреднамеренное выполнение операции может привести к нежелательным последствиям.
 Для этого можно требовать подтверждения права, даже если текущий пользователь им уже обладает.
@@ -132,24 +134,7 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 
 В этом случае окно запроса прав будет показываться всегда.
 
-#### Вариант 3.4: Запрашивать право в любом случае, даже если у пользователя оно есть. Подтвердить право может только текущий пользователь.
-
-Можно требовать подтверждения права только текущим пользователем. 
-Для этого, снова поменяем подписку нажатия на кнопку:
-
-```cs
-private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state) info)
-{
-    var currentUser = info.os.GetCurrentUser();
-    if(currentUser == null || !info.os.CheckPermission(currentUser, "F_XR")) //Текущий пользователь не обладает правом
-        return;
-    if (info.vm.ShowCheckPermissionPopup("F_XR", true) != currentUser) //Право не было подтверждено текущим пользователем
-        return;
-    info.vm.ShowOkPopup("Тестовое окно", "Сообщение показано с помощью SamplePlugin.");
-}
-```
-
-### Вариант 3: Проверка нескольких прав.
+### Вариант 4: Проверка нескольких прав.
 
 Можно показать окно проверки нескольких прав, например:
 
@@ -168,4 +153,4 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 - `bool showConfirmPopupAnyway` — если false, то окно покажется только в том случае, если у текущего пользователя нет прав. Если true, то окно покажется в любом случае, даже если пользователь обладает нужным правом.
 - [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - Проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
 
-Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил права, либо *null*, если права не были подтверждены.
+Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил права, либо `null`, если права не были подтверждены.
