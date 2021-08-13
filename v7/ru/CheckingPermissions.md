@@ -117,8 +117,9 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 
 #### Вариант 3.3: Запрашивать право в любом случае, даже если у пользователя оно есть.
 
-Выполнение операции может требовать подтверждения права в любом случае, даже если текущий пользователь им уже обладает. 
-Для этого, переделаем подписку нажатия на кнопку, передав в `showConfirmPopupAnyway` `true`:
+Иногда непреднамеренное выполнение операции может привести к нежелательным последствиям.
+Для этого можно требовать подтверждения права, даже если текущий пользователь им уже обладает.
+Переделаем подписку нажатия на кнопку, передав в `showConfirmPopupAnyway` `true`:
 
 ```cs
 private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state) info)
