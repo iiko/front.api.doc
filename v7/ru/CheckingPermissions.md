@@ -22,21 +22,16 @@ subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: 
 
 В результате выполнения метода регистрации можно получить идентификатор кнопки - `subscription.buttonId`. В дальнейшем будет использоваться этот идентификатор.
 
-### Вариант 1: Отключение кнопки для всех пользователей, у кого нет прав на её нажатие.
+### Вариант 1: Отключение кнопки для всех пользователей, у кого нет права на её нажатие.
 
 Можно включать и выключать ранее добавленную кнопку на экран кассы с помощью метода [`UpdatePaymentScreenButtonState`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_UpdatePaymentScreenButtonState.htm), передавая параметр *isEnabled*. Здесь удобнее всего будет воспользоваться событием [`CurrentUserChanged`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_CurrentUserChanged.htm), чтобы узнать, какой пользователь сейчас работает.
 Подпишемся на событие и проверим, обладает ли пользователь нужным правом (например, право печати Х-отчёта "F_XR"):
 
 ```cs
 // Подписка на событие изменения текущего пользователя
-PluginContext.Notifications.CurrentUserChanged.Subscribe(OnCurrentUserChanged);
-``` 
-
-```cs
-// Подписка на событие изменения текущего пользователя
 PluginContext.Notifications.CurrentUserChanged.Subscribe(user =>
 {
-    if(user == null)//Находимся на экране логина
+    if(user == null) //Находимся на экране логина
         return;
     var isButtonEnabled = PluginContext.Operations.CheckPermission(user, "F_XR");
     PluginContext.Operations.UpdatePaymentScreenButtonState(subscription.buttonId, isEnabled: isButtonEnabled);
@@ -57,7 +52,7 @@ PluginContext.Notifications.CurrentUserChanged.Subscribe(user =>
 - [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - Проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
 - [`IRole`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IRole.htm) `role` — необязательный параметр. Роль пользователя. Используется, если терминал работает в режиме "Строгое соответствие расписанию".
 
-### Вариант 2: Скрытие кнопки для всех пользователей, у кого нет прав на её нажатие.
+### Вариант 2: Скрытие кнопки для всех пользователей, у кого нет права на её нажатие.
 
 Можно перенести регистрацию кнопки в подписку [`CurrentUserChanged`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_CurrentUserChanged.htm):
 
@@ -66,7 +61,7 @@ PluginContext.Notifications.CurrentUserChanged.Subscribe(user =>
 // Подписка на событие изменения текущего пользователя
 PluginContext.Notifications.CurrentUserChanged.Subscribe(user =>
 {
-    if (user == null)
+    if (user == null) //Находимся на экране логина
         return;
     if (PluginContext.Operations.CheckPermission(user, "F_XR")) //Пользователь обладает правом
     {
@@ -81,7 +76,7 @@ PluginContext.Notifications.CurrentUserChanged.Subscribe(user =>
 });
 ``` 
 
-В этом случае, если у пользователя нет прав, то кнопка не покажется.
+В этом случае, если у пользователя нет права, то кнопка не покажется.
 
 ### Вариант 3: Проверка возможности выполнения операции в момент нажатия на кнопку.
 
