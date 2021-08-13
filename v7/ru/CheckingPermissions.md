@@ -151,6 +151,6 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 
 - `string[] permissionCodes` — права, которое будут проверяться у текущего пользователя.
 - `bool showConfirmPopupAnyway` — если false, то окно покажется только в том случае, если у текущего пользователя нет прав. Если true, то окно покажется в любом случае, даже если пользователь обладает нужным правом.
-- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - Проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
+- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
 
 Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил права, либо `null`, если права не были подтверждены.
