@@ -55,7 +55,7 @@ PluginContext.Notifications.CurrentUserChanged.Where(user => user != null).Disti
 
 - [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) `user` — пользователь, для которого проверяются права.
 - `string[] permissionCodes` — права, которые проверяются у пользователя.
-- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
+- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` — проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
 - [`IRole`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IRole.htm) `role` — необязательный параметр. Роль пользователя. Используется, если терминал работает в режиме "Строгое соответствие расписанию".
 
 Список прав, которыми обладает пользователь, может поменяться. 
@@ -72,7 +72,7 @@ PluginContext.Notifications.CurrentUserChanged.Where(user => user != null).Disti
 {
     if (PluginContext.Operations.CheckPermission(user, "F_XR")) //Пользователь обладает правом
     {
-        if(subscription == null) //Была ли ранее создана кнопка
+        if (subscription == null) //Была ли ранее создана кнопка
             subscription = PluginContext.Operations.AddButtonToPaymentScreen("SamplePlugin: Show ok popup", false, true, ShowOkPopupOnPaymentScreen);
     }
     else //Пользователь не обладает правом
@@ -107,7 +107,7 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 - `string permissionCode` — право, которое должно быть у текущего пользователя.
 - `bool showConfirmPopupAnyway` — если false, то окно покажется только в случае отсутствия права у текущего пользователя. Если true, то окно покажется, даже если пользователь обладает нужным правом.
 
-Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил право, либо *null*, если право не было подтверждено. 
+Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) — пользователь, который подтвердил право, либо *null*, если право не было подтверждено. 
 Следует учитывать, что подтвердить право может любой пользователь, а не только тот, кто в данный момент выполнил вход в терминал.
 
 В нашем случае, если текущий пользователь обладает правом, то окно запроса прав не покажется, произойдёт выполнение операции. 
@@ -151,6 +151,6 @@ private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IVi
 
 - `string[] permissionCodes` — права, которые будут проверяться у текущего пользователя.
 - `bool showConfirmPopupAnyway` — если false, то окно покажется только в случае отсутствия права у текущего пользователя. Если true, то окно покажется, даже если пользователь обладает нужным правом.
-- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` - проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
+- [`PermissionsCheckMode`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_PermissionsCheckMode.htm) `checkMode` — проверять наличие всех прав (`PermissionsCheckMode.All`), или хотя бы одного (`PermissionsCheckMode.Any`).
 
-Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) - пользователь, который подтвердил права, либо `null`, если права не были подтверждены.
+Метод возвращает экземпляр [`IUser`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Security_IUser.htm) — пользователь, который подтвердил права, либо `null`, если права не были подтверждены.
