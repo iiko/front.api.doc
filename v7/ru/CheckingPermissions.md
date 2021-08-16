@@ -96,7 +96,7 @@ PluginContext.Notifications.CurrentUserChanged.Where(user => user != null).Disti
 ```cs
 private void ShowOkPopupOnPaymentScreen((IOrder order, IOperationService os, IViewManager vm, (Guid buttonId, string caption, bool isChecked, string iconGeometry) state) info)
 {
-    if(info.vm.ShowCheckPermissionPopup("F_XR", false) == null) //Право не было подтверждено
+    if (info.vm.ShowCheckPermissionPopup("F_XR", false) == null) //Право не было подтверждено
         return;
     info.vm.ShowOkPopup("Тестовое окно", "Сообщение показано с помощью SamplePlugin.");
 }
