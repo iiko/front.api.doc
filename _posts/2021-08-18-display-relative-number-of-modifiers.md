@@ -24,7 +24,6 @@ layout: default
 Также добавлен метод [`GetModifierAmountString()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetModifierAmountString.htm), позволяющий получить количество модификатора для отображения на UI.
 
 Метод принимает
- 
 - `decimal modifierAmount` — количество модификатора,
 - `int defaultAmount` — количество модификатора по умолчанию,
 - `bool hideIfDefaultAmount` — настроено ли для данного группового модификатора "Скрывать, если количество по умолчанию",
