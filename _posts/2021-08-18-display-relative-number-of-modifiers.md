@@ -3,7 +3,7 @@ title: Показ относительного количества модифи
 layout: default
 ---
 
-В API V7 для ресторана появилась возможность настроить, как отображать количество групповых модификаторов блюда.
+В API V7 для ресторана появилась возможность настроить способ отображения количества групповых модификаторов блюда.
 Добавлено новое свойство [`bool IRestaurant.DisplayRelativeNumberOfModifiers`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_DisplayRelativeNumberOfModifiers.htm), обозначающее, что в случае `false` количество модификатора блюда должно отображаться в виде абсолютного количества (как было ранее), а в случае `true` как разница между абсолютным количеством модификатора и его количеством по умолчанию.
 
 Например, у блюда есть модификатор _Сметана_, входящий в группу модификаторов. Для данного модификатора выполняется:
@@ -21,11 +21,11 @@ layout: default
 
 Данная настройка влияет на показ модификаторов на экранах редактирования заказа, закрытого заказа, списка доставок, списка заказов, КДС и в сервис-чеках.
 
-Также добавлен метод [`GetModifierAmountString()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetModifierAmountString.htm), позволяющий получить количество модификатора для отображения на UI.
+Также добавлен метод [`GetModifierAmountString()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetModifierAmountString.htm), позволяющий, с учетом значения настройки `IRestaurant.DisplayRelativeNumberOfModifiers`, получить количество порций модификатора в строковом виде для отображения на UI.
 
-Метод принимает
-- `decimal modifierAmount` — количество модификатора,
-- `int defaultAmount` — количество модификатора по умолчанию,
+Метод принимает 
+- `decimal modifierAmount` — количество порций модификатора,
+- `int defaultAmount` — количество порций модификатора по умолчанию,
 - `bool hideIfDefaultAmount` — настроено ли для данного группового модификатора "Скрывать, если количество по умолчанию",
 - `bool isPaid` — является ли модификатор платным,
 - `bool isAmountIndependentOfParentAmount` — настроено ли для данного модификатора "Количество не зависит от количества блюда".
