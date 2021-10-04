@@ -3,17 +3,17 @@ title: Окна ввода даты и времени
 layout: default
 ---
 
-В API V7 появилась возможность показать окна ввода даты и времени (см. статью «[Окна запроса даты и времени]({{ site.baseurl }}/v7/ru/DateTimePopups.html)»).
+В API V7 появилась возможность показать окна запроса даты и времени (см. статью «[Окна запроса даты и времени]({{ site.baseurl }}/v7/ru/DateTimePopups.html)»).
 
 #### 1. Окно ввода даты.
 
-Окно ввода даты показывается с помощью метода [`DateTime? IViewManager.ShowDateNumpadPopup(DateTime selectedDate, string title)`]()
+Окно запроса даты показывается с помощью метода [`DateTime? IViewManager.ShowDateNumpadPopup(DateTime selectedDate, string title)`]()
 
 ![date-numpad-popup](../../../img/showDateTimePopup/DateNumpadPopup.png)
 
 #### 2. Окно ввода даты и времени.
 
-Окно ввода даты и времени показывается с помощью метода [`DateTime? IViewManager.ShowDateTimePopup(DateTime selectedDate, string title, DateTime minDate, DateTime maxDate)`]()
+Окно запроса даты и времени показывается с помощью метода [`DateTime? IViewManager.ShowDateTimePopup(DateTime selectedDate, string title, DateTime minDate, DateTime maxDate)`]()
 
 ![date-time-popup](../../../img/showDateTimePopup/DateTimePopup.png)
 
