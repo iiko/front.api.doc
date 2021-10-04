@@ -4,7 +4,7 @@ layout: default
 ---
 # Окна ввода даты и времени #
 
-В процессе работы плагина может потребоваться запрос даты и времени. Для этого можно показать диалоговые окна с помощью методов [`DateTime? IViewManager.ShowDateNumpadPopup(DateTime selectedDate, string title)`](), [`DateTime? IViewManager.ShowDateTimePopup(DateTime selectedDate, string title, DateTime minDate, DateTime maxDate)`]() и [`DateTime? IViewManager.ShowCalendarPopup(DateTime selectedDate, string title, DateTime minDate, DateTime maxDate)`]().
+В процессе работы плагина может потребоваться запрос даты и времени. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](), [`IViewManager.ShowDateTimePopup`]() и [`IViewManager.ShowCalendarPopup`]().
 
 ## Как это выглядит в iikoFront?
 
