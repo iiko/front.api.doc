@@ -4,7 +4,7 @@ layout: default
 ---
 # Окна ввода даты и времени #
 
-В процессе работы плагина может потребоваться запрос даты и времени. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](), [`IViewManager.ShowDateTimePopup`]() и [`IViewManager.ShowCalendarPopup`]().
+В процессе работы плагина может потребоваться запрос у пользователя даты и времени. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](), [`IViewManager.ShowDateTimePopup`]() и [`IViewManager.ShowCalendarPopup`]().
 
 ## Как это выглядит в iikoFront?
 
@@ -52,7 +52,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
 
 ### Вариант 2: Date-Time Popup
 
-Можно запросить дату и время с помощью диалога соответствующего диалога:
+Можно запросить дату и время с помощью диалога:
 
 ```cs
 PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
@@ -78,7 +78,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
 
 Метод вернёт выбранные пользователем дату и время, если он нажмёт *«OK»*, либо `null`, если он нажмёт *«Отмена»*.
 
-### Вариант 1: Calendar Popup
+### Вариант 3: Calendar Popup
 
 Для выбора даты можно использовать окно с календарём:
 
