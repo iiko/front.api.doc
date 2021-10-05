@@ -4,7 +4,7 @@ layout: default
 ---
 # Окна запроса даты и времени #
 
-В процессе работы плагина может потребоваться запрос у пользователя даты и времени. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](), [`IViewManager.ShowDateTimePopup`]() и [`IViewManager.ShowCalendarPopup`]().
+В процессе работы плагина может потребоваться запрос у пользователя даты и времени. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateNumpadPopup.htm), [`IViewManager.ShowDateTimePopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateTimePopup.htm) и [`IViewManager.ShowCalendarPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowCalendarPopup.htm).
 
 ## Как это выглядит в iikoFront?
 
@@ -43,7 +43,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
 
 ![date-numpad-popup](../../img/showDateTimePopup/DateNumpadPopup.png)
 
-Метод [`IViewManager.ShowDateNumpadPopup(DateTime selectedDate, string title)`]() принимает на вход 2 аргумента:
+Метод [`IViewManager.ShowDateNumpadPopup(DateTime selectedDate, string title)`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateNumpadPopup.htm) принимает на вход 2 аргумента:
 
 - `DateTime selectedDate` — дата, которая будет выбрана при показе окна.
 - `string title` — заголовок окна.
@@ -69,7 +69,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
 
 ![date-numpad-popup](../../img/showDateTimePopup/DateTimePopupCalendar.png)
 
-Метод [`IViewManager.ShowDateTimePopup(DateTime selectedDate, [CanBeNull] string title, DateTime minDate, DateTime maxDate)`]() принимает на вход 4 аргумента:
+Метод [`IViewManager.ShowDateTimePopup(DateTime selectedDate, [CanBeNull] string title, DateTime minDate, DateTime maxDate)`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateTimePopup.htm) принимает на вход 4 аргумента:
 
 - `DateTime selectedDate` — дата и время, которые будут выбраны при показе окна.
 - `string title` — заголовок окна.
@@ -93,7 +93,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("Sample Plugin", x =>
 
 ![date-numpad-popup](../../img/showDateTimePopup/CalendarPopup.png)
 
-Метод [`IViewManager.ShowCalendarPopup(DateTime selectedDate, [CanBeNull] string title, DateTime minDate, DateTime maxDate)`]() принимает на вход 4 аргумента:
+Метод [`IViewManager.ShowCalendarPopup(DateTime selectedDate, [CanBeNull] string title, DateTime minDate, DateTime maxDate)`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowCalendarPopup.htm) принимает на вход 4 аргумента:
 
 - `DateTime selectedDate` — дата, которая будет выбрана при показе окна.
 - `string title` — заголовок окна.
