@@ -26,6 +26,8 @@ PluginContext.Notifications.BeforeOrderBill.Subscribe(x =>
 });
 ```
 
+Более подробно об этом классе можно прочитать в статье «[Диалоговые окна]({{ site.baseurl }}/v6/ru/ViewManager.html)».
+
 В таких случаях, можно с помощью [`IViewManager`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_UI_IViewManager.htm) показывать диалоговые окна. Рассмотрим все методы для запроса у пользователя даты и времени. Для примера, создадим кнопку с помощью метода [`IOperationService.AddButtonToPluginsMenu`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_AddButtonToPluginsMenu.htm), как это показано выше, и при нажатии на неё будем показывать диалоговые окна.
 
 ### Вариант 1: Date Numpad Popup
