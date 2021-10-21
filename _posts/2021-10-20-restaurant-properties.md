@@ -11,9 +11,9 @@ layout: default
 — название юридического лица;
 - [`string LegalAddress`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_LegalAddress.htm)
 — юридический адрес;
-- [`Resto.Front.Api.Data.DataTransferObjects.LegalAddress LegalAddressDetailed`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_LegalAddressDetailed.htm)
+- [`LegalAddress LegalAddressDetailed`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_LegalAddressDetailed.htm)
 — детализированный юридический адрес;
 - [`string RegistrationNumber`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_RegistrationNumber.htm)
 — регистрационный номер;
 - [`string AccountingReasonCode`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_Data_Organization_IRestaurant_AccountingReasonCode.htm)
-— КПП.
+— код причины постановки на учёт (КПП).
