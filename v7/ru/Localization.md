@@ -10,7 +10,7 @@ layout: default
 
 Изменение языка делается через экран настроек:
 
-![date-numpad-popup](../../img/Localization/changeLanguage.png)
+![changeLanguage](../../img/Localization/changeLanguage.png)
 
 Через плагин сменить язык терминала нельзя.
 
