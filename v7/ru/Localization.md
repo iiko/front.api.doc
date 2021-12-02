@@ -31,7 +31,7 @@ var settings = PluginContext.Operations.GetHostTerminalSettings();
 - [`CultureInfo.CurrentCulture`](https://docs.microsoft.com/ru-ru/dotnet/api/system.globalization.cultureinfo.currentculture?view=net-6.0)
 - [`CultureInfo.CurrentUICulture`](https://docs.microsoft.com/ru-ru/dotnet/api/system.globalization.cultureinfo.currentuiculture?view=net-6.0)
 - [`CultureInfo.DefaultThreadCurrentCulture`](https://docs.microsoft.com/ru-ru/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentculture?view=net-6.0)
-- [`CCultureInfo.DefaultThreadCurrentUICulture`](https://docs.microsoft.com/ru-ru/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentuiculture?view=net-6.0)
+- [`CultureInfo.DefaultThreadCurrentUICulture`](https://docs.microsoft.com/ru-ru/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentuiculture?view=net-6.0)
 
 Данные свойства получают те же значения, какие они имеют в терминале. Как и в случае `IHostTerminalSettings`, свойства, имеющие в названии `UI`, дублируют аналогичные свойства (`CurrentUICulture` будет иметь то же значение, что и `CurrentCulture`, а `DefaultThreadCurrentUICulture` то же, что и `DefaultThreadCurrentCulture`).
 
