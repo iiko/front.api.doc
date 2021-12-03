@@ -22,7 +22,7 @@ var settings = PluginContext.Operations.GetHostTerminalSettings();
 ```
 Метод возвращает объект, реализующий интерфейс [`IHostTerminalSettings`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Organization_IHostTerminalSettings.htm). Он содержит два свойства локализации:
 - `CultureInfo Culture` - язык, который выбран на терминале.
-- `CultureInfo UICulture` - добавлено в API V7. Сейчас свойство содержит то же самое значение, что и свойство `Culture`. Позже планируется поддержка различных культрур для данных и интерфейса пользователя. 
+- `CultureInfo UICulture` - добавлено в API V7. Сейчас свойство содержит то же самое значение, что и свойство `Culture`. Позже планируется поддержка различных культрур для данных и интерфейса пользователя.
 
 ### Стартовые настройки плагина
 
@@ -33,7 +33,7 @@ var settings = PluginContext.Operations.GetHostTerminalSettings();
 - [`CultureInfo.DefaultThreadCurrentCulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentculture?view=net-6.0)
 - [`CultureInfo.DefaultThreadCurrentUICulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentuiculture?view=net-6.0)
 
-Данные свойства получают те же значения, какие они имеют в терминале. Как и в случае `IHostTerminalSettings`, свойства, имеющие в названии `UI`, дублируют аналогичные свойства (`CurrentUICulture` будет иметь то же значение, что и `CurrentCulture`, а `DefaultThreadCurrentUICulture` то же, что и `DefaultThreadCurrentCulture`).
+Они получают те же значения, что и на терминале. На текущий момент, свойство `CurrentUICulture` будет иметь то же значение, что и `CurrentCulture`, а `DefaultThreadCurrentUICulture` - то же, что и `DefaultThreadCurrentCulture`.
 
 ### Отслеживание изменения языка пользователем
 
