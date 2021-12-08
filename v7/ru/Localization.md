@@ -4,7 +4,8 @@ layout: default
 ---
 # Локализация #
 
-Пользователь может установить язык приложения. Начиная с API V7, плагины, логика которых зависит от языка терминала, имеют возможность отработать изменение языка. 
+Пользователь может установить язык приложения.
+Начиная с API V7, плагины, логика которых зависит от языка терминала, имеют возможность отработать изменение языка. 
 
 ## Как это выглядит в iikoFront?
 
@@ -20,24 +21,35 @@ layout: default
 ```cs
 var settings = PluginContext.Operations.GetHostTerminalSettings();
 ```
-Метод возвращает объект, реализующий интерфейс [`IHostTerminalSettings`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Organization_IHostTerminalSettings.htm). Он содержит два свойства локализации:
+Метод возвращает объект, реализующий интерфейс [`IHostTerminalSettings`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_Organization_IHostTerminalSettings.htm).
+Он содержит два свойства локализации:
 - `CultureInfo Culture` - язык, который выбран на терминале.
-- `CultureInfo UICulture` - добавлено в API V7. Сейчас свойство содержит то же самое значение, что и свойство `Culture`. Позже планируется поддержка различных культрур для данных и интерфейса пользователя.
+- `CultureInfo UICulture` - добавлено в API V7.
+Сейчас свойство содержит то же самое значение, что и свойство `Culture`.
+Позже планируется поддержка различных культрур для данных и интерфейса пользователя.
 
 ### Стартовые настройки плагина
 
-Начиная с API V7, во время старта приложения плагин автоматически получает настройки локализации из терминала. До вызова кода плагина выставляются свойства:
+Начиная с API V7, во время старта приложения плагин автоматически получает настройки локализации из терминала.
+До вызова кода плагина выставляются свойства:
 
 - [`CultureInfo.CurrentCulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=net-6.0)
 - [`CultureInfo.CurrentUICulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentuiculture?view=net-6.0)
 - [`CultureInfo.DefaultThreadCurrentCulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentculture?view=net-6.0)
 - [`CultureInfo.DefaultThreadCurrentUICulture`](https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.defaultthreadcurrentuiculture?view=net-6.0)
 
-Они получают те же значения, что и на терминале. На текущий момент, свойство `CurrentUICulture` будет иметь то же значение, что и `CurrentCulture`, а `DefaultThreadCurrentUICulture` - то же, что и `DefaultThreadCurrentCulture`.
+Они получают те же значения, что и на терминале.
+На текущий момент, свойство `CurrentUICulture` будет иметь то же значение, что и `CurrentCulture`, а `DefaultThreadCurrentUICulture` - то же, что и `DefaultThreadCurrentCulture`.
 
-### Отслеживание изменения языка пользователем
+### Отслеживание изменения языка плагином
 
-Пользователь может поменять язык приложения в процессе его работы. Это приведёт к тому, что свойства культуры, описанные выше, будут изменены. Однако, автоматичесткое изменение значений этих свойств для кода плагина является рискованной операцией. Например, в момент смены языка терминала плагин может выполнять операцию, результат которой зависит от культуры. Поэтому, для случая изменения языка терминала в процессе его работы, было решено не выставлять эти свойства для плагинов автоматически. В API V7 добавлено событие [`INotificationService.CurrentCultureChanged`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_CurrentCultureChanged.htm), позволяющее отследить смену языка терминала и выставить культуру плагина в удобный момент. Это событие имеет 2 аргумента:
+Пользователь может поменять язык приложения iikoFront в процессе его работы.
+Это приведёт к тому, что свойства культуры, описанные выше, будут изменены.
+Однако, автоматичесткое изменение значений этих свойств для кода плагина является рискованной операцией.
+Например, в момент смены языка терминала плагин может выполнять операцию, результат которой зависит от культуры.
+Поэтому, для случая изменения языка терминала в процессе его работы, было решено не выставлять эти свойства для плагинов автоматически.
+В API V7 добавлено событие [`INotificationService.CurrentCultureChanged`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_INotificationService_CurrentCultureChanged.htm), позволяющее отследить смену языка терминала и выставить культуру плагина в удобный момент.
+Это событие имеет 2 аргумента:
 
 - `CultureInfo culture` - новая культура.
 - `CultureInfo uiCulture` - то же самое, что и `culture`.
