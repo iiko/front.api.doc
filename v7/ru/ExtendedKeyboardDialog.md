@@ -18,7 +18,7 @@ layout: default
 
 Диалог поддерживает следующие типы ввода:
 - произвольная строка.
-- скрытая строка (ввод пароля и так далее).
+- скрытая строка.
 - считывание штрихкода.
 - считывание карты.
 
@@ -28,7 +28,7 @@ layout: default
 Строка, которая уже будет задана при показе диалога.
 По умолчанию `String.Empty`.
 - `bool isMultiline` - необязательный параметр.
-Позволяет вводить многострочный код.
+Позволяет вводить многострочный текст.
 Игнорируется при выставленном свойстве `isPassword = true`.
 По умолчанию `true`.
 - `int maxLength` - необязательный параметр.
@@ -61,7 +61,8 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: String input exam
 });
 ```
 
-При таких параметрах диалог будет реагировать только на ввод с клавиатуры, сканирование штрихкода и прокатка карты не будут считываться. Все слова будут вводиться с заглавной буквы.
+При таких параметрах диалог будет реагировать только на ввод с клавиатуры.
+Сканирование штрихкода и прокатка карты не будут учитываться. Все слова будут вводиться с заглавной буквы.
 Это может быть полезно при вводе имени, фамилии и отчества.
 
 Полученный результат необходимо привести к типу [`StringInputDialogResult`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_View_StringInputDialogResult.htm).
@@ -80,7 +81,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: String input exam
 
 ### Ввод скрытой строки
 
-Можно включить скрытие вводимой строки с помощью параметра `isPassword`:
+Можно скрыть введённую строку с помощью параметра `isPassword`:
 
 ```cs
 PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Password input example", x =>
@@ -127,13 +128,13 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Barcode input exa
     var barcodeResult = inputResult as BarcodeInputDialogResult;
     if(barcodeResult == null)
         return; //Пользователь нажал "Отмена", либо был другой тип ввода
-    var result = barcodeResult.Barcode; //Считанный баркод
+    var result = barcodeResult.Barcode; //Считанный штрихкод
 });
 ```
 
 ### Смешанный ввод
 
-Пусть наш диалог должен работать и с вводом текста, и с штрихкодами, и с картами.
+Пусть наш диалог будет работать и с вводом текста, и с штрихкодами, и с картами.
 Тогда нужно правильно обработать результат ввода.
 В `SamplePlugin` есть пример такого подхода.
 Модифицируем наш код для поддержки всех типов ввода:
@@ -151,7 +152,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Mixed input examp
             var cardResult = cardInputDialogResult.FullCardTrack; //Полная информация о карте
             return;
         case BarcodeInputDialogResult barcodeInputDialogResult:
-            var barcodeResult = barcodeInputDialogResult.Barcode; //Считанный баркод
+            var barcodeResult = barcodeInputDialogResult.Barcode; //Считанный штрихкод
             return;
         default:
             return; //Пользователь нажал "Отмена"
