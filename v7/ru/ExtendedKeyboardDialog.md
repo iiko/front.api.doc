@@ -14,7 +14,7 @@ layout: default
 
 ![extendedKeyboardDialog](../../img/extendedKeyboardDialog/extendedKeyboardDialog.png)
 
-Далее в статье будем использовать именно этот подход - показ окна ввода строки при нажатии на кнопку.
+Далее в статье будем использовать именно этот подход — показ окна ввода строки при нажатии на кнопку.
 
 Диалог поддерживает следующие типы ввода:
 - произвольная строка.
@@ -25,27 +25,27 @@ layout: default
 Диалог принимает на вход 8 параметров:
 - `string title` - заголовок диалога.
 - `string initialText` - необязательный параметр.
-Строка, которая уже будет задана при показе диалога.
+Строка, которая будет введена при показе диалога.
 По умолчанию `String.Empty`.
 - `bool isMultiline` - необязательный параметр.
 Позволяет вводить многострочный текст.
-Игнорируется при выставленном свойстве `isPassword = true`.
+Игнорируется при выставленном параметре `isPassword = true`.
 По умолчанию `true`.
 - `int maxLength` - необязательный параметр.
 Максимальная длина строки.
 По умолчанию `Int32.MaxValue`.
-- `bool capitalize`- необязательный параметр.
+- `bool capitalize` - необязательный параметр.
 Писать ли слова автоматически с заглавной буквы.
-Игнорируется при выставленном свойстве `isPassword = true`.
+Игнорируется, если параметр `isPassword` равен `true`.
 По умолчанию `false`.
-- `bool isPassword`- необязательный параметр.
+- `bool isPassword` - необязательный параметр.
 Скрывать ли строку при вводе.
 По умолчанию `false`.
-При выставлении в `true` свойства `isMultiline` и `capitalize` игнорируются. 
-- `bool enableCardSlider`- необязательный параметр.
+Игнорируется, если параметры `isMultiline` и `capitalize` равны `true`.
+- `bool enableCardSlider` - необязательный параметр.
 Возможно ли вводить данные с помощью прокатки карты.
 По умолчанию `false`.
-- `bool enableBarcode`- необязательный параметр.
+- `bool enableBarcode` - необязательный параметр.
 Возможно ли вводить данные с помощью считывания штрихкода.
 По умолчанию `false`.
 
@@ -73,7 +73,7 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: String input exam
 {
     var inputResult = x.vm.ShowExtendedKeyboardDialog("String input example", isMultiline: false, capitalize: true);
     var strResult = inputResult as StringInputDialogResult;
-    if(strResult == null)
+    if (strResult == null)
         return; //Пользователь нажал "Отмена"
     var result = strResult.Result; //Введённый пользователем текст
 });
@@ -88,26 +88,26 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Password input ex
 {
     var inputResult = x.vm.ShowExtendedKeyboardDialog("Password input example", isPassword: true);
     var strResult = inputResult as StringInputDialogResult;
-    if(strResult == null)
+    if (strResult == null)
         return; //Пользователь нажал "Отмена"
     var result = strResult.Result; //Введённый пользователем скрытый текст
 });
 ```
 
-Как было написано выше, свойства `isMultiline` и `capitalize` не будут учитываться.
-При этом, параметры `enableCardSlider` и `enableBarcode` продолжают работать.
+Как было написано выше, параметры `isMultiline` и `capitalize` не будут учитываться.
+Однако, остается возможность передать `true` в параметры `enableCardSlider` и `enableBarcode`, что позволит прокатывать карту и сканировать штрих-код.
 
 ### Считывание карт
 
 Можно отследить считывание карты с помощью параметра `enableCardSlider`.
-Результрат необходимо привести к типу [`CardInputDialogResult`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_View_CardInputDialogResult.htm):
+Результат необходимо привести к типу [`CardInputDialogResult`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_View_CardInputDialogResult.htm):
 
 ```cs
 PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Card input example", x =>
 {
     var inputResult = x.vm.ShowExtendedKeyboardDialog("Card input example", enableCardSlider: true);
     var cardResult = inputResult as CardInputDialogResult;
-    if(cardResult == null)
+    if (cardResult == null)
         return; //Пользователь нажал "Отмена", либо был другой тип ввода
     var result = cardResult.FullCardTrack; //Полная информация о карте
 });
@@ -118,15 +118,15 @@ PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Card input exampl
 ### Сканирование штрихкода
 
 Можно отследить сканирование штрихкода с помощью параметра `enableBarcode`.
-При этом, сканирование сервисных штрихкодов не будет учитываться.
-Результрат необходимо привести к типу [`BarcodeInputDialogResult`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_View_BarcodeInputDialogResult.htm):
+При этом сканирование сервисных штрихкодов не будет учитываться.
+Результат необходимо привести к типу [`BarcodeInputDialogResult`](https://iiko.github.io/front.api.sdk/v7/html/T_Resto_Front_Api_Data_View_BarcodeInputDialogResult.htm):
 
 ```cs
 PluginContext.Operations.AddButtonToPluginsMenu("SamplePlugin: Barcode input example", x =>
 {
     var inputResult = x.vm.ShowExtendedKeyboardDialog("Barcode input example", enableBarcode: true);
     var barcodeResult = inputResult as BarcodeInputDialogResult;
-    if(barcodeResult == null)
+    if (barcodeResult == null)
         return; //Пользователь нажал "Отмена", либо был другой тип ввода
     var result = barcodeResult.Barcode; //Считанный штрихкод
 });
