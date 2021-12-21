@@ -21,13 +21,55 @@ layout: default
 
 Данная настройка влияет на показ модификаторов на экранах редактирования заказа, закрытого заказа, списка доставок, списка заказов, КДС и в сервис-чеках.
 
-Также добавлен метод [`GetModifierAmountString()`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_GetModifierAmountString.htm), позволяющий, с учетом значения настройки `IRestaurant.DisplayRelativeNumberOfModifiers`, получить количество порций модификатора в строковом виде для отображения на UI.
+С учетом значения настройки `IRestaurant.DisplayRelativeNumberOfModifiers` в iikoFront рассчитывается количество порций модификатора в строковом виде, которое отображается на UI.
 
-Метод принимает 
+Для удобства разработчиков плагинов и возможности перенести логику к себе на UI, приведем пример получения строки количества модификаторов здесь.
+
+Метод CalculateModifierAmountString принимает
+
 - `decimal modifierAmount` — количество порций модификатора,
 - `int defaultAmount` — количество порций модификатора по умолчанию,
 - `bool hideIfDefaultAmount` — настроено ли для данного группового модификатора "Скрывать, если количество по умолчанию",
 - `bool isPaid` — является ли модификатор платным,
 - `bool isAmountIndependentOfParentAmount` — настроено ли для данного модификатора "Количество не зависит от количества блюда".
 
-В результате метод возвращает строку вида `<знак><число>`, которую нужно отобразить на UI рядом с названием модификатора.
+И в результате возвращает строку вида `<знак><число>`, которую нужно отобразить на UI рядом с названием модификатора, чтобы пользователь увидел на экране `<знак><число> <имя модификатора>`.
+
+```cs
+public static string CalculateModifierAmountString(decimal modifierAmount, int defaultAmount, bool hideIfDefaultAmount, bool isPaid, bool isAmountIndependentOfParentAmount)
+{
+    var culture = CultureInfo.CurrentUICulture;
+
+	// Настройка способа отображения количества групповых модификаторов блюда.
+    var showDeltaAmount = ServiceFactory.Instance.Config.CafeSetup.Instance.DisplayRelativeNumberOfModifiers;
+
+    // Если стоит галка "Количество не зависит от количества блюда", то всегда пишем "+N".
+    if (isAmountIndependentOfParentAmount)
+        return $"+{modifierAmount.ToString(culture)}";
+
+    // Если модификатор платный или показываем абсолютное количество модификаторов, то пишем "×N".
+    var multiplyAmountString = $"\u00D7{modifierAmount.ToString(culture)}";
+
+    if (isPaid || !showDeltaAmount)
+        return multiplyAmountString;
+
+	// Относительное количество модификатора.
+    var amount = modifierAmount - defaultAmount;
+
+    // Показываем относительное количество модификаторов.
+    switch (amount)
+    {
+        case 1:
+            return "+";
+        case -1:
+            return "-";
+        case 0 when hideIfDefaultAmount:
+            return string.Empty;
+        case 0:
+            return multiplyAmountString;
+        default:
+            var amountFormatted= $"{amount:+#;-#;0}";
+            return amountFormatted.ToString(culture);
+    }
+}
+```
