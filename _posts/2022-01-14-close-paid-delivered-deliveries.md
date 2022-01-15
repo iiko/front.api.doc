@@ -11,7 +11,7 @@ layout: default
 ([`IDeliveryOrder.Status`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Orders_IOrder_Status.htm) ==
 [`OrderStatus.Closed`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Orders_OrderStatus.htm)),
 т.е. оплачен. Оплата доставочных заказов была сделана ранее, о чём мы писали в
-[заметке](https://iiko.github.io/front.api.doc/2020/11/23/pay-deliveries.md).
+[заметке](https://iiko.github.io/front.api.doc/2020/12/23/pay-deliveries.html).
 Сама доставка должна находиться в статусе "Доставлена"
 ([`IDeliveryOrder.DeliveryStatus`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Orders_IDeliveryOrder_DeliveryStatus.htm) ==
 [`DeliveryStatus.Delivered`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Brd_DeliveryStatus.htm)).
@@ -23,5 +23,5 @@ layout: default
 Если задать этот параметр, как `null`, метод изменит статус доставки из "Закрыта" обратно в "Доставлена".
 
 Данный метод не работает для доставок самовывоза, поскольку для закрытия такой доставки нужно ее просто оплатить, о чем упоминалось в
-[заметке](https://iiko.github.io/front.api.doc/2020/11/23/pay-deliveries.md),
+[заметке](https://iiko.github.io/front.api.doc/2020/12/23/pay-deliveries.html),
 а возврат такой доставки подразумевает сторнирование заказа (т.е. возврат оплат), которое пока не поддерживается из API.
