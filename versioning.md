@@ -16,160 +16,147 @@ LTS-версии нумеруются по порядку целыми числ�
 Preview-версии являются копиями промежуточных состояний разрабатываемой LTS-версии, поэтому содержат в названии номер разрабатываемой LTS-версии и нумеруются по порядку с префиксом «Preview», например, во время разработки V7 будут выходить версии V7Preview1, V7Preview2 и так далее до V7Preview7, после чего выйдет сама V7.
 
 ### График выпуска
-<svg height="480" width="1200">
+
+[//]: # "График сгенерирован с помощью утилиты VersionGraphGenerator (RMS-53254), руками не править"
+
+<svg height="640" width="816">
   <g>
-    <text y="20">V1</text>
-    <text y="40">V2</text>
-    <text y="60">V3</text>
-    <text y="80">V4</text>
-    <text y="100">V5</text>
-    <text y="120">V6Preview4</text>
-    <text y="140">V6Preview5</text>
-    <text y="160">V6</text>
-    <text y="180">V7Preview1</text>
-    <text y="200">V7Preview2</text>
-    <text y="220">V7Preview3</text>
-    <text y="240">V7Preview4</text>
-    <text y="260">V7Preview5</text>
-    <text y="280">V7Preview6</text>
-    <text y="300">V7Preview7</text>
-    <text y="320">V7</text>
+    <text x="0" y="20">V1</text>
+    <text x="0" y="40">V2</text>
+    <text x="0" y="60">V3</text>
+    <text x="0" y="80">V4</text>
+    <text x="0" y="100">V5</text>
+    <text x="0" y="120">V6Preview4</text>
+    <text x="0" y="140">V6Preview5</text>
+    <text x="0" y="160">V6</text>
+    <text x="0" y="180">V7Preview1</text>
+    <text x="0" y="200">V7Preview2</text>
+    <text x="0" y="220">V7Preview3</text>
+    <text x="0" y="240">V7Preview4</text>
+    <text x="0" y="260">V7Preview5</text>
+    <text x="0" y="280">V7Preview6</text>
+    <text x="0" y="300">V7Preview7</text>
+    <text x="0" y="320">V7</text>
+    <text x="0" y="340">V8Preview1</text>
+    <text x="0" y="360">V8Preview2</text>
+    <text x="0" y="380">V8Preview3</text>
+    <text x="0" y="400">V8Preview4</text>
+    <text x="0" y="420">V8Preview5</text>
+    <text x="0" y="440">V8Preview6</text>
+    <text x="0" y="460">V8Preview7</text>
+    <text x="0" y="480">V8</text>
   </g>
-  <g transform="translate(100, 340)">
-    <line x1="0" x2="0" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="35">2013</text>
-
-    <line x1="100" x2="100" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="135">2014</text>
-
-    <line x1="200" x2="200" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="235">2015</text>
-
-    <line x1="300" x2="300" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="335">2016</text>
-
-    <line x1="400" x2="400" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="435">2017</text>
-
-    <line x1="500" x2="500" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="535">2018</text>
-
-    <line x1="600" x2="600" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="635">2019</text>
-
-    <line x1="700" x2="700" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="735">2020</text>
-
-    <line x1="800" x2="800" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="835">2021</text>
-
-    <line x1="900" x2="900" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="935">2022</text>
-
-    <line x1="1000" x2="1000" y1="-340" style="stroke: grey; stroke-dasharray: 1 5;" />
-    <text x="1035">2023</text>
+  <g>
+    <line x1="90" x2="90" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="91" y="500" font-size="80%">2013</text>
+    <line x1="120" x2="120" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="121" y="500" font-size="80%">2014</text>
+    <line x1="150" x2="150" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="151" y="500" font-size="80%">2015</text>
+    <line x1="180" x2="180" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="181" y="500" font-size="80%">2016</text>
+    <line x1="210" x2="210" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="211" y="500" font-size="80%">2017</text>
+    <line x1="240" x2="240" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="241" y="500" font-size="80%">2018</text>
+    <line x1="270" x2="270" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="271" y="500" font-size="80%">2019</text>
+    <line x1="300" x2="300" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="328" y="500">2020</text>
+    <line x1="390" x2="390" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="418" y="500">2021</text>
+    <line x1="480" x2="480" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="508" y="500">2022</text>
+    <line x1="570" x2="570" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="598" y="500">2023</text>
+    <line x1="660" x2="660" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="688" y="500">2024</text>
+    <line x1="750" x2="750" y1="0" y2="500" style="stroke: grey; stroke-dasharray: 1 5;" />
+    <text x="778" y="500">2025</text>
   </g>
-  <g transform="translate(100, 360)">
-    <text x="0">3.1</text>
-    <text x="75">3.3</text>
-    <text x="125">3.8</text>
-    <text x="275">4.3</text>
-    <text x="450">5.4</text>
-    <text x="650">6.4</text>
-    <text x="675">7.0</text>
-    <text x="700">7.1</text>
-    <text x="725">7.2</text>
-    <text x="750">7.3</text>
-    <text x="775">7.4</text>
-    <text x="800">7.5</text>
-    <text x="825">7.6</text>
-    <text x="850">7.7</text>
+  <g>
+    <text x="90" y="520" font-size="80%">3.1</text>
+    <text x="111" y="520" font-size="80%">3.3</text>
+    <text x="127" y="520" font-size="80%">3.8</text>
+    <text x="171" y="520" font-size="80%">4.3</text>
+    <text x="224" y="520" font-size="80%">5.4</text>
+    <text x="291" y="520" font-size="80%">7.0</text>
+    <text x="322" y="520" font-size="80%">7.2</text>
+    <text x="344" y="520" font-size="80%">7.3</text>
+    <text x="366" y="520" font-size="80%">7.4</text>
+    <text x="390" y="520" font-size="80%">7.5</text>
+    <text x="412" y="520" font-size="80%">7.6</text>
+    <text x="434" y="520" font-size="80%">7.7</text>
+    <text x="480" y="520" font-size="80%">7.9</text>
   </g>
-  <g transform="translate(100, 0)">
-    <!-- V1 -->
-    <rect x="0" y="10" fill="green" height="10" width="75" />
-    <rect x="75" y="10" fill="darkgreen" height="10" width="50" />
-
-    <!-- V2 -->
-    <rect x="50" y="30" fill="lightgrey" height="10" width="25" />
-    <rect x="75" y="30" fill="green" height="10" width="50" />
-    <rect x="125" y="30" fill="darkgreen" height="10" width="150" />
-
-    <!-- V3 -->
-    <rect x="75" y="50" fill="lightgrey" height="10" width="50" />
-    <rect x="125" y="50" fill="green" height="10" width="150" />
-    <rect x="275" y="50" fill="darkgreen" height="10" width="175" />
-
-    <!-- V4 -->
-    <rect x="125" y="70" fill="lightgrey" height="10" width="150" />
-    <rect x="275" y="70" fill="green" height="10" width="175" />
-    <rect x="450" y="70" fill="darkgreen" height="10" width="225" />
-
-    <!-- V5 -->
-    <rect x="275" y="90" fill="lightgrey" height="10" width="175" />
-    <rect x="450" y="90" fill="green" height="10" width="225" />
-    <rect x="675" y="90" fill="darkgreen" height="10" width="200" />
-
-    <!-- V6Preview4 -->
-    <rect x="625" y="110" fill="steelblue" height="10" width="25" />
-    <rect x="650" y="110" fill="darkblue" height="10" width="25" />
-
-    <!-- V6Preview5 -->
-    <rect x="650" y="130" fill="steelblue" height="10" width="25" />
-    <rect x="675" y="130" fill="darkblue" height="10" width="25" />
-
-    <!-- V6 -->
-    <rect x="450" y="150" fill="lightgrey" height="10" width="225" />
-    <rect x="675" y="150" fill="green" height="10" width="200" />
-    <rect x="875" y="150" fill="darkgreen" height="10" width="200" />
-
-    <!-- V7Preview1 -->
-    <rect x="700" y="170" fill="steelblue" height="10" width="25" />
-    <rect x="725" y="170" fill="darkblue" height="10" width="50" />
-
-    <!-- V7Preview2 -->
-    <rect x="745" y="190" fill="steelblue" height="10" width="5" />
-    <rect x="750" y="190" fill="darkblue" height="10" width="25" />
-
-    <!-- V7Preview3 -->
-    <rect x="750" y="210" fill="steelblue" height="10" width="25" />
-    <rect x="775" y="210" fill="darkblue" height="10" width="25" />
-
-    <!-- V7Preview4 -->
-    <rect x="775" y="230" fill="steelblue" height="10" width="25" />
-    <rect x="800" y="230" fill="darkblue" height="10" width="25" />
-
-    <!-- V7Preview5 -->
-    <rect x="800" y="250" fill="steelblue" height="10" width="25" />
-    <rect x="825" y="250" fill="darkblue" height="10" width="25" />
-
-    <!-- V7Preview6 -->
-    <rect x="825" y="270" fill="steelblue" height="10" width="25" />
-    <rect x="850" y="270" fill="darkblue" height="10" width="25" />
-
-    <!-- V7Preview7 -->
-    <rect x="850" y="290" fill="steelblue" height="10" width="25" />
-    <rect x="875" y="290" fill="darkblue" height="10" width="25" />
-
-    <!-- V7 -->
-    <rect x="675" y="310" fill="lightgrey" height="10" width="200" />
-    <rect x="875" y="310" fill="green" height="10" width="200" />
+  <g>
+    <rect x="90" y="10" fill="green" height="10" width="21" />
+    <rect x="111" y="10" fill="darkgreen" height="10" width="16" />
+    <rect x="104" y="30" fill="lightgrey" height="10" width="7" />
+    <rect x="111" y="30" fill="green" height="10" width="16" />
+    <rect x="127" y="30" fill="darkgreen" height="10" width="44" />
+    <rect x="111" y="50" fill="lightgrey" height="10" width="16" />
+    <rect x="127" y="50" fill="green" height="10" width="44" />
+    <rect x="171" y="50" fill="darkgreen" height="10" width="53" />
+    <rect x="127" y="70" fill="lightgrey" height="10" width="44" />
+    <rect x="171" y="70" fill="green" height="10" width="53" />
+    <rect x="224" y="70" fill="darkgreen" height="10" width="67" />
+    <rect x="171" y="90" fill="lightgrey" height="10" width="53" />
+    <rect x="224" y="90" fill="green" height="10" width="67" />
+    <rect x="291" y="90" fill="darkgreen" height="10" width="165" />
+    <rect x="277" y="110" fill="steelblue" height="10" width="7" />
+    <rect x="284" y="110" fill="darkblue" height="10" width="7" />
+    <rect x="284" y="130" fill="steelblue" height="10" width="7" />
+    <rect x="291" y="130" fill="darkblue" height="10" width="9" />
+    <rect x="224" y="150" fill="lightgrey" height="10" width="67" />
+    <rect x="291" y="150" fill="green" height="10" width="165" />
+    <rect x="456" y="150" fill="darkgreen" height="10" width="180" />
+    <rect x="300" y="170" fill="steelblue" height="10" width="22" />
+    <rect x="322" y="170" fill="darkblue" height="10" width="44" />
+    <rect x="336" y="190" fill="steelblue" height="10" width="8" />
+    <rect x="344" y="190" fill="darkblue" height="10" width="22" />
+    <rect x="344" y="210" fill="steelblue" height="10" width="22" />
+    <rect x="366" y="210" fill="darkblue" height="10" width="24" />
+    <rect x="366" y="230" fill="steelblue" height="10" width="24" />
+    <rect x="390" y="230" fill="darkblue" height="10" width="22" />
+    <rect x="390" y="250" fill="steelblue" height="10" width="22" />
+    <rect x="412" y="250" fill="darkblue" height="10" width="22" />
+    <rect x="412" y="270" fill="steelblue" height="10" width="22" />
+    <rect x="434" y="270" fill="darkblue" height="10" width="22" />
+    <rect x="434" y="290" fill="steelblue" height="10" width="22" />
+    <rect x="456" y="290" fill="darkblue" height="10" width="46" />
+    <rect x="291" y="310" fill="lightgrey" height="10" width="189" />
+    <rect x="480" y="310" fill="green" height="10" width="156" />
+    <rect x="636" y="310" fill="darkgreen" height="10" width="180" />
+    <rect x="502" y="330" fill="steelblue" height="10" width="22" />
+    <rect x="524" y="330" fill="darkblue" height="10" width="22" />
+    <rect x="524" y="350" fill="steelblue" height="10" width="22" />
+    <rect x="546" y="350" fill="darkblue" height="10" width="24" />
+    <rect x="546" y="370" fill="steelblue" height="10" width="24" />
+    <rect x="570" y="370" fill="darkblue" height="10" width="22" />
+    <rect x="570" y="390" fill="steelblue" height="10" width="22" />
+    <rect x="592" y="390" fill="darkblue" height="10" width="22" />
+    <rect x="592" y="410" fill="steelblue" height="10" width="22" />
+    <rect x="614" y="410" fill="darkblue" height="10" width="22" />
+    <rect x="614" y="430" fill="steelblue" height="10" width="22" />
+    <rect x="636" y="430" fill="darkblue" height="10" width="24" />
+    <rect x="636" y="450" fill="steelblue" height="10" width="24" />
+    <rect x="660" y="450" fill="darkblue" height="10" width="22" />
+    <rect x="480" y="470" fill="lightgrey" height="10" width="180" />
+    <rect x="660" y="470" fill="green" height="10" width="156" />
+    <rect x="816" y="470" fill="darkgreen" height="10" width="0" />
   </g>
-  <g transform="translate(0, 380)">
+  <g transform="translate(0, 540)">
     <rect x="0" y="0" fill="lightgrey" height="10" width="25" />
-    <text x="25" y="10">&nbsp;— разрабатываемая LTS-версия</text>
-
+    <text x="25" y="10"> — разрабатываемая LTS-версия</text>
     <rect x="0" y="20" fill="green" height="10" width="25" />
-    <text x="25" y="30">&nbsp;— стабильная LTS-версия</text>
-
+    <text x="25" y="30"> — стабильная LTS-версия</text>
     <rect x="0" y="40" fill="darkgreen" height="10" width="25" />
-    <text x="25" y="50">&nbsp;— устаревшая LTS-версия</text>
-
+    <text x="25" y="50"> — устаревшая LTS-версия</text>
     <rect x="0" y="60" fill="steelblue" height="10" width="25" />
-    <text x="25" y="70">&nbsp;— актуальная preview-версия</text>
-
+    <text x="25" y="70"> — актуальная preview-версия</text>
     <rect x="0" y="80" fill="darkblue" height="10" width="25" />
-    <text x="25" y="90">&nbsp;— устаревшая preview-версия</text>
+    <text x="25" y="90"> — устаревшая preview-версия</text>
   </g>
 </svg>
 
