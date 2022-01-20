@@ -36,7 +36,7 @@ public static string CalculateModifierAmountString(decimal modifierAmount, int d
     // Настройка способа отображения количества групповых модификаторов блюда.	
     var showDeltaAmount = PluginContext.Operations.GetHostRestaurant().DisplayRelativeNumberOfModifiers;
 
-    // Если стоит галка "Количество не зависит от количества блюда", то всегда пишем "+N".
+    // Если включена опция "Количество не зависит от количества блюда", то всегда пишем "+N".
     if (isAmountIndependentOfParentAmount)
         return $"+{modifierAmount}";
 
