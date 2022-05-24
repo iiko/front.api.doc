@@ -1,12 +1,19 @@
 ---
-title: В API V8 добавлен механизм нотификации плагина об удалении внешнего типа оплаты из заказа
+title: В API V8 добавлены уведомления об удалении внешней оплаты из заказа
 layout: default
 ---
 
-При попытке удаления внешней оплаты вызывается метод [`OnPaymentDeleting`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IPaymentProcessor_OnPaymentDeleting.htm) у соответствующего [`IPaymentProcessor`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_IPaymentProcessor.htm). Данный механизм работает только в случае попытки удаления с экрана оплаты.
+При попытке удаления внешней оплаты вызывается метод [`OnPaymentDeleting`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IPaymentProcessor_OnPaymentDeleting.htm) у соответствующего [`IPaymentProcessor`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_IPaymentProcessor.htm).
 
-Плагин, исходя из логики работы, может корректно обработать удаление оплаты, либо запретить удаление.
-Отменить удаление можно двумя способами: выкинув исключение [`PaymentActionCancelledException`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Exceptions_PaymentActionCancelledException.htm), при этом никакого сообщения не будет отображено пользователю либо при помощи исключения [`PaymentActionFailedException`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Exceptions_PaymentActionFailedException.htm) и в данном случае отобразится переданное сообщение.
+Некоторые платёжные системы требуют проведения оплаты во внешней системе до оплаты заказа в iiko, поэтому возникает отрезок времени, когда во внешней системе оплата уже проведена, а в iiko ещё нет.
+Прежде пользователь мог бесследно удалить такую оплату и, поскольку в iiko эта оплата считалась непроведённой, удалялась она без отмены, что приводило к ошибочной лишней транзакции во внешней системе.
 
-Некоторые платежные системы требуют процессинга на стороне внешней системы до того, как заказ полностью оплачивается и закрывается на стороне iiko. Ранее, добавленную оплату можно было легко удалить из списка оплат на экране кассы, не обращаясь при этом к внешней системе для отмены платежа. Это приводило к рассинхронизации платежей и потере денег. Теперь событие удаления добавленной оплаты можно перехватить со стороны внешнего платежного решения, корректно отменить оплату во внешней системе или же отменить удаление оплаты.
- 
+Теперь процессор оплаты в методе `OnPaymentDeleting` может по своему усмотрению:
+
+* ничего не делать — если оплата ещё не проведена и не требует никаких действий при удалении,
+* отменить оплату во внешней системе,
+* запретить удаление оплаты в iiko, сгенерировав одно из исключений:
+    * [`PaymentActionCancelledException`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Exceptions_PaymentActionCancelledException.htm) — отмена удаления без дополнительных сообщений (например, если ранее плагин показывал какой-то вопрос, и пользователь выбрал отмену),
+    * [`PaymentActionFailedException`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Exceptions_PaymentActionFailedException.htm) — запрет удаления с показом сообщения об ошибке (например, если не удалось отменить оплату во внешней системе).
+
+Пока это работает только в случае попытки удаления с экрана оплаты. Вызов метода `OnPaymentDeleting` при удалении оплаты через API ([`DeleteExternalPaymentItem`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_Editors_IEditSession_DeleteExternalPaymentItem.htm)) будет реализован позднее.
