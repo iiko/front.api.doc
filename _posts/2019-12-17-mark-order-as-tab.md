@@ -12,4 +12,4 @@ layout: default
 
 Подробнее о сессиях редактирования в [соответствующем разделе]({{ site.baseurl }}/v6/ru/Data editing.html).
 
-Подробнее о функционировании режима табов в [документации](https://ru.iiko.help/articles/#!iikofront-7-1/topic-69/q/%D1%82%D0%B0%D0%B1%D1%8B/qid/278231/qp/1).
+Подробнее о функционировании режима табов в [документации](https://ru.iiko.help/smart/project-iikofront/topic-69/q/%D1%82%D0%B0%D0%B1%D1%8B/qid/278231/qp/1).

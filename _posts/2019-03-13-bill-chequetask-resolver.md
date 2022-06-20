@@ -10,7 +10,7 @@ layout: default
 Конфигурация `IsBillTaskSupported = true` предполагает, что номер счёта обязателен в команде чека оплаты.
 Поэтому в результатах команды `DoBillCheque` обязательно к заполнению поле `CashRegisterResult.BillNumber`.
 
-В момент [печати пречека](https://ru.iiko.help/articles/iikofront-5-4/topic-48) ядро iikoFront опрашивает подписчиков *«На какой точке продаж печатать Счёт‎ для данного заказа?»*.
+В момент [печати пречека](https://ru.iiko.help/smart/project-iikofront/topic-48) ядро iikoFront опрашивает подписчиков *«На какой точке продаж печатать Счёт‎ для данного заказа?»*.
 Регистрация маршрутизатора печати чеков типа «Счёт‎» осуществляется методом `IOperationService.RegisterBillChequeTaskResolver()`:
 
 - Метод принимает функцию с аргументами `IOrder` *"заказ"* и `bool` *"это возврат пречека"*.
