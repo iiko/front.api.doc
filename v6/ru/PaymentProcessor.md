@@ -17,7 +17,7 @@ layout: default
 
 ![backPT](../../img/payment/backPT.png)
 
-Если создать [тип оплаты](https://ru.iiko.help/articles/iikooffice-5-4/topic-103) этой платёжной системы, на iikoFront на экранах кассы и предоплаты появится возможность выбрать этот внешний тип оплаты.
+Если создать [тип оплаты](https://ru.iiko.help/smart/project-iikooffice/topic-103) этой платёжной системы, на iikoFront на экранах кассы и предоплаты появится возможность выбрать этот внешний тип оплаты.
 
 ![frontPT](../../img/payment/frontPT.png)
 
@@ -28,7 +28,7 @@ layout: default
 Имеет настраиваемые свойства вроде фискальности, счетов перемещения и т.д.
 Если сделать внешний тип оплаты фискальным, он попадёт в раздел *«Банковские карты»*, если оставить нефискальным, он будет в разделе *«Безналичный расчёт»*.
 Можно заводить сколько угодно типов оплаты каждой платёжной системы.   
-- *Элемент оплаты* – относится к заказам в iikoFront. Когда пользователь [на экране кассы](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72) или в [окне предоплат и платежей](https://ru.iiko.help/articles/#!iikofront-5-4/topic-72/a/h2_10) выбирает какой-либо тип оплаты, в заказ добавляется элемент оплаты соответствующего типа оплаты.
+- *Элемент оплаты* – относится к заказам в iikoFront. Когда пользователь [на экране кассы](https://ru.iiko.help/smart/project-iikofront/topic-72) или в [окне предоплат и платежей](https://ru.iiko.help/smart/project-iikofront/topic-72/a/h2_10) выбирает какой-либо тип оплаты, в заказ добавляется элемент оплаты соответствующего типа оплаты.
 Также элементы оплаты могут быть добавлены средствами API ([Добавление оплат](Payments.html)).
 
 ## Интерфейс IExternalPaymentProcessor
@@ -261,7 +261,7 @@ public void EmergencyCancelPayment(decimal sum, Guid? orderId, Guid paymentTypeI
 }
 ```
 
-Метод [`ReturnPaymentWithoutOrder()`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_ReturnPaymentWithoutOrder.htm) вызывается, когда происходит [возврат товаров](https://ru.iiko.help/articles/iikofront-6-1/topic-38) внешним типом оплаты.
+Метод [`ReturnPaymentWithoutOrder()`](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IExternalPaymentProcessor_ReturnPaymentWithoutOrder.htm) вызывается, когда происходит [возврат товаров](https://ru.iiko.help/smart/project-iikofront/topic-38) внешним типом оплаты.
 Возможность возвращать оплату за товары без оплаченных ранее заказов внешними типами появилась начиная с версии iiko 6.2.2. 
 Чтобы на UI возврата товаров появилась возможность выбрать внешний тип оплаты, нужно регистрировать платёжную систему с опциональным параметром `canProcessPaymentReturnWithoutOrder = true`. Т.е.
 

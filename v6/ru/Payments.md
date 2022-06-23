@@ -62,7 +62,7 @@ PluginContext.Operations.AddExternalPaymentItem(150, false, additionalData, paym
 также существует метод, с помощью которого можно превратить элемент оплаты в предоплату iikoFront
 - [IOperationService.ProcessPrepay](https://iiko.github.io/front.api.sdk/v6/html/M_Resto_Front_Api_IOperationService_ProcessPrepay.htm)
 
- Если оплата производится фискальным наличным типом, то на пользователя, от чьего имени производится операция оплаты методом `IOperationService.PayOrderAndPayOutOnUser`, будет оформлено [фискальное изъятие](https://ru.iiko.help/articles/iikofront-6-3/topic-43).
+ Если оплата производится фискальным наличным типом, то на пользователя, от чьего имени производится операция оплаты методом `IOperationService.PayOrderAndPayOutOnUser`, будет оформлено [фискальное изъятие](https://ru.iiko.help/smart/project-iikofront/topic-43).
 
 #### Примеры
 
