@@ -1,5 +1,6 @@
 *.*~
 /.jekyll-metadata
+/.jekyll-cache
 
 /_site/
 .idea

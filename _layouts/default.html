@@ -88,7 +88,7 @@
 
         <!-- common topics -->
         {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% assign apiVersionOfPage = p.path | split:"/" | first %}
         {% unless site.apiVersions contains apiVersionOfPage %}
         &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
         {% endunless %}
@@ -98,7 +98,7 @@
         {% for apiVersion in site.apiVersions reversed %}
         {% assign hasVersionHeader = false %}
         {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = (p.path | split:"/") | first %}
+        {% assign apiVersionOfPage = p.path | split:"/" | first %}
         {% if apiVersionOfPage == apiVersion %}
         {% unless hasVersionHeader %}
         {% assign hasVersionHeader = true %}
