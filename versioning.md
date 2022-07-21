@@ -92,56 +92,68 @@ Preview-версии являются копиями промежуточных 
     <text x="524" y="520" font-size="80%">8.1</text>
   </g>
   <g>
+    <rect x="0" y="5" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="90" y="10" fill="green" height="10" width="21" />
     <rect x="111" y="10" fill="darkgreen" height="10" width="16" />
     <rect x="104" y="30" fill="lightgrey" height="10" width="7" />
     <rect x="111" y="30" fill="green" height="10" width="16" />
     <rect x="127" y="30" fill="darkgreen" height="10" width="44" />
+    <rect x="0" y="45" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="111" y="50" fill="lightgrey" height="10" width="16" />
     <rect x="127" y="50" fill="green" height="10" width="44" />
     <rect x="171" y="50" fill="darkgreen" height="10" width="53" />
     <rect x="127" y="70" fill="lightgrey" height="10" width="44" />
     <rect x="171" y="70" fill="green" height="10" width="53" />
     <rect x="224" y="70" fill="darkgreen" height="10" width="67" />
+    <rect x="0" y="85" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="171" y="90" fill="lightgrey" height="10" width="53" />
     <rect x="224" y="90" fill="green" height="10" width="67" />
     <rect x="291" y="90" fill="darkgreen" height="10" width="165" />
     <rect x="277" y="110" fill="steelblue" height="10" width="7" />
     <rect x="284" y="110" fill="darkblue" height="10" width="7" />
+    <rect x="0" y="125" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="284" y="130" fill="steelblue" height="10" width="7" />
     <rect x="291" y="130" fill="darkblue" height="10" width="9" />
     <rect x="224" y="150" fill="lightgrey" height="10" width="67" />
     <rect x="291" y="150" fill="green" height="10" width="165" />
     <rect x="456" y="150" fill="darkgreen" height="10" width="180" />
+    <rect x="0" y="165" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="300" y="170" fill="steelblue" height="10" width="22" />
     <rect x="322" y="170" fill="darkblue" height="10" width="44" />
     <rect x="336" y="190" fill="steelblue" height="10" width="8" />
     <rect x="344" y="190" fill="darkblue" height="10" width="22" />
+    <rect x="0" y="205" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="344" y="210" fill="steelblue" height="10" width="22" />
     <rect x="366" y="210" fill="darkblue" height="10" width="24" />
     <rect x="366" y="230" fill="steelblue" height="10" width="24" />
     <rect x="390" y="230" fill="darkblue" height="10" width="22" />
+    <rect x="0" y="245" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="390" y="250" fill="steelblue" height="10" width="22" />
     <rect x="412" y="250" fill="darkblue" height="10" width="22" />
     <rect x="412" y="270" fill="steelblue" height="10" width="22" />
     <rect x="434" y="270" fill="darkblue" height="10" width="22" />
+    <rect x="0" y="285" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="434" y="290" fill="steelblue" height="10" width="22" />
     <rect x="456" y="290" fill="darkblue" height="10" width="90" />
     <rect x="291" y="310" fill="lightgrey" height="10" width="189" />
     <rect x="480" y="310" fill="green" height="10" width="156" />
     <rect x="636" y="310" fill="darkgreen" height="10" width="180" />
+    <rect x="0" y="325" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="502" y="330" fill="steelblue" height="10" width="22" />
     <rect x="524" y="330" fill="darkblue" height="10" width="22" />
     <rect x="524" y="350" fill="steelblue" height="10" width="22" />
     <rect x="546" y="350" fill="darkblue" height="10" width="24" />
+    <rect x="0" y="365" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="546" y="370" fill="steelblue" height="10" width="24" />
     <rect x="570" y="370" fill="darkblue" height="10" width="22" />
     <rect x="570" y="390" fill="steelblue" height="10" width="22" />
     <rect x="592" y="390" fill="darkblue" height="10" width="22" />
+    <rect x="0" y="405" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="592" y="410" fill="steelblue" height="10" width="22" />
     <rect x="614" y="410" fill="darkblue" height="10" width="22" />
     <rect x="614" y="430" fill="steelblue" height="10" width="22" />
     <rect x="636" y="430" fill="darkblue" height="10" width="24" />
+    <rect x="0" y="445" fill="rgba(130,130,0,0.1)" height="20" width="816" />
     <rect x="636" y="450" fill="steelblue" height="10" width="24" />
     <rect x="660" y="450" fill="darkblue" height="10" width="22" />
     <rect x="480" y="470" fill="lightgrey" height="10" width="180" />
