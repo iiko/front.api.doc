@@ -88,6 +88,8 @@ Preview-версии являются копиями промежуточных 
     <text x="412" y="520" font-size="80%">7.6</text>
     <text x="434" y="520" font-size="80%">7.7</text>
     <text x="480" y="520" font-size="80%">7.9</text>
+    <text x="502" y="520" font-size="80%">8.0</text>
+    <text x="524" y="520" font-size="80%">8.1</text>
   </g>
   <g>
     <rect x="90" y="10" fill="green" height="10" width="21" />
@@ -124,7 +126,7 @@ Preview-версии являются копиями промежуточных 
     <rect x="412" y="270" fill="steelblue" height="10" width="22" />
     <rect x="434" y="270" fill="darkblue" height="10" width="22" />
     <rect x="434" y="290" fill="steelblue" height="10" width="22" />
-    <rect x="456" y="290" fill="darkblue" height="10" width="46" />
+    <rect x="456" y="290" fill="darkblue" height="10" width="90" />
     <rect x="291" y="310" fill="lightgrey" height="10" width="189" />
     <rect x="480" y="310" fill="green" height="10" width="156" />
     <rect x="636" y="310" fill="darkgreen" height="10" width="180" />
@@ -208,13 +210,16 @@ Preview-версии являются копиями промежуточных 
 | V7Preview4 | Не поддерживается | 7.4              | 7.6      |
 | V7Preview5 | Не поддерживается | 7.5              | 7.7      |
 | V7Preview6 | Не поддерживается | 7.6              | 7.9      |
-| V7Preview7 | Устаревшая        | 7.7              |          |
+| V7Preview7 | Устаревшая        | 7.7              | 8.2<sup>3</sup>      |
 | V7         | Стабильная        | 7.9              |          |
+| V8Preview1 | Устаревшая        | 8.0              |          |
+| V8Preview2 | Устаревшая        | 8.1              |          |
 | V8         | Разрабатываемая   |                  |          |
 
 
 <sup>1</sup> Версия V6Preview4 была экспериментальной, она выпущена в начале цикла разработки iikoRMS 6.4. Кроме того, были пропущены V6Preview6 и V6Preview7, вместо них сразу вышла LTS-версия V6.  
-<sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).
+<sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).  
+<sup>3</sup> Поддержка версии V7Preview7 была продлена до 8.1 включительно из-за проблем с автообновлением плагинов с V7Preview7 на V7.
 
 ## Обратная совместимость
 Обратная совместимость предполагает гарантию того, что плагин, разработанный под определённую версию API, будет одинаково работать с любыми версиями iikoRMS, поддерживающими эту версию API.
