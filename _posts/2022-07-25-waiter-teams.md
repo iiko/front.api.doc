@@ -11,4 +11,4 @@ layout: default
 который даёт возможность получить список всех бригад, и [`TryGetWaiterTeamForUser`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_TryGetWaiterTeamForUser.htm), 
 позволяющий получить бригаду, в которую назначен сотрудник.
 
-Подробнее о функционировании бригад официантов в [`документации`](https://ru.iiko.help/articles/releasenotes/2022-summer).
+Подробнее о функционировании бригад официантов в [`документации`](https://ru.iiko.help/articles/releasenotes/2022-summer/a/h2_442097477).
