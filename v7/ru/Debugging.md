@@ -5,7 +5,7 @@ layout: default
 
 В дополнение к статье [`Отладка`](https://iiko.github.io/front.api.doc/v6/ru/Debugging.html) версии v6: 
 
-###Для отладки плагина в проекта на .Net Standard 2.0:
+### Для отладки плагина в проекта на .Net Standard 2.0:
 		
 1.	В свойствах проекта проверить, что в Build=>Debug symbols генерируется PDB файл.
 2.	Добавить в решение еще один проект Console App (.NET Framework) на фреймворке .Net Framework 4.7.2.
