@@ -10,5 +10,5 @@ layout: default
 которое показывает, доступна ли продажа данного товара на вес.
 
 В ресторан было добавлено новое свойство
-[`IRestaurant.FractionalAmoutMode`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Organization_IRestaurant.htm),
+[`IRestaurant.FractionalAmountMode`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Organization_IRestaurant.htm),
 которое отображает настройку торгового предприятия: ввод дробного количества товаров.
