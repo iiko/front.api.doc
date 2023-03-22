@@ -5,7 +5,7 @@ layout: default
 
 Теперь появилась возможность делать возврат товаров или заказов закрытых кассовых смен не только из [UI iikoFront](https://ru.iiko.help/articles/#!iikofront-8-3/topic-38), но и из API V8.
 
-В одной из [предыдущих новостей]({{ site.baseurl }}/2020/03/09/past-orders.html)
+В одной из [предыдущих новостей]({{ site.baseurl }}/2023/03/09/past-orders.html)
 мы рассказали о способах получения заказов закрытых кассовых смен.
 Теперь, если это необходимо, можно откорректировать список блюд такого заказа, и сделать его возврат путем вызова метода
 [`StornoPastOrder`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_StornoPastOrder.htm).
