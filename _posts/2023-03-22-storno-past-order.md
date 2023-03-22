@@ -31,7 +31,7 @@ layout: default
 
 Тип оплаты для сторнирования можно получить через
 [`GetPaymentTypesToStornoPastOrderItems`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetPaymentTypesToStornoPastOrderItems.htm).
-Можно также возвращать [плагинным типом оплаты](({{ site.baseurl }}/v6/ru/PaymentProcessor.html)
+Можно также возвращать [плагинным типом оплаты]({{ site.baseurl }}/v6/ru/PaymentProcessor.html)
 (с флажком `canProcessPaymentReturnWithoutOrder` равным `true`, переданным в
 [`RegisterPaymentSystem`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_RegisterPaymentSystem.htm)).
 
