@@ -59,13 +59,13 @@ layout: default
 private void StornoPastOrder()
 {
     var pastOrder = PluginContext.Operations.GetPastOrders().First();
-    var paymentType = PluginContext.Operations.GetPaymentTypesToStornoPastOrderItems().First();
+    var paymentType = pastOrder.Payments.First();
 
     // rt.WriteoffType.HasFlag(WriteoffType.Cafe) - сторнирование со списанием
     // rt.WriteoffType == WriteoffType.None - сторнирование без списания
     var removalType = PluginContext.Operations.GetRemovalTypesToStornoPastOrderItems().First(rt => rt.WriteoffType.HasFlag(WriteoffType.Cafe));
-    var section = PluginContext.Operations.GetTerminalsGroupRestaurantSections(PluginContext.Operations.GetHostTerminalsGroup()).First();
-    var orderType = PluginContext.Operations.GetOrderTypes().FirstOrDefault(ot => ot.OrderServiceType == OrderServiceTypes.Common);
+    var section = pastOrder.RestaurantSection;
+    var orderType = pastOrder.OrderType;
     var taxationSystem = PluginContext.Operations.GetTaxationSystemsToStornoPastOrderItems().Select(ts => (TaxationSystem?)ts).FirstOrDefault();
 
     PluginContext.Operations.StornoPastOrder(
