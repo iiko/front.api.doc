@@ -1,5 +1,5 @@
 ---
-title: Текущая сумма наличных в CafeSession
+title: Текущая сумма наличных в ICafeSession
 layout: default
 ---
 
