@@ -3,9 +3,9 @@ title: Возможность редактировать стоп-лист
 layout: default
 ---
 
-Появилась возможность добавить в стоп-лист блюдо только в одном размере или без указания размера [`AddProductToStopList`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_AddProductToStopList.htm).
+В Api V8 появилась возможность добавить в стоп-лист блюдо только в одном размере или без указания размера [`AddProductToStopList`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_AddProductToStopList.htm).
 
-Появилась возможность увидеть что блюдо в каком-то размере добавлено в стоп-лист [`IsStopListProductSellingRestricted`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_IsStopListProductSellingRestricted.htm).
+Появилась возможность увидеть, что блюдо в каком-то размере добавлено в стоп-лист [`IsStopListProductSellingRestricted`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_IsStopListProductSellingRestricted.htm).
 
 Для получения всего списка стоп-листа теперь нужно воспользоваться вызовом [`GetStopListProductsRemainingAmounts`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetStopListProductsRemainingAmounts.htm), возвращается словарь с ключом экземпляра [`ProductAndSize`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_ProductAndSize.htm), содержащий конкретный продукт [`IProduct`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm) и его размер [`IProductSize`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_IProductSize.htm).
 
