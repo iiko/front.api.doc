@@ -15,10 +15,10 @@ layout: default
 
 Установка остатков по блюду в стоп-листе [`SetStopListProductRemainingAmount`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_SetStopListProductRemainingAmount.htm) - доступно указать только значения от 0.001 до 999.999, размер опционален и может быть `null`.
 
-Проверка ограничения продаж продукта переименован [`CheckStopListProductsSellingRestrictions`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CheckStopListProductsSellingRestrictions.htm) и теперь принимает словарь, где ключом является [`ProductAndSize`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_ProductAndSize.htm), а значением всё так же количество.
+Проверка ограничения продаж продукта переименована [`CheckStopListProductsSellingRestrictions`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CheckStopListProductsSellingRestrictions.htm) и теперь принимает словарь, где ключом является [`ProductAndSize`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_ProductAndSize.htm), а значением всё так же количество.
 
-При попытке воспользоваться API вызовами у пользователя, который не имеет права для очистки/удаления/добавления/установки остатка по стоп-листам (Редактировать стоп-лист и быстрое меню `F_EM`) будет выброшено исключение.
+При попытке воспользоваться API вызовами у пользователя, который не имеет права для очистки/удаления/добавления/установки остатка по стоп-листам (Редактировать стоп-лист и быстрое меню `F_EM`), будет выброшено исключение.
 
 При попытке добавить блюдо с размером в стоп-лист всегда проверяется, что размер для блюда может быть применён в соответствии с его шкалой размеров, в противном случае будет выброшено исключение.
 
-Для отслеживания изменения стоп-листов событие было переименовано ProductsRemainingAmountsChanged -> [`StopListProductsRemainingAmountsChanged`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_INotificationService_StopListProductsRemainingAmountsChanged.htm).
+Для отслеживания изменения стоп-листов событие было переименовано `ProductsRemainingAmountsChanged` -> [`StopListProductsRemainingAmountsChanged`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_INotificationService_StopListProductsRemainingAmountsChanged.htm).
