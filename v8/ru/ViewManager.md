@@ -10,7 +10,7 @@ layout: default
 - [`String`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) - ввод целых чисел.
 - [`Decimal`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) - ввод дробных чисел.
  
-Для типа ввода дробных чисел - [`Decimal`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) добавлены свойства:
+Для типа ввода дробных чисел [`Decimal`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) добавлены свойства:
 - [`MaxDecimalValue`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_MaxDecimalValue.htm) - максимальное значение.
 - [`MinDecimalValue`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_MinDecimalValue.htm) - минимальное значение.
 - [`DefaultDecimalValue`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_DefaultDecimalValue.htm) - значение по умолчанию.
