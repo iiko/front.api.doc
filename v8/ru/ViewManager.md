@@ -3,7 +3,7 @@ title: Диалоговые окна
 layout: default
 ---
 ### Диалог ввода числовых строк
-В данной версии изменена структура класса настроек - [`ExtendedInputDialogSettings`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_ExtendedInputDialogSettings.htm), который передается в качестве параметра в [`Диалоговое окно`](https://kmamedkulyev.github.io/front.api.doc/v6/ru/ViewManager.html) - [`ShowExtendedInputDialog()`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_UI_IViewManager_ShowExtendedInputDialog.htm).
+Начиная с версии V8, изменена структура класса настроек - [`ExtendedInputDialogSettings`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_ExtendedInputDialogSettings.htm), который передается в качестве параметра в [`Диалоговое окно`](https://kmamedkulyev.github.io/front.api.doc/v6/ru/ViewManager.html) - [`ShowExtendedInputDialog()`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_UI_IViewManager_ShowExtendedInputDialog.htm).
 
 [`ExtendedInputDialogSettings.EnableNumericString`](https://iiko.github.io/front.api.sdk/v7/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_EnableNumericString.htm) заменен на [`NumericInputMode`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) который является типом `enum` состоящий из:
 - [`Disabled`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_UI_NumericInputMode.htm) - значение по умолчанию если не указан тип ввода.
