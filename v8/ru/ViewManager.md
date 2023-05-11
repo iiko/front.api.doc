@@ -27,7 +27,7 @@ layout: default
 var settings = new ExtendedInputDialogSettings
 {
     NumericInputMode = NumericInputMode.Decimal,
-    TabTitleNumericString = "Заголовок вкладки для ввода дробных числа",
+    TabTitleNumericString = "Decimal number",
     MaxDecimalValue = 500,
     DefaultDecimalValue = 50
 }
