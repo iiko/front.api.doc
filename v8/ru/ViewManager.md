@@ -18,7 +18,7 @@ layout: default
 С помощью новых свойств можно задавать соответствующие ограничения для дробных чисел. 
 
 При выборе `String` или `Decimal` пользователю будет предложено ввести целые числа или числа с дробью. 
-В качестве поясняющего текста по дробным числам используется - [`ExtendedInputDialogSettings.TabTitleNumericString`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_TabTitleNumericString.htm).
+В качестве поясняющего текста по дробным числам используется [`ExtendedInputDialogSettings.TabTitleNumericString`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_UI_ExtendedInputDialogSettings_TabTitleNumericString.htm).
 
 ![ext_number](../../img/viewmanager/ext_decimal.png)
 
