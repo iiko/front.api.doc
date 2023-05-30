@@ -1,9 +1,9 @@
 ---
-title: Работа с фискальным регистратором из API V8
+title: Работа с фискальным регистратором из API V8Preview6
 layout: default
 ---
 
-В API V8 добавлены методы для работы непостредственно с ФР
+В API V8Preview6 добавлены методы для работы непостредственно с ФР
 
 Открытие кассовой смены на ФР
 [`OpenCashRegisterSession`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_OpenCashRegisterSession.htm)
@@ -11,9 +11,10 @@ layout: default
 Для выполнения операции пользователь должен обладать разрешением CAN_EXECUTE_FISCAL_REGISTER_COMMANDS.
 
 Закрытие кассовой смены на ФР(печать Z отчета)
-[`DoZReport`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_OpenCashRegisterSession.htm)
+[`DoZReport`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_DoZReport.htm)
 Поддерживается только при наличии в лицензии модуля 21052601. Для корректной работы устройство должно быть запущено и смена на устройстве должна быть закрыта.
 Для выполнения операции пользователь должен обладать разрешением CAN_EXECUTE_FISCAL_REGISTER_COMMANDS.
+Если параметр [`printCashRegisterTape`] ежедневный журнал будет напечатан вместе с Z-отчетом.
 
 Открытие денежного ящика 
 [`CashRegisterOpenDrawer`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CashRegisterOpenDrawer.htm)
@@ -29,7 +30,7 @@ layout: default
  
 Возвращает дополнительные поддерживаемые операции
 [`GetQueryInfo`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetQueryInfo.htm)
-Возвращает дополнительные поддерживаемые операции [`QueryInfoResult.SupportedCommands`]https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Device_Results_QueryInfoResult_SupportedCommands.htm
+Возвращает дополнительные поддерживаемые операции [`QueryInfoResult.SupportedCommands`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Device_Results_QueryInfoResult_SupportedCommands.htm)
 которые могут быть вызваны  спомощью метода [`CashRegisterDirectIO`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CashRegisterDirectIO.htm)
 
 Выполнение дополнительной операции
@@ -37,6 +38,7 @@ layout: default
 Для выполнения операции пользователь должен обладать разрешением CAN_EXECUTE_FISCAL_REGISTER_COMMANDS.
 Позволяет выполнить дополнительную операцию, нужно передать в параметре [`CommandExecute`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Device_Tasks_CommandExecute.htm)
 название дополнительной операции [`Name`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Device_Tasks_CommandExecute_Name.htm) и значения параметров [`Parameters`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Device_Tasks_CommandExecute_Parameters.htm)
+Этот метод используется для выполнения операций специфических для конкретной модели ФР, не соответствующих какому либо методу общего интерфейса[`ICashRegister `](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Devices_ICashRegister.htm)
  
 Запуск ФР
 [`CashRegisterStart`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CashRegisterStart.htm)
