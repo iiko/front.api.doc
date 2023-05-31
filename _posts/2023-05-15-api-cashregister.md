@@ -45,6 +45,9 @@ layout: default
  
 Остановка ФР
 [`CashRegisterStop`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CashRegisterStop.htm)
+Устройства запускаются при старте iikoFront и останваливаются при завершении работы iikoFront (если в настройках устройства включен автозапуск).
+Команды запуска и остановки ФР нужны для того чтобы можно было остановить устройство и освободить COM-порт или другой порт который занимает устройство и после запустить устройство
+без перезапуска iikoFront.
 
 Проверка кода маркировки 
 [`CheckFfd12Marking`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_CheckFfd12Marking.htm)
