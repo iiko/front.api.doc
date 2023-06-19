@@ -3,7 +3,7 @@ title: Добавление новых возможностей GetCashRegisterS
 layout: default
 ---
 
-Добавлена возможность получения дополнительных свойств с помощью [`IOperationService.GetCashRegisterStatus`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetCashRegisterStatus.htm).
+В API V8Preview6 добавлена возможность получения дополнительных свойств с помощью [`IOperationService.GetCashRegisterStatus`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetCashRegisterStatus.htm).
 
 Новые добавленные поля:
 * [`SerialNumber`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Device_Results_CashRegisterStatus_SerialNumber.htm) - Серийный номер ФР
