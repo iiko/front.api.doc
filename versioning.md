@@ -9,7 +9,7 @@ layout: default
 
 ## Жизненный цикл версий ##
 Большие LTS-версии (от *Long-Term Support*) выпускаются примерно раз в два года и поддерживаются около четырёх лет.
-Между ними выпускаются промежуточные preview-версии, они выходят каждые три месяца и поддерживаются в течение полугода.
+Между ними выпускаются промежуточные preview-версии, они выходят каждые три месяца и поддерживаются в течение 3 версий iikoRMS.
 Таким образом, в каждый момент времени поддерживаются две последние выпущенные LTS-версии, две последние выпущенные preview-версии (либо одна, если в предыдущем квартале вышла LTS-версия), а также для ознакомления доступна разрабатываемая LTS-версия.
 
 LTS-версии нумеруются по порядку целыми числами — V1, V2, V3, V4, V5, V6 и так далее.
@@ -207,37 +207,57 @@ Preview-версии являются копиями промежуточных 
 К сожалению, механизм PackageReference пока [не поддерживает](https://github.com/NuGet/Home/issues/4989) extern alias, поэтому придётся использовать либо прямую ссылку на *Resto.Front.Api.V7Preview2.dll*, либо ссылку на NuGet-пакет `Resto.Front.Api.V7Preview2` и затем добавлять alias через MSBuild Target ([пример](https://github.com/NuGet/Home/issues/4989#issuecomment-310565840)).
 Важно: не следует одновременно реализовывать интерфейсы `IFrontPlugin` разных версий, такой плагин не будет загружен.
 
-## Статус версий API и соответствие версиям iikoRMS ##
+## Соответствие версий iikoRMS и версий API ##
 
-| Версия     | Статус            | Выпуск           | Удаление |
-| ---------  | ----------------- |:----------------:|:--------:|
-| V1         | Не поддерживается | 3.1              | 3.8      |
-| V2         | Не поддерживается | 3.3              | 4.3      |
-| V3         | Не поддерживается | 3.8              | 5.4      |
-| V4         | Не поддерживается | 4.3              | 7.0      |
-| V5         | Не поддерживается | 5.4              | 8.0      |
-| V6Preview4 | Не поддерживается | 6.4<sup>1</sup>  | 7.0      |
-| V6Preview5 | Не поддерживается | 6.4              | 7.1      |
-| V6         | Устаревшая        | 7.0              |          |
-| V7Preview1 | Не поддерживается | 7.1              | 7.4      |
-| V7Preview2 | Не поддерживается | 7.3.5<sup>2</sup>| 7.4      |
-| V7Preview3 | Не поддерживается | 7.3              | 7.5      |
-| V7Preview4 | Не поддерживается | 7.4              | 7.6      |
-| V7Preview5 | Не поддерживается | 7.5              | 7.7      |
-| V7Preview6 | Не поддерживается | 7.6              | 7.9      |
-| V7Preview7 | Устаревшая        | 7.7              | 8.5<sup>3</sup>      |
-| V7         | Стабильная        | 7.9              |          |
-| V8Preview1 | Не поддерживается | 8.0              | 8.2      |
-| V8Preview2 | Не поддерживается | 8.1              | 8.3      |
-| V8Preview3 | Устаревшая        | 8.2              | 8.4      |
-| V8Preview4 | Актуальная        | 8.3              | 8.5      |
-| V8Preview5 | Актуальная        | 8.4              | 8.6      |
-| V8         | Разрабатываемая   |                  |          |
-
-
+| Версия iikoRMS | Выпуск версии API      | Удаление версии API        | Поддерживаемые зафиксированные версии                  |
+|:-------------- |------------------------|----------------------------|--------------------------------------------------------|
+| 3.1            | V1                     |                            | V1                                                     |
+| 3.3            | V2                     |                            | V1, V2                                                 |
+| 3.8            | V3                     | V1                         | V2, V3                                                 |
+| 4.3            | V4                     | V2                         | V3, V4                                                 |
+| 5.4            | V5                     | V3                         | V4, V5                                                 |
+| 6.4<sup>1</sup>            | V6Preview4, V6Preview5 |                            | V4, V5, V6Preview4, V6Preview5                         |
+| 7.0            | V6                     | V4, V6Preview4             | V5, V6Preview5, V6                                     |
+| 7.1            | V7Preview1             | V6Preview5                 | V5, V6, V7Preview1                                     |
+| 7.3.5<sup>2</sup>          | V7Preview2             |                            | V6, V7Preview1, V7Preview2                             |
+| 7.3            | V7Preview3             |                            | V6, V7Preview1, V7Preview2, V7Preview3                 |
+| 7.4            | V7Preview4             | V7Preview1, V7Preview2     | V6, V7Preview3, V7Preview4                             |
+| 7.5            | V7Preview5             | V7Preview3                 | V6, V7Preview4, V7Preview5                             |
+| 7.6            | V7Preview6             | V7Preview4                 | V6, V7Preview5, V7Preview6                             |
+| 7.7            | V7Preview7             | V7Preview5                 | V6, V7Preview6, V7Preview7                             |
+| 7.8            |                        |                            | V6, V7Preview7                                         |
+| 7.9            | V7                     | V7Preview6                 | V6, V7Preview7, V7                                     |
+| 8.0            | V8Preview1             |                            | V6, V7Preview7, V7, V8Preview1                         |
+| 8.1            | V8Preview2             |                            | V6, V7Preview7, V7, V8Preview1, V8Preview2             |
+| 8.2            | V8Preview3             | V8Preview1                 | V6, V7Preview7, V7, V8Preview2, V8Preview3             |
+| 8.3            | V8Preview4<sup>4</sup>             | V8Preview2                 | V6, V7Preview7, V7, V8Preview3, V8Preview4             |
+| 8.4            | V8Preview5             | V8Preview3                 | V6, V7Preview7, V7, V8Preview4, V8Preview5             |
+| 8.5            | V8Preview6             |                            | V6, V7Preview7, V7, V8Preview4, V8Preview5, V8Preview6 |
+| 8.6            | V8Preview7             | V6, V7Preview7<sup>3</sup>, V8Preview4 | V7, V8Preview5, V8Preview6, V8Preview7                 |
+| 8.7            | V8                     | V8Preview5                 | V7, V8Preview6, V8Preview7, V8                         |
+| 8.8            | V9Preview1             | V8Preview6                 | V7, V8Preview7, V8, V9Preview1                         |
+| 8.9            | V9Preview2             | V8Preview7                 | V7, V8, V9Preview1, V9Preview2                         |
+| 9.0            | V9Preview3             |                            | V7, V8, V9Preview1, V9Preview2, V9Preview3             |
+| 9.1            | V9Preview4             | V9Preview1                 | V7, V8, V9Preview2, V9Preview3, V9Preview4             |
+| 9.2            | V9Preview5             | V9Preview2                 | V7, V8, V9Preview3, V9Preview4, V9Preview5             |
+| 9.3            | V9Preview6             | V9Preview3                 | V7, V8, V9Preview4, V9Preview5, V9Preview6             |
+| 9.4            | V9Preview7             | V9Preview4                 | V7, V8, V9Preview5, V9Preview6, V9Preview7             |
+| 9.5            | V9                     | V7, V9Preview5             | V8, V9Preview6, V9Preview7, V9                         |
+| 9.6            | V10Preview1            | V9Preview6                 | V8, V9, V9Preview7, V10Preview1                        |
+| 9.7            | V10Preview2            | V9Preview7                 | V8, V9, V10Preview1, V10Preview2                       |
+| 9.8            | V10Preview3            |                            | V8, V9, V10Preview1, V10Preview2, V10Preview3          |
+| 9.9            | V10Preview4            | V10Preview1                | V8, V9, V10Preview2, V10Preview3, V10Preview4          |
+| 10.0           | V10Preview5            | V10Preview2                | V8, V9, V10Preview3, V10Preview4, V10Preview5          |
+| 10.1           | V10Preview6            | V10Preview3                | V8, V9, V10Preview4, V10Preview5, V10Preview6          |
+| 10.2           | V10Preview7            | V10Preview4                | V8, V9, V10Preview5, V10Preview6, V10Preview7          |
+| 10.3           | V10                    | V8, V10Preview5            | V9, V10Preview6, V10Preview7, V10                      |
+{:.mbtablestyle}
 <sup>1</sup> Версия V6Preview4 была экспериментальной, она выпущена в начале цикла разработки iikoRMS 6.4. Кроме того, были пропущены V6Preview6 и V6Preview7, вместо них сразу вышла LTS-версия V6.  
 <sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).  
-<sup>3</sup> Поддержка версии V7Preview7 была продлена до 8.4 включительно из-за проблем с автообновлением плагинов с V7Preview7 на V7.
+<sup>3</sup> Поддержка версии V7Preview7 была продлена до 8.6 включительно из-за проблем с автообновлением плагинов с V7Preview7 на V7.  
+<sup>4</sup> Срок жизни Preview-версий начиная с V8Preview4 увеличен на одну версию iikoRMS.
+
+Начиная с версии iikoRMS 8.5 момента цикл поддержки Preview-версий увеличивается: версия V8Preview4, которая была выпущена в 8.3, будет удалена лишь в 8.6, т.е. поддерживается в 8.3, 8.4, 8.5.
 
 ## Обратная совместимость
 Обратная совместимость предполагает гарантию того, что плагин, разработанный под определённую версию API, будет одинаково работать с любыми версиями iikoRMS, поддерживающими эту версию API.
