@@ -209,48 +209,48 @@ Preview-версии являются копиями промежуточных 
 
 ## Соответствие версий iikoRMS и версий API ##
 
-| Версия iikoRMS | Выпуск версии API      | Удаление версии API        | Поддерживаемые зафиксированные версии                  |
-|:-------------- |------------------------|----------------------------|--------------------------------------------------------|
-| 3.1            | V1                     |                            | V1                                                     |
-| 3.3            | V2                     |                            | V1, V2                                                 |
-| 3.8            | V3                     | V1                         | V2, V3                                                 |
-| 4.3            | V4                     | V2                         | V3, V4                                                 |
-| 5.4            | V5                     | V3                         | V4, V5                                                 |
-| 6.4<sup>1</sup>            | V6Preview4, V6Preview5 |                            | V4, V5, V6Preview4, V6Preview5                         |
-| 7.0            | V6                     | V4, V6Preview4             | V5, V6Preview5, V6                                     |
-| 7.1            | V7Preview1             | V6Preview5                 | V5, V6, V7Preview1                                     |
-| 7.3.5<sup>2</sup>          | V7Preview2             |                            | V6, V7Preview1, V7Preview2                             |
-| 7.3            | V7Preview3             |                            | V6, V7Preview1, V7Preview2, V7Preview3                 |
-| 7.4            | V7Preview4             | V7Preview1, V7Preview2     | V6, V7Preview3, V7Preview4                             |
-| 7.5            | V7Preview5             | V7Preview3                 | V6, V7Preview4, V7Preview5                             |
-| 7.6            | V7Preview6             | V7Preview4                 | V6, V7Preview5, V7Preview6                             |
-| 7.7            | V7Preview7             | V7Preview5                 | V6, V7Preview6, V7Preview7                             |
-| 7.8            |                        |                            | V6, V7Preview7                                         |
-| 7.9            | V7                     | V7Preview6                 | V6, V7Preview7, V7                                     |
-| 8.0            | V8Preview1             |                            | V6, V7Preview7, V7, V8Preview1                         |
-| 8.1            | V8Preview2             |                            | V6, V7Preview7, V7, V8Preview1, V8Preview2             |
-| 8.2            | V8Preview3             | V8Preview1                 | V6, V7Preview7, V7, V8Preview2, V8Preview3             |
-| 8.3            | V8Preview4<sup>4</sup>             | V8Preview2                 | V6, V7Preview7, V7, V8Preview3, V8Preview4             |
-| 8.4            | V8Preview5             | V8Preview3                 | V6, V7Preview7, V7, V8Preview4, V8Preview5             |
-| 8.5            | V8Preview6             |                            | V6, V7Preview7, V7, V8Preview4, V8Preview5, V8Preview6 |
-| 8.6            | V8Preview7             | V6, V7Preview7<sup>3</sup>, V8Preview4 | V7, V8Preview5, V8Preview6, V8Preview7                 |
-| 8.7            | V8                     | V8Preview5                 | V7, V8Preview6, V8Preview7, V8                         |
-| 8.8            | V9Preview1             | V8Preview6                 | V7, V8Preview7, V8, V9Preview1                         |
-| 8.9            | V9Preview2             | V8Preview7                 | V7, V8, V9Preview1, V9Preview2                         |
-| 9.0            | V9Preview3             |                            | V7, V8, V9Preview1, V9Preview2, V9Preview3             |
-| 9.1            | V9Preview4             | V9Preview1                 | V7, V8, V9Preview2, V9Preview3, V9Preview4             |
-| 9.2            | V9Preview5             | V9Preview2                 | V7, V8, V9Preview3, V9Preview4, V9Preview5             |
-| 9.3            | V9Preview6             | V9Preview3                 | V7, V8, V9Preview4, V9Preview5, V9Preview6             |
-| 9.4            | V9Preview7             | V9Preview4                 | V7, V8, V9Preview5, V9Preview6, V9Preview7             |
-| 9.5            | V9                     | V7, V9Preview5             | V8, V9Preview6, V9Preview7, V9                         |
-| 9.6            | V10Preview1            | V9Preview6                 | V8, V9, V9Preview7, V10Preview1                        |
-| 9.7            | V10Preview2            | V9Preview7                 | V8, V9, V10Preview1, V10Preview2                       |
-| 9.8            | V10Preview3            |                            | V8, V9, V10Preview1, V10Preview2, V10Preview3          |
-| 9.9            | V10Preview4            | V10Preview1                | V8, V9, V10Preview2, V10Preview3, V10Preview4          |
-| 10.0           | V10Preview5            | V10Preview2                | V8, V9, V10Preview3, V10Preview4, V10Preview5          |
-| 10.1           | V10Preview6            | V10Preview3                | V8, V9, V10Preview4, V10Preview5, V10Preview6          |
-| 10.2           | V10Preview7            | V10Preview4                | V8, V9, V10Preview5, V10Preview6, V10Preview7          |
-| 10.3           | V10                    | V8, V10Preview5            | V9, V10Preview6, V10Preview7, V10                      |
+| Версия      | Выпуск           | Удаление |
+| ----------  |:----------------:|:--------:|
+| V1          | 3.1              | 3.8      |
+| V2          | 3.3              | 4.3      |
+| V3          | 3.8              | 5.4      |
+| V4          | 4.3              | 7.0      |
+| V5          | 5.4              | 8.0      |
+| V6Preview4  | 6.4<sup>1</sup>  | 7.0      |
+| V6Preview5  | 6.4              | 7.1      |
+| V6          | 7.0              |          |
+| V7Preview1  | 7.1              | 7.4      |
+| V7Preview2  | 7.3.5<sup>2</sup>| 7.4      |
+| V7Preview3  | 7.3              | 7.5      |
+| V7Preview4  | 7.4              | 7.6      |
+| V7Preview5  | 7.5              | 7.7      |
+| V7Preview6  | 7.6              | 7.9      |
+| V7Preview7  | 7.7              | 8.5<sup>3</sup>      |
+| V7          | 7.9              | 9.5      |
+| V8Preview1  | 8.0              | 8.2      |
+| V8Preview2  | 8.1              | 8.3      |
+| V8Preview3  | 8.2              | 8.4      |
+| V8Preview4<sup>4</sup>  | 8.3              | 8.6      |
+| V8Preview5  | 8.4              | 8.7      |
+| V8Preview6  | 8.5              | 8.8      |
+| V8Preview7  | 8.6              | 8.9      |
+| V8          | 8.7              | 10.3     |
+| V9Preview1  | 8.8              | 9.1      |
+| V9Preview2  | 9.9              | 9.2      |
+| V9Preview3  | 9.0              | 9.3      |
+| V9Preview4  | 9.1              | 9.4      |
+| V9Preview5  | 9.2              | 9.5      |
+| V9Preview6  | 9.3              | 9.6      |
+| V9Preview7  | 9.4              | 9.7      |
+| V9          | 9.5              |          |
+| V10Preview1 | 9.6              | 9.9      |
+| V10Preview2 | 9.7              | 10.0     |
+| V10Preview3 | 9.8              | 10.1     |
+| V10Preview4 | 9.9              | 10.2     |
+| V10Preview5 | 10.0             | 10.3     |
+| V10Preview6 | 10.1             | 10.4     |
+| V10Preview7 | 10.2             | 10.5     |
+| V10         | 10.3             |          |
 {:.mbtablestyle}
 <sup>1</sup> Версия V6Preview4 была экспериментальной, она выпущена в начале цикла разработки iikoRMS 6.4. Кроме того, были пропущены V6Preview6 и V6Preview7, вместо них сразу вышла LTS-версия V6.  
 <sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).  
