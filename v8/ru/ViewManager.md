@@ -36,7 +36,7 @@ var dialogResult = viewManager.ShowExtendedInputDialog(
                 "Заголовок окна", 
                 "Подзаголовок, поясняющий что именно нужно ввести пользователю.",
                 settings) 
-    as NumericStringInputDialogResult;
+    as DecimalInputDialogResult;
 if (dialogResult == null)
     return;
 // analyze result
