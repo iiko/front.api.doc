@@ -1,5 +1,7 @@
-Автоматическое закрытие доставочного заказа при завершении поездки.
--------
+---
+title:Автоматическое закрытие доставочного заказа при завершении поездки.
+layout: default
+---
 
 Начиная с API V8Preview3 при завершении поездки (вызов метода [`ChangeRideStatus`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_Editors_IEditSession_ChangeRideStatus.htm) со статусом [`DeliveredFinish`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Brd_RideStatus.htm)) также закрывается связанная с этой поездкой доставка.
 
