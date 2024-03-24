@@ -3,9 +3,9 @@ title: Событие об изменении произвольных данн�
 layout: default
 ---
 
-В API V8 добавлено событие об изменении произвольных данных плагинов [`CustomDataChanged`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_CustomDataChanged.htm). 
+В API V8 добавлено событие об изменении произвольных данных плагинов [`CustomDataChanged`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_INotificationService_CustomDataChanged.htm). 
 
-Параметр уведомления [`CustomDataChangedEventArgs`](https://iiko.github.io/front.api.sdk/v9/html/Properties_T_Resto_Front_Api_Data_Common_CustomDataChangedEventArgs.htm) состоит из нескольких полей:
+Параметр уведомления [`CustomDataChangedEventArgs`](https://iiko.github.io/front.api.sdk/v8/html/Properties_T_Resto_Front_Api_Data_Common_CustomDataChangedEventArgs.htm) состоит из нескольких полей:
 
 - `Key` — ключ элемента произвольных данных;
 - `Value` — значение элемента произвольных данных;
