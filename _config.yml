@@ -1,6 +1,9 @@
 title: iikoFront API docs
 baseurl: /front.api.doc
 apiVersions: [v1, v2, v3, v4, v5, v6, v7, v8]
+tag_page_layout: tagpage
+tag_page_dir: tag
 
 plugins:
   - jekyll-redirect-from
+  - jekyll-tagging

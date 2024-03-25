@@ -76,6 +76,9 @@
             }
         }
     </style>
+    {% if page.tags %}
+      {% include collecttags.html %}
+    {% endif %}
 </head>
 <body>
     <header>
@@ -126,6 +129,14 @@
     </aside>
     <article>
         <h1 style="text-align:center">{% if page.title %}{{ page.title }}{% endif %}</h1>
+          {% if page.tags %}
+          <span>[
+          {% for tag in page.tags %}
+             {% capture tag_name %}{{ tag }}{% endcapture %}
+             <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+          {% endfor %}
+          ]</span>
+          {% endif %}
         {{ content }}
     </article>
     <footer>
