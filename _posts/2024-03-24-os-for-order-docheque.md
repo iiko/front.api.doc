@@ -1,6 +1,7 @@
 ---
 title: Возможность работать с заказом во время операции DoCheque в ICashRegister
 layout: default
+tags: v9preview1
 ---
 
 В API V9Preview1 появилась возможность работать с заказом во время операции [`DoCheque`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_Devices_ICashRegister_DoCheque.htm), используя [`IOperationService`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_IOperationService.htm).

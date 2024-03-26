@@ -1,6 +1,7 @@
 ---
 title: Событие об изменении произвольных данных плагинов
 layout: default
+tags: v8
 ---
 
 В API V8 добавлено событие об изменении произвольных данных плагинов [`CustomDataChanged`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_INotificationService_CustomDataChanged.htm). 

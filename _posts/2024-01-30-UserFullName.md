@@ -1,6 +1,7 @@
 ---
 title: ФИО для IUser
 layout: default
+tags: v8
 ---
 
 В Api V8 была добавлена возможность получить ФИО пользователя, заданное в iikoOffice. 

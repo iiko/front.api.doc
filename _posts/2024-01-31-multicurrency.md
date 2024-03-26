@@ -1,6 +1,7 @@
 ---
 title: Поддержка дополнительной валюты в IPaymentItem
 layout: default
+tags: v9preview1
 ---
 
 В интерфейсе [`IPaymentItem`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Payments_IPaymentItem.htm) появилось свойство [`CurrencyInfo`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Payments_IPaymentItem_CurrencyInfo.htm), которое позволяет хранить данные о дополнительной валюте платежа.
