@@ -1,6 +1,7 @@
 ---
 title: Признак принадлежности к текущему департаменту для IUser 
 layout: default
+tags: v8preview7 v8
 ---
 
 Начиная с API V8PreviewV7:

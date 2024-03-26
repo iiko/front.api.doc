@@ -1,6 +1,7 @@
 ---
 title: Печать на произвольном принтере
 layout: default
+tags: v8preview7 v8
 ---
 
 В API V8Preview7 был добавлен новый метод [`GetPrintingDeviceInfos`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetPrintingDeviceInfos.htm), который возвращает список из объектов с интерфейсом [`PrintingDeviceInfo`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Device_IPrintingDeviceInfo.htm).

@@ -1,6 +1,7 @@
 ---
 title: CashChequePrinting при сторнировании
 layout: default
+tags: v8
 ---
 
 Уведомление о печати чека при оплате

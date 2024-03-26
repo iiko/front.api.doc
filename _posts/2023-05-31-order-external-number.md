@@ -1,6 +1,7 @@
 ---
 title: Новое свойство заказа ExternalNumber
 layout: default
+tags: v8preview4 v8
 ---
 
 Начиная с версии API V8Preview4, в заказ добавлено новое свойство [`IOrder.ExternalNumber`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Orders_IOrder_ExternalNumber.htm), в котором хранится номер заказа во внешней системе. 

@@ -1,6 +1,7 @@
 ---
 title: Выпуск версии V8Preview6 и небольшие изменения в графике выпуска
 layout: default
+tags: v8preview6
 ---
 
 

@@ -1,6 +1,7 @@
 ---
 title: Выпущена версия V8Preview3
 layout: default
+tags: v8preview3
 ---
 
 Вышла очередная версия [iikoRms 8.2](https://ru.iiko.help/articles/#!releasenotes/2022-autumn), а вместе с ней и промежуточный релиз [V8Preview3](https://www.nuget.org/packages/Resto.Front.Api.V8Preview3/8.2.6000-alpha). Эта версия будет поддерживаться в 8.2 и 8.3.

@@ -1,6 +1,7 @@
 ---
 title: Выставлены пользовательские свойства (ProductTags) для продукта (IProduct)
 layout: default
+tags: v8
 ---
 
 В API V8 были выставлены пользовательские свойства для продуктов [`IProduct.ProductTags`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Assortment_IProduct_ProductTags.htm), а так же появилась возможность получить все пользовательские свойства и их группы с помощью вызовов [`GetProductTags`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetProductTags.htm) и [`GetProductTagGroups`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_GetProductTagGroups.htm) соответственно.

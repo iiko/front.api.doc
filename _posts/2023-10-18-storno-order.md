@@ -1,6 +1,7 @@
 ---
 title: Возврат заказа (сторнирование)
 layout: default
+tags: v8preview7
 ---
 
 Теперь появилась возможность делать возврат заказов не только из [UI iikoFront](https://ru.iiko.help/articles/#!iikofront-8-6/topic-78/a/h2__1472503195),

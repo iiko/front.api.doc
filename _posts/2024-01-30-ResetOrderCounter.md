@@ -1,7 +1,7 @@
 ---
 title: Сброс нумерации заказов
 layout: default
-tags: v9preview1
+tags: v9preview1 v9
 ---
 
 В Api V9Preview1 была добавлена возможность сбрасывать нумерацию заказов внутри группы через Api. 
