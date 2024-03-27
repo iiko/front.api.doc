@@ -1,5 +1,5 @@
 ---
-title: Публичная ExternalData для PastOrder
+title: Причина списания для PastOrder
 layout: default
 tags: v8preview7 v8
 ---
