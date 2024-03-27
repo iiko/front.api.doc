@@ -1,6 +1,7 @@
 ---
 title: Возможность изменять параметр hasFixedIikoCardDiscounts
 layout: default
+tags: v8
 ---
 
 Начиная с API V8 мы переименовали параметр hasIikoCardDiscounts методов [`CreateOrder`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_Editors_IEditSession_CreateOrder.htm),

@@ -1,6 +1,7 @@
 ---
 title: Выпущена версия V8Preview5
 layout: default
+tags: v8preview5
 ---
 
 Вышла очередная версия [iikoRms 8.4](https://ru.iiko.help/articles/releasenotes/2023-spring), а вместе с ней и промежуточный релиз [V8Preview5](https://www.nuget.org/packages/Resto.Front.Api.V8Preview5/8.4.6018-alpha). Эта версия будет поддерживаться в 8.4 и 8.5.

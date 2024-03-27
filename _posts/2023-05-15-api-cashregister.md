@@ -1,6 +1,7 @@
 ---
 title: Работа с фискальным регистратором из API V8Preview6
 layout: default
+tags: v8preview6 v8
 ---
 
 В API V8Preview6 добавлены методы для работы непостредственно с ФР

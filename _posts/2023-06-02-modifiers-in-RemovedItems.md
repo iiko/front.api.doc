@@ -1,6 +1,7 @@
 ---
 title: Удаленные до печати модификаторы
 layout: default
+tags: v8preview6 v8
 ---
 
 В API V8Preview6 в [`новости`](https://iiko.github.io/front.api.doc/2023/05/18/removed-items-without-printing.html) был описан новый список [`RemovedItems`](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Orders_IOrder_RemovedItems.htm). 

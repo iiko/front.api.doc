@@ -1,6 +1,7 @@
 ---
 title: Добавлены свойства ФН, ФПД
 layout: default
+tags: v8
 ---
 
 В API V8 в класс

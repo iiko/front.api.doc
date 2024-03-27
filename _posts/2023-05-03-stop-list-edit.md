@@ -1,6 +1,7 @@
 ---
 title: Возможность редактировать стоп-лист
 layout: default
+tags: v8
 ---
 
 В Api V8 появилась возможность добавить в стоп-лист блюдо только в одном размере или без указания размера [`AddProductToStopList`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IOperationService_AddProductToStopList.htm).

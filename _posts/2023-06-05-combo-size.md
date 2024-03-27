@@ -1,6 +1,7 @@
 ---
 title: Размеры в комбо-блюдах
 layout: default
+tags: v8preview6 v8
 ---
 
 Начиная с API V8PreviewV6:
