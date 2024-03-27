@@ -1,9 +1,10 @@
 ---
 title: Смена комментария у отпечатанного блюда
 layout: default
+tags: v8
 ---
 
-В Api V8Preview7 добавлена возможность изменять комментарии у отпечатанных блюд.
+В Api V8 добавлена возможность изменять комментарии у отпечатанных блюд.
 
 Для этого можно использовать операцию: [`ChangeOrderItemComment`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_Editors_IEditSession_ChangeOrderItemComment.htm).
 
