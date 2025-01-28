@@ -15,14 +15,14 @@ tags: v9preview4 v9
 - заказ должен быть еще не фискализированным:
 [`IsFiscalizedBeforePayment`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Orders_IOrder_IsFiscalizedBeforePayment.htm)` = false`.
 
-Также печать фискального чека до оплаты заказа недоступна для доставок, кроме режима самовывоз.
+Также печать фискального чека до оплаты заказа недоступна для доставок, кроме режима самовывоза.
 
-При печати фискального чека до оплаты, для заказа будет выполнен пречек, однако проведение оплат происходить не будет.
+При печати фискального чека до оплаты, для заказа будет напечатан пречек, однако проведение оплат происходить не будет.
 
 В случае успеха, заказ помечается *фискализированным*: [`IsFiscalizedBeforePayment`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Orders_IOrder_IsFiscalizedBeforePayment.htm).
 Все оплаты заказа помечаются *фискализированными*: [`IsFiscalizedLocally`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Payments_IPaymentItem_IsFiscalizedLocally.htm).
 
-В случае возникновения ошибки, фронт выдаст исключение с описанием случившегося: 
+В случае возникновения ошибки, фронт выдаст исключение с описанием ошибки: 
 [`PrintFiscalChequeBeforePaymentOrderFailed`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Exceptions_PaymentActionFailedExceptionReason.htm).
 
 #### Закрытие фискализированного заказа
@@ -31,8 +31,8 @@ tags: v9preview4 v9
 Далее фискализированный заказ можно закрыть: [`PayOrder`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_IOperationService_PayOrder.htm).
 На этом этапе все непроведенные оплаты будут проведены. 
 Если фискализированный заказ был изменен, тогда при выполнении `IOperationService.PayOrder` для заказа будут напечатаны:
-- фискальный чек коррекции возврата и прихода (для ФФД 1.1 и выше)
-- фискальный чек возврата и прихода (для ФФД 1.0 и 1.05) согласно актуальному состоянию заказа.
+- чек коррекции возврата прихода и чек коррекции прихода (для ФФД 1.1 и выше)
+- чек возврата прихода и чек прихода согласно актуальному состоянию заказа (ФФД 1.05).
 
 Также при удаленнии фискализированного заказа будет напечатан фискальный чек возврата.
 
