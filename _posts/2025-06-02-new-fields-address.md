@@ -1,14 +1,14 @@
 ---
-title: В адрес добавлены три новых поля для упрощения поиска.
+title: В адрес для упрощения поиска адресов добавлены три новых поля как возможная альтернатива Line1
 layout: default
 tags: v9preview5 v9
 ---
 
 Начиная с V9Preview5 в интерфейсе [`IAddress`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Brd_IAddress.htm) появились дополнительные параметры [`Title`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Brd_IAddress_Title.htm), [`Subtitle`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Brd_IAddress_Subtitle.htm) и [`Distance`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Brd_IAddress_Distance.htm), которые можно использовать при поиске адреса в формате `Line1`.
 
-- `Title` - основная часть подсказки;
-- `Subtitle` - вспомогательная часть подсказки;
-- `Distance` - расстояние до адреса от торгового предприятия.
+- `Title` - основная часть подсказки
+- `Subtitle` - вспомогательная часть подсказки
+- `Distance` - расстояние до адреса от торгового предприятия
 
 Эти поля визуально облегчают поиск нужного адреса в окне поиска адресов с помощью внешнего сервиса. Ранее результатом поиска адреса была одна строка
 ([`Line1`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Brd_IAddress_Line1.htm)). Теперь результат поиска можно вернуть двумя строками - основная часть адреса (`Title`) и вспомогательная (`Subtitle`).
