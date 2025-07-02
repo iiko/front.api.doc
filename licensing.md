@@ -65,4 +65,4 @@ redirect_from:
 Для регистрации, получения лицензии разработчика, получения идентификатора лицензируемого модуля и заключения договора необходимо отправить заявку по адресу [api@iiko.ru](mailto:api@iiko.ru).
 
 ## Ссылки ##
-- [Общая справка по лицензированию API всех продуктов iiko](https://ru.iiko.help/articles/#!api-documentations/apistart)
+- [Общая справка по лицензированию API всех продуктов iiko](https://ru.iiko.help/articles/api-documentations/litsenzirovanie-i-yuridicheskie-aspekty)
