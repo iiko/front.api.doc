@@ -1,8 +1,9 @@
 ---
 title: Получение номера инвойса из АПИ
 layout: default
+tags: v9preview6 v9
 ---
-В V9 добавлена возможность получения номера инвойса из АПИ для Болгарии.
+В API V9Preview6 добавлена возможность получения номера инвойса из АПИ для Болгарии.
 
 Были добавлены два новых уведомления:
 - [`GetEInvoiceNumber`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_GetEInvoiceNumber.htm) используется для получения номера инвойса. Оно отправляется, когда выбрана организация и кассир переходит к оплате.
