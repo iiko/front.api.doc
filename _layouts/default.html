@@ -1,7 +1,8 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.svg?">
     {% if page.description %}
     <meta name="description" content="{{ page.description }}" />
     {% endif %}
@@ -66,7 +67,18 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .mbtablestyle {
+            border-collapse: collapse;
+            > table, td, th {
+                border: 1px solid black;
+                padding: 3px;
+            }
+        }
     </style>
+    {% if page.tags %}
+      {% include collecttags.html %}
+    {% endif %}
 </head>
 <body>
     <header>
@@ -84,7 +96,7 @@
         </div>
     </header>
     <aside>
-        {% assign pagesByTitle = site.pages | sort: 'title' %}
+        {% assign pagesByTitle = site.pages | where_exp: "post", "post.title" | sort: 'title' %}
 
         <!-- common topics -->
         {% for p in pagesByTitle %}
@@ -111,24 +123,32 @@
         {% endfor %}
         <br>
         <b>Code reference</b><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v6/">V6 (obsolete)</a><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v7/">V7 (current)</a><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v8/">V8 (preview)</a><br>
+        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v7/">V7 (obsolete)</a><br>
+        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v8/">V8 (current)</a><br>
+        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a><br>
     </aside>
     <article>
         <h1 style="text-align:center">{% if page.title %}{{ page.title }}{% endif %}</h1>
+          {% if page.tags %}
+          <span>[
+          {% for tag in page.tags %}
+             {% capture tag_name %}{{ tag }}{% endcapture %}
+             <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
+          {% endfor %}
+          ]</span>
+          {% endif %}
         {{ content }}
     </article>
     <footer>
         <div>
             <div style="float: left">
-                Contacts: <a href="http://help.iiko.ru/articles/#!api-documentations/getting-started/">help.iiko.ru</a> | <a href="api@iiko.ru">api@iiko.ru</a>
+                Contacts: <a href="http://ru.iiko.help/articles/#!api-documentations/getting-started/">help.iiko.ru</a> | <a href="api@iiko.ru">api@iiko.ru</a>
             </div>
             <div style="float: right">
                 Last change: {{ site.time | date_to_long_string }} | <a href="https://github.com/iiko/front.api.doc/">View source</a>
             </div>
             <div style="margin: 0 auto">
-                iiko, 2021
+                iiko, 2025
             </div>
         </div>
     </footer>

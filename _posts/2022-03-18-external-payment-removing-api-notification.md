@@ -1,6 +1,7 @@
 ---
 title: В API V8 добавлены уведомления об удалении внешней оплаты из заказа
 layout: default
+tags: v8
 ---
 
 При попытке удаления внешней оплаты вызывается метод [`OnPaymentDeleting`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_IPaymentProcessor_OnPaymentDeleting.htm) у соответствующего [`IPaymentProcessor`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_IPaymentProcessor.htm).
