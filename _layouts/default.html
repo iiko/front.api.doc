@@ -123,26 +123,19 @@
 
         <!-- common topics -->
         {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = p.path | split:"/" | first %}
-        {% unless site.apiVersions contains apiVersionOfPage %}
-        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-        {% endunless %}
-        {% endfor %}
-
-        <!-- version-specific topics -->
-        {% for apiVersion in site.apiVersions reversed %}
-        {% assign hasVersionHeader = false %}
-        {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = p.path | split:"/" | first %}
-        {% if apiVersionOfPage == apiVersion %}
-        {% unless hasVersionHeader %}
-        {% assign hasVersionHeader = true %}
-        <br>
-        <b>{{ apiVersion }}</b><br>
-        {% endunless %}
+        {% assign pageFolder = p.path | split:"/" | first %}
+        {% if pageFolder == "commonArticles" %}
         &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
         {% endif %}
         {% endfor %}
+        <br>
+        <b>Статьи</b><br>
+        <!-- version-specific topics -->
+        {% for p in pagesByTitle %}
+        {% assign pageFolder = p.path | split:"/" | first %}
+        {% if pageFolder == "articles" %}
+        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
+        {% endif %}
         {% endfor %}
         <br>
         <b>Code reference</b><br>
