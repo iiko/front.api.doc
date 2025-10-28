@@ -7,3 +7,7 @@ tag_page_dir: tag
 plugins:
   - jekyll-redirect-from
   - jekyll-tagging
+
+# Исключить из сборки сайта
+exclude:
+  - VERSION_GRAPH_STRUCTURE.md
