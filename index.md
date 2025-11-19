@@ -10,6 +10,36 @@ layout: default
     </p>
 </div>
 
+## 🚀 Быстрый старт
+
+<div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); margin: 1.5rem 0;">
+    <ol style="margin: 0; padding-left: 1.5rem;">
+        <li style="margin: 0.75rem 0;">
+            <strong>Изучите основы:</strong> Ознакомьтесь с <a href="{{ site.baseurl }}/intro.html">введением</a> и <a href="{{ site.baseurl }}/licensing.html">лицензированием</a>
+        </li>
+        <li style="margin: 0.75rem 0;">
+            <strong>Выберите версию API:</strong> Рекомендуем начать с <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (текущая)</a> или <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a>
+        </li>
+        <li style="margin: 0.75rem 0;">
+            <strong>Установите SDK:</strong> Скачайте <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a> с GitHub
+        </li>
+        <li style="margin: 0.75rem 0;">
+            <strong>Начните разработку:</strong> Создайте свой первый плагин используя примеры из документации
+        </li>
+        <li style="margin: 0.75rem 0;">
+            <strong>Следите за изменениями:</strong> Читайте <a href="{{ site.baseurl }}/changelog.html">changelog</a> для актуальной информации об обновлениях
+        </li>
+    </ol>
+</div>
+
+## 📚 Разделы документации
+
+- **[Введение]({{ site.baseurl }}/intro.html)** — основные концепции и архитектура API
+- **[Лицензирование]({{ site.baseurl }}/licensing.html)** — информация о лицензировании плагинов
+- **[Версионирование]({{ site.baseurl }}/versioning.html)** — политика версионирования API
+- **[Отладка]({{ site.baseurl }}/debugging.html)** — инструменты и методы отладки
+- **[Changelog]({{ site.baseurl }}/changelog.html)** — история изменений API
+
 ## 🎯 О iikoFront API
 
 **iikoFront** — это программное обеспечение для кассовых терминалов, являющееся частью продукта **iikoRms**. Приложение поддерживает расширение функциональности с помощью плагинов.
@@ -42,33 +72,6 @@ layout: default
         <p style="margin-bottom: 0;">Подключать внешние платежные системы и терминалы</p>
     </div>
 </div>
-
-## 🚀 Быстрый старт
-
-<div style="background: var(--bg-tertiary); padding: 1.5rem; border-radius: var(--radius-md); margin: 1.5rem 0;">
-    <ol style="margin: 0; padding-left: 1.5rem;">
-        <li style="margin: 0.75rem 0;">
-            <strong>Изучите основы:</strong> Ознакомьтесь с <a href="{{ site.baseurl }}/intro.html">введением</a> и <a href="{{ site.baseurl }}/licensing.html">лицензированием</a>
-        </li>
-        <li style="margin: 0.75rem 0;">
-            <strong>Выберите версию API:</strong> Рекомендуем начать с <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (текущая)</a> или <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a>
-        </li>
-        <li style="margin: 0.75rem 0;">
-            <strong>Установите SDK:</strong> Скачайте <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a> с GitHub
-        </li>
-        <li style="margin: 0.75rem 0;">
-            <strong>Начните разработку:</strong> Создайте свой первый плагин используя примеры из документации
-        </li>
-    </ol>
-</div>
-
-## 📚 Разделы документации
-
-- **[Введение]({{ site.baseurl }}/intro.html)** — основные концепции и архитектура API
-- **[Лицензирование]({{ site.baseurl }}/licensing.html)** — информация о лицензировании плагинов
-- **[Версионирование]({{ site.baseurl }}/versioning.html)** — политика версионирования API
-- **[Отладка]({{ site.baseurl }}/debugging.html)** — инструменты и методы отладки
-- **[Changelog]({{ site.baseurl }}/changelog.html)** — история изменений API
 
 ## 📖 API Reference
 
