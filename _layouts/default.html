@@ -660,10 +660,22 @@
 
             <!-- common topics -->
             <b>Основное</b>
+            <!-- Главная страница всегда первая -->
             {% for p in pagesByTitle %}
             {% assign apiVersionOfPage = p.path | split:"/" | first %}
             {% unless site.apiVersions contains apiVersionOfPage %}
+            {% if p.url == "/" or p.url == "/index.html" or p.title == "Главная" %}
             <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% endif %}
+            {% endunless %}
+            {% endfor %}
+            <!-- Остальные страницы -->
+            {% for p in pagesByTitle %}
+            {% assign apiVersionOfPage = p.path | split:"/" | first %}
+            {% unless site.apiVersions contains apiVersionOfPage %}
+            {% unless p.url == "/" or p.url == "/index.html" or p.title == "Главная" %}
+            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% endunless %}
             {% endunless %}
             {% endfor %}
 
