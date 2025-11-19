@@ -1,78 +1,565 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.svg?">
     {% if page.description %}
     <meta name="description" content="{{ page.description }}" />
     {% endif %}
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        header
-        {
-            background-color: lightgray;
-            text-align: center;
-            padding: 5px;
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary-color: #0ea5e9;
+            --accent-color: #8b5cf6;
+            --success-color: #10b981;
+            --bg-color: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        aside
-        {
-            background-color: #eeeeee;
-            float: left;
-            padding: 5px;
-            margin: 0px 20px 10px 0px;
-            width: 250px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        article
-        {
-            margin: 5px 5px 50px 280px;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        footer
-        {
-            background-color: lightgray;
-            text-align: center;
-            padding: 5px;
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 1.25rem 2rem;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        p, blockquote, ul, ol, dl, table, pre
-        {
-            margin: 15px 0;
-        }
-
-        blockquote
-        {
-            border-left: 4px solid lightgray;
-            padding: 0 15px;
-            color: gray;
-        }
-
-        blockquote > :first-child
-        {
-            margin-top: 0px;
-        }
-
-        blockquote > :last-child
-        {
-            margin-bottom: 0px;
-        }
-
-        body
-        {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .flex-container {
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .header-brand a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .header-brand a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .header-brand a::before {
+            content: "📚";
+            font-size: 1.5rem;
+        }
+
+        .search-form {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem;
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .search-form input[type="text"] {
+            padding: 0.625rem 1rem;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            width: 280px;
+            background: white;
+            color: var(--text-primary);
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-form input[type="text"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-form input[type="submit"] {
+            padding: 0.625rem 1.25rem;
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-form input[type="submit"]:hover {
+            background: var(--bg-secondary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            flex: 1;
+        }
+
+        aside {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+
+        aside::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        aside::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 3px;
+        }
+
+        aside::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        aside::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        aside a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            margin: 0.25rem 0;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            font-size: 0.9375rem;
+            border-left: 3px solid transparent;
+        }
+
+        aside a:hover {
+            background: var(--bg-tertiary);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            padding-left: 1rem;
+        }
+
+        aside b {
+            display: block;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        aside b:first-child {
+            margin-top: 0;
+        }
+
+        article {
+            background: var(--bg-color);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            min-height: 500px;
+        }
+
+        article h1 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        article h2 {
+            color: var(--text-primary);
+            margin: 2rem 0 1rem;
+            font-size: 1.875rem;
+            font-weight: 600;
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        article h3 {
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        article h4, article h5, article h6 {
+            color: var(--text-primary);
+            margin: 1.25rem 0 0.625rem;
+            font-weight: 600;
+        }
+
+        p, blockquote, ul, ol, dl, table, pre {
+            margin: 1.25rem 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        blockquote > :first-child {
+            margin-top: 0;
+        }
+
+        blockquote > :last-child {
+            margin-bottom: 0;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.875em;
+            color: var(--accent-color);
+            border: 1px solid var(--border-color);
+        }
+
+        pre {
+            background: var(--text-primary);
+            color: #e2e8f0;
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+            border: none;
+            font-size: 0.9375rem;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        article a {
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+        }
+
+        article a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-color);
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background: var(--bg-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.875rem;
+            text-align: left;
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        tr:hover {
+            background: var(--bg-secondary);
         }
 
         .mbtablestyle {
             border-collapse: collapse;
-            > table, td, th {
-                border: 1px solid black;
-                padding: 3px;
+        }
+
+        .mbtablestyle > table, 
+        .mbtablestyle td, 
+        .mbtablestyle th {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+
+        .tag-container {
+            margin: 1rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .tag-container code {
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-color));
+            color: white;
+            padding: 0.375rem 0.875rem;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border: none;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .tag-container code:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 2rem;
+            margin-top: auto;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-left {
+            text-align: left;
+        }
+
+        .footer-center {
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .footer-right {
+            text-align: right;
+        }
+
+        footer a {
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 2px;
+            transition: var(--transition);
+        }
+
+        footer a:hover {
+            border-bottom-color: white;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 240px 1fr;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            article {
+                padding: 2rem;
+            }
+
+            article h1 {
+                font-size: 2rem;
+            }
+
+            .search-form input[type="text"] {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-form {
+                width: 100%;
+            }
+
+            .search-form input[type="text"] {
+                flex: 1;
+                width: auto;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 1rem;
+            }
+
+            aside {
+                position: static;
+                max-height: none;
+            }
+
+            article {
+                padding: 1.5rem;
+            }
+
+            article h1 {
+                font-size: 1.75rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-left,
+            .footer-right {
+                text-align: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        article {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* Accessibility */
+        :focus-visible {
+            outline: 3px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+            header, aside, footer, .search-form {
+                display: none;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            article {
+                box-shadow: none;
+                border: none;
             }
         }
     </style>
@@ -82,73 +569,81 @@
 </head>
 <body>
     <header>
-        <div class="flex-container">
-            <div>
-                <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a>
+        <div class="header-content">
+            <div class="header-brand">
+                <a href="{{ site.baseurl }}/">{{ site.title }}</a>
+                <a href="https://github.com/iiko/front.api.sdk" style="font-size: 0.9375rem; padding: 0.375rem 0.875rem;">SDK</a>
             </div>
-            <div>
-                <form action="https://google.com/search" method="get">
-                    <input type="hidden" name="sitesearch" value="https://iiko.github.io/front.api.doc/" />
-                    <input type="text" name="q" />
-                    <input type="submit" value="Search Google">
-                </form>
-            </div>
+            <form class="search-form" action="https://google.com/search" method="get">
+                <input type="hidden" name="sitesearch" value="https://iiko.github.io/front.api.doc/" />
+                <input type="text" name="q" placeholder="Поиск по документации..." />
+                <input type="submit" value="Поиск">
+            </form>
         </div>
     </header>
-    <aside>
-        {% assign pagesByTitle = site.pages | where_exp: "post", "post.title" | sort: 'title' %}
+    
+    <div class="container">
+        <aside>
+            {% assign pagesByTitle = site.pages | where_exp: "post", "post.title" | sort: 'title' %}
 
-        <!-- common topics -->
-        {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = p.path | split:"/" | first %}
-        {% unless site.apiVersions contains apiVersionOfPage %}
-        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-        {% endunless %}
-        {% endfor %}
+            <!-- common topics -->
+            <b>Основное</b>
+            {% for p in pagesByTitle %}
+            {% assign apiVersionOfPage = p.path | split:"/" | first %}
+            {% unless site.apiVersions contains apiVersionOfPage %}
+            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% endunless %}
+            {% endfor %}
 
-        <!-- version-specific topics -->
-        {% for apiVersion in site.apiVersions reversed %}
-        {% assign hasVersionHeader = false %}
-        {% for p in pagesByTitle %}
-        {% assign apiVersionOfPage = p.path | split:"/" | first %}
-        {% if apiVersionOfPage == apiVersion %}
-        {% unless hasVersionHeader %}
-        {% assign hasVersionHeader = true %}
-        <br>
-        <b>{{ apiVersion }}</b><br>
-        {% endunless %}
-        &nbsp;<a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-        {% endif %}
-        {% endfor %}
-        {% endfor %}
-        <br>
-        <b>Code reference</b><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v7/">V7 (obsolete)</a><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v8/">V8 (current)</a><br>
-        &nbsp;<a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a><br>
-    </aside>
-    <article>
-        <h1 style="text-align:center">{% if page.title %}{{ page.title }}{% endif %}</h1>
-          {% if page.tags %}
-          <span>[
-          {% for tag in page.tags %}
-             {% capture tag_name %}{{ tag }}{% endcapture %}
-             <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
-          {% endfor %}
-          ]</span>
-          {% endif %}
-        {{ content }}
-    </article>
+            <!-- version-specific topics -->
+            {% for apiVersion in site.apiVersions reversed %}
+            {% assign hasVersionHeader = false %}
+            {% for p in pagesByTitle %}
+            {% assign apiVersionOfPage = p.path | split:"/" | first %}
+            {% if apiVersionOfPage == apiVersion %}
+            {% unless hasVersionHeader %}
+            {% assign hasVersionHeader = true %}
+            <b>{{ apiVersion }}</b>
+            {% endunless %}
+            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+            
+            <b>API Reference</b>
+            <a href="https://iiko.github.io/front.api.sdk/v7/">V7 (устарела)</a>
+            <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (текущая)</a>
+            <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (предпросмотр)</a>
+        </aside>
+        
+        <article>
+            <h1>{% if page.title %}{{ page.title }}{% endif %}</h1>
+            {% if page.tags %}
+            <div class="tag-container">
+                <span style="color: var(--text-muted); font-weight: 500;">Теги:</span>
+                {% for tag in page.tags %}
+                {% capture tag_name %}{{ tag }}{% endcapture %}
+                <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {{ content }}
+        </article>
+    </div>
+    
     <footer>
-        <div>
-            <div style="float: left">
-                Contacts: <a href="http://ru.iiko.help/articles/#!api-documentations/getting-started/">help.iiko.ru</a> | <a href="api@iiko.ru">api@iiko.ru</a>
+        <div class="footer-content">
+            <div class="footer-left">
+                <strong>Контакты:</strong><br>
+                <a href="http://ru.iiko.help/articles/#!api-documentations/getting-started/">help.iiko.ru</a> | 
+                <a href="mailto:api@iiko.ru">api@iiko.ru</a>
             </div>
-            <div style="float: right">
-                Last change: {{ site.time | date_to_long_string }} | <a href="https://github.com/iiko/front.api.doc/">View source</a>
+            <div class="footer-center">
+                © iiko, 2025
             </div>
-            <div style="margin: 0 auto">
-                iiko, 2025
+            <div class="footer-right">
+                Обновлено: {{ site.time | date: "%d.%m.%Y" }}<br>
+                <a href="https://github.com/iiko/front.api.doc/">Исходный код</a>
             </div>
         </div>
     </footer>
