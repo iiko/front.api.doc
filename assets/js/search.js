@@ -210,6 +210,28 @@
 
     // Построение индекса поиска
     function buildSearchIndex() {
+        // Загружаем данные из JSON индекса
+        const searchDataEl = document.getElementById('search-data');
+        if (searchDataEl) {
+            try {
+                const data = JSON.parse(searchDataEl.textContent);
+                if (data.pages) {
+                    data.pages.forEach(page => {
+                        searchIndex.push({
+                            title: page.title,
+                            url: page.url,
+                            date: page.date,
+                            tags: page.tags || [],
+                            type: getPageType(page.url),
+                            content: page.content || page.title
+                        });
+                    });
+                }
+            } catch (e) {
+                console.error('Failed to parse search data:', e);
+            }
+        }
+        
         // Получаем все страницы из навигации
         const links = document.querySelectorAll('aside a');
         
@@ -218,12 +240,16 @@
             const url = link.getAttribute('href');
             
             if (url && title) {
-                searchIndex.push({
-                    title: title,
-                    url: url,
-                    type: getPageType(url),
-                    content: title // В реальном случае можно загрузить контент страницы
-                });
+                // Проверяем, нет ли уже такой страницы в индексе
+                const exists = searchIndex.some(item => item.url === url);
+                if (!exists) {
+                    searchIndex.push({
+                        title: title,
+                        url: url,
+                        type: getPageType(url),
+                        content: title
+                    });
+                }
             }
         });
 
@@ -251,20 +277,24 @@
 
     // Определение типа страницы
     function getPageType(url) {
+        if (url.includes('/v9/')) return 'v9';
         if (url.includes('/v8/')) return 'v8';
         if (url.includes('/v7/')) return 'v7';
-        if (url.includes('/v9/')) return 'v9';
+        if (url.includes('/v6/')) return 'v6';
         if (url.includes('api.sdk')) return 'api-ref';
+        if (url.match(/\/\d{4}\/\d{2}\/\d{2}\//)) return 'post'; // Формат даты в URL
         return 'doc';
     }
 
     // Получение иконки для типа
     function getTypeIcon(type) {
         const icons = {
+            'v9': '📘',
             'v8': '📗',
             'v7': '📕',
-            'v9': '📘',
+            'v6': '📙',
             'api-ref': '🔧',
+            'post': '📝',
             'doc': '📄',
             'current': '📍'
         };
@@ -400,10 +430,30 @@
             typeTag.className = 'search-result-tag';
             typeTag.textContent = result.type.toUpperCase();
             
+            meta.appendChild(typeTag);
+            
+            // Добавляем дату если есть
+            if (result.date) {
+                const dateSpan = document.createElement('span');
+                dateSpan.textContent = '📅 ' + result.date;
+                meta.appendChild(dateSpan);
+            }
+            
+            // Добавляем теги если есть
+            if (result.tags && result.tags.length > 0) {
+                result.tags.slice(0, 3).forEach(tag => {
+                    const tagSpan = document.createElement('span');
+                    tagSpan.className = 'search-result-tag';
+                    tagSpan.textContent = tag;
+                    tagSpan.style.background = 'var(--secondary-color)';
+                    meta.appendChild(tagSpan);
+                });
+            }
+            
             const urlDisplay = document.createElement('span');
             urlDisplay.textContent = result.url;
-
-            meta.appendChild(typeTag);
+            urlDisplay.style.fontSize = '0.75rem';
+            urlDisplay.style.opacity = '0.7';
             meta.appendChild(urlDisplay);
 
             item.appendChild(title);

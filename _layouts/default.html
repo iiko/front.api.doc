@@ -756,5 +756,22 @@
             });
         })();
     </script>
+    
+    <!-- JSON индекс для поиска -->
+    <script type="application/json" id="search-data">
+    {
+        "pages": [
+            {% for post in site.posts %}
+            {
+                "title": {{ post.title | jsonify }},
+                "url": "{{ site.baseurl }}{{ post.url }}",
+                "date": "{{ post.date | date: '%d.%m.%Y' }}",
+                "tags": {{ post.tags | jsonify }},
+                "content": {{ post.content | strip_html | truncatewords: 100 | jsonify }}
+            }{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+        ]
+    }
+    </script>
 </body>
 </html>
