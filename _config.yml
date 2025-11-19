@@ -7,3 +7,10 @@ tag_page_dir: tag
 plugins:
   - jekyll-redirect-from
   - jekyll-tagging
+
+exclude:
+  - MODERNIZATION.md
+  - UI-COMPONENTS.md
+  - ENHANCEMENTS-GUIDE.md
+  - SEARCH-GUIDE.md
+  - SUMMARY.md
