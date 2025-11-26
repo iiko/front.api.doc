@@ -91,8 +91,7 @@
         }
 
         .header-brand a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .header-brand a::before {
@@ -251,7 +250,6 @@
 
         .menu-toggle:hover {
             background: var(--bg-secondary);
-            transform: scale(1.05);
         }
 
         .menu-toggle span {
@@ -324,6 +322,7 @@
             font-weight: 600;
             border-bottom: 3px solid var(--primary-color);
             padding-bottom: 0.5rem;
+            text-align: left;
         }
 
         article h3 {
@@ -331,6 +330,7 @@
             margin: 1.5rem 0 0.75rem;
             font-size: 1.5rem;
             font-weight: 600;
+            text-align: left;
         }
 
         article h4, article h5, article h6 {
@@ -372,7 +372,7 @@
             border-radius: var(--radius-sm);
             font-family: 'JetBrains Mono', 'Courier New', monospace;
             font-size: 0.875em;
-            color: #E31E24;
+            color: var(--text-primary);
             border: 1px solid var(--border-color);
         }
 
@@ -573,8 +573,7 @@
             }
 
             aside {
-                position: static;
-                max-height: none;
+                width: 280px;
             }
 
             article {
@@ -664,7 +663,7 @@
 
         body.dark-theme code {
             background: #2d2d2d;
-            color: #ff4d52;
+            color: #e2e8f0;
         }
 
         /* Theme Toggle Button */
@@ -680,7 +679,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: var(--shadow-xl);
+            box-shadow: var(--shadow-lg);
             transition: var(--transition);
             z-index: 1000;
             display: flex;
@@ -689,8 +688,7 @@
         }
 
         .theme-toggle:hover {
-            transform: scale(1.1) rotate(180deg);
-            box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-xl);
         }
 
         .theme-toggle:active {
@@ -842,12 +840,6 @@
                 const isDark = body.classList.contains('dark-theme');
                 themeIcon.textContent = isDark ? '☀️' : '🌙';
                 localStorage.setItem('theme', isDark ? 'dark' : 'light');
-                
-                // Add rotation animation
-                this.style.transform = 'scale(1.1) rotate(360deg)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 300);
             });
         })();
     </script>
