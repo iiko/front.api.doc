@@ -1,6 +1,7 @@
 ---
 title: Шаблонизация через RazorEngine для печатных форм
 layout: default
+tags: v8
 ---
 
 Опубликован новый пример [`SampleRazorRunner`](https://github.com/iiko/front.api.sdk/tree/master/sample/v8/Resto.Front.Api.SampleRazorRunner), который показывает возможности использования Razor разметки в комбинации с данными, полученными из Resto.Front.Api.

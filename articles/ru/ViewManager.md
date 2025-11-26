@@ -1,6 +1,7 @@
 ---
 title: Диалоговые окна
 layout: default
+tags: v6
 ---
 # Возможности ViewManager 
 ## «Точки входа» 

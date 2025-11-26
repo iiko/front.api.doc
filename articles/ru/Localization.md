@@ -1,6 +1,7 @@
 ---
 title: Локализация
 layout: default
+tags: v7
 ---
 # Локализация #
 
