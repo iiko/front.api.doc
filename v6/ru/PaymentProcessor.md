@@ -238,7 +238,7 @@ public class IsCardClass
 
 public void ReturnPayment(decimal sum, Guid? orderId, Guid paymentTypeId, Guid transactionId, [NotNull] IPointOfSale pointOfSale, [NotNull] IUser cashier, IReceiptPrinter printer, IViewManager viewManager, IPaymentDataContext context, IProgressBar progressBar)
 {
-    // Выполняктся произвольные методы. Например, по id транзакции платёж   озвращаетется в некой hotelSystem, которая вернет true, если платёж  успешно ткатился и false, если возврат не удался.
+    // Выполняются произвольные методы. Например, по id транзакции платёж возвращается в некой hotelSystem, которая вернет true, если платёж успешно откатился и false, если возврат не удался.
     var success = hotelSystem.ProcessReturnPayment(transactionId);
     if (!success)
         throw new PaymentActionFailedException("Не получилось вернуть плату.");

@@ -1,6 +1,7 @@
 ---
 title: Добавлена возможность объединять заказы в дозаказ через API
 layout: default
+tags: v8
 ---
 
 В API V8 добавлен метод [`MarkOrderAsAdditional`](https://iiko.github.io/front.api.sdk/v8/html/M_Resto_Front_Api_Editors_IEditSession_MarkOrderAsAdditional.htm) , который позволяет назначить

@@ -1,6 +1,7 @@
 ---
 title: Бригады официантов 
 layout: default
+tags: v8preview2 v8
 ---
 
 В API V8Preview2 появилась возможность работать с бригадами официантов.
