@@ -74,7 +74,7 @@
             border-radius: var(--radius-md);
             font-size: 1.125rem;
             font-family: 'Inter', sans-serif;
-            background: white;
+            background: var(--bg-color);
             color: var(--text-primary);
             box-shadow: var(--shadow-md);
             outline: none;
