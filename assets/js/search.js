@@ -282,7 +282,7 @@
         if (url.includes('/v7/')) return 'v7';
         if (url.includes('/v6/')) return 'v6';
         if (url.includes('api.sdk')) return 'api-ref';
-        if (url.match(/\/\d{4}\/\d{2}\/\d{2}\//)) return 'post'; // Формат даты в URL
+        if (url.match(/\/\d{4}\/\d{2}\/\d{2}\//)) return 'post'; // Matches URLs with date in /YYYY/MM/DD/ format (e.g., /2024/06/01/)
         return 'doc';
     }
 
@@ -392,11 +392,19 @@
         return excerpt;
     }
 
+    // Экранирование специальных символов regex
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
     // Подсветка совпадений
     function highlightMatches(text, query) {
         if (!query) return text;
         
-        const regex = new RegExp(`(${query.split(' ').filter(w => w.length > 1).join('|')})`, 'gi');
+        const regex = new RegExp(
+            `(${query.split(' ').filter(w => w.length > 1).map(escapeRegExp).join('|')})`,
+            'gi'
+        );
         return text.replace(regex, '<mark>$1</mark>');
     }
 
@@ -487,20 +495,36 @@
 
     // Нет результатов
     function showNoResults(query) {
-        searchResults.innerHTML = `
-            <div class="search-no-results">
-                <div class="search-no-results-icon">😔</div>
-                <div style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
-                    Ничего не найдено
-                </div>
-                <div style="font-size: 0.9375rem; margin-bottom: 1rem;">
-                    По запросу "<strong>${query}</strong>" результатов нет
-                </div>
-                <div style="font-size: 0.875rem; color: var(--text-muted);">
-                    💡 Попробуйте изменить запрос или использовать другие ключевые слова
-                </div>
-            </div>
-        `;
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'search-no-results';
+        
+        const icon = document.createElement('div');
+        icon.className = 'search-no-results-icon';
+        icon.textContent = '😔';
+        
+        const title = document.createElement('div');
+        title.style.cssText = 'font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;';
+        title.textContent = 'Ничего не найдено';
+        
+        const message = document.createElement('div');
+        message.style.cssText = 'font-size: 0.9375rem; margin-bottom: 1rem;';
+        message.innerHTML = 'По запросу "';
+        const querySpan = document.createElement('strong');
+        querySpan.textContent = query;
+        message.appendChild(querySpan);
+        message.innerHTML += '" результатов нет';
+        
+        const hint = document.createElement('div');
+        hint.style.cssText = 'font-size: 0.875rem; color: var(--text-muted);';
+        hint.textContent = '💡 Попробуйте изменить запрос или использовать другие ключевые слова';
+        
+        noResultsDiv.appendChild(icon);
+        noResultsDiv.appendChild(title);
+        noResultsDiv.appendChild(message);
+        noResultsDiv.appendChild(hint);
+        
+        searchResults.innerHTML = '';
+        searchResults.appendChild(noResultsDiv);
     }
 
     // Навигация с клавиатуры
@@ -559,6 +583,7 @@
     // Проверка фокуса на input элементе
     function isInputFocused() {
         const active = document.activeElement;
+        if (!active) return false;
         return active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable;
     }
 

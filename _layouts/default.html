@@ -15,7 +15,7 @@
             --primary-dark: #c41a1f;
             --primary-light: #ff3339;
             --secondary-color: #ff4d52;
-            --accent-color: #E31E24;
+            --accent-color: #1E90FF;
             --success-color: #10b981;
             --bg-color: #ffffff;
             --bg-secondary: #f8f9fa;
@@ -871,10 +871,12 @@
                 menuOverlay.classList.toggle('active');
                 aside.classList.toggle('open');
                 
-                // Prevent body scroll when menu is open
+                // Update aria-label dynamically
                 if (aside.classList.contains('open')) {
+                    menuToggle.setAttribute('aria-label', 'Закрыть меню');
                     document.body.style.overflow = 'hidden';
                 } else {
+                    menuToggle.setAttribute('aria-label', 'Открыть меню');
                     document.body.style.overflow = '';
                 }
             }
@@ -883,6 +885,7 @@
                 menuToggle.classList.remove('active');
                 menuOverlay.classList.remove('active');
                 aside.classList.remove('open');
+                menuToggle.setAttribute('aria-label', 'Открыть меню');
                 document.body.style.overflow = '';
             }
             

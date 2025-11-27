@@ -24,7 +24,7 @@ layout: default
             <strong>Установите SDK:</strong> Скачайте <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a> с GitHub
         </li>
         <li style="margin: 0.75rem 0;">
-            <strong>Начните разработку:</strong> Создайте свой первый плагин используя примеры из документации
+            <strong>Начните разработку:</strong> Создайте свой первый плагин, используя примеры из документации
         </li>
         <li style="margin: 0.75rem 0;">
             <strong>Следите за изменениями:</strong> Читайте <a href="{{ site.baseurl }}/changelog.html">changelog</a> для актуальной информации об обновлениях

@@ -138,8 +138,12 @@ function initCodeCopy() {
         
         button.addEventListener('click', async () => {
             const code = pre.querySelector('code')?.textContent || pre.textContent;
-            await navigator.clipboard.writeText(code);
-            button.innerHTML = '✅ Copied!';
+            try {
+                await navigator.clipboard.writeText(code);
+                button.innerHTML = '✅ Copied!';
+            } catch (err) {
+                button.innerHTML = '❌ Copy failed';
+            }
             setTimeout(() => {
                 button.innerHTML = '📋 Copy';
             }, 2000);
@@ -275,10 +279,11 @@ function initLazyLoading() {
 
 // 10. Уведомления о новых обновлениях
 function initUpdateNotification() {
+    const ONE_DAY_MS = 24 * 60 * 60 * 1000;
     const lastVisit = localStorage.getItem('lastVisit');
     const currentTime = new Date().getTime();
     
-    if (!lastVisit || (currentTime - parseInt(lastVisit)) > 86400000) { // 24 часа
+    if (!lastVisit || (currentTime - parseInt(lastVisit)) > ONE_DAY_MS) {
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;
@@ -296,7 +301,7 @@ function initUpdateNotification() {
         notification.innerHTML = `
             <strong>✨ Обновления!</strong>
             <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">
-                Ознакомьтесь с последними изменениями в <a href="/changelog.html" style="color: white; text-decoration: underline;">Changelog</a>
+                Ознакомьтесь с последними изменениями в <a href="changelog.html" style="color: white; text-decoration: underline;">Changelog</a>
             </p>
             <button onclick="this.parentElement.remove()" style="
                 position: absolute;
