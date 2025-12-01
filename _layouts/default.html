@@ -8,95 +8,72 @@
     {% endif %}
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
-        body {
-            background: #f7f7f7;
-            color: #222;
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            font-size: 16px;
-            margin: 0;
-        }
-        header, footer {
-            background: #eaeaea;
-            color: #444;
-            padding: 16px 0;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+        header
+        {
+            background-color: lightgray;
             text-align: center;
+            padding: 5px;
         }
-        aside {
-            background: #eaeaea;
-            padding: 20px 16px;
-            margin: 0 24px 24px 0;
-            border-radius: 8px;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+
+        aside
+        {
+            background-color: #eeeeee;
             float: left;
+            padding: 5px;
+            margin: 0px 20px 10px 0px;
             width: 250px;
-            word-break: break-word;
-            overflow-wrap: anywhere;
         }
-        article {
-            background: #fff;
-            margin: 24px 24px 48px 280px;
-            padding: 32px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            word-break: break-word;
-            overflow-wrap: anywhere;
+
+        article
+        {
+            margin: 5px 5px 50px 280px;
         }
-        pre, code {
-            white-space: pre-wrap;
-            word-break: break-word;
-            overflow-wrap: anywhere;
+
+        footer
+        {
+            background-color: lightgray;
+            text-align: center;
+            padding: 5px;
         }
-        p, blockquote, ul, ol, dl, table, pre {
+
+        p, blockquote, ul, ol, dl, table, pre
+        {
             margin: 15px 0;
         }
-        blockquote {
-            border-left: 4px solid #b0b0b0;
+
+        blockquote
+        {
+            border-left: 4px solid lightgray;
             padding: 0 15px;
-            color: #666;
-            background: #ececec;
-            border-radius: 6px;
+            color: gray;
         }
-        blockquote > :first-child {
+
+        blockquote > :first-child
+        {
             margin-top: 0px;
         }
-        blockquote > :last-child {
+
+        blockquote > :last-child
+        {
             margin-bottom: 0px;
         }
+
+        body
+        {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
         .flex-container {
             display: flex;
             justify-content: space-between;
         }
+
         .mbtablestyle {
             border-collapse: collapse;
-        }
-        .mbtablestyle table, .mbtablestyle td, .mbtablestyle th {
-            border: 1px solid #b0b0b0;
-            padding: 3px;
-        }
-        a {
-            color: #3a6ea5;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        a:hover {
-            color: #274472;
-            text-decoration: underline;
-        }
-        .version-note {
-            background: #ececec;
-            border-left: 4px solid #b0b0b0;
-            padding: 0.5em 1em;
-            margin: 1em 0;
-            border-radius: 6px;
-            color: #444;
-        }
-        input[type="text"], input[type="submit"] {
-            border: none;
-            background: #fff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+            > table, td, th {
+                border: 1px solid black;
+                padding: 3px;
+            }
         }
     </style>
     {% if page.tags %}
