@@ -508,11 +508,11 @@
         
         const message = document.createElement('div');
         message.style.cssText = 'font-size: 0.9375rem; margin-bottom: 1rem;';
-        message.innerHTML = 'По запросу "';
+        message.appendChild(document.createTextNode('По запросу "'));
         const querySpan = document.createElement('strong');
         querySpan.textContent = query;
         message.appendChild(querySpan);
-        message.innerHTML += '" результатов нет';
+        message.appendChild(document.createTextNode('" результатов нет'));
         
         const hint = document.createElement('div');
         hint.style.cssText = 'font-size: 0.875rem; color: var(--text-muted);';
