@@ -298,8 +298,8 @@ function initUpdateNotification() {
             animation: slideIn 0.5s ease-out;
         `;
         
-        // Build changelog URL dynamically to support subdirectory deployment
-        const changelogUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '') + '/changelog.html';
+        // Use a relative URL for changelog to support subdirectory deployment
+        const changelogUrl = 'changelog.html';
         notification.innerHTML = `
             <strong>✨ Обновления!</strong>
             <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">
