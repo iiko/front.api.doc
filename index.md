@@ -63,12 +63,12 @@ layout: default
         <h3 style="margin-top: 0; color: var(--success-color); font-size: 1.25rem;">🔌 Интеграции</h3>
         <p style="margin-bottom: 0;">Подключать внешние системы приема заказов (веб-сайты, мобильные приложения)</p>
     </div>
-    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #f59e0b;">
-        <h3 style="margin-top: 0; color: #f59e0b; font-size: 1.25rem;">📊 Аналитика</h3>
+    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--warning-color);">
+        <h3 style="margin-top: 0; color: var(--warning-color); font-size: 1.25rem;">📊 Аналитика</h3>
         <p style="margin-bottom: 0;">Собирать статистику и строить собственные отчеты</p>
     </div>
-    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid #ec4899;">
-        <h3 style="margin-top: 0; color: #ec4899; font-size: 1.25rem;">💳 Платежные системы</h3>
+    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border-left: 4px solid var(--info-color);">
+        <h3 style="margin-top: 0; color: var(--info-color); font-size: 1.25rem;">💳 Платежные системы</h3>
         <p style="margin-bottom: 0;">Подключать внешние платежные системы и терминалы</p>
     </div>
 </div>
