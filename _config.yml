@@ -10,4 +10,4 @@ plugins:
 
 # Исключить из сборки сайта
 exclude:
-  - VERSION_GRAPH_STRUCTURE.md
+  

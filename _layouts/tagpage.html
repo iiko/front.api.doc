@@ -4,10 +4,19 @@ layout: default
 <div class="post">
 <h1>Tag: {{ page.tag }}</h1>
 <ul>
-{% for post in site.tags[page.tag] %}
+{% for post in site.posts %}
+  {% if post.tags contains page.tag %}
   <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
     {{ post.description }}
   </li>
+  {% endif %}
+{% endfor %}
+{% for p in site.pages %}
+  {% if p.path contains 'articles/' and p.tags contains page.tag %}
+  <li><a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
+    {{ p.description }}
+  </li>
+  {% endif %}
 {% endfor %}
 </ul>
 </div>
