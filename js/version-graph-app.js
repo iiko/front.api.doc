@@ -30,10 +30,8 @@ const VersionGraphApp = {
    */
   bindFilters() {
     const filters = [
-      { selector: CONFIG.SELECTORS.FILTER_ACTUAL, key: 'actual' },
       { selector: CONFIG.SELECTORS.FILTER_LTS, key: 'lts' },
-      { selector: CONFIG.SELECTORS.FILTER_PREVIEW, key: 'preview' },
-      { selector: CONFIG.SELECTORS.FILTER_UNRELEASED, key: 'unreleased' }
+      { selector: CONFIG.SELECTORS.FILTER_PREVIEW, key: 'preview' }
     ];
     
     filters.forEach(({ selector, key }) => {

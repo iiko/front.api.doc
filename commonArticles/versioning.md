@@ -18,17 +18,11 @@ Preview-версии являются копиями промежуточных 
 ### График выпуска
 
 <div style="margin-bottom: 10px;">
-  <label style="margin-right: 15px;">
-    <input type="checkbox" id="filter-actual" checked> Только актуальные версии (V7+)
-  </label>
   <label>
     <input type="checkbox" id="filter-lts" checked> LTS
   </label>
   <label style="margin-left: 10px;">
     <input type="checkbox" id="filter-preview" checked> Preview
-  </label>
-  <label style="margin-left: 10px;">
-    <input type="checkbox" id="filter-unreleased" checked> Невыпущенные версии
   </label>
 </div>
 

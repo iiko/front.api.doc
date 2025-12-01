@@ -7,10 +7,8 @@
 
 const FilterManager = {
   state: {
-    actual: true,
     lts: true,
-    preview: true,
-    unreleased: true
+    preview: true
   },
 
   listeners: [],
@@ -40,21 +38,11 @@ const FilterManager = {
    */
   applyFilters(apiVersions) {
     return apiVersions.filter(api => {
-      // Фильтр по актуальности
-      if (this.state.actual && !api.actual) {
-        return false;
-      }
-      
       // Фильтр по типу
       if (!this.state.lts && api.type === 'lts') {
         return false;
       }
       if (!this.state.preview && api.type === 'preview') {
-        return false;
-      }
-      
-      // Фильтр по статусу выпуска
-      if (!this.state.unreleased && !api.released) {
         return false;
       }
       

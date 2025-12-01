@@ -22,10 +22,8 @@ const CONFIG = {
   },
   SELECTORS: {
     CONTAINER: '#api-version-graph',
-    FILTER_ACTUAL: '#filter-actual',
     FILTER_LTS: '#filter-lts',
     FILTER_PREVIEW: '#filter-preview',
-    FILTER_UNRELEASED: '#filter-unreleased',
     TBODY_ROWS: 'tbody tr',
     HEADER_CELLS: 'thead tr:nth-child(2) th'
   },
