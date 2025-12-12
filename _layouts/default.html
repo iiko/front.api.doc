@@ -760,17 +760,20 @@
         &nbsp;<a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a><br>
     </aside>
     <article>
-        <h1 style="text-align:center">{% if page.title %}{{ page.title }}{% endif %}</h1>
-          {% if page.tags %}
-          <span>[
-          {% for tag in page.tags %}
-             {% capture tag_name %}{{ tag }}{% endcapture %}
-             <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code>&nbsp;</a>
-          {% endfor %}
-          ]</span>
-          {% endif %}
+        <h1>{% if page.title %}{{ page.title }}{% endif %}</h1>
+        {% if page.tags %}
+        <div class="tag-container">
+            <span style="color: var(--text-muted); font-weight: 500;">Теги:</span>
+            {% for tag in page.tags %}
+            {% capture tag_name %}{{ tag }}{% endcapture %}
+            <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
+            {% endfor %}
+        </div>
+        {% endif %}
         {{ content }}
     </article>
+    </div>
+    
     <footer>
         <div class="footer-content">
             <div class="footer-left">
