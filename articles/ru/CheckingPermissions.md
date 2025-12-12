@@ -2,6 +2,7 @@
 title: Проверка и запрос прав
 layout: default
 tags: v7
+permalink: /v7/ru/CheckingPermissions.html
 ---
 # Проверка и запрос прав #
 

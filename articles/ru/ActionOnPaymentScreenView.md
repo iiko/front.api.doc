@@ -2,6 +2,7 @@
 title: Экран кассы
 layout: default
 tags: v7
+permalink: /v7/ru/ActionOnPaymentScreenView.html
 ---
 # Расширение функционала экрана кассы #
 

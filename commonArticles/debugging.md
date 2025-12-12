@@ -1,6 +1,7 @@
 ---
 title: Отладка
 layout: default
+permalink: /debugging.html
 redirect_from:
   - /v6/ru/Debugging
   - /v7/ru/Debugging

@@ -2,6 +2,7 @@
 title: Диалоговые окна
 layout: default
 tags: v6
+permalink: /v6/ru/ViewManager.html
 ---
 # Возможности ViewManager 
 ## «Точки входа» 

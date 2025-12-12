@@ -2,6 +2,7 @@
 title: Окна запроса даты и времени
 layout: default
 tags: v7
+permalink: /v7/ru/DateTimePopups.html
 ---
 # Окна запроса даты и времени #
 

@@ -2,6 +2,7 @@
 title: Чаевые и пожертвования
 layout: default
 tags: v6
+permalink: /v6/ru/Donations.html
 ---
 ## Добавление чаевых
 Для добавления чаевых в заказ существует метод:

@@ -1,6 +1,7 @@
 ---
 title: История изменений
 layout: default
+permalink: /changelog.html
 ---
 <table>
 {% for p in site.posts %}

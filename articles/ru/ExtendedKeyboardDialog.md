@@ -2,6 +2,7 @@
 title: Диалог ввода строк и штрихкодов
 layout: default
 tags: v7
+permalink: /v7/ru/ExtendedKeyboardDialog.html
 ---
 # Диалог ввода строк и штрихкодов #
 

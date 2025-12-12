@@ -2,6 +2,7 @@
 title: Группы и точки продаж
 layout: default
 tags: v6
+permalink: /v6/ru/GroupsAndPointsOfSale.html
 ---
 ## Основные понятия ##
 

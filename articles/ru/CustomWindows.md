@@ -2,6 +2,7 @@
 title: Произвольные окна
 layout: default
 tags: v6
+permalink: /v6/ru/CustomWindows.html
 ---
 # FAQ по UI и .Net 
 Если [диалоговых окон iikoFront API](ViewManager.html "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.

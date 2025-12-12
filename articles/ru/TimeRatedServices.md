@@ -2,6 +2,7 @@
 title: Повременные услуги
 layout: default
 tags: v6
+permalink: /v6/ru/TimeRatedServices.html
 ---
 ## Общее описание 
 

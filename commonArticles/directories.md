@@ -1,6 +1,7 @@
 ---
 title: Структура папок 
 layout: default
+permalink: /directories.html
 ---
 # Общая информация #
 Каждый плагин устанавливается в свою собственную папку внутри папки *Plugins* ([V4+]({{ site.baseurl }}/2015/10/23/load-plugins-from-subdirectories.html)).

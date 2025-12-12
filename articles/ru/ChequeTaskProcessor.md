@@ -2,6 +2,7 @@
 title: Расширение функционала фискального регистратора 
 layout: default
 tags: v6
+permalink: /v6/ru/ChequeTaskProcessor.html
 ---
 
 ## Введение

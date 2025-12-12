@@ -2,6 +2,7 @@
 title: Оплатные действия
 layout: default
 tags: v6
+permalink: /v6/ru/Payments.html
 ---
 ## Добавление оплат
 Для добавления оплаты в заказ существуют методы:

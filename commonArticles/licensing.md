@@ -1,6 +1,7 @@
 ---
 title: Лицензирование
 layout: default
+permalink: /licensing.html
 redirect_from:
   - Licensing
   - /v6/ru/Licensing

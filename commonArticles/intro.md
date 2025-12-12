@@ -1,6 +1,7 @@
 ---
 title: Введение
 layout: default
+permalink: /intro.html
 redirect_from:
   - Intro
   - /v6/ru/Intro

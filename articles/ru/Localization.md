@@ -2,6 +2,7 @@
 title: Локализация
 layout: default
 tags: v7
+permalink: /v7/ru/Localization.html
 ---
 # Локализация #
 

@@ -2,6 +2,7 @@
 title: Создание доставки с полем адреса Line1
 layout: default
 tags: v8
+permalink: /v8/ru/AddressWithLine1.html
 ---
 В API V8 появилась возможность создавать доставки, где адрес, вместо полей город, улица, дом, корпус, формируется с помощью поля [Line1](https://iiko.github.io/front.api.sdk/v8/html/P_Resto_Front_Api_Data_Brd_IAddress_Line1.htm).
 

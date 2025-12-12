@@ -2,6 +2,7 @@
 title: Показ относительного количества модификаторов
 layout: default
 tags: v7
+permalink: /v7/ru/DisplayRelativeNumberOfModifiers.html
 ---
 
 С учетом значения настройки `IRestaurant.DisplayRelativeNumberOfModifiers` в iikoFront рассчитывается количество порций модификатора в строковом виде, которое отображается на UI.

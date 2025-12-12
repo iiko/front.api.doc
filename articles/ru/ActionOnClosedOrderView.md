@@ -2,6 +2,7 @@
 title: Экран закрытого заказа 
 layout: default
 tags: v6
+permalink: /v6/ru/ActionOnClosedOrderView.html
 ---
 # Расширение функционала экрана закрытого заказа #
 
