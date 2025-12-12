@@ -1,23 +1,42 @@
 ---
 layout: default
 ---
-<div class="post">
-<h1>Tag: {{ page.tag }}</h1>
-<ul>
-{% for post in site.posts %}
-  {% if post.tags contains page.tag %}
-  <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> ({{ post.date | date_to_string }})<br>
-    {{ post.description }}
-  </li>
+<div class="tag-page">
+    <div style="background: linear-gradient(135deg, #E31E24, #ff4d52); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 2rem; color: white;">
+        <h2 style="margin: 0; color: white; border: none; padding: 0; font-size: 1.5rem;">
+            🏷️ Страницы с тегом: <span style="background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px;">{{ page.tag }}</span>
+        </h2>
+    </div>
+    
+    <ul style="list-style: none; padding: 0;">
+    {% for post in site.posts %}
+        {% if post.tags contains page.tag %}
+        <li style="background: var(--bg-secondary); padding: 1.25rem; margin-bottom: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary-color); transition: var(--transition);">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <a href="{{ site.baseurl }}{{ post.url }}" style="font-size: 1.125rem; font-weight: 600; color: var(--primary-color); text-decoration: none;">
+                        {{ post.title }}
+                    </a>
+                    {% if post.description %}
+                    <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.9375rem;">
+                        {{ post.description }}
+                    </p>
+                    {% endif %}
+                </div>
+                <div style="color: var(--text-muted); font-size: 0.875rem; white-space: nowrap;">
+                    📅 {{ post.date | date: "%d.%m.%Y" }}
+                </div>
+            </div>
+        </li>
+          {% endif %}
+    {% endfor %}
+    {% for p in site.pages %}
+        {% if p.path contains 'articles/' and p.tags contains page.tag %}
+        <li><a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
+        {{ p.description }}
+    </li>
   {% endif %}
-{% endfor %}
-{% for p in site.pages %}
-  {% if p.path contains 'articles/' and p.tags contains page.tag %}
-  <li><a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a><br>
-    {{ p.description }}
-  </li>
-  {% endif %}
-{% endfor %}
-</ul>
+    {% endfor %}
+    </ul>
 </div>
-<hr>
+<hr style="border: none; height: 2px; background: linear-gradient(to right, transparent, var(--border-color), transparent); margin: 2rem 0;">

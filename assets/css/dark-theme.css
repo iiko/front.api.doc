@@ -1,0 +1,46 @@
+/* Dark Theme Support - Add this to enable dark mode */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-color: #3b82f6;
+        --primary-dark: #60a5fa;
+        --primary-light: #2563eb;
+        --secondary-color: #0ea5e9;
+        --accent-color: #a78bfa;
+        --success-color: #34d399;
+        --bg-color: #1e293b;
+        --bg-secondary: #0f172a;
+        --bg-tertiary: #334155;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --text-muted: #94a3b8;
+        --border-color: #334155;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    pre {
+        background: #0f172a;
+        color: #e2e8f0;
+    }
+
+    code {
+        background: #334155;
+        color: #a78bfa;
+    }
+
+    .search-form input[type="text"] {
+        background: #334155;
+        color: #f1f5f9;
+    }
+
+    .search-form input[type="submit"] {
+        background: #334155;
+        color: #3b82f6;
+    }
+
+    .search-form input[type="submit"]:hover {
+        background: #475569;
+    }
+}
