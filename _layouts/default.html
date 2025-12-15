@@ -752,6 +752,12 @@
         <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
         {% endif %}
         {% endfor %}
+        <!-- Облако тегов -->
+        {% for p in pagesByTitle %}
+        {% if p.title == "Облако тэгов" %}
+        <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
 
         <b>Статьи</b>
         <!-- version-specific topics -->
