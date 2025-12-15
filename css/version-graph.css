@@ -1,0 +1,225 @@
+/* ============================================================================
+   API VERSION GRAPH STYLES
+   Стили для таблицы жизненного цикла версий API
+   ============================================================================ */
+
+/* ============================================================================
+   CSS ПЕРЕМЕННЫЕ
+   ============================================================================ */
+:root {
+  /* Цвета */
+  --color-lts: #66bb6a;
+  --color-lts-dev: #fff9c4;
+  --color-preview: #42a5f5;
+  --color-highlight: #ffd700;
+  --color-highlight-border: #ffa500;
+  --color-highlight-hover: #ff8c00;
+  --color-highlight-subtle: #ffe680;
+  
+  /* Градиенты заголовков */
+  --gradient-header: linear-gradient(180deg, #455a64 0%, #37474f 100%);
+  --gradient-year: linear-gradient(180deg, #607d8b 0%, #546e7a 100%);
+  
+  /* Фоны */
+  --bg-white: white;
+  --bg-api-name: #fafbfc;
+  --bg-hover-row: rgba(255, 247, 205, 0.3);
+  
+  /* Границы */
+  --border-cell: 1px solid #e1e4e8;
+  --border-year-separator: 3px solid #bbb;
+  --border-api-column: 2px solid #d1d5da;
+  
+  /* Отступы */
+  --padding-cell: 4px 6px;
+  --padding-api-name: 4px 8px;
+  
+  /* Размеры шрифтов */
+  --font-size-base: 10px;
+  --font-size-header: 8px;
+  --font-size-year: 10px;
+  --font-size-api-name: 10px;
+  
+  /* Минимальные размеры */
+  --min-cell-width: 24px;
+  --min-api-name-width: 85px;
+  
+  /* Z-индексы */
+  --z-api-name: 5;
+  --z-header: 10;
+  --z-sticky-corner: 20;
+  
+  /* Шрифты */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Consolas", "Liberation Mono", Menlo, monospace;
+  
+  /* Эффекты */
+  --transition-base: all 0.15s ease;
+  --shadow-table: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-highlight: 0 0 0 2px var(--color-highlight-hover);
+  --shadow-cell-inset: inset 0 0 0 1px var(--color-highlight-border);
+}
+
+/* ============================================================================
+   БАЗОВАЯ СТРУКТУРА
+   ============================================================================ */
+
+#api-version-graph { 
+  overflow-x: auto; 
+  max-height: 600px; 
+  overflow-y: auto; 
+  position: relative;
+  border-radius: 6px;
+  box-shadow: var(--shadow-table);
+}
+
+.api-version-graph-table { 
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--font-size-base);
+  margin: 0; 
+  width: auto;
+  font-family: var(--font-sans);
+  border-radius: 6px;
+}
+
+/* ============================================================================
+   ЯЧЕЙКИ И ГРАНИЦЫ
+   ============================================================================ */
+
+.api-version-graph-table th,
+.api-version-graph-table td { 
+  border-right: var(--border-cell);
+  border-bottom: var(--border-cell);
+  padding: var(--padding-cell);
+  text-align: center; 
+  min-width: var(--min-cell-width);
+  transition: var(--transition-base);
+  background: var(--bg-white);
+}
+
+.api-version-graph-table th:first-child,
+.api-version-graph-table td:first-child { 
+  border-left: var(--border-cell);
+}
+
+.api-version-graph-table thead tr:first-child th { 
+  border-top: var(--border-cell);
+}
+
+/* ============================================================================
+   STICKY ПОЗИЦИОНИРОВАНИЕ
+   ============================================================================ */
+
+.api-version-graph-table .api-name { 
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-align: left; 
+  background: var(--bg-api-name);
+  min-width: var(--min-api-name-width);
+  font-size: var(--font-size-api-name);
+  padding: var(--padding-api-name);
+  position: sticky; 
+  left: 0; 
+  z-index: var(--z-api-name);
+  border-right: var(--border-api-column);
+}
+
+.api-version-graph-table th { 
+  position: sticky; 
+  top: 0; 
+  font-size: var(--font-size-header);
+  z-index: var(--z-header);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.api-version-graph-table thead th:first-child {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: var(--z-sticky-corner);
+}
+
+.api-version-graph-table th.year-header { 
+  font-size: var(--font-size-year);
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.api-version-graph-table th.year-separator,
+.api-version-graph-table td.year-separator { 
+  border-left: var(--border-year-separator);
+}
+
+/* ============================================================================
+   ЦВЕТОВАЯ СХЕМА
+   ============================================================================ */
+
+.api-version-graph-table th { 
+  background: var(--gradient-header);
+}
+
+.api-version-graph-table th.year-header { 
+  background: var(--gradient-year);
+}
+
+.api-version-graph-table td.lts { 
+  background: var(--color-lts);
+}
+
+.api-version-graph-table td.lts-dev { 
+  background: var(--color-lts-dev);
+}
+
+.api-version-graph-table td.preview { 
+  background: var(--color-preview);
+}
+
+/* ============================================================================
+   ИНТЕРАКТИВНОСТЬ
+   ============================================================================ */
+
+.api-version-graph-table tbody tr:hover { 
+  background: var(--bg-hover-row);
+}
+
+/* Подсветка строки */
+.api-version-graph-table tbody tr.highlight .api-name {
+  background: var(--color-highlight-subtle);
+}
+
+.api-version-graph-table tbody tr.highlight td.lts,
+.api-version-graph-table tbody tr.highlight td.preview {
+  background: var(--color-highlight);
+}
+
+.api-version-graph-table tbody tr.highlight td.lts-dev {
+  background: var(--color-highlight-subtle);
+}
+
+/* Подсветка заголовка столбца */
+.api-version-graph-table th.highlight-col {
+  background: var(--color-highlight-hover);
+  box-shadow: var(--shadow-highlight);
+}
+
+/* Подсветка ячейки при наведении на столбец */
+.api-version-graph-table td.highlight-cell {
+  background: var(--color-highlight);
+  box-shadow: var(--shadow-cell-inset);
+}
+
+/* Подсветка названия API при наведении на столбец */
+.api-version-graph-table .api-name.highlight-api-name {
+  background: var(--color-highlight-subtle);
+  font-weight: 700;
+}
+
+/* Скрытие строк */
+.api-version-graph-table tr.hidden { 
+  display: none;
+}

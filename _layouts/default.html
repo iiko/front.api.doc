@@ -737,61 +737,55 @@
         <aside>
             {% assign pagesByTitle = site.pages | where_exp: "post", "post.title" | sort: 'title' %}
 
-            <!-- common topics -->
-            <b>Основное</b>
-            <!-- Главная страница всегда первая -->
-            {% for p in pagesByTitle %}
-            {% assign apiVersionOfPage = p.path | split:"/" | first %}
-            {% unless site.apiVersions contains apiVersionOfPage %}
-            {% if p.url == "/" or p.url == "/index.html" or p.title == "Главная" %}
-            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
-            {% endif %}
-            {% endunless %}
-            {% endfor %}
-            <!-- Остальные страницы -->
-            {% for p in pagesByTitle %}
-            {% assign apiVersionOfPage = p.path | split:"/" | first %}
-            {% unless site.apiVersions contains apiVersionOfPage %}
-            {% unless p.url == "/" or p.url == "/index.html" or p.title == "Главная" %}
-            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
-            {% endunless %}
-            {% endunless %}
-            {% endfor %}
+        <!-- common topics -->
+        <b>Основное</b>
+        <!-- Главная страница всегда первая -->
+        {% for p in pagesByTitle %}
+        {% if p.url == "/" or p.url == "/index.html" or p.title == "Главная" %}
+        <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
+        <!-- Остальные страницы из commonArticles -->
+        {% for p in pagesByTitle %}
+        {% assign pageFolder = p.path | split:"/" | first %}
+        {% if pageFolder == "commonArticles" %}
+        <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
+        <!-- Облако тегов -->
+        {% for p in pagesByTitle %}
+        {% if p.title == "Облако тэгов" %}
+        <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
 
-            <!-- version-specific topics -->
-            {% for apiVersion in site.apiVersions reversed %}
-            {% assign hasVersionHeader = false %}
-            {% for p in pagesByTitle %}
-            {% assign apiVersionOfPage = p.path | split:"/" | first %}
-            {% if apiVersionOfPage == apiVersion %}
-            {% unless hasVersionHeader %}
-            {% assign hasVersionHeader = true %}
-            <b>{{ apiVersion }}</b>
-            {% endunless %}
-            <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
-            {% endif %}
+        <b>Статьи</b>
+        <!-- version-specific topics -->
+        {% for p in pagesByTitle %}
+        {% assign pageFolder = p.path | split:"/" | first %}
+        {% if pageFolder == "articles" %}
+        <a href="{{ site.baseurl }}{{ p.url }}">{{ p.title }}</a>
+        {% endif %}
+        {% endfor %}
+
+        <b>Code reference</b>
+        <a href="https://iiko.github.io/front.api.sdk/v7/">V7 (obsolete)</a>
+        <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (current)</a>
+        <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a>
+    </aside>
+    <article>
+        <h1>{% if page.title %}{{ page.title }}{% endif %}</h1>
+        {% if page.tags %}
+        <div class="tag-container">
+            <span style="color: var(--text-muted); font-weight: 500;">Теги:</span>
+            {% for tag in page.tags %}
+            {% capture tag_name %}{{ tag }}{% endcapture %}
+            <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
             {% endfor %}
-            {% endfor %}
-            
-            <b>API Reference</b>
-            <a href="https://iiko.github.io/front.api.sdk/v7/">V7 (устарела)</a>
-            <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (текущая)</a>
-            <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (предпросмотр)</a>
-        </aside>
-        
-        <article>
-            <h1>{% if page.title %}{{ page.title }}{% endif %}</h1>
-            {% if page.tags %}
-            <div class="tag-container">
-                <span style="color: var(--text-muted); font-weight: 500;">Теги:</span>
-                {% for tag in page.tags %}
-                {% capture tag_name %}{{ tag }}{% endcapture %}
-                <a href="{{ site.baseurl }}/tag/{{ tag_name }}"><code class="highligher-rouge"><nobr>{{ tag_name }}</nobr></code></a>
-                {% endfor %}
-            </div>
-            {% endif %}
-            {{ content }}
-        </article>
+        </div>
+        {% endif %}
+        {{ content }}
+    </article>
     </div>
     
     <footer>

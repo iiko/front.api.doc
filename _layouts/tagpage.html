@@ -9,7 +9,8 @@ layout: default
     </div>
     
     <ul style="list-style: none; padding: 0;">
-    {% for post in site.tags[page.tag] %}
+    {% for post in site.posts %}
+        {% if post.tags contains page.tag %}
         <li style="background: var(--bg-secondary); padding: 1.25rem; margin-bottom: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary-color); transition: var(--transition);">
             <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem; flex-wrap: wrap;">
                 <div style="flex: 1; min-width: 200px;">
@@ -27,6 +28,25 @@ layout: default
                 </div>
             </div>
         </li>
+        {% endif %}
+    {% endfor %}
+    {% for p in site.pages %}
+        {% if p.path contains 'articles/' and p.tags contains page.tag %}
+        <li style="background: var(--bg-secondary); padding: 1.25rem; margin-bottom: 1rem; border-radius: var(--radius-md); border-left: 4px solid var(--primary-color); transition: var(--transition);">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 1rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <a href="{{ site.baseurl }}{{ p.url }}" style="font-size: 1.125rem; font-weight: 600; color: var(--primary-color); text-decoration: none;">
+                        {{ p.title }}
+                    </a>
+                    {% if p.description %}
+                    <p style="margin: 0.5rem 0 0 0; color: var(--text-secondary); font-size: 0.9375rem;">
+                        {{ p.description }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        </li>
+        {% endif %}
     {% endfor %}
     </ul>
 </div>
