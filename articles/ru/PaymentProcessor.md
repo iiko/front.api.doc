@@ -4,7 +4,6 @@ layout: default
 tags: v6
 permalink: /v6/ru/PaymentProcessor.html
 ---
-# Интеграция с внешними типами оплаты
 ## Общая идея 
 Если реализовать интерфейс [`IExternalPaymentProcessor`](http://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_IExternalPaymentProcessor.htm) и зарегистрировать его соответствующим образом, в iikoRMS появится новая платёжная система.
 Упрощенно можно называть это внешним типом оплаты. 

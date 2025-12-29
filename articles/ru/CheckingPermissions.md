@@ -4,7 +4,6 @@ layout: default
 tags: v7
 permalink: /v7/ru/CheckingPermissions.html
 ---
-# Проверка и запрос прав #
 
 Действия, которые выполняются с помощью плагина, могут требовать проверки или запроса прав. 
 Для проверки прав пользователя есть методы [`CheckPermission`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_CheckPermission.htm) и [`CheckPermissions`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_IOperationService_CheckPermissions.htm). 

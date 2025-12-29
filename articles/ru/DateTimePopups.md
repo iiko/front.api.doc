@@ -4,8 +4,6 @@ layout: default
 tags: v7
 permalink: /v7/ru/DateTimePopups.html
 ---
-# Окна запроса даты и времени #
-
 В процессе работы плагина может потребоваться запросить у пользователя дату и время. Для этого можно показать диалоговые окна с помощью методов [`IViewManager.ShowDateNumpadPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateNumpadPopup.htm), [`IViewManager.ShowDateTimePopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowDateTimePopup.htm) и [`IViewManager.ShowCalendarPopup`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowCalendarPopup.htm).
 
 ## Как это выглядит в iikoFront?

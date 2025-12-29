@@ -4,7 +4,7 @@ layout: default
 tags: v6
 permalink: /v6/ru/CustomWindows.html
 ---
-# FAQ по UI и .Net 
+## FAQ по UI и .Net 
 Если [диалоговых окон iikoFront API](ViewManager.html "ViewManager") недостаточно, плагин может показывать собственные окна, однако, необходимо учитывать некоторые нюансы.
 
 Во-первых, хост-процесс плагина по умолчанию не содержит необходимого для UI [STA-потока](https://msdn.microsoft.com/library/ms809971.aspx "Understanding and Using COM Threading Models"). Плагин должен создать его самостоятельно. Пример кода:

@@ -4,8 +4,6 @@ layout: default
 tags: v7
 permalink: /v7/ru/ExtendedKeyboardDialog.html
 ---
-# Диалог ввода строк и штрихкодов #
-
 Плагины могут запрашивать данные (строки, штрихкоды, карты) у пользователя с помощью диалоговых окон.
 Здесь мы будем рассматривать диалог [`IViewManager.ShowExtendedKeyboardDialog`](https://iiko.github.io/front.api.sdk/v7/html/M_Resto_Front_Api_UI_IViewManager_ShowExtendedKeyboardDialog.htm), но есть и другие диалоги, о которых можно прочитать в статье [Диалоговые окна]({{ site.baseurl }}/v6/ru/ViewManager.html).
 
