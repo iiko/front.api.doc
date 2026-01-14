@@ -36,5 +36,6 @@ const TableRenderer = {
     this.container.appendChild(table);
     
     InteractionManager.attachHandlers();
+    InteractionManager.initStickyScroll();
   }
 };

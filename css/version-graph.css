@@ -65,12 +65,14 @@
    ============================================================================ */
 
 #api-version-graph { 
-  overflow-x: auto; 
+  max-width: 100%;
   max-height: 600px; 
-  overflow-y: auto; 
+  overflow: auto;
   position: relative;
   border-radius: 6px;
   box-shadow: var(--shadow-table);
+  border: 1px solid #ddd;
+  display: block;
 }
 
 .api-version-graph-table { 
@@ -78,9 +80,10 @@
   border-spacing: 0;
   font-size: var(--font-size-base);
   margin: 0; 
-  width: auto;
+  width: 100%;
+  min-width: 1200px;
   font-family: var(--font-sans);
-  border-radius: 6px;
+  display: table;
 }
 
 /* ============================================================================
@@ -115,32 +118,52 @@
   font-weight: 600;
   font-family: var(--font-mono);
   text-align: left; 
-  background: var(--bg-api-name);
+  background: var(--bg-api-name) !important;
   min-width: var(--min-api-name-width);
   font-size: var(--font-size-api-name);
   padding: var(--padding-api-name);
-  position: sticky; 
-  left: 0; 
+  position: relative;
   z-index: var(--z-api-name);
   border-right: var(--border-api-column);
+  box-shadow: 2px 0 3px -1px rgba(0, 0, 0, 0.15);
+  will-change: transform;
 }
 
-.api-version-graph-table th { 
-  position: sticky; 
-  top: 0; 
+/* Фиксация всех заголовков */
+.api-version-graph-table thead tr:first-child th { 
+  position: relative;
   font-size: var(--font-size-header);
   z-index: var(--z-header);
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.3px;
   text-transform: uppercase;
+  height: 32px;
+  will-change: transform;
+  transform-style: preserve-3d;
 }
 
-.api-version-graph-table thead th:first-child {
-  position: sticky;
-  left: 0;
-  top: 0;
+.api-version-graph-table thead tr:nth-child(2) th { 
+  position: relative;
+  font-size: var(--font-size-header);
+  z-index: var(--z-header);
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  height: 32px;
+  box-shadow: 0 2px 3px -1px rgba(0, 0, 0, 0.25);
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Угловая ячейка в первой строке (с rowspan=2) */
+.api-version-graph-table thead tr:first-child th:first-child {
+  position: relative;
   z-index: var(--z-sticky-corner);
+  box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.25);
+  will-change: transform;
+  transform-style: preserve-3d;
 }
 
 .api-version-graph-table th.year-header { 
@@ -159,12 +182,12 @@
    ЦВЕТОВАЯ СХЕМА
    ============================================================================ */
 
-.api-version-graph-table th { 
-  background: var(--gradient-header);
+.api-version-graph-table thead th { 
+  background: var(--gradient-header) !important;
 }
 
-.api-version-graph-table th.year-header { 
-  background: var(--gradient-year);
+.api-version-graph-table thead th.year-header { 
+  background: var(--gradient-year) !important;
 }
 
 .api-version-graph-table td.lts { 
@@ -187,9 +210,14 @@
   background: var(--bg-hover-row);
 }
 
+/* При наведении не меняем фон у зафиксированной колонки API */
+.api-version-graph-table tbody tr:hover .api-name {
+  background: var(--bg-api-name) !important;
+}
+
 /* Подсветка строки */
 .api-version-graph-table tbody tr.highlight .api-name {
-  background: var(--color-highlight-subtle);
+  background: var(--color-highlight-subtle) !important;
 }
 
 .api-version-graph-table tbody tr.highlight td.lts,
@@ -203,14 +231,16 @@
 
 /* Подсветка заголовка столбца */
 .api-version-graph-table th.highlight-col {
-  background: var(--color-highlight-hover);
-  box-shadow: var(--shadow-highlight);
+  background: var(--color-highlight-hover) !important;
+  box-shadow: var(--shadow-highlight) !important;
+  position: relative;
+  z-index: 15 !important;
 }
 
 /* Подсветка ячейки при наведении на столбец */
 .api-version-graph-table td.highlight-cell {
-  background: var(--color-highlight);
-  box-shadow: var(--shadow-cell-inset);
+  background: var(--color-highlight) !important;
+  box-shadow: var(--shadow-cell-inset) !important;
 }
 
 /* Подсветка названия API при наведении на столбец */
