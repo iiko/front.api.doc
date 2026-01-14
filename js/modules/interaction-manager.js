@@ -145,5 +145,47 @@ const InteractionManager = {
         cell.classList.remove(CONFIG.CLASSES.HIGHLIGHT_API_NAME);
       });
     });
+  },
+
+  /**
+   * Инициализирует sticky заголовки и первый столбец
+   */
+  initStickyScroll() {
+    if (!this.container) return;
+
+    const table = this.container.querySelector('.api-version-graph-table');
+    if (!table) return;
+
+    // Apply sticky using transform on scroll
+    this.container.addEventListener('scroll', () => {
+      const scrollLeft = this.container.scrollLeft;
+      const scrollTop = this.container.scrollTop;
+
+      // Fix first column (all cells with class api-name)
+      const firstCells = table.querySelectorAll('.api-name');
+      firstCells.forEach(cell => {
+        cell.style.transform = `translateX(${scrollLeft}px)`;
+      });
+
+      // Fix all header cells in both rows
+      const headerRow1 = table.querySelectorAll('thead tr:first-child th');
+      const headerRow2 = table.querySelectorAll('thead tr:nth-child(2) th');
+      
+      headerRow1.forEach(cell => {
+        if (!cell.classList.contains('api-name') && cell !== table.querySelector('thead tr:first-child th:first-child')) {
+          cell.style.transform = `translateY(${scrollTop}px)`;
+        }
+      });
+
+      headerRow2.forEach(cell => {
+        cell.style.transform = `translateY(${scrollTop}px)`;
+      });
+
+      // Fix corner cell (first cell in first header row)
+      const cornerCell = table.querySelector('thead tr:first-child th:first-child');
+      if (cornerCell) {
+        cornerCell.style.transform = `translate(${scrollLeft}px, ${scrollTop}px)`;
+      }
+    });
   }
 };
