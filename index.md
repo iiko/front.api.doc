@@ -104,7 +104,7 @@ layout: default
             📧 <strong>Email:</strong> <a href="mailto:api@iiko.ru">api@iiko.ru</a>
         </div>
         <div>
-            🌐 <strong>Help Center:</strong> <a href="http://ru.iiko.help/articles/#!api-documentations/getting-started/">help.iiko.ru</a>
+            🌐 <strong>Help Center:</strong> <a href="https://ru.iiko.help/articles/#!api-documentations/iikofront-api">help.iiko.ru</a>
         </div>
         <div>
             💻 <strong>GitHub:</strong> <a href="https://github.com/iiko/front.api.sdk">front.api.sdk</a>
