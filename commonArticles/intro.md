@@ -81,5 +81,5 @@ redirect_from:
 
 ## Контакты ##
 
-- [help.iiko.ru](http://help.iiko.ru/articles/#!api-documentations/getting-started/)
+- [help.iiko.ru](https://ru.iiko.help/articles/#!api-documentations/iikofront-api)
 - [api@iiko.ru](mailto:api@iiko.ru)
