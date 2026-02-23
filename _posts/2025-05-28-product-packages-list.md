@@ -1,7 +1,7 @@
 ﻿---
 title: Список фасовок продукта
 layout: default
-tags: V9Preview6 V9
+tags: v9preview6 v9
 ---
 Добавлена возможность получения списка фасовок продукта через Front API.
 

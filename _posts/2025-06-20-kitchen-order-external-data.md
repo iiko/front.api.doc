@@ -1,7 +1,7 @@
 ﻿---
 title: Доступ к ExternalData в событии KitchenOrderChanged
 layout: default
-tags: V9Preview7 V9
+tags: v9preview7 v9
 ---
 Добавлена возможность доступа к [`ExternalData`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Kitchen_IKitchenOrder_ExternalData.htm) в уведомлении [`KitchenOrderChanged`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_KitchenOrderChanged.htm).
 

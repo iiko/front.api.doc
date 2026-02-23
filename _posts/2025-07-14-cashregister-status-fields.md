@@ -1,7 +1,7 @@
 ﻿---
 title: Поля статуса ККТ и фискального накопителя
 layout: default
-tags: V9
+tags: v9
 ---
 Добавлены и уточнены поля в [`CashRegisterStatusField`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Device_CashRegisterStatusField.htm) для более точного представления информации о ККТ и фискальном накопителе.
 

@@ -1,7 +1,7 @@
 ---
 title: IViewManager для работы с UI iikoAgent
 layout: default
-tags: V9
+tags: v9
 ---
 
 Реализован новый [`IViewManager`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_UI_IViewManager.htm) для работы с пользовательским интерфейсом iikoAgent (ServiceControl).

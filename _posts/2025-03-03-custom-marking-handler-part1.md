@@ -1,7 +1,7 @@
 ﻿---
 title: Регистрация кастомных обработчиков кодов маркировки
 layout: default
-tags: V9Preview6 V9
+tags: v9preview6 v9
 ---
 Добавлена возможность регистрировать кастомные обработчики кодов маркировки через метод [`RegisterIdentifierCodeHandlers`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_IOperationService_RegisterIdentifierCodeHandlers.htm).
 

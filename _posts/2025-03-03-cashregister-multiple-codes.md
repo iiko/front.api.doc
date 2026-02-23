@@ -1,7 +1,7 @@
 ﻿---
 title: Поддержка нескольких кодов маркировки
 layout: default
-tags: V9Preview5 V9
+tags: v9preview5 v9
 ---
 В класс [`CashRegisterDriverParameters`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Device_Tasks_CashRegisterDriverParameters.htm) добавлено свойство `IsMultipleMarkingCodesPerUnitSupported`, которое показывает, поддерживает ли фискальный регистратор несколько кодов маркировки на одну позицию чека.
 

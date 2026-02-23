@@ -1,7 +1,7 @@
 ﻿---
 title: IOperationService в AfterDoFfd11CorrectionOnPaymentOrderAction
 layout: default
-tags: V9Preview6 V9
+tags: v9preview6 v9
 ---
 Добавлен параметр [`IOperationService`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_IOperationService.htm) в метод [`AfterDoFfd11CorrectionOnPaymentOrderAction`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_Data_Cheques_IChequeTaskProcessor_AfterDoFfd11CorrectionOnPaymentOrderAction.htm) интерфейса [`IChequeTaskProcessor`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Cheques_IChequeTaskProcessor.htm), по аналогии с [`AfterDoCheckAction`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_Data_Cheques_IChequeTaskProcessor_AfterDoCheckAction.htm).
 

@@ -1,7 +1,7 @@
 ﻿---
 title: Удалена зависимость от System.Reactive
 layout: default
-tags: V9Preview7 V9
+tags: v9preview7 v9
 ---
 Из API V9 удалена зависимость от библиотеки System.Reactive.dll.
 
