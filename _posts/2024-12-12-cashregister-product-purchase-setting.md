@@ -1,7 +1,7 @@
 ﻿---
 title: Добавлена настройка покупки товара на кассе
 layout: default
-tags: V9Preview5 V9
+tags: v9preview5 v9
 ---
 В интерфейс [`ICashRegister`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Device_ICashRegister.htm) добавлено свойство [`CanBuy`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Device_ICashRegister_CanBuy.htm), показывающее, поддерживает ли касса операцию покупки товара.
 

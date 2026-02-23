@@ -1,7 +1,7 @@
 ﻿---
 title: Передача количества позиций при частичном возврате
 layout: default
-tags: V9Preview7 V9
+tags: v9preview7 v9
 ---
 Добавлена передача количества позиций в уведомлении [`PartialOrderItemsRemovalTypeSelected`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_PartialOrderItemsRemovalTypeSelected.htm).
 

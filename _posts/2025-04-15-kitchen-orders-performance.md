@@ -1,7 +1,7 @@
 ﻿---
 title: Оптимизация методов работы с кухонными заказами
 layout: default
-tags: V9Preview6 V9
+tags: v9preview6 v9
 ---
 Оптимизированы методы работы с кухонными заказами в [`IOperationService`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_IOperationService.htm). Вместо передачи полных моделей объектов теперь используются только идентификаторы, что значительно сокращает время передачи данных.
 

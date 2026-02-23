@@ -1,7 +1,7 @@
 ﻿---
 title: Список фасовок без привязки к штрихкодам
 layout: default
-tags: V9Preview7 V9
+tags: v9preview7 v9
 ---
 Добавлено свойство `Containers` в интерфейс [`IProduct`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm) для работы с фасовками без обязательной привязки к штрихкодам.
 
