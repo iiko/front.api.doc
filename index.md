@@ -40,6 +40,27 @@ layout: default
 - **[Отладка]({{ site.baseurl }}/debugging.html)** — инструменты и методы отладки
 - **[Changelog]({{ site.baseurl }}/changelog.html)** — история изменений API
 
+## 📰 Последние обновления
+
+<div style="background: linear-gradient(135deg, rgba(227, 30, 36, 0.05), rgba(255, 77, 82, 0.05)); padding: 1.5rem; border-radius: var(--radius-md); margin: 1.5rem 0; border-left: 4px solid var(--primary-color);">
+    {% for post in site.posts limit:5 %}
+    <div style="{% if forloop.last %}margin-bottom: 0;{% else %}margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border-color);{% endif %}">
+        <div style="display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.5rem;">
+            <span style="color: var(--text-muted); font-size: 0.875rem; white-space: nowrap;">{{ post.date | date: "%-d.%m.%Y" }}</span>
+            <a href="{{ site.baseurl }}{{ post.url }}" style="font-weight: 600; color: var(--text-primary); text-decoration: none; flex: 1;">{{ post.title }}</a>
+        </div>
+        <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+            {{ post.excerpt | strip_html | truncatewords: 20 }}
+        </div>
+    </div>
+    {% endfor %}
+    <div style="margin-top: 1.5rem; text-align: center;">
+        <a href="{{ site.baseurl }}/changelog.html" style="display: inline-block; background: var(--primary-color); color: white; padding: 0.75rem 1.5rem; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; transition: var(--transition);">
+            📋 Посмотреть все изменения ({{ site.posts.size }})
+        </a>
+    </div>
+</div>
+
 ## 🎯 О iikoFront API
 
 **iikoFront** — это программное обеспечение для кассовых терминалов, являющееся частью продукта **iikoRms**. Приложение поддерживает расширение функциональности с помощью плагинов.
