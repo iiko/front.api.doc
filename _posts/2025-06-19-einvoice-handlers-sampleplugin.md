@@ -1,4 +1,4 @@
-﻿---
+---
 title: EInvoice API - обработчики в SamplePlugin для разработки
 layout: default
 tags: v9preview6 v9
@@ -18,5 +18,5 @@ tags: v9preview6 v9
 
 ### См. также
 
-* [Получение номера счета через API](https://iiko.github.io/front.api.doc/2025/04/25/get-invoice-number-from-api.html)
+* [Получение номера счета через API](https://iiko.github.io/front.api.doc/2025/06/20/get-invoice-number-from-api.html)
 * [`INotificationService`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_INotificationService.htm)
