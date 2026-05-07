@@ -18,7 +18,7 @@ layout: default
             <strong>Изучите основы:</strong> Ознакомьтесь с <a href="{{ site.baseurl }}/intro.html">введением</a> и <a href="{{ site.baseurl }}/licensing.html">лицензированием</a>
         </li>
         <li style="margin: 0.75rem 0;">
-            <strong>Выберите версию API:</strong> Рекомендуем начать с <a href="https://iiko.github.io/front.api.sdk/v8/">V8 (текущая)</a> или <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (preview)</a>
+            <strong>Выберите версию API:</strong> Рекомендуем начать с <a href="https://iiko.github.io/front.api.sdk/v9/">V9 (текущая)</a> или <a href="https://iiko.github.io/front.api.sdk/v10/">V10 (preview)</a>
         </li>
         <li style="margin: 0.75rem 0;">
             <strong>Установите SDK:</strong> Скачайте <a href="https://github.com/iiko/front.api.sdk">iikoFront API SDK</a> с GitHub
@@ -97,19 +97,19 @@ layout: default
 ## 📖 API Reference
 
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
-    <a href="https://iiko.github.io/front.api.sdk/v7/" style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--border-color); transition: var(--transition); display: block;">
-        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📕</div>
-        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Version 7</div>
+    <a href="https://iiko.github.io/front.api.sdk/v8/" style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--border-color); transition: var(--transition); display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📗</div>
+        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Version 8</div>
         <div style="font-size: 0.875rem; color: var(--text-muted);">Устаревшая</div>
     </a>
-    <a href="https://iiko.github.io/front.api.sdk/v8/" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--primary-color); transition: var(--transition); display: block; box-shadow: var(--shadow-md);">
-        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📗</div>
-        <div style="font-weight: 600; color: white; margin-bottom: 0.25rem;">Version 8</div>
+    <a href="https://iiko.github.io/front.api.sdk/v9/" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--primary-color); transition: var(--transition); display: block; box-shadow: var(--shadow-md);">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📘</div>
+        <div style="font-weight: 600; color: white; margin-bottom: 0.25rem;">Version 9</div>
         <div style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">⭐ Текущая</div>
     </a>
-    <a href="https://iiko.github.io/front.api.sdk/v9/" style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--accent-color); transition: var(--transition); display: block;">
-        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📘</div>
-        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Version 9</div>
+    <a href="https://iiko.github.io/front.api.sdk/v10/" style="background: var(--bg-secondary); padding: 1.25rem; border-radius: var(--radius-md); text-align: center; text-decoration: none; border: 2px solid var(--accent-color); transition: var(--transition); display: block;">
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">📙</div>
+        <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Version 10</div>
         <div style="font-size: 0.875rem; color: var(--accent-color);">🚀 Предпросмотр</div>
     </a>
 </div>
