@@ -4,7 +4,7 @@ layout: default
 tags: v9 v9preview2
 ---
 
-Расширены команды [`AddProductToStopList`](https://iiko.github.io/front.api.sdk/v9/html/Overload_Resto_Front_Api_IOperationService_AddProductToStopList.htm) и [`RemoveProductFromStopList`](https://iiko.github.io/front.api.sdk/v9/html/Overload_Resto_Front_Api_IOperationService_RemoveProductFromStopList.htm) для возможности передачи списков продуктов и выполнения операций в рамках одной транзакции.
+Расширены команды [`AddProductToStopList`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_IOperationService_AddProductToStopList.htm) и [`RemoveProductFromStopList`](https://iiko.github.io/front.api.sdk/v9/html/M_Resto_Front_Api_IOperationService_RemoveProductFromStopList.htm) для возможности передачи списков продуктов и выполнения операций в рамках одной транзакции.
 
 Преимущества:
 

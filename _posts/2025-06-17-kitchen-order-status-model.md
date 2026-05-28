@@ -5,7 +5,7 @@ tags: v9preview7 v9
 ---
 Изменена статусная модель кухонного заказа. Теперь статус заказа можно менять независимо от статуса блюд, которые в него входят.
 
-Введены новые статусы для [`KitchenOrder`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Kitchen_KitchenOrder.htm) через перечисление [`KitchenOrderStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Kitchen_KitchenOrderStatus.htm):
+Введены новые статусы для [`KitchenOrder`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Kitchen_IKitchenOrder.htm) через перечисление [`KitchenOrderStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Kitchen_KitchenOrderProcessingStatus.htm):
 
 - **New** (0) — Не готовится
 - **CookingStarted** (1) — Готовится

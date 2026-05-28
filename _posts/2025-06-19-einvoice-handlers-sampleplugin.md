@@ -14,7 +14,7 @@ tags: v9preview6 v9
 
 **ConfirmEInvoiceNumberProcessedHandler** — имитирует отправку подтверждения о том, был ли успешно использован номер счета.
 
-Для оплаты заказа как E-Invoice необходимо наличие ровно одной подписки на оба уведомления: [`GetEInvoiceNumber`](https://iiko.github.io/front.api.sdk/v9/html/E_Resto_Front_Api_INotificationService_GetEInvoiceNumber.htm) и [`ConfirmEInvoiceNumberProcessed`](https://iiko.github.io/front.api.sdk/v9/html/E_Resto_Front_Api_INotificationService_ConfirmEInvoiceNumberProcessed.htm). Эти stub-обработчики позволяют тестировать функциональность E-Invoice без реальной интеграции.
+Для оплаты заказа как E-Invoice необходимо наличие ровно одной подписки на оба уведомления: [`GetEInvoiceNumber`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_GetEInvoiceNumber.htm) и [`ConfirmEInvoiceNumberProcessed`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_ConfirmEInvoiceNumberProcessed.htm). Эти stub-обработчики позволяют тестировать функциональность E-Invoice без реальной интеграции.
 
 ### См. также
 
