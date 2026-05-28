@@ -15,5 +15,5 @@ tags: v8
 
 * [`IOperationService`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_IOperationService.htm)
 * [`ChequeSale.Ffd12`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Device_Tasks_ChequeSale_Ffd12.htm)
-* [Работа с маркированной продукцией](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_IOrderItem.htm)
+* [Работа с маркированной продукцией](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_IOrderProductItem.htm)
 * [Создание заказов через API](https://iiko.github.io/front.api.sdk/v9/html/Overload_Resto_Front_Api_IOperationService_CreateOrder.htm)

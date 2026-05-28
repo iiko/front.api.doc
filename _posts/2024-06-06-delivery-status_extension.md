@@ -4,7 +4,7 @@ layout: default
 tags: v9
 ---
 
-В [`DeliveryStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_DeliveryStatus.htm) добавлены новые статусы:
+В [`DeliveryStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Brd_DeliveryStatus.htm) добавлены новые статусы:
 
 * **CookingStarted** - приготовление начато
 * **CookingCompleted** - приготовлено
@@ -40,6 +40,6 @@ if (delivery != null)
 
 ### См. также
 
-* [`DeliveryStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_DeliveryStatus.htm)
+* [`DeliveryStatus`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Brd_DeliveryStatus.htm)
 * [`IDeliveryOrder`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_IDeliveryOrder.htm)
 * [`IRestaurant`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Organization_IRestaurant.htm)

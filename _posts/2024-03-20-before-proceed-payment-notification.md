@@ -4,7 +4,7 @@ layout: default
 tags: v9 v9preview1
 ---
 
-Добавлена нотификация [`BeforeProceedOrderPayment`](https://iiko.github.io/front.api.sdk/v9/html/E_Resto_Front_Api_INotificationService_BeforeProceedOrderPayment.htm), которая выполняется перед началом процесса оплаты (на экране кассы при нажатии кнопки "Оплатить").
+Добавлена нотификация [`BeforeProceedOrderPayment`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_INotificationService_BeforeProceedOrderPayment.htm), которая выполняется перед началом процесса оплаты (на экране кассы при нажатии кнопки "Оплатить").
 
 ### Возможности
 
