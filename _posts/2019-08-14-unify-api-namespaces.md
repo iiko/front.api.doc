@@ -14,7 +14,7 @@ layout: default
 
 Ссылки на описания типов тоже поменялись, теперь в них номер версии присутствует единожды. Для сравнения:
 
-- https://iiko.github.io/front.api.sdk/v5/html/T\_Resto\_Front\_Api\_V5\_PluginContext.htm
-- https://iiko.github.io/front.api.sdk/v6/html/T\_Resto\_Front\_Api\_PluginContext.htm
+- https://iiko.github.io/front.api.sdk/v5/html/T_Resto_Front_Api_V5_PluginContext.htm
+- https://iiko.github.io/front.api.sdk/v6/html/T_Resto_Front_Api_PluginContext.htm
 
 Релиз версии API V6 состоится осенью 2019, об этом будет отдельная новость.

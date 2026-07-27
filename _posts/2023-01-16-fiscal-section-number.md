@@ -8,7 +8,7 @@ tags: v8
 
 Добавлены свойства:
 
-* [`FiscalSectionMap`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Organization_ITerminalGroup_FiscalSectionMap.htm) в [`ITerminalGroup`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Organization_ITerminalGroup.htm) - карта соответствия типов мест приготовления и номеров секций ФР
+* [`FiscalSectionMap`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Organization_ITerminalsGroup_FiscalSectionMap.htm) в [`ITerminalGroup`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Organization_ITerminalsGroup.htm) - карта соответствия типов мест приготовления и номеров секций ФР
 * [`CookingPlaceType`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Assortment_IProduct_CookingPlaceType.htm) в [`IProduct`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm) - тип места приготовления для продукта  
 * [`Kitchen`](https://iiko.github.io/front.api.sdk/v9/html/P_Resto_Front_Api_Data_Orders_IOrderServiceItem_Kitchen.htm) в [`IOrderServiceItem`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Orders_IOrderServiceItem.htm) - кухня, на которой готовится позиция заказа
 
@@ -28,7 +28,7 @@ var fiscalSection = terminalGroup.FiscalSectionMap[cookingPlaceType];
 
 ### См. также
 
-* [`ITerminalGroup`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Organization_ITerminalGroup.htm)
+* [`ITerminalGroup`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Organization_ITerminalsGroup.htm)
 * [`IProduct`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Assortment_IProduct.htm)
 * [`IOrderServiceItem`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Orders_IOrderServiceItem.htm)
 * [`ChequeSale`](https://iiko.github.io/front.api.sdk/v8/html/T_Resto_Front_Api_Data_Device_Tasks_ChequeSale.htm)

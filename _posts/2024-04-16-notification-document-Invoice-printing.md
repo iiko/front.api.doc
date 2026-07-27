@@ -12,4 +12,4 @@ tags: v9preview1 v9
 
 [`IDocument`](https://iiko.github.io/front.api.sdk/v9/html/Properties_T_Resto_Front_Api_Data_Documents_IDocument.htm) - Передает тип и номер печатаемого документа.
 
-[`ChequeExtensions`](ChequeExtensions) - Используется для вставки xml разметки в соответствующие секции документа (BeforeHeader, AfterHeader, BeforeFooter, AfterFooter).
+[`ChequeExtensions`](https://iiko.github.io/front.api.sdk/v9/html/T_Resto_Front_Api_Data_Cheques_ChequeExtensions.htm) - Используется для вставки xml разметки в соответствующие секции документа (BeforeHeader, AfterHeader, BeforeFooter, AfterFooter).
