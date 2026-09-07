@@ -142,11 +142,11 @@ private void AddComboInOrder(IOrder order, IOperationService os)
     // 4. Добавляем само комбо
     editSession.AddOrderCombo(
         Guid.NewGuid(),           // id комбо в заказе
-        null,                     // имя (можно null)
+        null,                     // имя (можно null, это RMS-комбо, ядро само рассчитает имя) 
         1,                        // количество
-        expectedComboPrice,       // цена
+        expectedComboPrice,       // цена. Если передать 0, и это RMS-комбо, ядро само рассчитает цену
         comboDefinition.Id,       // sourceActionId — id определения комбо
-        Guid.Empty,               // programId — программа лояльности (0, если нет)
+        Guid.Empty,               // programId — программа лояльности (Guid.Empty, если нет iikoCard)
         comboItems,               // блюда по шагам
         order,
         guest,
