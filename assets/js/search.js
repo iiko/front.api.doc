@@ -57,6 +57,7 @@
 
         // Контейнер для поиска
         const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-input-wrap';
         searchContainer.style.cssText = `
             padding: 1.5rem;
             border-bottom: 2px solid var(--border-color);
@@ -96,6 +97,7 @@
 
         // Подсказка
         const hint = document.createElement('div');
+        hint.className = 'search-hint';
         hint.style.cssText = `
             padding: 0.75rem 1.5rem;
             text-align: center;
@@ -203,6 +205,47 @@
                 font-size: 3rem;
                 margin-bottom: 1rem;
                 opacity: 0.5;
+            }
+
+            #search-modal.open {
+                display: block !important;
+            }
+
+            @media (max-width: 768px) {
+                #search-modal.open {
+                    top: 0 !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    height: 100vh !important;
+                    height: 100dvh !important;
+                    max-height: 100vh !important;
+                    max-height: 100dvh !important;
+                    border-radius: 0 !important;
+                    border: none !important;
+                    display: flex !important;
+                    flex-direction: column !important;
+                }
+                #search-modal .search-input-wrap {
+                    flex: 0 0 auto;
+                    padding-top: calc(1rem + env(safe-area-inset-top)) !important;
+                    padding-bottom: 0.75rem !important;
+                }
+                #search-modal .search-hint {
+                    flex: 0 0 auto;
+                    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom)) !important;
+                }
+                #search-results {
+                    flex: 1 1 auto;
+                    min-height: 0;
+                    max-height: none !important;
+                    -webkit-overflow-scrolling: touch;
+                }
+                #search-button {
+                    width: 100% !important;
+                    justify-content: center !important;
+                }
             }
         `;
         document.head.appendChild(style);
@@ -593,6 +636,7 @@
         if (headerSearch) {
             const searchButton = document.createElement('button');
             searchButton.type = 'button';
+            searchButton.id = 'search-button';
             searchButton.style.cssText = `
                 padding: 0.625rem 1.25rem;
                 background: white;
@@ -629,17 +673,19 @@
     // Открытие поиска
     function openSearch() {
         document.getElementById('search-overlay').style.display = 'block';
-        searchModal.style.display = 'block';
+        searchModal.classList.add('open');
         searchInput.focus();
         showEmptyState();
+        document.body.style.overflow = 'hidden';
     }
 
     // Закрытие поиска
     function closeSearch() {
         document.getElementById('search-overlay').style.display = 'none';
-        searchModal.style.display = 'none';
+        searchModal.classList.remove('open');
         searchInput.value = '';
         currentFocus = -1;
+        document.body.style.overflow = '';
     }
 
     // Инициализация при загрузке страницы
