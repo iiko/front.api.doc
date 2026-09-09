@@ -42,7 +42,7 @@ permalink: /changelog.html
 
 .changelog-content {
     padding: 0;
-    max-height: 5000px;
+    max-height: 100000px;
     overflow: hidden;
     transition: max-height 0.5s ease-out, padding 0.3s ease;
 }
@@ -128,6 +128,26 @@ permalink: /changelog.html
     font-weight: 600;
     font-size: 1.25rem;
     color: var(--text-primary);
+}
+
+@media (max-width: 480px) {
+    .changelog-year-header {
+        padding: 0.875rem 1rem;
+        font-size: 1.1rem;
+    }
+
+    .changelog-item {
+        padding: 1rem;
+    }
+
+    .changelog-stats {
+        padding: 0.875rem 1rem;
+        gap: 1.25rem;
+    }
+
+    .changelog-title {
+        font-size: 1rem;
+    }
 }
 </style>
 
