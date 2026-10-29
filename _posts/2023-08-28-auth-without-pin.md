@@ -4,7 +4,7 @@ layout: default
 tags: v8preview7 v8
 ---
 
-> **Внимание!** Метод `AuthenticateByUser` больше не поддерживается.
+> **Внимание!** Метод `AuthenticateByUser` выводится из API.
 > Подробнее — в новости [*"Прекращение поддержки метода AuthenticateByUser"*]({{ site.baseurl }}{% post_url 2026-10-29-authenticate-by-user-removed %}).
 
 В API V8Preview7 теперь можно подтверждать действия пользователям без ПИН-кода. Но для этого понадобится специальная лицензия.
