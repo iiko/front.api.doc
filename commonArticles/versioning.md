@@ -21,34 +21,6 @@ Preview-версии являются копиями промежуточных 
 
 Каждый минорный цикл включает шесть ежемесячных выпусков с окончаниями `.1`–`.6`. Первый цикл начинается с 9.8.1 в ноябре 2026 года. Календарь ниже строится из данных новой схемы.
 
-Новая Preview выпускается ежемесячно. Каждая версия поддерживается девять месяцев, считая месяц выпуска. Пример перекрытия первых двух Preview:
-
-<div id="preview-overlap"></div>
-
-Ниже приведён календарь ежемесячных выпусков до конца 2030 года. Указан месяц выпуска; конкретное число в рамках месяца не фиксируется. Даты LTS рассчитаны при сохранении прежнего интервала около двух лет.
-
-<div id="monthly-release-schedule"></div>
-
-Срок поддержки в таблицах указан включительно: Preview доступна в течение девяти месячных выпусков, считая выпуск, в котором она появилась.
-
-#### Preview V10
-
-<div id="v10-preview-schedule"></div>
-
-V10 фиксируется как стабильная LTS-версия, после чего начинается разработка следующей LTS-версии V11.
-
-#### Preview V11
-
-<div id="v11-preview-schedule"></div>
-
-#### Поддержка LTS
-
-<div id="lts-support-schedule"></div>
-
-При выходе V10 поддержка V8 прекращается, а V9 остаётся поддерживаемой предыдущей LTS-версией. При выходе V11 поддержка V9 прекращается, а V10 остаётся поддерживаемой. Срок поддержки выпущенной LTS по-прежнему составляет около четырёх лет.
-
-### Исторический график выпуска (до 9.7)
-
 <div style="margin-bottom: 10px;">
   <label>
     <input type="checkbox" id="filter-lts" checked> LTS
@@ -58,7 +30,13 @@ V10 фиксируется как стабильная LTS-версия, пос�
   </label>
 </div>
 
-<div id="api-version-graph"></div>
+<div id="api-version-graph-current" class="api-version-graph-container"></div>
+
+Новая Preview выпускается ежемесячно и поддерживается девять месячных выпусков включительно. Для LTS сохраняется прежний цикл: выпуск примерно раз в два года и поддержка около четырёх лет. Месяц каждой сборки указан в подсказке к заголовку столбца.
+
+### Исторический график выпуска (до 9.7)
+
+<div id="api-version-graph" class="api-version-graph-container"></div>
 
 <div style="margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid #546e7a;">
   <strong style="font-size: 13px; color: #333;">Легенда:</strong>
@@ -83,13 +61,14 @@ V10 фиксируется как стабильная LTS-версия, пос�
 
 <!-- Подключение скриптов -->
 <script src="{{ site.baseurl }}/js/config/graph-config.js"></script>
+<script src="{{ site.baseurl }}/js/data/version-data-utils.js"></script>
 <script src="{{ site.baseurl }}/js/data/version-data.js"></script>
 <script src="{{ site.baseurl }}/js/data/version-data-v2.js"></script>
-<script src="{{ site.baseurl }}/js/modules/schedule-renderer.js"></script>
 <script src="{{ site.baseurl }}/js/modules/filter-manager.js"></script>
 <script src="{{ site.baseurl }}/js/modules/table-builder.js"></script>
 <script src="{{ site.baseurl }}/js/modules/table-renderer.js"></script>
 <script src="{{ site.baseurl }}/js/modules/interaction-manager.js"></script>
+<script src="{{ site.baseurl }}/js/modules/version-history-renderer.js"></script>
 <script src="{{ site.baseurl }}/js/version-graph-app.js"></script>
 
 После выпуска очередной LTS-версии роли перераспределяются следующим образом:
@@ -121,14 +100,15 @@ V10 фиксируется как стабильная LTS-версия, пос�
 Механизм PackageReference поддерживает extern alias начиная с [Visual Studio 2019 16.7](https://github.com/NuGet/Home/issues/4989#issuecomment-643405754).
 **Важно:** не следует одновременно реализовывать интерфейсы `IFrontPlugin` разных версий, такой плагин не будет загружен.
 
-## Соответствие версий iikoRMS и версий API до 9.7 ##
+## Соответствие версий iikoRMS и версий API ##
 
-<div id="historical-api-version-table"></div>
+<div id="api-version-correspondence-table"></div>
 
-<sup>1</sup> Версия V6Preview4 была экспериментальной, она выпущена в начале цикла разработки iikoRMS 6.4. Кроме того, были пропущены V6Preview6 и V6Preview7, вместо них сразу вышла LTS-версия V6.  
-<sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).  
-<sup>3</sup> Поддержка версии V7Preview7 была продлена до 8.6 включительно из-за проблем с автообновлением плагинов с V7Preview7 на V7.  
-<sup>4</sup> Срок жизни Preview-версий начиная с V8Preview4 увеличен на одну версию iikoRMS.
+<sup>1</sup> Версия V6Preview4 была экспериментальной, она выпущена в начале цикла разработки iikoRMS 6.4. Кроме того, были пропущены V6Preview6 и V6Preview7, вместо них сразу вышла LTS-версия V6.<br>
+<sup>2</sup> Версия V7Preview2 [выпущена](2020/05/28/v7preview2-release.html) с опозданием в 7.3.5 (вместо 7.2).<br>
+<sup>3</sup> Поддержка версии V7Preview7 была продлена до 8.6 включительно из-за проблем с автообновлением плагинов с V7Preview7 на V7.<br>
+<sup>4</sup> Срок жизни Preview-версий начиная с V8Preview4 увеличен на одну версию iikoRMS.<br>
+<sup>5</sup> Поддержка V9Preview6 прекращена в iikoRMS 9.7.
 
 Начиная с версии iikoRMS 8.5 цикл поддержки Preview-версий увеличивается: версия V8Preview4, которая была выпущена в 8.3, будет удалена лишь в 8.6, т.е. поддерживается в 8.3, 8.4, 8.5.
 

@@ -6,35 +6,35 @@
 'use strict';
 
 const InteractionManager = {
-  container: null,
+  attachedContainers: new WeakSet(),
+  stickyContainers: new WeakSet(),
 
   /**
    * Подключает обработчики событий
    */
-  attachHandlers() {
-    this.container = document.querySelector(CONFIG.SELECTORS.CONTAINER);
-    if (!this.container) return;
-    
-    // Используем делегирование событий
-    this.container.addEventListener('mouseenter', this.handleMouseEnter.bind(this), true);
-    this.container.addEventListener('mouseleave', this.handleMouseLeave.bind(this), true);
+  attachHandlers(container) {
+    if (!container || this.attachedContainers.has(container)) return;
+
+    container.addEventListener('mouseenter', event => this.handleMouseEnter(event, container), true);
+    container.addEventListener('mouseleave', event => this.handleMouseLeave(event, container), true);
+    this.attachedContainers.add(container);
   },
 
   /**
    * Обработчик наведения мыши
    * @param {MouseEvent} e - Событие мыши
    */
-  handleMouseEnter(e) {
+  handleMouseEnter(e, container) {
     const target = e.target;
     
     // Обработка наведения на ячейку строки
     if (target.tagName === 'TD' && target.closest('tbody')) {
-      this.highlightRow(target.closest('tr'));
+      this.highlightRow(target.closest('tr'), container);
     }
     
     // Обработка наведения на заголовок столбца
     if (target.tagName === 'TH' && target.closest('thead tr:nth-child(2)')) {
-      this.highlightColumn(target);
+      this.highlightColumn(target, container);
     }
   },
 
@@ -42,15 +42,15 @@ const InteractionManager = {
    * Обработчик ухода мыши
    * @param {MouseEvent} e - Событие мыши
    */
-  handleMouseLeave(e) {
+  handleMouseLeave(e, container) {
     const target = e.target;
     
     if (target.tagName === 'TD' && target.closest('tbody')) {
-      this.clearRowHighlight(target.closest('tr'));
+      this.clearRowHighlight(target.closest('tr'), container);
     }
     
     if (target.tagName === 'TH' && target.closest('thead tr:nth-child(2)')) {
-      this.clearColumnHighlight(target);
+      this.clearColumnHighlight(target, container);
     }
   },
 
@@ -58,7 +58,7 @@ const InteractionManager = {
    * Подсвечивает строку и соответствующие заголовки
    * @param {HTMLTableRowElement} row - Строка таблицы
    */
-  highlightRow(row) {
+  highlightRow(row, container) {
     if (!row) return;
     
     row.classList.add(CONFIG.CLASSES.HIGHLIGHT);
@@ -67,7 +67,7 @@ const InteractionManager = {
     const cells = Array.from(row.cells);
     cells.forEach((cell, idx) => {
       if (idx > 0 && this.isActiveCell(cell)) {
-        const header = this.getHeaderByIndex(idx - 1);
+        const header = this.getHeaderByIndex(idx - 1, container);
         if (header) {
           header.classList.add(CONFIG.CLASSES.HIGHLIGHT_COL);
         }
@@ -79,14 +79,14 @@ const InteractionManager = {
    * Подсвечивает столбец и соответствующие API
    * @param {HTMLTableCellElement} header - Заголовок столбца
    */
-  highlightColumn(header) {
+  highlightColumn(header, container) {
     if (!header) return;
     
     const colIdx = Array.from(header.parentElement.children).indexOf(header);
     header.classList.add(CONFIG.CLASSES.HIGHLIGHT_COL);
     
     // Подсветить ячейки столбца
-    const rows = this.container.querySelectorAll(CONFIG.SELECTORS.TBODY_ROWS);
+    const rows = container.querySelectorAll(CONFIG.SELECTORS.TBODY_ROWS);
     rows.forEach(row => {
       const cell = row.cells[colIdx + 1];
       if (cell && this.isActiveCell(cell)) {
@@ -111,8 +111,8 @@ const InteractionManager = {
    * @param {number} idx - Индекс столбца
    * @returns {HTMLTableCellElement|null}
    */
-  getHeaderByIndex(idx) {
-    const headers = this.container.querySelectorAll(CONFIG.SELECTORS.HEADER_CELLS);
+  getHeaderByIndex(idx, container) {
+    const headers = container.querySelectorAll(CONFIG.SELECTORS.HEADER_CELLS);
     return headers[idx] || null;
   },
 
@@ -120,12 +120,12 @@ const InteractionManager = {
    * Снимает подсветку со строки
    * @param {HTMLTableRowElement} row - Строка таблицы
    */
-  clearRowHighlight(row) {
+  clearRowHighlight(row, container) {
     if (!row) return;
     
     row.classList.remove(CONFIG.CLASSES.HIGHLIGHT);
     
-    const headers = this.container.querySelectorAll(CONFIG.SELECTORS.HEADER_CELLS);
+    const headers = container.querySelectorAll(CONFIG.SELECTORS.HEADER_CELLS);
     headers.forEach(h => h.classList.remove(CONFIG.CLASSES.HIGHLIGHT_COL));
   },
 
@@ -133,12 +133,12 @@ const InteractionManager = {
    * Снимает подсветку со столбца
    * @param {HTMLTableCellElement} header - Заголовок столбца
    */
-  clearColumnHighlight(header) {
+  clearColumnHighlight(header, container) {
     if (!header) return;
     
     header.classList.remove(CONFIG.CLASSES.HIGHLIGHT_COL);
     
-    const rows = this.container.querySelectorAll(CONFIG.SELECTORS.TBODY_ROWS);
+    const rows = container.querySelectorAll(CONFIG.SELECTORS.TBODY_ROWS);
     rows.forEach(row => {
       Array.from(row.cells).forEach(cell => {
         cell.classList.remove(CONFIG.CLASSES.HIGHLIGHT_CELL);
@@ -150,16 +150,17 @@ const InteractionManager = {
   /**
    * Инициализирует sticky заголовки и первый столбец
    */
-  initStickyScroll() {
-    if (!this.container) return;
+  initStickyScroll(container) {
+    if (!container || this.stickyContainers.has(container)) return;
 
-    const table = this.container.querySelector('.api-version-graph-table');
-    if (!table) return;
+    if (!container.querySelector('.api-version-graph-table')) return;
 
-    // Apply sticky using transform on scroll
-    this.container.addEventListener('scroll', () => {
-      const scrollLeft = this.container.scrollLeft;
-      const scrollTop = this.container.scrollTop;
+    container.addEventListener('scroll', () => {
+      const table = container.querySelector('.api-version-graph-table');
+      if (!table) return;
+
+      const scrollLeft = container.scrollLeft;
+      const scrollTop = container.scrollTop;
 
       // Fix first column (all cells with class api-name)
       const firstCells = table.querySelectorAll('.api-name');
@@ -187,5 +188,6 @@ const InteractionManager = {
         cornerCell.style.transform = `translate(${scrollLeft}px, ${scrollTop}px)`;
       }
     });
+    this.stickyContainers.add(container);
   }
 };

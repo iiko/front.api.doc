@@ -120,6 +120,7 @@ const TableBuilder = {
     productVersions.forEach((pv, idx) => {
       const th = document.createElement('th');
       th.textContent = pv.version;
+      if (pv.title) th.title = pv.title;
       
       if (this.isFirstInYear(idx, productVersions)) {
         th.classList.add(CONFIG.CLASSES.YEAR_SEPARATOR);
@@ -137,11 +138,11 @@ const TableBuilder = {
    * @param {Array} productVersions - Версии продукта
    * @returns {HTMLTableSectionElement}
    */
-  createBody(filteredApis, productVersions) {
+  createBody(filteredApis, productVersions, versionDataStore = VersionDataStore) {
     const tbody = document.createElement('tbody');
     
     filteredApis.forEach(api => {
-      tbody.appendChild(this.createApiRow(api, productVersions));
+      tbody.appendChild(this.createApiRow(api, productVersions, versionDataStore));
     });
     
     return tbody;
@@ -153,7 +154,7 @@ const TableBuilder = {
    * @param {Array} productVersions - Версии продукта
    * @returns {HTMLTableRowElement}
    */
-  createApiRow(api, productVersions) {
+  createApiRow(api, productVersions, versionDataStore = VersionDataStore) {
     const tr = document.createElement('tr');
     tr.dataset.api = api.name;
     tr.dataset.type = api.type;
@@ -164,7 +165,7 @@ const TableBuilder = {
     
     // Ячейки для каждой версии продукта
     productVersions.forEach((pv, idx) => {
-      tr.appendChild(this.createVersionCell(api, pv, idx, productVersions));
+      tr.appendChild(this.createVersionCell(api, pv, idx, productVersions, versionDataStore));
     });
     
     return tr;
@@ -190,15 +191,15 @@ const TableBuilder = {
    * @param {Array} allVersions - Все версии продукта
    * @returns {HTMLTableCellElement}
    */
-  createVersionCell(api, productVersion, idx, allVersions) {
+  createVersionCell(api, productVersion, idx, allVersions, versionDataStore = VersionDataStore) {
     const td = document.createElement('td');
     
-    const isActive = VersionDataStore.isVersionInRange(
+    const isActive = versionDataStore.isVersionInRange(
       productVersion.version, 
       api.from, 
       api.to
     );
-    const isDev = VersionDataStore.isDevPeriod(api, productVersion.version);
+    const isDev = versionDataStore.isDevPeriod(api, productVersion.version);
     
     if (isActive) {
       td.classList.add(api.type);

@@ -12,6 +12,7 @@ const VersionGraphApp = {
   init() {
     // Инициализация рендерера
     TableRenderer.init(CONFIG.SELECTORS.CONTAINER);
+    TableRenderer.register(CONFIG.SELECTORS.CURRENT_CONTAINER, VersionDataStoreV2);
     
     // Подписка на изменения фильтров
     FilterManager.subscribe(() => {
@@ -23,7 +24,7 @@ const VersionGraphApp = {
     
     // Первичный рендер
     TableRenderer.render();
-    ScheduleRenderer.render();
+    VersionHistoryRenderer.render();
   },
 
   /**

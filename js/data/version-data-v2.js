@@ -57,6 +57,72 @@ const VersionDataStoreV2 = {
     return this.releasePlan;
   },
 
+  getProductVersions() {
+    const existing = this.releasePlan.existingPreviews.map(api => ({
+      version: api.releaseVersion,
+      year: api.releaseDate.year,
+      title: `${api.releaseDate.day}.${api.releaseDate.month}.${api.releaseDate.year}`
+    }));
+    const monthly = this.getMonthlyReleaseDtos().map(release => ({
+      ...release,
+      title: `${release.month}.${release.year}`
+    }));
+    return [...existing, ...monthly];
+  },
+
+  getYearGroups() {
+    return VersionDataUtils.getYearGroups(this.getProductVersions());
+  },
+
+  getApiVersions() {
+    const previews = this.getPreviewDtos().map(api => ({
+      name: api.name,
+      type: 'preview',
+      from: api.release.version,
+      to: api.existing
+        ? this.lastReleaseInMinor(api.supportedThroughVersion)
+        : api.supportThrough.version
+    }));
+    const previousLts = this.getLtsDtos().previousLts.map(api => ({
+      name: api.name,
+      type: 'lts',
+      from: api.releaseVersion,
+      to: this.createMonthlyReleaseDto(api.retirement.index - 1).version
+    }));
+    const currentLts = this.getLtsDtos().currentLts.map(api => ({
+      name: api.name,
+      type: 'lts',
+      devFrom: api.devFrom,
+      from: api.release.version,
+      to: this.createMonthlyReleaseDto(api.supportEnd.index - 1).version
+    }));
+
+    return [...previousLts, ...previews, ...currentLts];
+  },
+
+  compareVersions(v1, v2) {
+    return VersionDataUtils.compareVersions(v1, v2);
+  },
+
+  isVersionInRange(version, from, to) {
+    return VersionDataUtils.isVersionInRange(version, from, to);
+  },
+
+  isDevPeriod(api, version) {
+    return api.type === 'lts' && api.devFrom &&
+      this.compareVersions(version, api.devFrom) >= 0 &&
+      this.compareVersions(version, api.from) < 0;
+  },
+
+  lastReleaseInMinor(version) {
+    const [major, minor] = version.split('.');
+    const matching = this.getMonthlyReleaseDtos().filter(release => {
+      const parts = release.version.split('.');
+      return parts[0] === major && parts[1] === minor;
+    });
+    return matching.length ? matching[matching.length - 1].version : version;
+  },
+
   getMonthlyReleaseDtos() {
     return Array.from({ length: this.getReleaseCount() }, (_, index) =>
       this.createMonthlyReleaseDto(index)
@@ -150,17 +216,29 @@ const VersionDataStoreV2 = {
         name: api.name,
         releaseVersion: api.releaseVersion,
         releaseDate: api.releaseDate,
+        devFrom: null,
         retirement
       };
     });
     const currentLts = plan.ltsMilestones.map(api => {
       const release = this.createMonthlyReleaseDto(api.releaseIndex);
+      const previousMilestone = plan.ltsMilestones
+        .filter(item => item.releaseIndex < api.releaseIndex)
+        .pop();
+      const previousStable = previousMilestone
+        ? this.createMonthlyReleaseDto(previousMilestone.releaseIndex)
+        : plan.previousLts[plan.previousLts.length - 1];
+      const supportThrough = this.createMonthlyReleaseDto(
+        api.releaseIndex + plan.ltsSupportMonths - 1
+      );
       const supportEnd = this.createMonthlyReleaseDto(
         api.releaseIndex + plan.ltsSupportMonths
       );
       return {
         name: api.name,
+        devFrom: previousStable.version || previousStable.releaseVersion,
         release,
+        supportThrough,
         supportEnd
       };
     });
@@ -176,17 +254,62 @@ const VersionDataStoreV2 = {
       const lastSupported = this.createMonthlyReleaseDto(api.retirement.index - 1);
       boundaries[api.name] = {
         supportThroughVersion: lastSupported.version,
-        removalVersion: api.retirement.version
+        removalVersion: api.retirement.version,
+        removalDate: api.retirement
       };
     });
     this.releasePlan.existingPreviews.forEach(api => {
+      const removalDate = this.firstReleaseInMinor(api.removalVersion);
       boundaries[api.name] = {
         supportThroughVersion: api.supportedThroughVersion,
-        removalVersion: api.removalVersion
+        removalVersion: api.removalVersion,
+        removalDate
       };
     });
 
     return boundaries;
+  },
+
+  getApiVersionHistory() {
+    const boundaries = this.getHistoricalApiBoundaries();
+    const knownApis = [...this.releasePlan.previousLts, ...this.releasePlan.existingPreviews];
+    const historical = VersionDataStore.getApiVersionHistory().map(api => {
+      const knownApi = knownApis.find(item => item.name === api.name);
+      return {
+        ...api,
+        releaseDate: knownApi?.releaseDate,
+        removalDate: boundaries[api.name]?.removalDate
+      };
+    });
+    const futurePreviews = this.getPreviewDtos()
+      .filter(api => !api.existing)
+      .map(api => {
+        const removal = this.createMonthlyReleaseDto(api.supportThrough.index + 1);
+        return {
+          name: api.name,
+          release: api.release.version,
+          removal: removal.version,
+          releaseDate: api.release,
+          removalDate: removal
+        };
+      });
+    const futureLts = this.getLtsDtos().currentLts.map(api => ({
+      name: api.name,
+      release: api.release.version,
+      removal: api.supportEnd.version,
+      releaseDate: api.release,
+      removalDate: api.supportEnd
+    }));
+
+    return [...historical, ...futurePreviews, ...futureLts];
+  },
+
+  firstReleaseInMinor(version) {
+    const [major, minor] = version.split('.');
+    return this.getMonthlyReleaseDtos().find(release => {
+      const parts = release.version.split('.');
+      return parts[0] === major && parts[1] === minor;
+    }) || null;
   },
 
   createMonthlyReleaseDto(index) {

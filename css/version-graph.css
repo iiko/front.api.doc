@@ -64,7 +64,7 @@
    БАЗОВАЯ СТРУКТУРА
    ============================================================================ */
 
-#api-version-graph { 
+.api-version-graph-container {
   max-width: 100%;
   max-height: 600px; 
   overflow: auto;

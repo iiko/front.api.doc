@@ -48,7 +48,7 @@ const VersionDataStore = {
     { name: 'V7Preview4', type: 'preview', from: '7.4', to: '7.5' },
     { name: 'V7Preview5', type: 'preview', from: '7.5', to: '7.6' },
     { name: 'V7Preview6', type: 'preview', from: '7.6', to: '7.7' },
-      { name: 'V7Preview7', type: 'preview', from: '7.7', to: '8.3', retirementNote: '³' },
+    { name: 'V7Preview7', type: 'preview', from: '7.7', to: '8.3' },
     { name: 'V7', type: 'lts', devFrom: '7.0', from: '7.9', to: '9.4' },
     { name: 'V8Preview1', type: 'preview', from: '8.0', to: '8.1' },
     { name: 'V8Preview2', type: 'preview', from: '8.1', to: '8.2' },
@@ -63,7 +63,7 @@ const VersionDataStore = {
     { name: 'V9Preview3', type: 'preview', from: '9.0', to: '9.2' },
     { name: 'V9Preview4', type: 'preview', from: '9.1', to: '9.3' },
     { name: 'V9Preview5', type: 'preview', from: '9.2', to: '9.4' },
-    { name: 'V9Preview6', type: 'preview', from: '9.3', to: '9.5' },
+    { name: 'V9Preview6', type: 'preview', from: '9.3', to: '9.6' },
     { name: 'V9Preview7', type: 'preview', from: '9.4', to: '9.6' },
     { name: 'V9', type: 'lts', devFrom: '8.7', from: '9.5', to: null },
     { name: 'V10Preview1', type: 'preview', from: '9.6', to: null },
@@ -100,7 +100,7 @@ const VersionDataStore = {
     { name: 'V9Preview3', release: '9.0', removal: '9.3' },
     { name: 'V9Preview4', release: '9.1', removal: '9.4' },
     { name: 'V9Preview5', release: '9.2', removal: '9.5' },
-    { name: 'V9Preview6', release: '9.3', removal: '9.6' },
+    { name: 'V9Preview6', release: '9.3', removal: '9.7', removalNote: '⁵' },
     { name: 'V9Preview7', release: '9.4', removal: '9.7' },
     { name: 'V9', release: '9.5', removal: null },
     { name: 'V10Preview1', release: '9.6', removal: null },
@@ -139,15 +139,7 @@ const VersionDataStore = {
    * @returns {number} -1 если v1 < v2, 0 если равны, 1 если v1 > v2
    */
   compareVersions(v1, v2) {
-    const parts1 = v1.split('.').map(Number);
-    const parts2 = v2.split('.').map(Number);
-    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
-      const p1 = parts1[i] || 0;
-      const p2 = parts2[i] || 0;
-      if (p1 < p2) return -1;
-      if (p1 > p2) return 1;
-    }
-    return 0;
+    return VersionDataUtils.compareVersions(v1, v2);
   },
 
   /**
@@ -158,8 +150,7 @@ const VersionDataStore = {
    * @returns {boolean}
    */
   isVersionInRange(version, from, to) {
-    return this.compareVersions(version, from) >= 0 && 
-           this.compareVersions(version, to) <= 0;
+    return VersionDataUtils.isVersionInRange(version, from, to);
   },
 
   /**
@@ -180,36 +171,6 @@ const VersionDataStore = {
    * @returns {Array} Массив объектов {year, count, startIdx}
    */
   getYearGroups() {
-    const yearGroups = [];
-    let currentYear = null;
-    let currentCount = 0;
-    let currentStartIdx = 0;
-    
-    this.productVersions.forEach((pv, idx) => {
-      if (pv.year !== currentYear) {
-        if (currentYear !== null) {
-          yearGroups.push({ 
-            year: currentYear, 
-            count: currentCount, 
-            startIdx: currentStartIdx 
-          });
-        }
-        currentYear = pv.year;
-        currentCount = 1;
-        currentStartIdx = idx;
-      } else {
-        currentCount++;
-      }
-    });
-    
-    if (currentYear !== null) {
-      yearGroups.push({ 
-        year: currentYear, 
-        count: currentCount, 
-        startIdx: currentStartIdx 
-      });
-    }
-    
-    return yearGroups;
+    return VersionDataUtils.getYearGroups(this.productVersions);
   }
 };
