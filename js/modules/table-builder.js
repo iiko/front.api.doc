@@ -130,7 +130,6 @@ const TableBuilder = {
     productVersions.forEach((pv, idx) => {
       const th = document.createElement('th');
       th.textContent = pv.version;
-      if (pv.title) th.title = pv.title;
       
       if (this.isFirstInYear(idx, productVersions)) {
         th.classList.add(CONFIG.CLASSES.YEAR_SEPARATOR);

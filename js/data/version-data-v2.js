@@ -58,10 +58,7 @@ const VersionDataStoreV2 = {
   },
 
   getProductVersions() {
-    return this.getMonthlyReleaseDtos().map(release => ({
-      ...release,
-      title: `${release.month}.${release.year}`
-    }));
+    return this.getMonthlyReleaseDtos();
   },
 
   getYearGroups() {

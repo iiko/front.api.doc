@@ -153,6 +153,7 @@
 
 .api-version-graph-table thead tr:nth-child(2) th { 
   position: relative;
+  white-space: nowrap;
   font-size: var(--font-size-header);
   z-index: var(--z-header);
   color: #fff;
