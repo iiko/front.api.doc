@@ -33,6 +33,16 @@ const TableBuilder = {
     const tbody = document.createElement('tbody');
     rows.forEach(row => {
       const tableRow = document.createElement('tr');
+      if (row.separator) {
+        tableRow.className = 'version-scheme-divider';
+        const cell = document.createElement('td');
+        cell.colSpan = headers.length;
+        cell.textContent = row.separator;
+        tableRow.appendChild(cell);
+        tbody.appendChild(tableRow);
+        return;
+      }
+
       row.forEach(value => {
         const cell = document.createElement('td');
         cell.textContent = value;

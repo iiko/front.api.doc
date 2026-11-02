@@ -86,6 +86,14 @@
   display: table;
 }
 
+#api-version-correspondence-table .version-scheme-divider td {
+  background: #e9eef2;
+  border-top: 2px solid #607d8b;
+  color: #37474f;
+  font-weight: 700;
+  text-align: left;
+}
+
 /* ============================================================================
    ЯЧЕЙКИ И ГРАНИЦЫ
    ============================================================================ */

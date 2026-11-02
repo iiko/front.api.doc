@@ -11,11 +11,16 @@ const VersionHistoryRenderer = {
   ],
 
   render() {
-    const rows = VersionDataStoreV2.getApiVersionHistory().map(api => [
-      api.name,
-      this.formatVersion(api.release, api.releaseDate, api.releaseNote),
-      this.formatVersion(api.removal, api.removalDate, api.removalNote)
-    ]);
+    const rows = VersionDataStoreV2.getApiVersionHistory().map(api => {
+      if (api.kind === 'separator') return { separator: api.label };
+
+      const isPreview = api.name.includes('Preview');
+      return [
+        api.name,
+        this.formatVersion(api.release, isPreview ? null : api.releaseDate, api.releaseNote),
+        this.formatVersion(api.removal, isPreview ? null : api.removalDate, api.removalNote)
+      ];
+    });
     const container = document.querySelector('#api-version-correspondence-table');
     if (container) {
       container.replaceChildren(TableBuilder.createDataTable(

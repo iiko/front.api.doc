@@ -58,16 +58,10 @@ const VersionDataStoreV2 = {
   },
 
   getProductVersions() {
-    const existing = this.releasePlan.existingPreviews.map(api => ({
-      version: api.releaseVersion,
-      year: api.releaseDate.year,
-      title: `${api.releaseDate.day}.${api.releaseDate.month}.${api.releaseDate.year}`
-    }));
-    const monthly = this.getMonthlyReleaseDtos().map(release => ({
+    return this.getMonthlyReleaseDtos().map(release => ({
       ...release,
       title: `${release.month}.${release.year}`
     }));
-    return [...existing, ...monthly];
   },
 
   getYearGroups() {
@@ -300,8 +294,16 @@ const VersionDataStoreV2 = {
       releaseDate: api.release,
       removalDate: api.supportEnd
     }));
+    const futureByApiGeneration = this.releasePlan.ltsMilestones.flatMap(milestone => [
+      ...futurePreviews.filter(api => api.name.startsWith(`${milestone.name}Preview`)),
+      ...futureLts.filter(api => api.name === milestone.name)
+    ]);
 
-    return [...historical, ...futurePreviews, ...futureLts];
+    return [
+      ...historical,
+      { kind: 'separator', label: 'Новая схема релизов' },
+      ...futureByApiGeneration
+    ];
   },
 
   firstReleaseInMinor(version) {
