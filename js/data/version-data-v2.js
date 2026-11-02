@@ -88,8 +88,12 @@ const VersionDataStoreV2 = {
       from: api.release.version,
       to: this.createMonthlyReleaseDto(api.supportEnd.index - 1).version
     }));
+    const currentGenerations = this.releasePlan.ltsMilestones.flatMap(milestone => [
+      ...previews.filter(api => api.name.startsWith(`${milestone.name}Preview`)),
+      ...currentLts.filter(api => api.name === milestone.name)
+    ]);
 
-    return [...previousLts, ...previews, ...currentLts];
+    return [...previousLts, ...currentGenerations];
   },
 
   compareVersions(v1, v2) {
