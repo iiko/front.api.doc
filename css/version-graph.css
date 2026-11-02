@@ -254,7 +254,7 @@
 
 /* Подсветка названия API при наведении на столбец */
 .api-version-graph-table .api-name.highlight-api-name {
-  background: var(--color-highlight-subtle);
+  background: var(--color-highlight-subtle) !important;
   font-weight: 700;
 }
 
