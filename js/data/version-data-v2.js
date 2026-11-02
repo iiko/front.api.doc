@@ -24,16 +24,16 @@ const VersionDataStoreV2 = {
         releaseVersion: '9.6',
         releaseDate: { year: 2026, month: 4, day: 9 },
         supportedFromVersion: '9.6',
-        supportedThroughVersion: '9.8',
-        removalVersion: '9.9'
+        supportedThroughVersion: '9.9.1',
+        removalVersion: '9.9.1'
       },
       {
         name: 'V10Preview2',
         releaseVersion: '9.7',
         releaseDate: { year: 2026, month: 9, day: 28 },
         supportedFromVersion: '9.7',
-        supportedThroughVersion: '9.9',
-        removalVersion: '10.0'
+        supportedThroughVersion: '9.9.2',
+        removalVersion: '9.9.2'
       }
     ],
     previousLts: [
@@ -73,9 +73,7 @@ const VersionDataStoreV2 = {
       name: api.name,
       type: 'preview',
       from: api.release.version,
-      to: api.existing
-        ? this.lastReleaseInMinor(api.supportedThroughVersion)
-        : api.supportThrough.version
+      to: api.existing ? api.supportedThroughVersion : api.supportThrough.version
     }));
     const previousLts = this.getLtsDtos().previousLts.map(api => ({
       name: api.name,
@@ -106,15 +104,6 @@ const VersionDataStoreV2 = {
     return api.type === 'lts' && api.devFrom &&
       this.compareVersions(version, api.devFrom) >= 0 &&
       this.compareVersions(version, api.from) < 0;
-  },
-
-  lastReleaseInMinor(version) {
-    const [major, minor] = version.split('.');
-    const matching = this.getMonthlyReleaseDtos().filter(release => {
-      const parts = release.version.split('.');
-      return parts[0] === major && parts[1] === minor;
-    });
-    return matching.length ? matching[matching.length - 1].version : version;
   },
 
   getMonthlyReleaseDtos() {
