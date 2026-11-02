@@ -16,6 +16,35 @@ const TableBuilder = {
     return table;
   },
 
+  createDataTable(headers, rows, className = 'mbtablestyle') {
+    const table = document.createElement('table');
+    table.className = className;
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+      const cell = document.createElement('th');
+      cell.textContent = header;
+      headerRow.appendChild(cell);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+      const tableRow = document.createElement('tr');
+      row.forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        tableRow.appendChild(cell);
+      });
+      tbody.appendChild(tableRow);
+    });
+    table.appendChild(tbody);
+
+    return table;
+  },
+
   /**
    * Создаёт заголовок таблицы
    * @param {Array} productVersions - Версии продукта

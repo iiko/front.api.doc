@@ -23,6 +23,7 @@ const VersionGraphApp = {
     
     // Первичный рендер
     TableRenderer.render();
+    ScheduleRenderer.render();
   },
 
   /**
