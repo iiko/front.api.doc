@@ -22,6 +22,7 @@ const CONFIG = {
   },
   SELECTORS: {
     CONTAINER: '#api-version-graph',
+    CURRENT_CONTAINER: '#api-version-graph-current',
     FILTER_LTS: '#filter-lts',
     FILTER_PREVIEW: '#filter-preview',
     TBODY_ROWS: 'tbody tr',

@@ -16,6 +16,45 @@ const TableBuilder = {
     return table;
   },
 
+  createDataTable(headers, rows, className = 'mbtablestyle') {
+    const table = document.createElement('table');
+    table.className = className;
+
+    const thead = document.createElement('thead');
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+      const cell = document.createElement('th');
+      cell.textContent = header;
+      headerRow.appendChild(cell);
+    });
+    thead.appendChild(headerRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement('tbody');
+    rows.forEach(row => {
+      const tableRow = document.createElement('tr');
+      if (row.separator) {
+        tableRow.className = 'version-scheme-divider';
+        const cell = document.createElement('td');
+        cell.colSpan = headers.length;
+        cell.textContent = row.separator;
+        tableRow.appendChild(cell);
+        tbody.appendChild(tableRow);
+        return;
+      }
+
+      row.forEach(value => {
+        const cell = document.createElement('td');
+        cell.textContent = value;
+        tableRow.appendChild(cell);
+      });
+      tbody.appendChild(tableRow);
+    });
+    table.appendChild(tbody);
+
+    return table;
+  },
+
   /**
    * Создаёт заголовок таблицы
    * @param {Array} productVersions - Версии продукта
@@ -108,11 +147,11 @@ const TableBuilder = {
    * @param {Array} productVersions - Версии продукта
    * @returns {HTMLTableSectionElement}
    */
-  createBody(filteredApis, productVersions) {
+  createBody(filteredApis, productVersions, versionDataStore = VersionDataStore) {
     const tbody = document.createElement('tbody');
     
     filteredApis.forEach(api => {
-      tbody.appendChild(this.createApiRow(api, productVersions));
+      tbody.appendChild(this.createApiRow(api, productVersions, versionDataStore));
     });
     
     return tbody;
@@ -124,7 +163,7 @@ const TableBuilder = {
    * @param {Array} productVersions - Версии продукта
    * @returns {HTMLTableRowElement}
    */
-  createApiRow(api, productVersions) {
+  createApiRow(api, productVersions, versionDataStore = VersionDataStore) {
     const tr = document.createElement('tr');
     tr.dataset.api = api.name;
     tr.dataset.type = api.type;
@@ -135,7 +174,7 @@ const TableBuilder = {
     
     // Ячейки для каждой версии продукта
     productVersions.forEach((pv, idx) => {
-      tr.appendChild(this.createVersionCell(api, pv, idx, productVersions));
+      tr.appendChild(this.createVersionCell(api, pv, idx, productVersions, versionDataStore));
     });
     
     return tr;
@@ -161,15 +200,15 @@ const TableBuilder = {
    * @param {Array} allVersions - Все версии продукта
    * @returns {HTMLTableCellElement}
    */
-  createVersionCell(api, productVersion, idx, allVersions) {
+  createVersionCell(api, productVersion, idx, allVersions, versionDataStore = VersionDataStore) {
     const td = document.createElement('td');
     
-    const isActive = VersionDataStore.isVersionInRange(
+    const isActive = versionDataStore.isVersionInRange(
       productVersion.version, 
       api.from, 
       api.to
     );
-    const isDev = VersionDataStore.isDevPeriod(api, productVersion.version);
+    const isDev = versionDataStore.isDevPeriod(api, productVersion.version);
     
     if (isActive) {
       td.classList.add(api.type);

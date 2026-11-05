@@ -6,36 +6,38 @@
 'use strict';
 
 const TableRenderer = {
-  container: null,
+  tables: [],
 
   /**
    * Инициализирует рендерер
    * @param {string} containerSelector - Селектор контейнера
    */
-  init(containerSelector) {
-    this.container = document.querySelector(containerSelector);
+  init(containerSelector, versionDataStore = VersionDataStore) {
+    this.tables = [{ containerSelector, versionDataStore }];
+  },
+
+  register(containerSelector, versionDataStore) {
+    this.tables.push({ containerSelector, versionDataStore });
   },
 
   /**
    * Выполняет рендеринг таблицы
    */
   render() {
-    if (!this.container) return;
-    
-    const filteredApis = FilterManager.applyFilters(
-      VersionDataStore.getApiVersions()
-    );
-    const productVersions = VersionDataStore.getProductVersions();
-    const yearGroups = VersionDataStore.getYearGroups();
-    
-    const table = TableBuilder.createTable();
-    table.appendChild(TableBuilder.createHeader(productVersions, yearGroups));
-    table.appendChild(TableBuilder.createBody(filteredApis, productVersions));
-    
-    this.container.innerHTML = '';
-    this.container.appendChild(table);
-    
-    InteractionManager.attachHandlers();
-    InteractionManager.initStickyScroll();
+    this.tables.forEach(({ containerSelector, versionDataStore }) => {
+      const container = document.querySelector(containerSelector);
+      if (!container) return;
+
+      const filteredApis = FilterManager.applyFilters(versionDataStore.getApiVersions());
+      const productVersions = versionDataStore.getProductVersions();
+      const yearGroups = versionDataStore.getYearGroups();
+      const table = TableBuilder.createTable();
+      table.appendChild(TableBuilder.createHeader(productVersions, yearGroups));
+      table.appendChild(TableBuilder.createBody(filteredApis, productVersions, versionDataStore));
+
+      container.replaceChildren(table);
+      InteractionManager.attachHandlers(container);
+      InteractionManager.initStickyScroll(container);
+    });
   }
 };

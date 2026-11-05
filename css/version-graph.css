@@ -64,7 +64,7 @@
    БАЗОВАЯ СТРУКТУРА
    ============================================================================ */
 
-#api-version-graph { 
+.api-version-graph-container {
   max-width: 100%;
   max-height: 600px; 
   overflow: auto;
@@ -84,6 +84,14 @@
   min-width: 1200px;
   font-family: var(--font-sans);
   display: table;
+}
+
+#api-version-correspondence-table .version-scheme-divider td {
+  background: #e9eef2;
+  border-top: 2px solid #607d8b;
+  color: #37474f;
+  font-weight: 700;
+  text-align: left;
 }
 
 /* ============================================================================
@@ -145,6 +153,7 @@
 
 .api-version-graph-table thead tr:nth-child(2) th { 
   position: relative;
+  white-space: nowrap;
   font-size: var(--font-size-header);
   z-index: var(--z-header);
   color: #fff;
@@ -245,7 +254,7 @@
 
 /* Подсветка названия API при наведении на столбец */
 .api-version-graph-table .api-name.highlight-api-name {
-  background: var(--color-highlight-subtle);
+  background: var(--color-highlight-subtle) !important;
   font-weight: 700;
 }
 
